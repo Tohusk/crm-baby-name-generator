@@ -92,7 +92,7 @@ isAdmin = (req, res, next) => {
 
 const authJwt = {
     verifyToken,
-    isAdmin,
-    isModerator
+    //isModerator,
+    isAdmin
 };
 module.exports = authJwt;
