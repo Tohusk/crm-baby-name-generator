@@ -81,6 +81,89 @@ export default class Login extends Component {
 
   render() {
     return (
+      <div>
+        <div className= "logo-container">
+        <img src = "https://source.unsplash.com/random" alt = "baby">
+        </img>
+
+        </div>
+        <div className= "flex-container">
+          <div className = "left-container">
+            
+          
+          <img src = "https://source.unsplash.com/random" alt = "baby">
+            
+          </img>
+          
+
+          </div>
+
+          <div className = "vl"></div>
+
+
+          <div className = "right-container">
+          <Form
+              onSubmit={this.handleLogin}
+              ref={c => {
+                this.form = c;
+              }}
+            >
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.onChangeUsername}
+                  validations={[required]}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <Input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.onChangePassword}
+                  validations={[required]}
+                />
+              </div>
+
+              <div className="form-group">
+                <button
+                  className="btn btn-primary btn-block"
+                  disabled={this.state.loading}
+                >
+                  {this.state.loading && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span>Login</span>
+                </button>
+              </div>
+
+              {this.state.message && (
+                <div className="form-group">
+                  <div className="alert alert-danger" role="alert">
+                    {this.state.message}
+                  </div>
+                </div>
+              )}
+              <CheckButton
+                style={{ display: "none" }}
+                ref={c => {
+                  this.checkBtn = c;
+                }}
+              />
+            </Form>
+
+          </div>
+        </div>
+      </div>
+
+      /*
       <div className="col-md-12">
         <div className="card card-container">
           <img
@@ -147,6 +230,8 @@ export default class Login extends Component {
           </Form>
         </div>
       </div>
+      */
     );
+  
   }
 }
