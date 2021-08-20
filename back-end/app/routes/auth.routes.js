@@ -1,3 +1,5 @@
+// written with reference to this tutorial: https://www.bezkoder.com/node-js-mongodb-auth-jwt/
+
 /**
  *  Login authentication routes
  */
@@ -22,7 +24,7 @@ module.exports = function(app) {
     app.post(
         "/api/auth/signup",
         [
-            verifySignUp.checkDuplicateUsernameOrEmail,
+            verifySignUp.checkDuplicateEmail,
             verifySignUp.checkRolesExisted
         ],
         controller.signup
