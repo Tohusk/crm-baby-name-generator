@@ -3,6 +3,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
+import "../styles/Authentication.css"
+
 import AuthService from "../services/auth.service";
 
 const required = value => {
@@ -84,20 +86,12 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <div className= "logo-container">
-        <img src = "https://source.unsplash.com/random" alt = "baby">
-        </img>
-
+        <div className="logo-container">
+          <img src="https://source.unsplash.com/random" alt="baby"></img>
         </div>
-        <div className= "flex-container">
-          <div className = "left-container">
-            
-          
-          <img src = "https://source.unsplash.com/random" alt = "baby">
-            
-          </img>
-          
-
+        <div className="flex-container">
+          <div className="left-container">
+            <img src="https://source.unsplash.com/random" alt="baby"></img>
           </div>
 
           <div className = "vl"></div>
@@ -150,9 +144,7 @@ export default class Login extends Component {
                   <span>Login</span>
                 </button>
                 <span>
-                <a href = "/register">
-                    signup
-                </a>
+                <a href = "/register">Sign up</a>
 
               </span>
               </div>
@@ -180,6 +172,6 @@ export default class Login extends Component {
       </div>
 
     );
-  
+
   }
 }
