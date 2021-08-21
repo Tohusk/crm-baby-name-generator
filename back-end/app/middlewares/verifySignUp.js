@@ -43,7 +43,20 @@ checkRolesExisted = (req, res, next) => {
     next();
 };
 
+
+/**
+ * check if all the required fields are filled
+ */
+ checkRequiredFields = (req, res, next) => {
+    if (!req.body.email || !req.body.password || !req.body.name) {
+        res.status(400).send({ message: "Failed! Unfilled field!" });
+        return;
+    }
+    next();
+};
+
 const verifySignUp = {
+    checkRequiredFields,
     checkDuplicateEmail,
     checkRolesExisted
 };
