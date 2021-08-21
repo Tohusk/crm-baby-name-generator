@@ -3,7 +3,6 @@
 // packages
 require('dotenv').config()
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 
 //create express app
@@ -18,8 +17,8 @@ const Role = db.role;
 
 // set up middlewares
 app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // routes
 require('./app/routes/auth.routes')(app);
