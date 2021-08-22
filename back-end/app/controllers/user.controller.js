@@ -1,17 +1,24 @@
 // written with reference to this tutorial: https://www.bezkoder.com/node-js-mongodb-auth-jwt/
 
-exports.allAccess = (req, res) => {
+const allAccess = (req, res) => {
     res.status(200).send("Public Content.");
 };
 
-exports.userBoard = (req, res) => {
+const userBoard = (req, res) => {
     res.status(200).send("User Content.");
 };
 
-exports.adminBoard = (req, res) => {
+const adminBoard = (req, res) => {
     res.status(200).send("Admin Content.");
 };
 
-exports.moderatorBoard = (req, res) => {
-    res.status(200).send("Moderator Content.");
-};
+// const moderatorBoard = (req, res) => {
+//     res.status(200).send("Moderator Content.");
+// };
+
+module.exports = {
+    allAccess,
+    userBoard,
+    adminBoard,
+    // moderatorBoard
+}
