@@ -1,4 +1,8 @@
 // written with reference to this tutorial: https://www.bezkoder.com/node-js-mongodb-auth-jwt/
+/**
+ * controllers related to users
+ */
+
 
 const allAccess = (req, res) => {
     res.status(200).send("Public Content.");
