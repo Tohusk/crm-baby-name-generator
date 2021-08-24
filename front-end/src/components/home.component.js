@@ -11,22 +11,19 @@ export default class Home extends Component {
     };
   }
 
-  componentDidMount() {
-    UserService.getPublicContent().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
+  async componentDidMount() {
+    try {
+      const response = await UserService.getPublicContent();
+      this.setState({
+        content: response.data
+      });
+    } catch (err) {
+      this.setState({
+        content:
+          (err.response && err.response.data) ||
+          err.message || err.toString()
+      });
+    }
   }
 
   render() {

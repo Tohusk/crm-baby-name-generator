@@ -46,9 +46,9 @@ export default class Login extends Component {
     });
   }
 
-  handleLogin(e) {
+  async handleLogin(e) {
     e.preventDefault();
-
+    
     this.setState({
       message: "",
       loading: true
@@ -57,25 +57,21 @@ export default class Login extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.email, this.state.password).then(
-        () => {
-          this.props.history.push("/profile");
-          window.location.reload();
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+      try {
+        await AuthService.login(this.state.email, this.state.password);
+        this.props.history.push("/profile");
+        window.location.reload();
+      } catch (err) {
+        const resMessage =
+        (err.response && err.response.data &&
+         err.response.data.message) || err.message ||
+         err.toString();
 
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
-        }
-      );
+        this.setState({
+          loading: false,
+          message: resMessage
+        });
+      }
     } else {
       this.setState({
         loading: false

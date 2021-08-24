@@ -11,24 +11,22 @@ export default class BoardUser extends Component {
     };
   }
 
-  componentDidMount() {
-    UserService.getUserBoard().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
+  async componentDidMount() {
+    try {
+      const response = UserService.getUserBoard();
+      this.setState({
+        content: response.data
+      });
+    } catch (err) {
+      this.setState({
+        content:
+          (err.response &&
+            err.response.data &&
+            err.response.data.message) ||
+            err.message ||
+            err.toString()
+      });
+    }
   }
 
   render() {
