@@ -6,12 +6,13 @@ label {
 .logo-container {
     display: flex;
     align-content: flex-start;
-
+    padding-top: 2em;
+    padding-bottom: 2em;
 }
 
 .logo-container img {
-    width: 70px;
-    height: 100%;
+    width: 175px;
+    height: 65px;
 }
 
 .flex-container {
@@ -24,9 +25,22 @@ label {
 }
 
 .left-container img {
+    flex-direction: column;
+    justify-content: flex-start;
     margin-left: 100%;
-    width: 200px;
-    height: auto;
+    /* width: 200px;
+    height: auto; */
+}
+
+.right-container {
+    padding-left: 5em;
+    border-left: 1px solid black;
+    
+}
+
+.log-in-container {
+    font-size: 2em;
+    padding-bottom: 1em;
 }
 
 .vl {
@@ -37,4 +51,3 @@ label {
     position: relative;
     margin-left: 30%;
 }
-

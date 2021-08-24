@@ -8,6 +8,9 @@ import "../styles/Authentication.css"
 
 import AuthService from "../services/auth.service";
 
+import img from '../assets/img-signup.png';
+import logo from '../assets/logo.png';
+
 const required = value => {
   if (!value) {
     return (
@@ -54,11 +57,13 @@ export default class Register extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeBusiness = this.onChangeBusiness.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
       name: "",
       email: "",
+      business: "",
       password: "",
       successful: false,
       message: ""
@@ -74,6 +79,12 @@ export default class Register extends Component {
   onChangeEmail(e) {
     this.setState({
       email: e.target.value
+    });
+  }
+
+  onChangeBusiness(e) {
+    this.setState({
+      business: e.target.value
     });
   }
 
@@ -126,15 +137,20 @@ export default class Register extends Component {
     return (
       <div>
         <div className="logo-container">
-          <img src="https://source.unsplash.com/random" alt="baby"></img>
+          <img src={logo} alt="logo" ></img>
+          {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
         </div>
 
         <div className="flex-container">
-          <div className="left-container">
-            <img src="https://source.unsplash.com/random" alt="baby"></img>
-          </div>
-          <div className="vl"></div>
+          <img src={img} alt="loginillustration"></img>
+          {/* <div className="left-container"> */}
+            {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
+          {/* </div> */}
+          {/* <div className="vl"></div> */}
           <div className="right-container">
+            <div className = "log-in-container">
+              Sign Up
+            </div>
             <Form
               onSubmit={this.handleRegister}
               ref={c => {
@@ -167,6 +183,17 @@ export default class Register extends Component {
                     />
                   </div>
 
+                  <div className="form-group">
+                    <label htmlFor="business">Business Name (Optional)</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="business"
+                      value={this.state.business}
+                      onChange={this.onChangeBusiness}
+                      // validations={[required, business]}
+                    />
+                  </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <Input
