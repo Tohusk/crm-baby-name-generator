@@ -83,7 +83,7 @@ export default class Register extends Component {
     });
   }
 
-  handleRegister(e) {
+  async handleRegister(e) {
     e.preventDefault();
 
     this.setState({
@@ -94,33 +94,31 @@ export default class Register extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.register(
-        this.state.name,
-        this.state.email,
-        this.state.password
-      ).then(
-        response => {
-          this.setState({
-            message: response.data.message,
-            successful: true
-          });
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          this.setState({
-            successful: false,
-            message: resMessage
-          });
-        }
-      );
+      try {
+        const res = await AuthService.register(
+          this.state.name,
+          this.state.email,
+          this.state.password
+        );
+        
+        this.setState({
+          message: res.data.message,
+          successful: true
+        });
+      } catch (err) {
+        const resMessage = (err.response && err.response.data &&
+          err.response.data.message) ||
+          err.message || err.toString();
+      
+        this.setState({
+          successful: false,
+          message: resMessage
+        });
+      }
     }
   }
+
+
 
   render() {
     return (
