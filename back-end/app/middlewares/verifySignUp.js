@@ -31,8 +31,9 @@ const checkDuplicateEmail = async (req, res, next) => {
  */
 const checkRolesExisted = (req, res, next) => {
     if (req.body.roles) {
-        for (let i = 0; i < req.body.roles.length; i++) {
-            if (!ROLES.includes(req.body.roles[i])) {
+
+        for (const role of req.body.roles) {
+            if (!ROLES.includes(role)) {
                 res.status(400).send({
                     message: `Failed! Role ${req.body.roles[i]} does not exist!`
                 });
@@ -48,7 +49,7 @@ const checkRolesExisted = (req, res, next) => {
 /**
  * check if all the required fields are filled
  */
- checkRequiredFields = (req, res, next) => {
+const checkRequiredFields = (req, res, next) => {
     if (!req.body.email || !req.body.password || !req.body.name) {
         res.status(400).send({ message: "Failed! Unfilled field!" });
         return;

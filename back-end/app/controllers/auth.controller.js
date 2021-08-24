@@ -90,9 +90,10 @@ const signin = async (req, res) => {
     // find authorities
     const authorities = [];
 
-    for (let i = 0; i < user.roles.length; i++) {
-        authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
+    for (const role of user.roles) {
+        authorities.push("ROLE_" + role.name.toUpperCase());
     }
+
     res.status(200).send({
         id: user._id,
         email: user.email,

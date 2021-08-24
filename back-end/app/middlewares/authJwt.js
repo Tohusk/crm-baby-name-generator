@@ -13,7 +13,7 @@ const Role = db.role;
 /**
  * Verify the token
  */
-verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
     let token = req.headers["x-access-token"];
 
     if (!token) {
@@ -32,12 +32,12 @@ verifyToken = (req, res, next) => {
 /**
  * find out if a a user is admin
  */
-isAdmin = async (req, res, next) => {
+const isAdmin = async (req, res, next) => {
     try {
         const user = await User.findById(req.userId);
         const roles = await Role.find({_id: { $in: user.roles }});
-        for (let i = 0; i < roles.length; i++) {
-            if (roles[i].name === "admin") {
+        for (const role of roles) {
+            if (role.name === "admin") {
                 next();
                 return;
             }
