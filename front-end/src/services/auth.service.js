@@ -21,9 +21,9 @@ class AuthService {
   }
     
   //TODO Add try catch stuff
-  register(username, email, password) {
+  register(name, email, password) {
     return axios.post(API_URL + "signup", {
-      username,
+      name,
       email,
       password
     });
