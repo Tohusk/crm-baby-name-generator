@@ -7,6 +7,9 @@ import "../styles/Authentication.css"
 
 import AuthService from "../services/auth.service";
 
+import img from '../assets/img-login.png';
+import logo from '../assets/logo.png';
+
 const required = value => {
   if (!value) {
     return (
@@ -83,14 +86,18 @@ export default class Login extends Component {
     return (
       <div>
         <div className="logo-container">
-          <img src="https://source.unsplash.com/random" alt="baby"></img>
+          <img src={logo} alt="logo" ></img>
+          {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
         </div>
         <div className="flex-container">
-          <div className="left-container">
-            <img src="https://source.unsplash.com/random" alt="baby"></img>
-          </div>
+          <img src={img} alt="loginillustration"/>
+          {/* <div className="left-container">
+            {/* <h1>CRM for Small Businesses</h1> */}
+            
+            {/* <img src="https://source.unsplash.com/random" alt="baby"></img>
+          </div> */}
 
-          <div className = "vl"></div>
+          {/* <div className = "vl"></div> */}
 
 
           <div className = "right-container">
