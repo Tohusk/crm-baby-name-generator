@@ -67,7 +67,7 @@ const signin = async (req, res) => {
 
     // user not found
     if (!user) {
-        return res.status(404).send({ message: "Incorrect username or password." });
+        return res.status(404).send({ message: "Incorrect email or password." });
     }
 
     // check if password is correct
@@ -79,7 +79,7 @@ const signin = async (req, res) => {
     if (!passwordIsValid) {
         return res.status(401).send({
             accessToken: null,
-            message: "Incorrect username or password."
+            message: "Incorrect email or password."
         });
     }
 
