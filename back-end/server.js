@@ -9,7 +9,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-    origin: "http://localhost:5050"
+    origin: process.env.CORS
 };
 
 const db = require("./app/models");
