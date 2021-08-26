@@ -1,38 +1,80 @@
 import React, { Component } from "react";
+import AuthService from "../services/auth.service";
 
-import UserService from "../services/user.service";
+
+
+
+import "../styles/Home.css";
+import img from '../assets/img-login.png';
+import logo from '../assets/logo.png';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      content: ""
+      currentUser: AuthService.getCurrentUser()
     };
   }
 
-  async componentDidMount() {
-    try {
-      const response = await UserService.getPublicContent();
-      this.setState({
-        content: response.data
-      });
-    } catch (err) {
-      this.setState({
-        content:
-          (err.response && err.response.data) ||
-          err.message || err.toString()
-      });
-    }
-  }
-
   render() {
+
     return (
-      <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
-        </header>
+      <div >
+        {/*Page Name*/}
+        <div className = "pagename">
+            Home
+        </div>
+
+        
+
+        {/*SideBar*/}
+        <div className = "side-bar">
+          {/*Logo*/}
+          <div className="logo-container">
+            <img src={logo} alt="logo" ></img>
+          </div>
+
+          {/*Buttons*/}
+          <div className = "side-text">
+            Account name
+          </div>
+          <div className = "side-text">
+            Home
+          </div>
+          <div className = "side-text">
+            Sales
+          </div>
+          <div className = "side-text">
+            Customers
+          </div>
+          <div className = "side-text">
+            Products
+          </div>
+          <div className = "settings">
+            Settings
+          </div>
+            
+        </div>
+
+        
+
+        
+        {/*
+        <div className="flex-container">
+          <div className = "side-bar">
+            This is the side bar
+          </div>
+
+          <div className = "right-container">
+            <div className = "log-in-container">
+              Log in
+            </div>
+          </div>
+        </div>
+        */}
       </div>
+
     );
   }
 }
