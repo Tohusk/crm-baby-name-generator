@@ -1,0 +1,7 @@
+{
+    "proxies": {
+      "/": {
+        "origin": "https://crm-baby-name-generator.herokuapp.com"
+      }
+    }
+  }
