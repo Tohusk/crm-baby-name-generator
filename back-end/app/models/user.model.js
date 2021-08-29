@@ -12,10 +12,7 @@ const User = mongoose.model(
         password: String,
         name: String,
         businessName: String,
-        roles: [{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Role"
-            }],
+        roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Role" }],
     })
 );
 
