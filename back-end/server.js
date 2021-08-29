@@ -8,25 +8,17 @@ const cors = require("cors");
 //create express app
 const app = express();
 
-const corsOptions = {
-    origin: process.env.CORS
-};
-
 const db = require("./app/models");
 // const Role = db.role;
 
 // set up middlewares
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
-
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../front-end/build', 'index.html'))
-});
 
 // simple route
 app.get("/", (req, res) => {
@@ -53,3 +45,30 @@ db.mongoose
         console.error("Connection error", err);
         process.exit();
     });
+
+    // initialise roles
+// function initial() {
+//     Role.estimatedDocumentCount((err, count) => {
+//         if (!err && count === 0) {
+//             new Role({
+//                 name: "user"
+//             }).save(err => {
+//                 if (err) {
+//                     console.log("error", err);
+//                 }
+//
+//                 console.log("added 'user' to roles collection");
+//             });
+//
+//             new Role({
+//                 name: "admin"
+//             }).save(err => {
+//                 if (err) {
+//                     console.log("error", err);
+//                 }
+//
+//                 console.log("added 'admin' to roles collection");
+//             });
+//         }
+//     });
+// } 
