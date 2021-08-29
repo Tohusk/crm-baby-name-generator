@@ -16,7 +16,7 @@ const db = require("./app/models");
 // const Role = db.role;
 
 // set up middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
