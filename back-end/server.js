@@ -16,7 +16,7 @@ const db = require("./app/models");
 // const Role = db.role;
 
 // set up middlewares
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -49,30 +49,3 @@ db.mongoose
         console.error("Connection error", err);
         process.exit();
     });
-
-// initialise roles
-// function initial() {
-//     Role.estimatedDocumentCount((err, count) => {
-//         if (!err && count === 0) {
-//             new Role({
-//                 name: "user"
-//             }).save(err => {
-//                 if (err) {
-//                     console.log("error", err);
-//                 }
-//
-//                 console.log("added 'user' to roles collection");
-//             });
-//
-//             new Role({
-//                 name: "admin"
-//             }).save(err => {
-//                 if (err) {
-//                     console.log("error", err);
-//                 }
-//
-//                 console.log("added 'admin' to roles collection");
-//             });
-//         }
-//     });
-// }
