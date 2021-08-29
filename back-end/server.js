@@ -24,6 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../front-end/build', 'index.html'))
+});
+
 // simple route
 app.get("/", (req, res) => {
     res.json({ message: "UwU." });
