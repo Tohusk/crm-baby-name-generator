@@ -8,15 +8,11 @@ const cors = require("cors");
 //create express app
 const app = express();
 
-const corsOptions = {
-    origin: process.env.CORS
-};
-
 const db = require("./app/models");
 // const Role = db.role;
 
 // set up middlewares
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
