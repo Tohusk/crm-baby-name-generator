@@ -57,13 +57,13 @@ export default class Register extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangeBusiness = this.onChangeBusiness.bind(this);
+    this.onChangeBusinessName = this.onChangeBusinessName.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
       name: "",
       email: "",
-      business: "",
+      businessName: "",
       password: "",
       successful: false,
       message: ""
@@ -82,9 +82,9 @@ export default class Register extends Component {
     });
   }
 
-  onChangeBusiness(e) {
+  onChangeBusinessName(e) {
     this.setState({
-      business: e.target.value
+      businessName: e.target.value
     });
   }
 
@@ -109,6 +109,7 @@ export default class Register extends Component {
         const res = await AuthService.register(
           this.state.name,
           this.state.email,
+          this.state.businessName,
           this.state.password
         );
         
@@ -182,14 +183,14 @@ export default class Register extends Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="business">Business Name (Optional)</label>
+                    <label htmlFor="businessName">Business Name (Optional)</label>
                     <Input
                       type="text"
                       className="form-control"
-                      name="business"
-                      value={this.state.business}
-                      onChange={this.onChangeBusiness}
-                      // validations={[required, business]}
+                      name="businessName"
+                      value={this.state.businessName}
+                      onChange={this.onChangeBusinessName}
+                      // validations={[required, businessName]}
                     />
                   </div>
                   <div className="form-group">
