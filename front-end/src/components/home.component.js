@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 
 
-
-
 import "../styles/Home.css";
-import img from '../assets/img-login.png';
 import logo from '../assets/logo.png';
 
 export default class Home extends Component {
@@ -27,7 +24,6 @@ export default class Home extends Component {
         </div>
 
         
-
         {/*SideBar*/}
         <div className = "side-bar">
           {/*Logo*/}
@@ -57,22 +53,6 @@ export default class Home extends Component {
             
         </div>
 
-        
-
-        
-        {/*
-        <div className="flex-container">
-          <div className = "side-bar">
-            This is the side bar
-          </div>
-
-          <div className = "right-container">
-            <div className = "log-in-container">
-              Log in
-            </div>
-          </div>
-        </div>
-        */}
       </div>
 
     );
