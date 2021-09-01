@@ -62,7 +62,7 @@ export default class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       try {
         await AuthService.login(this.state.email, this.state.password);
-        this.props.history.push("/profile");
+        this.props.history.push("/home");
         window.location.reload();
       } catch (err) {
         const resMessage =
