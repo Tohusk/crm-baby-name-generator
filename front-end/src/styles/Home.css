@@ -3,18 +3,6 @@ label {
     margin-top: 10px;
 }
 
-.logo-container {
-    display: flex;
-    align-content: flex-start;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    margin: 15px;
-}
-
-.logo-container img {
-    width: 175px;
-    height: 65px;
-}
 
 .flex-container {
     display: flex;
@@ -52,44 +40,6 @@ label {
     margin-left: 30%;
 }
 
-.side-bar {
-    flex-wrap: wrap;
-    
-    height: 100%;
-    width: 200px;
-
-    position: fixed;
-
-
-
-
-    align-items: center;
-    
-    z-index: -1;
-    top: 0;
-    left: 0;
-    background: white;
-    border-right: 1px solid rgb(0, 0, 0);
-    padding-top: 20px;
-}
-
-.side-text{
-    margin-left: auto;
-    margin-right: auto;
-    width: 8em;
-    font-size: 1em;
-    padding-bottom: 1em;
-}
-
-.settings{
-    margin-left: auto;
-    margin-right: auto;
-    width: 8em;
-    font-size: 1em;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    border-top: 1px solid rgb(0, 0, 0);
-}
 
 .pagename{
     position: absolute;

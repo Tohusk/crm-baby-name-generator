@@ -54,7 +54,7 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        {/* <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
             BabyNameGenerator
           </Link>
@@ -118,7 +118,7 @@ class App extends Component {
               </li>
             </div>
           )}
-        </nav>
+        </nav> */}
 
         <div className="container mt-3">
           <Switch>
