@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 
-import "../styles/AddCustomer.css";
+import "../styles/EditCustomer.css";
 
-export default class AddCustomer extends Component {
+export default class EditCustomer extends Component {
   constructor(props) {
     super(props);
 
@@ -17,37 +17,38 @@ export default class AddCustomer extends Component {
     return (
       <div className="addCustomer-container">
         {/*Page Name*/}
-        <div className="addCustomer-title">Add Customer</div>
+        <div className="addCustomer-title">Edit Customer Profile</div>
 
+        {/* Input values need to be filled automatically from customer details */}
         <form className="addCustomer-form">
               <div className="form-group">
                 <label htmlFor="name">Name</label>
-                <input></input>
+                <input defaultValue="Kyla Canares"></input>
               </div>
 
               <div className="form-group">
                 <label htmlFor="phoneNumber">Phone Number</label>
-                <input></input>
+                <input defaultValue="1234567890"></input>
               </div>
 
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input></input>
+                <input defaultValue="mybusiness@gmail.com"></input>
               </div>
 
               <div className="form-group">
                 <label htmlFor="description">Description</label>
-                <input></input>
+                <input defaultValue="Tutor at Unimelb"></input>
               </div>
 
               <div className="form-group">
                 <label htmlFor="businessName">Business Name (Optional)</label>
-                <input></input>
+                <input defaultValue="Baby Name Generator"></input>
               </div>
 
               <div className="addCustomer-submit-group">
                 <a className="addCustomer-cancelButton" href = "/home">Cancel</a>
-                <button className="addCustomer-addButton">Add</button>
+                <button className="addCustomer-addButton">Save</button>
               </div>  
             </form>
 

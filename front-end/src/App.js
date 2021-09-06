@@ -14,8 +14,11 @@ import BoardUser from "./components/board-user.component";
 import Home from "./components/home.component";
 import CustomerProfile from "./components/customer-profile.component";
 import AddCustomer from "./components/add-customer.component";
+import AddProduct from "./components/add-product.component";
 
 import Sidebar from "./components/sidebar.component";
+import AddTransaction from "./components/add-transaction.component";
+import EditCustomer from "./components/edit-customer.component";
 
 
 // import BoardModerator from "./components/board-moderator.component";
@@ -70,6 +73,10 @@ class App extends Component {
             <Route exact path="/home" component={Home} />
             <Route exact path="/customer-profile" component={CustomerProfile} />
             <Route exact path="/addCustomer" component={AddCustomer} />
+            <Route exact path="/addProduct" component={AddProduct} />
+            <Route exact path="/addTransaction" component={AddTransaction} />
+            <Route exact path="/editCustomer" component={EditCustomer} />
+
 
             {/* <Route path="/mod" component={BoardModerator} /> */}
             {/* <Route path="/admin" component={BoardAdmin} /> */}
