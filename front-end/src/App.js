@@ -13,6 +13,9 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import Home from "./components/home.component";
 import CustomerProfile from "./components/customer-profile.component";
+import AddCustomer from "./components/add-customer.component";
+
+import Sidebar from "./components/sidebar.component";
 
 
 // import BoardModerator from "./components/board-moderator.component";
@@ -56,72 +59,7 @@ class App extends Component {
 
     return (
       <div>
-        {/* <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/"} className="navbar-brand">
-            BabyNameGenerator
-          </Link>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/landing"} className="nav-link">
-                Landing
-              </Link>
-            </li>
-
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-
-            {currentUser && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-              </li>
-            )}
-          </div>
-
-          {currentUser ? (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
-                  {currentUser.username}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
-                </a>
-              </li>
-            </div>
-          ) : (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
-                  Login
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
-            </div>
-          )}
-        </nav> */}
-
+        <Sidebar/>
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/landing"]} component={Landing} />
@@ -131,6 +69,8 @@ class App extends Component {
             <Route path="/user" component={BoardUser} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/customer-profile" component={CustomerProfile} />
+            <Route exact path="/addCustomer" component={AddCustomer} />
+
             {/* <Route path="/mod" component={BoardModerator} /> */}
             {/* <Route path="/admin" component={BoardAdmin} /> */}
           </Switch>
