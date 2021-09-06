@@ -3,13 +3,13 @@
     flex-wrap: wrap;
     
     height: 100%;
-    width: 15em;
+    width: 12vw;
 
     position: fixed;
 
     align-items: center;
 
-    margin-right: 2em;
+    margin-right: 2vw;
     
     z-index: -1;
     top: 0;
@@ -21,9 +21,8 @@
 .sidebar-logo-container {
     display: flex;
     align-content: flex-start;
-    margin: 6em 3em 10em;
-    /* margin-bottom: 3em; */
-    padding-right: 1em;
+    margin: 10vh 2.5vw 25vh;
+    padding-right: 0.5vw;
 }
 
 .sidebar-logo-container img {
@@ -32,26 +31,26 @@
 }
 
 
-.side-text{
+.side-text {
     margin-left: auto;
     margin-right: auto;
-    width: 8em;
+    width: 7vw;
     font-size: 1.1em;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
 }
 
 .sidebar-icon-container {
-    margin-right: 1em;
+    margin-right: 1vw;
 }
 
 .sidebar-settings{
     margin-left: auto;
     margin-right: auto;
-    width: 10em;
+    width: 8vw;
     font-size: 1.1em;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    padding-left: 1em;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    padding-left: 0.5vw;
     border-top: 1px solid rgb(0, 0, 0);
 }
