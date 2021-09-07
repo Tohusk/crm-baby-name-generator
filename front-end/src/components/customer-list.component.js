@@ -3,42 +3,19 @@ import AuthService from "../services/auth.service";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 
-import "../styles/Home.css";
-import "../styles/customers.css"
-import Sidebar from "./sidebar.component";
-
-export default class Customers extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentUser: AuthService.getCurrentUser()
-    };
-  }
-
-  render() {
-
-    return (
-      <div >
-          <Sidebar/>
-        {/*Page Name*/}
-        <div className = "pagename">
-            Customers
-        </div>
-        <div className="subheading">
-                Overview
-            </div>
-        <div className="flex-container" >
-            <div className="stats-card" > Total Customers</div>
-            <div className="stats-card" > Satisfaction Score {'>'} 4.0</div>
-            <div className="stats-card" > Number of Customers (graph)</div>
-        </div>
-        <div className="subheading">
-                Customer List
-            </div>
-
-        <div className="flex-container" >
-        <div className="table-wrapper">
+export default class CustomerList extends Component{
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          currentUser: AuthService.getCurrentUser()
+        };
+      }
+    
+      render() {
+    
+        return (
+          <div className="table-wrapper">
               <Table bordered hover>
                   <thead>
                       <tr>
@@ -70,13 +47,8 @@ export default class Customers extends Component {
             
     
           </div>
-        </div>
-
-
-        
-
-      </div>
-
-    );
-  }
+    
+        );
+      }
+    
 }
