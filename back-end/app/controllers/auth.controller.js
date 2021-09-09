@@ -8,15 +8,18 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
+const contactController = require("./contact.controller")
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
 /**
  * controller for a signup request
  */
 const signup = async (req, res) => {
     // make new user
-    const user = new User({
+    let user = new User({
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
         name: req.body.name,
@@ -44,12 +47,17 @@ const signup = async (req, res) => {
 
     // try to save user
     try {
-        await user.save();
+        user = await user.save();
+        await contactController.initialiseContact(user._id);
         res.send({ message: "User was registered successfully!" });
     } catch (err) {
+        if (user._id != null) {
+            User.findOneAndDelete({_id: user._id})
+        }
         res.status(500).send({ message: err });
         return;
     }
+
 };
 
 /**
@@ -102,7 +110,25 @@ const signin = async (req, res) => {
     });
 };
 
+/**
+ * controller for deleting a user
+ */
+const deleteAccount = async (req, res) => {
+    try {
+        // delete contact, products, transactions etc for user
+        await contactController.deleteAllContacts(req.body.userId);
+
+        // delete user
+        await User.findOneAndDelete({_id: mongoose.Types.ObjectId(req.body.userId)});
+
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return;
+    }
+}
+
 module.exports = {
     signup,
-    signin
+    signin,
+    deleteAccount
 }

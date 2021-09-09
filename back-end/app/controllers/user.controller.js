@@ -19,7 +19,6 @@ const adminBoard = (req, res) => {
 // const moderatorBoard = (req, res) => {
 //     res.status(200).send("Moderator Content.");
 // };
-
 module.exports = {
     allAccess,
     userBoard,

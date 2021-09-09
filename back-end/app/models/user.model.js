@@ -8,9 +8,19 @@ const mongoose = require("mongoose");
 const User = mongoose.model(
     "User",
     new mongoose.Schema({
-        email: String,
-        password: String,
-        name: String,
+        email: {
+                type: String,
+                required: true,
+                unique: true
+        },
+        password: {
+                type: String,
+                required: true,
+        },
+        name: {
+                type: String,
+                required: true,
+        },
         businessName: String,
         roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Role" }],
     })

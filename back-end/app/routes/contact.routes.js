@@ -2,14 +2,14 @@
  * routes relating to contacts
  */
 
-const { verifyNewContact, verifySignUp} = require("../middlewares");
+const { verifyContact} = require("../middlewares");
 const controller = require("../controllers/contact.controller");
 
 /**
  * POST /api/contact/new
  * POST /api/contact/update
- * POST /api/contact/get
- * POST /api/contact/getAll
+ * GET /api/contact/get
+ * GET /api/contact/getAll
  * @param app
  */
 module.exports = function(app) {
@@ -24,20 +24,20 @@ module.exports = function(app) {
     app.post(
         "/api/contact/new",
         [
-            verifySignUp.checkRequiredFields
+            verifyContact.checkRequiredFields
         ],
-        controller.new
+        controller.newContact
     );
 
-    app.post(
-        "/api/contact/update",
-        [
-            verifySignUp.checkRequiredFields
-        ],
-        controller.update
-    );
+    // app.post(
+    //     "/api/contact/update",
+    //     [
+    //         verifyContact.checkRequiredFields
+    //     ],
+    //     controller.updateContact
+    // );
 
-    app.get("/api/contact/get", controller.get);
+    app.get("/api/contact/get", controller.getContact);
 
-    app.get("/api/contact/getAll", controller.getAll);
+    app.get("/api/contact/getAll", controller.getAllContacts);
 };
