@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 
 import "../styles/Home.css";
@@ -25,13 +26,30 @@ export default class Customers extends Component {
         <div className = "pagename">
             Customers
         </div>
+        <div className="button-box">
+        <Link
+            to="/addcustomer"
+            className="add-btn"
+            // style={{ textDecoration: "none" }}
+        >
+            + Add Customer
+        </Link>
+        </div>
         <div className="subheading">
                 Overview
             </div>
         <div className="flex-container" >
-            <div className="stats-card" > Total Customers</div>
-            <div className="stats-card" > Satisfaction Score {'>'} 4.0</div>
-            <div className="stats-card" > Number of Customers (graph)</div>
+            <div className="stats-card" > 
+                <div className="card-heading">Total Customers</div>
+                <div className="card-stat">20</div>
+            </div>
+            <div className="stats-card" > 
+                <div className="card-heading">Satisfaction Score {'>'} 4.0</div>
+                <div className="card-stat">51%</div>
+            </div>
+            <div className="stats-card"> 
+                <div className="card-heading">Number of Customers (graph)</div>
+            </div>
         </div>
         <div className="subheading">
                 Customer List

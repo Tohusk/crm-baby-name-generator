@@ -9,6 +9,7 @@ export default class CustomerList extends Component{
     
         this.state = {
           currentUser: AuthService.getCurrentUser()
+          //customers: []
         };
       }
     
