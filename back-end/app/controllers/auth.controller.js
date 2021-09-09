@@ -121,6 +121,7 @@ const deleteAccount = async (req, res) => {
         // delete user
         await User.findOneAndDelete({_id: mongoose.Types.ObjectId(req.body.userId)});
 
+        res.send({ message: "Account deleted successfully" })
     } catch (err) {
         res.status(500).send({ message: err });
         return;

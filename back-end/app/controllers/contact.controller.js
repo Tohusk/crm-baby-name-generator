@@ -44,6 +44,7 @@ const newContact = async (req, res) => {
             });
         res.send({ message: "New contact added successfully!" });
     } catch (err){
+        console.log(err);
         res.status(500).send({ message: err });
         return;
     }
