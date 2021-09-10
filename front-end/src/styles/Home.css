@@ -12,20 +12,15 @@ label {
     align-self: center;
 }
 
-.left-container img {
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-left: 100%;
-    /* width: 200px;
-    height: auto; */
+.home-pagename{
+    margin-top: 1em;
+    margin-left: 2em;
+    font-size: 4em;
+    font-weight: bold;
+    color: black;
 }
 
-.right-container {
-    padding-left: 5em;
-    border-left: 1px solid black;  
-}
-
-.log-in-container {
+.homepagesubtitle{
     font-size: 2em;
     padding-bottom: 1em;
 }
@@ -48,8 +43,22 @@ label {
     font-size: 4em;
     font-weight: bold;
     color: black;
+    margin-top: 1em;
+    margin-left: 5em;
 }
 
+.home-overview{
+    height: 10em;
+    margin-left: 10em;
+}
+.home-overview-stats{
+    float: left;
+    border: 0.1em solid rgb(0, 0, 0);
+    border-radius: 2em;
+    height: 10em;
+    width: 21em;
+    margin-right: 2em;
+}
 
 
 
