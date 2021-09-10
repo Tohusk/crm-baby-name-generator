@@ -8,7 +8,7 @@ import "../styles/Home.css";
 import "../styles/customers.css"
 import Sidebar from "./sidebar.component";
 
-export default class Customers extends Component {
+export default class Sales extends Component {
   constructor(props) {
     super(props);
 
@@ -24,16 +24,16 @@ export default class Customers extends Component {
           <Sidebar/>
         {/*Page Name*/}
         <div className = "pagename">
-            Customers
+            Sales
         </div>
         <div className="break"></div>
         <div className="button-box">
         <Link
-            to="/addcustomer"
+            to="/add-sales"
             className="add-btn"
             // style={{ textDecoration: "none" }}
         >
-            + Add Customer
+            + Add Sales
         </Link>
         </div>
         <div className="subheading">
@@ -41,19 +41,20 @@ export default class Customers extends Component {
             </div>
         <div className="flex-container" >
             <div className="stats-card" > 
-                <div className="card-heading">Total Customers</div>
+                <div className="card-heading">Number of Sales</div>
                 <div className="card-stat">20</div>
             </div>
             <div className="stats-card" > 
-                <div className="card-heading">Satisfaction Score {'>'} 4.0</div>
-                <div className="card-stat">51%</div>
+                <div className="card-heading">Overall Revenue</div>
+                <div className="card-stat">$20300</div>
             </div>
             <div className="stats-card"> 
-                <div className="card-heading">Number of Customers (graph)</div>
+                <div className="card-heading">Average Revenue</div>
+                <div className="card-stat">$6200</div>
             </div>
         </div>
         <div className="subheading">
-                Customer List
+                Recent Transaction History
             </div>
 
         <div className="flex-container" >
@@ -62,26 +63,26 @@ export default class Customers extends Component {
                   <thead>
                       <tr>
                           <th>ID</th>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Satisfaction Score</th>
-                          <th>Preferred Categories</th>
+                          <th>Date</th>
+                          <th>Customer Name</th>
+                          <th>Total</th>
+                          
                       </tr>
                   </thead>
                   <tbody>
                       <tr>
                           <td>1</td>
-                          <td>Mark Otto</td>
-                          <td>otto123@example.com</td>
-                          <td>4.0</td>
-                          <td>Fruit, Vegetable, Dairy</td>
+                          <td>01/02/2020 4:15PM</td>
+                          <td>Tom Smith</td>
+                          <td>$60.00</td>
+                          
                       </tr>
                       <tr>
                           <td>2</td>
-                          <td>Bob The Bird</td>
-                          <td>bobbird@example.com</td>
-                          <td>4.5</td>
-                          <td>Bread, Fruit, Dairy</td>
+                          <td>01/02/2020 7:15PM</td>
+                          <td>Mark Otto</td>
+                          <td>$10.50</td>
+                          
                       </tr>
                   </tbody>
               </Table>

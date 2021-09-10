@@ -13,8 +13,9 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import Home from "./components/home.component";
 import Customers from "./components/customer-overview.component";
+import Products from "./components/products-overview.component";
 import CustomerProfile from "./components/customer-profile.component";
-
+import Sales from "./components/sales-overview.component";
 
 // import BoardModerator from "./components/board-moderator.component";
 // import BoardAdmin from "./components/board-admin.component";
@@ -131,7 +132,9 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route path="/user" component={BoardUser} />
             <Route exact path="/home" component={Home} />
-            <Route exact path="/Customers" component={Customers} />
+            <Route exact path="/customers" component={Customers} />
+            <Route exact path="/products" component={Products} />
+            <Route exact path="/sales" component={Sales} />
             <Route exact path="/customer-profile" component={CustomerProfile} />
 
             {/* <Route path="/mod" component={BoardModerator} /> */}
