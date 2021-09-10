@@ -23,35 +23,38 @@ export default class Products extends Component {
       <div >
           <Sidebar/>
         {/*Page Name*/}
-        <div className = "pagename">
-            Products
-        </div>
-        <div className="button-box">
-        <Link
-            to="/add-product"
-            className="add-btn"
-            // style={{ textDecoration: "none" }}
-        >
-            + Add Product
-        </Link>
-        </div>
-        <div className="subheading">
+        
+            <div className = "pagename">
+                Products
+            </div>
+            <div className="break"></div>
+            <div className="button-box">
+                <Link
+                    to="/add-product"
+                    className="add-btn"
+                    // style={{ textDecoration: "none" }}
+                >
+                    + Add Product
+                </Link>
+            </div>
+        {/* <break></break> */}
+            <div className="subheading">
                 Overview
             </div>
-        <div className="flex-container" >
-            <div className="stats-card" > 
-                <div className="card-heading">Total Products</div>
-                <div className="card-stat">20</div>
+            <div className="flex-container" >
+                <div className="stats-card" > 
+                    <div className="card-heading">Total Products</div>
+                    <div className="card-stat">20</div>
+                </div>
+                <div className="stats-card" > 
+                    <div className="card-heading">Top Product of the Week</div>
+                    <div className="card-stat">Apples (500g)</div>
+                </div>
+                <div className="stats-card"> 
+                    <div className="card-heading">Products by Categories (chart)</div>
+                </div>
             </div>
-            <div className="stats-card" > 
-                <div className="card-heading">Top Product of the Week</div>
-                <div className="card-stat">Apples (500g)</div>
-            </div>
-            <div className="stats-card"> 
-                <div className="card-heading">Products by Categories (chart)</div>
-            </div>
-        </div>
-        <div className="subheading">
+            <div className="subheading">
                 Product List
             </div>
 
@@ -89,9 +92,6 @@ export default class Products extends Component {
     
           </div>
         </div>
-
-
-        
 
       </div>
 
