@@ -14,7 +14,7 @@ import BoardUser from "./components/board-user.component";
 import Home from "./components/home.component";
 import Customers from "./components/customer-overview.component";
 import Products from "./components/products-overview.component";
-import Sales from "./components/products-overview.component";
+import Sales from "./components/sales-overview.component";
 
 // import BoardModerator from "./components/board-moderator.component";
 // import BoardAdmin from "./components/board-admin.component";

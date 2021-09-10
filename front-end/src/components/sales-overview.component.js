@@ -28,11 +28,11 @@ export default class Sales extends Component {
         </div>
         <div className="button-box">
         <Link
-            to="/add-product"
+            to="/add-sales"
             className="add-btn"
             // style={{ textDecoration: "none" }}
         >
-            + Add Product
+            + Add Sales
         </Link>
         </div>
         <div className="subheading">
