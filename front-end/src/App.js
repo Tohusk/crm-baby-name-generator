@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/App.css";
 
@@ -16,13 +16,9 @@ import CustomerProfile from "./components/customer-profile.component";
 import AddCustomer from "./components/add-customer.component";
 import AddProduct from "./components/add-product.component";
 
-import Sidebar from "./components/sidebar.component";
 import AddTransaction from "./components/add-transaction.component";
 import EditCustomer from "./components/edit-customer.component";
-
-
-// import BoardModerator from "./components/board-moderator.component";
-// import BoardAdmin from "./components/board-admin.component";
+import Sidebar from "./components/sidebar.component";
 
 class App extends Component {
   constructor(props) {
@@ -58,28 +54,50 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-
     return (
       <div>
-        <Sidebar/>
+        
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/landing"]} component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
-            <Route path="/user" component={BoardUser} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/customer-profile" component={CustomerProfile} />
-            <Route exact path="/addCustomer" component={AddCustomer} />
-            <Route exact path="/addProduct" component={AddProduct} />
-            <Route exact path="/addTransaction" component={AddTransaction} />
-            <Route exact path="/editCustomer" component={EditCustomer} />
 
-
-            {/* <Route path="/mod" component={BoardModerator} /> */}
-            {/* <Route path="/admin" component={BoardAdmin} /> */}
+            <Route exact path={["/", "/landing"]}>
+              <Sidebar/>
+              <Landing/>
+            </Route>
+            <Route exact path="/profile">
+              <Sidebar/>
+              <Profile/>
+            </Route>
+            <Route exact path="/user">
+              <Sidebar/>
+              <BoardUser/>
+            </Route>
+            <Route exact path="/home">
+              <Sidebar/>
+              <Home/>
+            </Route>
+            <Route exact path="/customer-profile">
+              <Sidebar/>
+              <CustomerProfile/>
+            </Route>
+            <Route exact path="/addCustomer">
+              <Sidebar/>
+              <AddCustomer/>
+            </Route>
+            <Route exact path="/addProduct">
+              <Sidebar/>
+              <AddProduct/>
+            </Route>
+            <Route exact path="/addTransaction">
+              <Sidebar/>
+              <AddTransaction/>
+            </Route>
+            <Route exact path="/editCustomer">
+              <Sidebar/>
+              <EditCustomer/>
+            </Route>
           </Switch>
         </div>
 

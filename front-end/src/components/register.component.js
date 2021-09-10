@@ -135,22 +135,20 @@ export default class Register extends Component {
   render() {
     return (
       <div>
-        <div className="logo-container">
-          <img src={logo} alt="logo" ></img>
-          {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
+        {/* BBY Logo */}
+        <div className="authentication-logo-container">
+          <img src={logo} alt="logo"/>
         </div>
 
-        <div className="flex-container">
-          <img src={img} alt="loginillustration"></img>
-          {/* <div className="left-container"> */}
-            {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
-          {/* </div> */}
-          {/* <div className="vl"></div> */}
-          <div className="right-container">
-            <div className = "log-in-container">
-              Sign Up
-            </div>
+        <div className="authentication-content-container">
+          <div className = "authentication-left-container">
+            <img src={img} alt="loginillustration"/>
+          </div>
+          <div className="authentication-right-container">
+            <div className = "authentication-title-container">Sign Up</div>
+            
             <Form
+              className="authentication-form"
               onSubmit={this.handleRegister}
               ref={c => {
                 this.form = c;
@@ -158,8 +156,8 @@ export default class Register extends Component {
             >
               {!this.state.successful && (
                 <div>
-                  <div className="form-group">
-                    <label htmlFor="name">Name</label>
+                  <div className="authentication-form-group">
+                    <label htmlFor="name">NAME</label>
                     <Input
                       type="text"
                       className="form-control"
@@ -170,8 +168,8 @@ export default class Register extends Component {
                     />
                   </div>
 
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                  <div className="authentication-form-group">
+                    <label htmlFor="email">EMAIL</label>
                     <Input
                       type="text"
                       className="form-control"
@@ -182,8 +180,8 @@ export default class Register extends Component {
                     />
                   </div>
 
-                  <div className="form-group">
-                    <label htmlFor="businessName">Business Name (Optional)</label>
+                  <div className="authentication-form-group">
+                    <label htmlFor="businessName">BUSINESS NAME (Optional)</label>
                     <Input
                       type="text"
                       className="form-control"
@@ -193,8 +191,9 @@ export default class Register extends Component {
                       // validations={[required, businessName]}
                     />
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
+
+                  <div className="authentication-form-group">
+                    <label htmlFor="password">PASSWORD</label>
                     <Input
                       type="password"
                       className="form-control"
@@ -204,11 +203,13 @@ export default class Register extends Component {
                       validations={[required, vpassword]}
                     />
                   </div>
-                  <div className="form-group">
-                    <button className="btn btn-primary btn-block">Sign Up</button>
+
+                  <div className="authentication-form-group">
+                    <button className="submitButton">Sign Up</button>
                   </div>
+
                   Already have an account?
-                  <div><a href="/login">Log in</a></div>
+                  <div><a href="/login" className="other-authentication-link">Log in</a></div>
                 </div>
               )}
 
@@ -226,7 +227,6 @@ export default class Register extends Component {
                   </div>
                 </div>
               )}
-
 
               <CheckButton
                 style={{ display: "none" }}

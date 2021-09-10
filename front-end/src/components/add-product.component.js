@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+// import Input from "react-validation/build/input";
+import { Form } from "react-bootstrap";
 
-import "../styles/AddProduct.css";
+import "../styles/AddItem.css";
 
 export default class AddProduct extends Component {
   constructor(props) {
@@ -12,41 +14,67 @@ export default class AddProduct extends Component {
     };
   }
 
+
   render() {
-
     return (
-      <div className="addCustomer-container">
+      <div className="addItem-container">
         {/*Page Name*/}
-        <div className="addCustomer-title">Add Product</div>
-
-        <form className="addCustomer-form">
-
-          <div className="text-form">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input></input>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="price">Price</label>
-              <input></input>
-            </div>
-          </div>
-
-          <div className="category-radio">
-          </div>
-
-          <div className="addCustomer-submit-group">
-            <a className="addCustomer-cancelButton" href = "/home">Cancel</a>
-            <button className="addCustomer-addButton">Add</button>
-          </div>  
-        </form>
-
-
+        <div className="addItem-title">Add Product</div>
+        {/* One form for submitting add product query */}
         
+        <Form>
+          <div className="addProduct-form">
+            <div className="addProduct-text-fields">
+              <Form.Group className="addProduct-form-group" controlId="formBasicName">
+                <Form.Label>NAME</Form.Label>
+                <Form.Control className="form-control" type="name" />
+              </Form.Group>
 
+              <Form.Group className="addProduct-form-group" controlId="formBasicPrice">
+                <Form.Label>PRICE</Form.Label>
+                <Form.Control className="form-control" type="price" />
+              </Form.Group>
+            </div>
+
+            <div className="addProduct-radio-fields">
+              <div className="addProduct-category-title">CATEGORY</div>
+
+              <Form.Check
+                className="addProduct-radio-categories"
+                type="Radio"
+                label="Fruit"
+              />
+              <Form.Check
+                className="addProduct-radio-categories"
+                type="Radio"
+                label="Vegetable"
+              />
+              <Form.Check
+                className="addProduct-radio-categories"
+                type="Radio"
+                label="Bread"
+              />
+              <Form.Check
+                className="addProduct-radio-categories"
+                type="Radio"
+                label="Dairy"
+              />
+              <div className="addProduct-addCategory-container">
+                <a className="addProduct-addCategory" href="/addCategory">+ Add Category</a>
+              </div>
+            </div>
+            
+            <div className="addProduct-submit-group">
+              <a className="addProduct-cancelButton" href="/home">Cancel</a>
+              <button
+                className="submitButton"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+        </Form>
       </div>
-
     );
   }
 }

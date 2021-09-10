@@ -85,35 +85,27 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <div className="logo-container">
-          <img src={logo} alt="logo" ></img>
-          {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
+        {/* BBY Logo */}
+        <div className="authentication-logo-container">
+          <img src={logo} alt="logo"/>
         </div>
-        <div className="flex-container">
-          <img src={img} alt="loginillustration"/>
-          {/* <div className="left-container">
-            {/* <h1>CRM for Small Businesses</h1> */}
+
+        <div className="authentication-content-container">
+          <div className = "authentication-left-container">
+            <img src={img} alt="loginillustration"/>
+          </div>
+          <div className = "authentication-right-container">
+            <div className = "authentication-title-container">Log in</div>
             
-            {/* <img src="https://source.unsplash.com/random" alt="baby"></img>
-          </div> */}
-
-          {/* <div className = "vl"></div> */}
-
-
-          <div className = "right-container">
-            <div className = "log-in-container">
-              Log in
-            </div>
-
-          <Form
+            <Form
+              className="authentication-form"
               onSubmit={this.handleLogin}
               ref={c => {
                 this.form = c;
               }}
             >
-              <div className="form-group">
-
-                <label htmlFor="email">Email</label>
+              <div className="authentication-form-group">
+                <label htmlFor="email">EMAIL</label>
                 <Input
                   type="text"
                   className="form-control"
@@ -124,8 +116,8 @@ export default class Login extends Component {
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
+              <div className="authentication-form-group">
+                <label htmlFor="password">PASSWORD</label>
                 <Input
                   type="password"
                   className="form-control"
@@ -136,45 +128,38 @@ export default class Login extends Component {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="authentication-form-group">
                 <button
-                  className="btn btn-primary btn-block"
+                  className="submitButton"
                   disabled={this.state.loading}
                 >
-                  {this.state.loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
-                  <span>Login</span>
+                {this.state.loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                Login
                 </button>
-                <span>
-                <a href = "/register">Sign up</a>
-
-              </span>
+                <a href="/register" className="other-authentication-link">Sign up</a>
               </div>
 
               {this.state.message && (
-                <div className="form-group">
+                <div className="authentication-form-group">
                   <div className="alert alert-danger" role="alert">
                     {this.state.message}
                   </div>
                 </div>
               )}
-              
-                <CheckButton
-                  style={{ display: "none" }}
-                  ref={c => {
-                    this.checkBtn = c;
-                  }}
-                />
-                
-              
+            
+              <CheckButton
+                style={{ display: "none" }}
+                ref={c => {
+                  this.checkBtn = c;
+                }}
+              />    
             </Form>
-                
+            
           </div>
         </div>
       </div>
-
     );
-
   }
 }
