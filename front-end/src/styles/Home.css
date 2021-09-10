@@ -3,7 +3,6 @@ label {
     margin-top: 10px;
 }
 
-
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -42,13 +41,14 @@ label {
 
 
 .pagename{
-    position: absolute;
-    left: 230px;
-    font-size: 3em;
+    position: relative;
+    padding: 1em;
+    /* padding-top: 1em; */
+    /* padding-bottom: 1em; */
+    font-size: 4em;
     font-weight: bold;
     color: black;
 }
-
 
 
 

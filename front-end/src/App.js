@@ -12,6 +12,8 @@ import Landing from "./components/landing.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import Home from "./components/home.component";
+import Customers from "./components/customer-overview.component";
+import Products from "./components/products-overview.component";
 import CustomerProfile from "./components/customer-profile.component";
 import AddCustomer from "./components/add-customer.component";
 import AddProduct from "./components/add-product.component";
@@ -19,6 +21,11 @@ import AddProduct from "./components/add-product.component";
 import AddTransaction from "./components/add-transaction.component";
 import EditCustomer from "./components/edit-customer.component";
 import Sidebar from "./components/sidebar.component";
+
+import Sales from "./components/sales-overview.component";
+
+// import BoardModerator from "./components/board-moderator.component";
+// import BoardAdmin from "./components/board-admin.component";
 
 class App extends Component {
   constructor(props) {
@@ -61,7 +68,6 @@ class App extends Component {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-
             <Route exact path={["/", "/landing"]}>
               <Sidebar/>
               <Landing/>
@@ -98,6 +104,24 @@ class App extends Component {
               <Sidebar/>
               <EditCustomer/>
             </Route>
+            <Route exact path="/customers">
+              <Sidebar/>
+              <Customers/>
+            </Route>
+            <Route exact path="/products">
+              <Sidebar/>
+              <Products/>
+            </Route>
+            <Route exact path="/sales">
+              <Sidebar/>
+              <Sales/>
+            </Route>
+            <Route exact path="/customer-profile>
+              <Sidebar/>
+              <CustomerProfile/>
+            </Route>
+            {/* <Route path="/mod" component={BoardModerator} /> */}
+            {/* <Route path="/admin" component={BoardAdmin} /> */}
           </Switch>
         </div>
 
