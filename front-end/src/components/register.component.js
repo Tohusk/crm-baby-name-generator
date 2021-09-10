@@ -4,14 +4,14 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
-import "../styles/Authentication.css"
+import "../styles/Authentication.css";
 
 import AuthService from "../services/auth.service";
 
-import img from '../assets/img-signup.png';
-import logo from '../assets/logo.png';
+import img from "../assets/img-signup.png";
+import logo from "../assets/logo.png";
 
-const required = value => {
+const required = (value) => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -21,7 +21,7 @@ const required = value => {
   }
 };
 
-const email = value => {
+const email = (value) => {
   if (!isEmail(value)) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -31,7 +31,7 @@ const email = value => {
   }
 };
 
-const vname = value => {
+const vname = (value) => {
   if (value.length < 1 || value.length > 20) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -41,7 +41,7 @@ const vname = value => {
   }
 };
 
-const vpassword = value => {
+const vpassword = (value) => {
   if (value.length < 6 || value.length > 40) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -66,31 +66,31 @@ export default class Register extends Component {
       businessName: "",
       password: "",
       successful: false,
-      message: ""
+      message: "",
     };
   }
 
   onChangeUsername(e) {
     this.setState({
-      name: e.target.value
+      name: e.target.value,
     });
   }
 
   onChangeEmail(e) {
     this.setState({
-      email: e.target.value
+      email: e.target.value,
     });
   }
 
   onChangeBusinessName(e) {
     this.setState({
-      businessName: e.target.value
+      businessName: e.target.value,
     });
   }
 
   onChangePassword(e) {
     this.setState({
-      password: e.target.value
+      password: e.target.value,
     });
   }
 
@@ -99,7 +99,7 @@ export default class Register extends Component {
 
     this.setState({
       message: "",
-      successful: false
+      successful: false,
     });
 
     this.form.validateAll();
@@ -112,47 +112,42 @@ export default class Register extends Component {
           this.state.businessName,
           this.state.password
         );
-        
+
         this.setState({
           message: res.data.message,
-          successful: true
+          successful: true,
         });
       } catch (err) {
-        const resMessage = (err.response && err.response.data &&
-          err.response.data.message) ||
-          err.message || err.toString();
-      
+        const resMessage =
+          (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+
         this.setState({
           successful: false,
-          message: resMessage
+          message: resMessage,
         });
       }
     }
   }
 
-
-
   render() {
     return (
       <div>
         <div className="logo-container">
-          <img src={logo} alt="logo" ></img>
+          <img src={logo} alt="logo"></img>
           {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
         </div>
 
         <div className="flex-container">
           <img src={img} alt="loginillustration"></img>
           {/* <div className="left-container"> */}
-            {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
+          {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
           {/* </div> */}
           {/* <div className="vl"></div> */}
           <div className="right-container">
-            <div className = "log-in-container">
-              Sign Up
-            </div>
+            <div className="log-in-container">Sign Up</div>
             <Form
               onSubmit={this.handleRegister}
-              ref={c => {
+              ref={(c) => {
                 this.form = c;
               }}
             >
@@ -169,7 +164,6 @@ export default class Register extends Component {
                       validations={[required, vname]}
                     />
                   </div>
-
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <Input
@@ -181,7 +175,6 @@ export default class Register extends Component {
                       validations={[required, email]}
                     />
                   </div>
-
                   <div className="form-group">
                     <label htmlFor="businessName">Business Name (Optional)</label>
                     <Input
@@ -208,29 +201,23 @@ export default class Register extends Component {
                     <button className="btn btn-primary btn-block">Sign Up</button>
                   </div>
                   Already have an account?
-                  <div><a href="/login">Log in</a></div>
+                  <div>
+                    <a href="/login">Log in</a>
+                  </div>
                 </div>
               )}
 
               {this.state.message && (
                 <div className="form-group">
-                  <div
-                    className={
-                      this.state.successful
-                        ? "alert alert-success"
-                        : "alert alert-danger"
-                    }
-                    role="alert"
-                  >
+                  <div className={this.state.successful ? "alert alert-success" : "alert alert-danger"} role="alert">
                     {this.state.message}
                   </div>
                 </div>
               )}
 
-
               <CheckButton
                 style={{ display: "none" }}
-                ref={c => {
+                ref={(c) => {
                   this.checkBtn = c;
                 }}
               />
