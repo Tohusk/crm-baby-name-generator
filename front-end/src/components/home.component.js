@@ -18,7 +18,7 @@ export default class Home extends Component {
     return (
       <div >
         {/*Page Name*/}
-        <div className = "pagename">
+        <div className = "home-pagename">
             Home
         </div>
         <div className = "homepagesubtitle">
