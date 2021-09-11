@@ -22,29 +22,29 @@ require("./app/routes/user.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "UwU." });
+    res.json({ message: "UwU." });
 });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+    console.log(`Server is running on port ${PORT}.`);
 });
 
 // connect to mongoDB
 db.mongoose
-  .connect(process.env.MONGODB_CONNECTION, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Successfully connect to MongoDB.");
-    // initial();
-  })
-  .catch((err) => {
-    console.error("Connection error", err);
-    process.exit();
-  });
+    .connect(process.env.MONGODB_CONNECTION, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => {
+        console.log("Successfully connect to MongoDB.");
+        // initial();
+    })
+    .catch((err) => {
+        console.error("Connection error", err);
+        process.exit();
+    });
 
 // initialise roles
 // function initial() {
