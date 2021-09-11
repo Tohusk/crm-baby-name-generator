@@ -133,7 +133,7 @@ class App extends Component {
           </Switch>
         </div>
 
-        <AuthVerify logOut={this.logOut}/>
+        <AuthVerify logOut={this.logOut} />
       </div>
     );
   }

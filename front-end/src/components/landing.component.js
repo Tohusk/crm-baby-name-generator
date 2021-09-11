@@ -7,7 +7,7 @@ export default class Landing extends Component {
     super(props);
 
     this.state = {
-      content: ""
+      content: "",
     };
   }
 
@@ -15,13 +15,11 @@ export default class Landing extends Component {
     try {
       const response = await UserService.getPublicContent();
       this.setState({
-        content: response.data
+        content: response.data,
       });
     } catch (err) {
       this.setState({
-        content:
-          (err.response && err.response.data) ||
-          err.message || err.toString()
+        content: (err.response && err.response.data) || err.message || err.toString(),
       });
     }
   }

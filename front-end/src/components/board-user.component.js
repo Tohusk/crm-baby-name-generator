@@ -7,7 +7,7 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
-      content: ""
+      content: "",
     };
   }
 
@@ -15,16 +15,11 @@ export default class BoardUser extends Component {
     try {
       const response = UserService.getUserBoard();
       this.setState({
-        content: response.data
+        content: response.data,
       });
     } catch (err) {
       this.setState({
-        content:
-          (err.response &&
-            err.response.data &&
-            err.response.data.message) ||
-            err.message ||
-            err.toString()
+        content: (err.response && err.response.data && err.response.data.message) || err.message || err.toString(),
       });
     }
   }
