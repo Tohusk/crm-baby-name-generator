@@ -10,6 +10,7 @@ const controller = require("../controllers/contact.controller");
  * POST /api/contact/update
  * GET /api/contact/get
  * GET /api/contact/getAll
+ * DELETE /api/contact/delete
  * @param app
  */
 module.exports = function (app) {
@@ -20,15 +21,11 @@ module.exports = function (app) {
 
     app.post("/api/contact/new", [verifyContact.checkRequiredFields], controller.newContact);
 
-    // app.post(
-    //     "/api/contact/update",
-    //     [
-    //         verifyContact.checkRequiredFields
-    //     ],
-    //     controller.updateContact
-    // );
+    app.post("/api/contact/update", [verifyContact.checkRequiredFieldsUpdate], controller.updateContact);
 
     app.get("/api/contact/get", controller.getContact);
 
     app.get("/api/contact/getAll", controller.getAllContacts);
+
+    app.delete("/api/contact/deleteOne", controller.deleteOneContact);
 };

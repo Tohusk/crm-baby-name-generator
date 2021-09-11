@@ -46,7 +46,33 @@ const newContact = async (req, res) => {
         );
         res.send({ message: "New contact added successfully!" });
     } catch (err) {
-        console.log(err);
+        res.status(500).send({ message: err });
+        return;
+    }
+};
+
+/**
+ * Controller for updating a contact
+ */
+const updateContact = async (req, res) => {
+    try {
+        await Contacts.findOneAndUpdate(
+            {
+                user: mongoose.Types.ObjectId(req.body.userId),
+                customers: { $elemMatch: { _id: mongoose.Types.ObjectId(req.body.contactId) } },
+            },
+            {
+                $set: {
+                    "customers.$.name": req.body.name,
+                    "customers.$.email": req.body.email,
+                    "customers.$.phoneNumber": req.body.phoneNumber,
+                    "customers.$.companyName": req.body.companyName,
+                    "customers.$.description": req.body.description,
+                },
+            }
+        );
+        res.send({ message: "Contact updated successfully!" });
+    } catch (err) {
         res.status(500).send({ message: err });
         return;
     }
@@ -62,7 +88,6 @@ const getContact = async (req, res) => {
         });
         res.json(contact);
     } catch (err) {
-        console.log(err);
         res.status(500).send({ message: err });
         return;
     }
@@ -82,6 +107,22 @@ const getAllContacts = async (req, res) => {
 };
 
 /**
+ * Controller for deleting one contact
+ */
+const deleteOneContact = async (req, res) => {
+    try {
+        await Contacts.findOneAndUpdate(
+            { user: mongoose.Types.ObjectId(req.body.userId) },
+            { $pull: { customers: { _id: mongoose.Types.ObjectId(req.body.contactId) } } }
+        );
+        res.send({ message: "Contact deleted successfully" });
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return;
+    }
+};
+
+/**
  * Controller for deleting contacts entry for a given user
  */
 const deleteAllContacts = async (userId) => {
@@ -91,8 +132,9 @@ const deleteAllContacts = async (userId) => {
 module.exports = {
     initialiseContact,
     newContact,
-    // updateContact,
+    updateContact,
     getContact,
     getAllContacts,
+    deleteOneContact,
     deleteAllContacts,
 };
