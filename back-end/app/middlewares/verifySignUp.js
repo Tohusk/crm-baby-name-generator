@@ -73,7 +73,7 @@ const verifySignUp = {
     checkRequiredFields,
     checkDuplicateEmail,
     checkRolesExisted,
-    checkRequiredFieldsUpdate
+    checkRequiredFieldsUpdate,
 };
 
 module.exports = verifySignUp;
