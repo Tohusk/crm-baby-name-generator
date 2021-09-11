@@ -6,10 +6,10 @@ const mongoose = require("mongoose");
  * a role model ;)
  */
 const Role = mongoose.model(
-  "Role",
-  new mongoose.Schema({
-    name: String,
-  })
+    "Role",
+    new mongoose.Schema({
+        name: String,
+    })
 );
 
 module.exports = Role;
