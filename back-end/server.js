@@ -21,13 +21,13 @@ require("./app/routes/contact.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "UwU." });
+    res.json({ message: "UwU." });
 });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+    console.log(`Server is running on port ${PORT}.`);
 });
 
 // connect to mongoDB
