@@ -32,16 +32,16 @@ app.listen(PORT, () => {
 
 // connect to mongoDB
 db.mongoose
-  .connect(process.env.MONGODB_CONNECTION, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => {
-    console.log("Successfully connect to MongoDB.");
-    // initial();
-  })
-  .catch((err) => {
-    console.error("Connection error", err);
-    process.exit();
-  });
+    .connect(process.env.MONGODB_CONNECTION, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+    })
+    .then(() => {
+        console.log("Successfully connect to MongoDB.");
+        // initial();
+    })
+    .catch((err) => {
+        console.error("Connection error", err);
+        process.exit();
+    });

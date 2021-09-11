@@ -23,7 +23,7 @@ const signup = async (req, res) => {
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
         name: req.body.name,
-        businessName: req.body.businessName
+        businessName: req.body.businessName,
     });
 
     // assign user roles
@@ -106,22 +106,22 @@ const signin = async (req, res) => {
  * controller for deleting a user
  */
 const deleteAccount = async (req, res) => {
-  try {
-    // delete contact, products, transactions etc for user
-    await contactController.deleteAllContacts(req.body.userId);
+    try {
+        // delete contact, products, transactions etc for user
+        await contactController.deleteAllContacts(req.body.userId);
 
-    // delete user
-    await User.findOneAndDelete({ _id: mongoose.Types.ObjectId(req.body.userId) });
+        // delete user
+        await User.findOneAndDelete({ _id: mongoose.Types.ObjectId(req.body.userId) });
 
-    res.send({ message: "Account deleted successfully" });
-  } catch (err) {
-    res.status(500).send({ message: err });
-    return;
-  }
+        res.send({ message: "Account deleted successfully" });
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return;
+    }
 };
 
 module.exports = {
-  signup,
-  signin,
-  deleteAccount
+    signup,
+    signin,
+    deleteAccount,
 };
