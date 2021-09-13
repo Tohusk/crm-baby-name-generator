@@ -3,85 +3,81 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import "../styles/Authentication.css"
+import "../styles/Authentication.css";
 
 import AuthService from "../services/auth.service";
 
-import img from '../assets/img-login.png';
-import logo from '../assets/logo.png';
+import img from "../assets/img-login.png";
+import logo from "../assets/logo.png";
 
-const required = value => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
+const required = (value) => {
+    if (!value) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                This field is required!
+            </div>
+        );
+    }
 };
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+    constructor(props) {
+        super(props);
+        this.handleLogin = this.handleLogin.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
 
-    this.state = {
-      email: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }
+        this.state = {
+            email: "",
+            password: "",
+            loading: false,
+            message: "",
+        };
+    }
 
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
+    onChangeEmail(e) {
+        this.setState({
+            email: e.target.value,
+        });
+    }
   
-
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
-
-  async handleLogin(e) {
-    e.preventDefault();
-    
-    this.setState({
-      message: "",
-      loading: true
-    });
-
-    this.form.validateAll();
-
-    if (this.checkBtn.context._errors.length === 0) {
-      try {
-        await AuthService.login(this.state.email, this.state.password);
-        this.props.history.push("/home");
-        window.location.reload();
-      } catch (err) {
-        const resMessage =
-        (err.response && err.response.data &&
-         err.response.data.message) || err.message ||
-         err.toString();
+  
+    onChangePassword(e) {
+        this.setState({
+            password: e.target.value,
+        });
+    }
+  
+      async handleLogin(e) {
+        e.preventDefault();
 
         this.setState({
-          loading: false,
-          message: resMessage
+            message: "",
+            loading: true,
         });
-      }
-    } else {
-      this.setState({
-        loading: false
-      });
-    }
-  }
 
+        this.form.validateAll();
+
+        if (this.checkBtn.context._errors.length === 0) {
+            try {
+                await AuthService.login(this.state.email, this.state.password);
+                this.props.history.push("/home");
+                window.location.reload();
+            } catch (err) {
+                const resMessage =
+                    (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+
+                this.setState({
+                    loading: false,
+                    message: resMessage,
+                });
+            }
+        } else {
+            this.setState({
+                loading: false,
+            });
+        }
+    }
   render() {
     return (
       <div>

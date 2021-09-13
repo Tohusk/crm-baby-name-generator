@@ -3,7 +3,6 @@
  * Middlewares that helps with authorisation
  */
 
-
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
 const db = require("../models");
@@ -35,7 +34,7 @@ const verifyToken = (req, res, next) => {
 const isAdmin = async (req, res, next) => {
     try {
         const user = await User.findById(req.userId);
-        const roles = await Role.find({_id: { $in: user.roles }});
+        const roles = await Role.find({ _id: { $in: user.roles } });
         for (const role of roles) {
             if (role.name === "admin") {
                 next();
@@ -74,6 +73,6 @@ const isAdmin = async (req, res, next) => {
 const authJwt = {
     verifyToken,
     //isModerator,
-    isAdmin
+    isAdmin,
 };
 module.exports = authJwt;
