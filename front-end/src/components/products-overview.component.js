@@ -6,7 +6,6 @@ import Table from "react-bootstrap/Table";
 
 import "../styles/Home.css";
 import "../styles/customers.css";
-import Sidebar from "./sidebar.component";
 
 export default class Products extends Component {
     constructor(props) {
@@ -20,9 +19,7 @@ export default class Products extends Component {
     render() {
         return (
             <div>
-                <Sidebar />
                 {/*Page Name*/}
-
                 <div className="pagename">Products</div>
                 {/* <div className="break"></div> */}
                 <div className="button-box">
