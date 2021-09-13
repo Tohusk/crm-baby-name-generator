@@ -136,6 +136,7 @@ class App extends Component {
             <Route exact path="/products" component={Products} />
             <Route exact path="/sales" component={Sales} />
             <Route exact path="/customer-profile" component={CustomerProfile} />
+
             {/* <Route path="/mod" component={BoardModerator} /> */}
             {/* <Route path="/admin" component={BoardAdmin} /> */}
           </Switch>
