@@ -3,7 +3,6 @@
  * controllers related to users
  */
 
-
 const allAccess = (req, res) => {
     res.status(200).send("Public Content.");
 };
@@ -25,4 +24,4 @@ module.exports = {
     userBoard,
     adminBoard,
     // moderatorBoard
-}
+};

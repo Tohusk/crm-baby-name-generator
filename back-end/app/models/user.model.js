@@ -12,12 +12,13 @@ const User = mongoose.model(
         password: String,
         name: String,
         businessName: String,
-        roles: [{
+        roles: [
+            {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "Role"
-            }],
+                ref: "Role",
+            },
+        ],
     })
 );
 
 module.exports = User;
-

@@ -20,14 +20,14 @@ const signup = async (req, res) => {
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
         name: req.body.name,
-        businessName: req.body.businessName
+        businessName: req.body.businessName,
     });
 
     // assign user roles
     if (req.body.roles) {
         try {
-            const roles = await Role.find({name: { $in: req.body.roles }});
-            user.roles = roles.map(role => role._id);
+            const roles = await Role.find({ name: { $in: req.body.roles } });
+            user.roles = roles.map((role) => role._id);
         } catch (err) {
             res.status(500).send({ message: err });
             return;
@@ -59,7 +59,7 @@ const signin = async (req, res) => {
     // find user with given email
     let user;
     try {
-        user = await User.findOne({email: req.body.email}).populate("roles", "-__v");
+        user = await User.findOne({ email: req.body.email }).populate("roles", "-__v");
     } catch {
         res.status(500).send({ message: err });
         return;
@@ -71,20 +71,17 @@ const signin = async (req, res) => {
     }
 
     // check if password is correct
-    const passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-    );
+    const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
     if (!passwordIsValid) {
         return res.status(401).send({
             accessToken: null,
-            message: "Incorrect email or password."
+            message: "Incorrect email or password.",
         });
     }
 
-    const token = jwt.sign({id: user.id}, config.secret, {
-        expiresIn: 86400 // 24 hours
+    const token = jwt.sign({ id: user.id }, config.secret, {
+        expiresIn: 86400, // 24 hours
     });
 
     // find authorities
@@ -98,11 +95,11 @@ const signin = async (req, res) => {
         id: user._id,
         email: user.email,
         roles: authorities,
-        accessToken: token
+        accessToken: token,
     });
 };
 
 module.exports = {
     signup,
-    signin
-}
+    signin,
+};

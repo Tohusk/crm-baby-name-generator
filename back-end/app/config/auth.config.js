@@ -1,3 +1,3 @@
 module.exports = {
-  secret: "baby-name-generator"
+    secret: "baby-name-generator",
 };

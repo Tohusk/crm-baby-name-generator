@@ -3,7 +3,6 @@
  * middleware that helps verify signups
  */
 
-
 const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;
@@ -13,7 +12,7 @@ const User = db.user;
  */
 const checkDuplicateEmail = async (req, res, next) => {
     try {
-        const existingUser = await User.findOne({email: req.body.email});
+        const existingUser = await User.findOne({ email: req.body.email });
 
         if (existingUser) {
             res.status(400).send({ message: "Failed! Email is already in use!" });
@@ -31,11 +30,10 @@ const checkDuplicateEmail = async (req, res, next) => {
  */
 const checkRolesExisted = (req, res, next) => {
     if (req.body.roles) {
-
         for (const role of req.body.roles) {
             if (!ROLES.includes(role)) {
                 res.status(400).send({
-                    message: `Failed! Role ${req.body.roles[i]} does not exist!`
+                    message: `Failed! Role ${req.body.roles[i]} does not exist!`,
                 });
                 return;
             }
@@ -44,7 +42,6 @@ const checkRolesExisted = (req, res, next) => {
 
     next();
 };
-
 
 /**
  * check if all the required fields are filled
@@ -60,7 +57,7 @@ const checkRequiredFields = (req, res, next) => {
 const verifySignUp = {
     checkRequiredFields,
     checkDuplicateEmail,
-    checkRolesExisted
+    checkRolesExisted,
 };
 
 module.exports = verifySignUp;

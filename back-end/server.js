@@ -1,7 +1,7 @@
 // written with reference to this tutorial: https://www.bezkoder.com/node-js-mongodb-auth-jwt/
 
 // packages
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
@@ -17,8 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
+require("./app/routes/auth.routes")(app);
+require("./app/routes/user.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {
@@ -35,18 +35,18 @@ app.listen(PORT, () => {
 db.mongoose
     .connect(process.env.MONGODB_CONNECTION, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
     })
     .then(() => {
         console.log("Successfully connect to MongoDB.");
         // initial();
     })
-    .catch(err => {
+    .catch((err) => {
         console.error("Connection error", err);
         process.exit();
     });
 
-    // initialise roles
+// initialise roles
 // function initial() {
 //     Role.estimatedDocumentCount((err, count) => {
 //         if (!err && count === 0) {
@@ -71,4 +71,4 @@ db.mongoose
 //             });
 //         }
 //     });
-// } 
+// }
