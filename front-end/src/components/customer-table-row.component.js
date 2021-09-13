@@ -13,7 +13,7 @@ export default class CustomerTableRow extends Component {
                 <td>{this.props.obj.score}</td>
                 <td>{this.props.obj.categories}</td>
                 <td>
-                    <Link className="edit-link" to={"/edit-student/" + this.props.obj._id}>
+                    <Link className="edit-link" to={"/edit-customer/" + this.props.obj._id}>
                         Edit
                     </Link>
                     <Button size="sm" variant="danger">Delete</Button>

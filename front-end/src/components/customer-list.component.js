@@ -8,10 +8,28 @@ export default class CustomerList extends Component{
         super(props);
     
         this.state = {
-          currentUser: AuthService.getCurrentUser()
-          //customers: []
+          currentUser: AuthService.getCurrentUser(),
+          customers: []
         };
       }
+    
+    componentDidMount(){
+        axios.get('')
+        .then(res => {
+            this.setState({
+                customers: res.data
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+    dataTable(){
+        return this.state.customers.map((res, i) => {
+            return <CustomerTableRow obj={res} key={i} />;
+        });
+    }
     
       render() {
     
@@ -28,7 +46,8 @@ export default class CustomerList extends Component{
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
+                      {this.dataTable()}
+                      {/* <tr>
                           <td>1</td>
                           <td>Mark Otto</td>
                           <td>otto123@example.com</td>
@@ -41,7 +60,7 @@ export default class CustomerList extends Component{
                           <td>bobbird@example.com</td>
                           <td>4.5</td>
                           <td>Bread, Fruit, Dairy</td>
-                      </tr>
+                      </tr> */}
                   </tbody>
               </Table>
              
