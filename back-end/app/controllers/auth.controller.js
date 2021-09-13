@@ -4,12 +4,16 @@
  */
 
 const config = require("../config/auth.config");
+const mongoose = require("mongoose");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
+const contactController = require("./contact.controller");
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
 /**
  * controller for a signup request
@@ -46,6 +50,23 @@ const signup = async (req, res) => {
     try {
         await user.save();
         res.send({ message: "User was registered successfully!" });
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return;
+    }
+};
+
+/**
+ * Controller for updating a user's email, name and/or business name
+ */
+const updateUser = async (req, res) => {
+    // update user
+    try {
+        await User.findOneAndUpdate(
+            { _id: mongoose.Types.ObjectId(req.body.userId) },
+            { $set: { name: req.body.name, email: req.body.email, businessName: req.body.businessName } }
+        );
+        res.send({ message: "User updated successfully!" });
     } catch (err) {
         res.status(500).send({ message: err });
         return;
@@ -99,7 +120,27 @@ const signin = async (req, res) => {
     });
 };
 
+/**
+ * controller for deleting a user
+ */
+const deleteAccount = async (req, res) => {
+    try {
+        // delete contact, products, transactions etc for user
+        await contactController.deleteAllContacts(req.body.userId);
+
+        // delete user
+        await User.findOneAndDelete({ _id: mongoose.Types.ObjectId(req.body.userId) });
+
+        res.send({ message: "Account deleted successfully" });
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return;
+    }
+};
+
 module.exports = {
     signup,
+    updateUser,
     signin,
+    deleteAccount,
 };
