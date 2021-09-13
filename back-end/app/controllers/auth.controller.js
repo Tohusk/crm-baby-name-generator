@@ -8,8 +8,11 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
+const contactController = require("./contact.controller");
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
 /**
  * controller for a signup request
@@ -99,7 +102,26 @@ const signin = async (req, res) => {
     });
 };
 
+/**
+ * controller for deleting a user
+ */
+const deleteAccount = async (req, res) => {
+    try {
+        // delete contact, products, transactions etc for user
+        await contactController.deleteAllContacts(req.body.userId);
+
+        // delete user
+        await User.findOneAndDelete({ _id: mongoose.Types.ObjectId(req.body.userId) });
+
+        res.send({ message: "Account deleted successfully" });
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return;
+    }
+};
+
 module.exports = {
     signup,
     signin,
+    deleteAccount,
 };
