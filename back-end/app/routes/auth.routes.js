@@ -9,6 +9,7 @@ const controller = require("../controllers/auth.controller");
 
 /**
  * POST /api/auth/signup
+ * POST /api/auth/update
  * POST /api/auth/signin
  * DELETE /api/auth/deleteAccount
  * @param app
@@ -24,6 +25,8 @@ module.exports = function (app) {
         [verifySignUp.checkRequiredFields, verifySignUp.checkDuplicateEmail, verifySignUp.checkRolesExisted],
         controller.signup
     );
+
+    app.post("/api/auth/update", [verifySignUp.checkRequiredFieldsUpdate], controller.updateUser);
 
     app.post("/api/auth/signin", controller.signin);
 
