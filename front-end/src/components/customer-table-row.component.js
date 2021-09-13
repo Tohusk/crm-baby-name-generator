@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 export default class CustomerTableRow extends Component {
     render() {
@@ -16,7 +15,9 @@ export default class CustomerTableRow extends Component {
                     <Link className="edit-link" to={"/edit-student/" + this.props.obj._id}>
                         Edit
                     </Link>
-                    <Button size="sm" variant="danger">Delete</Button>
+                    <Button size="sm" variant="danger">
+                        Delete
+                    </Button>
                 </td>
             </tr>
         );

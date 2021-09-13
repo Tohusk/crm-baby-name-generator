@@ -31,35 +31,34 @@ class App extends Component {
             currentUser: undefined,
         };
     }
-  }
 
-  componentDidMount() {
-    const user = AuthService.getCurrentUser();
+    componentDidMount() {
+        const user = AuthService.getCurrentUser();
 
-    if (user) {
+        if (user) {
+            this.setState({
+                currentUser: user,
+                showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+                showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+            });
+        }
+    }
+
+    logOut() {
+        AuthService.logout();
         this.setState({
-            currentUser: user,
-            showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-            showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+            showModeratorBoard: false,
+            showAdminBoard: false,
+            currentUser: undefined,
         });
     }
-}
 
-  logOut() {
-    AuthService.logout();
-    this.setState({
-      showModeratorBoard: false,
-      showAdminBoard: false,
-      currentUser: undefined,
-    });
-  }
+    render() {
+        const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
 
-  render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-
-    return (
-      <div>
-        {/* <nav className="navbar navbar-expand navbar-dark bg-dark">
+        return (
+            <div>
+                {/* <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
             BabyNameGenerator
           </Link>
@@ -125,28 +124,28 @@ class App extends Component {
           )}
         </nav> */}
 
-        <div className="container mt-3">
-          <Switch>
-            <Route exact path={["/", "/landing"]} component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
-            <Route path="/user" component={BoardUser} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/customers" component={Customers} />
-            <Route exact path="/products" component={Products} />
-            <Route exact path="/sales" component={Sales} />
-            <Route exact path="/customer-profile" component={CustomerProfile} />
+                <div className="container mt-3">
+                    <Switch>
+                        <Route exact path={["/", "/landing"]} component={Landing} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/register" component={Register} />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route path="/user" component={BoardUser} />
+                        <Route exact path="/home" component={Home} />
+                        <Route exact path="/customers" component={Customers} />
+                        <Route exact path="/products" component={Products} />
+                        <Route exact path="/sales" component={Sales} />
+                        <Route exact path="/customer-profile" component={CustomerProfile} />
 
-            {/* <Route path="/mod" component={BoardModerator} /> */}
-            {/* <Route path="/admin" component={BoardAdmin} /> */}
-          </Switch>
-        </div>
+                        {/* <Route path="/mod" component={BoardModerator} /> */}
+                        {/* <Route path="/admin" component={BoardAdmin} /> */}
+                    </Switch>
+                </div>
 
-        <AuthVerify logOut={this.logOut}/>
-      </div>
-    );
-  }
+                <AuthVerify logOut={this.logOut} />
+            </div>
+        );
+    }
 }
 
 export default App;
