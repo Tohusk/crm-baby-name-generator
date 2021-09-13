@@ -35,8 +35,6 @@ export default class Home extends Component {
                     <div className="home-overview-stats"></div>
                     <div className="home-overview-stats"></div>
                 </div>
-
-                <Sidebar />
             </div>
         );
     }

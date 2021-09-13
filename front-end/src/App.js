@@ -116,7 +116,7 @@ class App extends Component {
               <Sidebar/>
               <Sales/>
             </Route>
-            <Route exact path="/customer-profile>
+            <Route exact path="/customer-profile">
               <Sidebar/>
               <CustomerProfile/>
             </Route>

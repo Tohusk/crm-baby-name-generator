@@ -207,7 +207,8 @@ export default class Register extends Component {
                   Already have an account?
                   <div><a href="/login" className="other-authentication-link">Log in</a></div>
                 </div>
-
+              )}
+              
               {this.state.message && (
                   <div className="form-group">
                       <div
