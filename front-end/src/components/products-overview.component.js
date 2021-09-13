@@ -27,7 +27,7 @@ export default class Products extends Component {
             <div className = "pagename">
                 Products
             </div>
-            <div className="break"></div>
+            {/* <div className="break"></div> */}
             <div className="button-box">
                 <Link
                     to="/add-product"

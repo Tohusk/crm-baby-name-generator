@@ -20,6 +20,18 @@
     align-items:stretch;
 }
 
+.pagename{
+    position: relative;
+    /* padding: 1em; */
+    /* padding-top: 1em; */
+    /* padding-bottom: 1em; */
+    font-size: 4em;
+    font-weight: bold;
+    color: black;
+    margin-top: 1em;
+    /* margin-left: 1em; */
+}
+
 .subheading{
     position: relative;
     /* align-self: auto; */
