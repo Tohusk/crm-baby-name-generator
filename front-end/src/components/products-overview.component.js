@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 
 import "../styles/Home.css";
-import "../styles/customers.css";
+import "../styles/Overview.css";
 
 export default class Products extends Component {
     constructor(props) {
@@ -20,36 +20,35 @@ export default class Products extends Component {
         return (
             <div>
                 {/*Page Name*/}
-                <div className="pagename">Products</div>
-                {/* <div className="break"></div> */}
-                <div className="button-box">
+                <div className="overview-pagename">Products</div>
+                <div className="overview-button-box">
                     <Link
                         to="/add-product"
-                        className="add-btn"
+                        className="overview-add-btn"
                         // style={{ textDecoration: "none" }}
                     >
                         + Add Product
                     </Link>
                 </div>
                 {/* <break></break> */}
-                <div className="subheading">Overview</div>
-                <div className="flex-container">
-                    <div className="stats-card">
-                        <div className="card-heading">Total Products</div>
-                        <div className="card-stat">20</div>
+                <div className="overview-subheading">Overview</div>
+                <div className="overview-flex-container">
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Total Products</div>
+                        <div className="overview-card-stat">20</div>
                     </div>
-                    <div className="stats-card">
-                        <div className="card-heading">Top Product of the Week</div>
-                        <div className="card-stat">Apples (500g)</div>
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Top Product of the Week</div>
+                        <div className="overview-card-stat">Apples (500g)</div>
                     </div>
-                    <div className="stats-card">
-                        <div className="card-heading">Products by Categories (chart)</div>
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Products by Categories (chart)</div>
                     </div>
                 </div>
-                <div className="subheading">Product List</div>
+                <div className="overview-subheading">Product List</div>
 
-                <div className="flex-container">
-                    <div className="table-wrapper">
+                <div className="overview-flex-container">
+                    <div className="overview-table-wrapper">
                         <Table bordered hover>
                             <thead>
                                 <tr>

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
+import "../styles/Overview.css";
+
 
 export default class CustomerList extends Component {
     constructor(props) {
@@ -34,7 +36,7 @@ export default class CustomerList extends Component {
       render() {
     
         return (
-          <div className="table-wrapper">
+          <div className="overview-table-wrapper">
               <Table bordered hover>
                   <thead>
                       <tr>

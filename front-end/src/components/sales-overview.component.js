@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 
 import "../styles/Home.css";
-import "../styles/customers.css";
+import "../styles/Overview.css";
 
 export default class Sales extends Component {
     constructor(props) {
@@ -20,36 +20,35 @@ export default class Sales extends Component {
         return (
             <div>
                 {/*Page Name*/}
-                <div className="pagename">Sales</div>
-                {/* <div className="break"></div> */}
-                <div className="button-box">
+                <div className="overview-pagename">Sales</div>
+                <div className="overview-button-box">
                     <Link
                         to="/add-sales"
-                        className="add-btn"
+                        className="overview-add-btn"
                         // style={{ textDecoration: "none" }}
                     >
                         + Add Sales
                     </Link>
                 </div>
-                <div className="subheading">Overview</div>
-                <div className="flex-container">
-                    <div className="stats-card">
-                        <div className="card-heading">Number of Sales</div>
-                        <div className="card-stat">20</div>
+                <div className="overview-subheading">Overview</div>
+                <div className="overview-flex-container">
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Number of Sales</div>
+                        <div className="overview-card-stat">20</div>
                     </div>
-                    <div className="stats-card">
-                        <div className="card-heading">Overall Revenue</div>
-                        <div className="card-stat">$20300</div>
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Overall Revenue</div>
+                        <div className="overview-card-stat">$20300</div>
                     </div>
-                    <div className="stats-card">
-                        <div className="card-heading">Average Revenue</div>
-                        <div className="card-stat">$6200</div>
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Average Revenue</div>
+                        <div className="overview-card-stat">$6200</div>
                     </div>
                 </div>
-                <div className="subheading">Recent Transaction History</div>
+                <div className="overview-subheading">Recent Transaction History</div>
 
-                <div className="flex-container">
-                    <div className="table-wrapper">
+                <div className="overview-flex-container">
+                    <div className="overview-table-wrapper">
                         <Table bordered hover>
                             <thead>
                                 <tr>
