@@ -6,18 +6,18 @@ export default class CustomerTableRow extends Component {
     render() {
         return (
             <tr>
-                <td>{this.props.obj._id}</td>
-                <td>{this.props.obj.name}</td>
-                <td>{this.props.obj.email}</td>
-                <td>{this.props.obj.score}</td>
-                <td>{this.props.obj.categories}</td>
+                <td>{this.props.customer._id}</td>
+                <td>{this.props.customer.name}</td>
+                <td>{this.props.customer.email}</td>
+                {/* <td>{this.props.obj.score}</td> */}
+                {/* <td>{this.props.obj.categories}</td> */}
                 <td>
-                    <Link className="edit-link" to={"/edit-customer/" + this.props.obj._id}>
-                        Edit
+                    <Link className="edit-link" to={"/customer-profile/" + this.props.customer._id}>
+                        View
                     </Link>
-                    <Button size="sm" variant="danger">
+                    {/* <Button size="sm" variant="danger">
                         Delete
-                    </Button>
+                    </Button> */}
                 </td>
             </tr>
         );

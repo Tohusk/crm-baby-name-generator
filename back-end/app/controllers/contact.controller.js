@@ -98,8 +98,8 @@ const getContact = async (req, res) => {
  */
 const getAllContacts = async (req, res) => {
     try {
-        const contacts = await Contacts.find({ user: mongoose.Types.ObjectId(req.query.userId) });
-        res.json(contacts);
+        const contacts = await Contacts.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
+        res.json(contacts.customers);
     } catch (err) {
         res.status(500).send({ message: err });
         return;
