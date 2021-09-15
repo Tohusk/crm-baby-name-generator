@@ -3,7 +3,7 @@
  */
 
 const db = require("../models");
-const Category = db.controller;
+const Category = db.category;
 const mongoose = require("mongoose");
 
 /**
@@ -31,13 +31,14 @@ const newCategory = async (req, res) => {
             {user: mongoose.Types.ObjectId(req.body.userId)},
             {
                 $push: {
-                    name: req.body.name,
+                    categories: req.body.name,
                 },
             }
         );
         res.send({message: "New category added successfully!"});
     } catch (err) {
         res.status(500).send({ message: err });
+        return;
     }
 };
 

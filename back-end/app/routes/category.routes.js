@@ -19,7 +19,7 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("/api/category/new", [verifyCategory.checkRequiredFields], controller.newCategory);
+    app.post("/api/category/new", [verifyCategory.checkRequiredFields, verifyCategory.checkDuplicateUserCategory], controller.newCategory);
 
     app.post("/api/category/update", [verifyCategory.checkRequiredFieldsUpdate], controller.updateCategory);
 
@@ -27,5 +27,5 @@ module.exports = function (app) {
 
     app.get("/api/category/getAll", controller.getAllCategories);
 
-    app.delete("/api/category/deleteOne", controller.deleteOneCategories);
+    app.delete("/api/category/deleteOne", controller.deleteOneCategory);
 };

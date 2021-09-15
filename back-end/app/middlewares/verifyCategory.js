@@ -1,19 +1,18 @@
 /**
  * middleware that helps check if a category is valid
  */
-const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 /**
  * check if a duplicate category for a user is trying to be created
  */
 checkDuplicateUserCategory = (req, res, next) => {
-    // Username
+    // user
     User.findOne({
         username: req.body.user
     }).exec((err, user) => {
         User.findOne({
-            email: req.body.name
+            name: req.body.name
         }).exec((err, user) => {
             if (err) {
                 res.status(500).send({ message: err });
@@ -60,6 +59,7 @@ const checkRequiredFieldsUpdate = (req, res, next) => {
 };
 
 const verifyContact = {
+    checkDuplicateUserCategory,
     checkRequiredFields,
     checkRequiredFieldsUpdate,
 };
