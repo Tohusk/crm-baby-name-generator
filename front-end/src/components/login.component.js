@@ -40,14 +40,15 @@ export default class Login extends Component {
             email: e.target.value,
         });
     }
-
+  
+  
     onChangePassword(e) {
         this.setState({
             password: e.target.value,
         });
     }
-
-    async handleLogin(e) {
+  
+      async handleLogin(e) {
         e.preventDefault();
 
         this.setState({
@@ -77,85 +78,84 @@ export default class Login extends Component {
             });
         }
     }
+  render() {
+    return (
+      <div>
+        {/* BBY Logo */}
+        <div className="authentication-logo-container">
+          <img src={logo} alt="logo"/>
+        </div>
 
-    render() {
-        return (
-            <div>
-                <div className="logo-container">
-                    <img src={logo} alt="logo"></img>
-                    {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
+        <div className="authentication-content-container">
+          <div className = "authentication-left-container">
+            <img src={img} alt="loginillustration"/>
+          </div>
+          <div className = "authentication-right-container">
+            <div className = "authentication-title-container">Log in</div>
+            
+            <Form
+              className="authentication-form"
+              onSubmit={this.handleLogin}
+              ref={c => {
+                this.form = c;
+              }}
+            >
+              <div className="authentication-form-group">
+                <label htmlFor="email">EMAIL</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.onChangeEmail}
+                  validations={[required]}
+                />
+              </div>
+
+              <div className="authentication-form-group">
+                <label htmlFor="password">PASSWORD</label>
+                <Input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.onChangePassword}
+                  validations={[required]}
+                />
+              </div>
+
+              <div className="authentication-form-group">
+                <button
+                  className="submitButton"
+                  disabled={this.state.loading}
+                >
+                {this.state.loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                Login
+                </button>
+                <a href="/register" className="other-authentication-link">Sign up</a>
+              </div>
+
+              {this.state.message && (
+                <div className="authentication-form-group">
+                  <div className="alert alert-danger" role="alert">
+                    {this.state.message}
+                  </div>
                 </div>
-                <div className="flex-container">
-                    <img src={img} alt="loginillustration" />
-                    {/* <div className="left-container">
-            {/* <h1>CRM for Small Businesses</h1> */}
-
-                    {/* <img src="https://source.unsplash.com/random" alt="baby"></img>
-          </div> */}
-
-                    {/* <div className = "vl"></div> */}
-
-                    <div className="right-container">
-                        <div className="log-in-container">Log in</div>
-
-                        <Form
-                            onSubmit={this.handleLogin}
-                            ref={(c) => {
-                                this.form = c;
-                            }}
-                        >
-                            <div className="form-group">
-                                <label htmlFor="email">Email</label>
-                                <Input
-                                    type="text"
-                                    className="form-control"
-                                    name="email"
-                                    value={this.state.email}
-                                    onChange={this.onChangeEmail}
-                                    validations={[required]}
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <Input
-                                    type="password"
-                                    className="form-control"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.onChangePassword}
-                                    validations={[required]}
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <button className="btn btn-primary btn-block" disabled={this.state.loading}>
-                                    {this.state.loading && <span className="spinner-border spinner-border-sm"></span>}
-                                    <span>Login</span>
-                                </button>
-                                <span>
-                                    <a href="/register">Sign up</a>
-                                </span>
-                            </div>
-
-                            {this.state.message && (
-                                <div className="form-group">
-                                    <div className="alert alert-danger" role="alert">
-                                        {this.state.message}
-                                    </div>
-                                </div>
-                            )}
-
-                            <CheckButton
-                                style={{ display: "none" }}
-                                ref={(c) => {
-                                    this.checkBtn = c;
-                                }}
-                            />
-                        </Form>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+              )}
+            
+              <CheckButton
+                style={{ display: "none" }}
+                ref={c => {
+                  this.checkBtn = c;
+                }}
+              />    
+            </Form>
+            
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

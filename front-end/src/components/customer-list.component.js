@@ -24,6 +24,7 @@ import Button from "react-bootstrap/Button";
 //     </tr>
 // );
 
+import "../styles/Overview.css";
 
 
 export default class CustomerList extends Component {
@@ -36,8 +37,9 @@ export default class CustomerList extends Component {
         };
       }
     
+      
     componentDidMount(){
-        axios.get("http://localhost:8080/api/contact/getAll?userId=6137539b9ea0762ce0a1f560")
+        axios.get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser)
         .then(res => {
             this.setState({
                 customers: res.data
@@ -47,13 +49,10 @@ export default class CustomerList extends Component {
                 // customer_email: res.data.customers.email,
             });
             console.log(res.data);
-            console.log(res.data._id);
-            
             //console.log(res.data.customers);
         })
         .catch((error) => {
             console.log(error);
-            console.log(this.state.currentUser._id);
         })
     }
 
@@ -77,7 +76,8 @@ export default class CustomerList extends Component {
       render() {
     
         return (
-          <div className="table-wrapper">
+
+          <div className="overview-table-wrapper">
               <Table bordered hover>
                   <thead>
                       <tr>

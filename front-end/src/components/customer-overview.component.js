@@ -6,8 +6,7 @@ import Table from "react-bootstrap/Table";
 import CustomerList from "./customer-list.component";
 
 import "../styles/Home.css";
-import "../styles/customers.css";
-import Sidebar from "./sidebar.component";
+import "../styles/Overview.css";
 
 export default class Customers extends Component {
     constructor(props) {
@@ -21,38 +20,38 @@ export default class Customers extends Component {
     render() {
         return (
             <div>
-                <Sidebar />
                 {/*Page Name*/}
-                <div className="pagename">Customers</div>
-                {/* <div className="break"></div> */}
-                <div className="button-box">
+                <div className="overview-pagename">Customers</div>
+                <div className="overview-button-box">
                     <Link
                         to="/addcustomer"
-                        className="add-btn"
+                        className="overview-add-btn"
                         // style={{ textDecoration: "none" }}
                     >
                         + Add Customer
                     </Link>
                 </div>
-                <div className="subheading">Overview</div>
-                <div className="flex-container">
-                    <div className="stats-card">
-                        <div className="card-heading">Total Customers</div>
-                        <div className="card-stat">20</div>
+                <div className="overview-subheading">Overview</div>
+                <div className="overview-flex-container">
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Total Customers</div>
+                        <div className="overview-card-stat">20</div>
                     </div>
-                    <div className="stats-card">
-                        <div className="card-heading">Satisfaction Score {">"} 4.0</div>
-                        <div className="card-stat">51%</div>
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Satisfaction Score {">"} 4.0</div>
+                        <div className="overview-card-stat">51%</div>
                     </div>
-                    <div className="stats-card">
-                        <div className="card-heading">Number of Customers (graph)</div>
+                    <div className="overview-stats-card">
+                        <div className="overview-card-heading">Number of Customers (graph)</div>
                     </div>
                 </div>
-                <div className="subheading">Customer List</div>
+                <div className="overview-subheading">Customer List</div>
 
-                <div className="flex-container">
+                <div className="overview-flex-container">
                     <CustomerList></CustomerList>
                     {/* <div className="table-wrapper">
+                <div className="overview-flex-container">
+                    <div className="overview-table-wrapper">
                         <Table bordered hover>
                             <thead>
                                 <tr>

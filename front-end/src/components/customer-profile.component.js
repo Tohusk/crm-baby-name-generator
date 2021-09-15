@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 
 import "../styles/Customer-Profile.css";
-import Sidebar from "./sidebar.component";
 
 export default class Home extends Component {
     constructor(props) {
@@ -72,7 +71,6 @@ export default class Home extends Component {
                     </div>
                 </div>
 
-                <Sidebar />
             </div>
         );
     }
