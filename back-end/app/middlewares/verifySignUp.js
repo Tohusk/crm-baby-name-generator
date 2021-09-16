@@ -54,10 +54,26 @@ const checkRequiredFields = (req, res, next) => {
     next();
 };
 
+/**
+ * check if all required fields are filled in an update
+ */
+const checkRequiredFieldsUpdate = (req, res, next) => {
+    if (!req.body.email || !req.body.name) {
+        res.status(400).send({ message: "Failed! Email and Name cannot be blank!" });
+        return;
+    }
+    if (!req.body.userId) {
+        res.status(400).send({ message: "Failed! Needs to provide userId!" });
+        return;
+    }
+    next();
+};
+
 const verifySignUp = {
     checkRequiredFields,
     checkDuplicateEmail,
     checkRolesExisted,
+    checkRequiredFieldsUpdate,
 };
 
 module.exports = verifySignUp;

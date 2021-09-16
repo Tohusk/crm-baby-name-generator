@@ -19,7 +19,7 @@ const mongoose = require("mongoose");
  */
 const signup = async (req, res) => {
     // make new user
-    const user = new User({
+    let user = new User({
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
         name: req.body.name,
@@ -47,8 +47,27 @@ const signup = async (req, res) => {
 
     // try to save user
     try {
-        await user.save();
+        user = await user.save();
+        await contactController.initialiseContact(user._id);
         res.send({ message: "User was registered successfully!" });
+    } catch (err) {
+        await User.findOneAndDelete({email: req.body.email});
+        res.status(500).send({ message: err });
+        return;
+    }
+};
+
+/**
+ * Controller for updating a user's email, name and/or business name
+ */
+const updateUser = async (req, res) => {
+    // update user
+    try {
+        await User.findOneAndUpdate(
+            { _id: mongoose.Types.ObjectId(req.body.userId) },
+            { $set: { name: req.body.name, email: req.body.email, businessName: req.body.businessName } }
+        );
+        res.send({ message: "User updated successfully!" });
     } catch (err) {
         res.status(500).send({ message: err });
         return;
@@ -63,7 +82,7 @@ const signin = async (req, res) => {
     let user;
     try {
         user = await User.findOne({ email: req.body.email }).populate("roles", "-__v");
-    } catch {
+    } catch (err) {
         res.status(500).send({ message: err });
         return;
     }
@@ -122,6 +141,7 @@ const deleteAccount = async (req, res) => {
 
 module.exports = {
     signup,
+    updateUser,
     signin,
     deleteAccount,
 };

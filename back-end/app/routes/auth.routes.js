@@ -5,12 +5,10 @@
  */
 
 const { verifySignUp } = require("../middlewares");
-const authController = require("../controllers/auth.controller");
-const contactController = require("../controllers/contact.controller");
-const categoryController = require("../controllers/category.controller");
-
+const controller = require("../controllers/auth.controller");
 /**
  * POST /api/auth/signup
+ * POST /api/auth/update
  * POST /api/auth/signin
  * DELETE /api/auth/deleteAccount
  * @param app
@@ -24,10 +22,11 @@ module.exports = function (app) {
     app.post(
         "/api/auth/signup",
         [verifySignUp.checkRequiredFields, verifySignUp.checkDuplicateEmail, verifySignUp.checkRolesExisted],
-        authController.signup, contactController.initialiseContact, categoryController.initialiseCategory
-    );
+        controller.signup);
 
-    app.post("/api/auth/signin", authController.signin);
+    app.post("/api/auth/update", [verifySignUp.checkRequiredFieldsUpdate], controller.updateUser);
 
-    app.delete("/api/auth/deleteAccount", authController.deleteAccount);
+    app.post("/api/auth/signin", controller.signin);
+
+    app.delete("/api/auth/deleteAccount", controller.deleteAccount);
 };
