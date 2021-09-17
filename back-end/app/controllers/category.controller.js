@@ -26,12 +26,13 @@ const initialiseCategory = async (userId) => {
  */
 const newCategory = async (req, res) => {
     try {
+        const newCategory = {name: req.body.name};
         // add a category to a user's category list
         await Category.findOneAndUpdate(
             {user: mongoose.Types.ObjectId(req.body.userId)},
             {
                 $push: {
-                    categories: req.body.name,
+                    categories: newCategory,
                 },
             }
         );
