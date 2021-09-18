@@ -140,9 +140,15 @@
     margin-top: 3%;
 }
 
+.addCategory-list-container h1 {
+    color: #747474;
+    font-family: 'Inter';
+    font-size: 0.8em;
+}
+
 .addCategory-list {
     list-style-type: none;
-    width: 20%;
+    width: 15%;
 }
 
 .addCategory-list li {

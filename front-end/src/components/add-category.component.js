@@ -100,7 +100,7 @@ export default class AddCategory extends Component {
         {/*Page Name*/}
         <div className="addItem-title">Edit Categories</div>
         <div className="addCategory-list-container">
-            Categories
+            <h1>CATEGORIES</h1>
             <ul className="addCategory-list">
                 {/* Probably add image of colour of category next to category name */}
                 <li>Fruit
