@@ -50,10 +50,10 @@ const updateCategory = async (req, res) => {
         await Category.findOneAndUpdate(
             {
                 user: mongoose.Types.ObjectId(req.body.userId),
-                name: { $elemMatch: { _id: mongoose.Types.ObjectId(req.body.categoryId) } },
+                categories: { $elemMatch: { _id: mongoose.Types.ObjectId(req.body.categoryId) } },
             },
             {
-                $set: { "categories.$name": req.body.name, "categories.$colour": req.body.colour },
+                $set: { "categories.$.name": req.body.name, "categories.$.colour": req.body.colour },
             }
         );
         res.send({ message: "Category updated successfully!" });
