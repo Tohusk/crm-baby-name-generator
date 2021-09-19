@@ -53,12 +53,11 @@ export default class AddCustomer extends Component {
       try {
         const res = await ContactService.addNewCustomer(this.state.name, this.state.email, 
           this.state.phoneNumber, this.state.companyName, this.state.description, this.state.currentUser.id);
-        this.setState({
+          this.setState({
           message: res.data.message,
           loading: false,
       });
     } catch (err) {
-        console.log(err)
         const resMessage =
             (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
         this.setState({
@@ -193,13 +192,13 @@ export default class AddCustomer extends Component {
             </button>
           </div>  
 
-          {/* {this.state.message && (
+          {this.state.message && (
             <div className="authentication-form-group">
               <div className="alert alert-danger" role="alert">
                 {this.state.message}
               </div>
             </div>
-          )} */}
+          )}
             
           <CheckButton
             style={{ display: "none" }}
