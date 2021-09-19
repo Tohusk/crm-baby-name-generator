@@ -17,7 +17,7 @@ import Products from "./components/products-overview.component";
 import CustomerProfile from "./components/customer-profile.component";
 import AddCustomer from "./components/add-customer.component";
 import AddProduct from "./components/add-product.component";
-
+import AddCategory from "./components/add-category.component";
 import AddTransaction from "./components/add-transaction.component";
 import EditCustomer from "./components/edit-customer.component";
 import Sidebar from "./components/sidebar.component";
@@ -99,6 +99,10 @@ class App extends Component {
             <Route exact path="/addTransaction">
               <Sidebar/>
               <AddTransaction/>
+            </Route>
+            <Route exact path="/addCategory">
+              <Sidebar/>
+              <AddCategory/>
             </Route>
             <Route exact path="/editCustomer">
               <Sidebar/>
