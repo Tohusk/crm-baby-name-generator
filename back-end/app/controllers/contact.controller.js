@@ -26,6 +26,7 @@ const initialiseContact = async (userId) => {
  */
 const newContact = async (req, res) => {
     try {
+        console.log("here")
         // new contact model
         const newContact = {
             name: req.body.name,

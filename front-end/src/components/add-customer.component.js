@@ -28,7 +28,7 @@ export default class AddCustomer extends Component {
     this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
 
     this.state = {
-      userId: AuthService.getCurrentUser(),
+      currentUser: AuthService.getCurrentUser(),
       name: "",
       phoneNumber: "",
       email: "",
@@ -51,23 +51,21 @@ export default class AddCustomer extends Component {
 
     if (this.checkBtn.context._errors.length === 0) {
       try {
-        await ContactService.addNewCustomer(this.state.name, this.state.email, 
-          this.state.phoneNumber, this.state.companyName, this.state.description, this.state.userId);
-        this.props.history.push("/customers");
-        window.location.reload();
+        const res = await ContactService.addNewCustomer(this.state.name, this.state.email, 
+          this.state.phoneNumber, this.state.companyName, this.state.description, this.state.currentUser.id);
+        this.setState({
+          message: res.data.message,
+          loading: false,
+      });
     } catch (err) {
-      
+        console.log(err)
         const resMessage =
             (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
-        {
         this.setState({
             loading: false,
             message: resMessage,
         });
       }
-    }
-        
-
     }
     else {
       this.setState({
@@ -195,13 +193,13 @@ export default class AddCustomer extends Component {
             </button>
           </div>  
 
-          {this.state.message && (
+          {/* {this.state.message && (
             <div className="authentication-form-group">
               <div className="alert alert-danger" role="alert">
                 {this.state.message}
               </div>
             </div>
-          )}
+          )} */}
             
           <CheckButton
             style={{ display: "none" }}
