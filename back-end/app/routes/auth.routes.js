@@ -22,7 +22,8 @@ module.exports = function (app) {
     app.post(
         "/api/auth/signup",
         [verifySignUp.checkRequiredFields, verifySignUp.checkDuplicateEmail, verifySignUp.checkRolesExisted],
-        controller.signup);
+        controller.signup
+    );
 
     app.post("/api/auth/update", [verifySignUp.checkRequiredFieldsUpdate], controller.updateUser);
 

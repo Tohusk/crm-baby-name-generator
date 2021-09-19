@@ -7,12 +7,14 @@ const Category = mongoose.model(
     "Category",
     new mongoose.Schema({
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true },
-        categories: [ {
-            name: {
-                type: String,
-                required: true
-            }}
-        ]
+        categories: [
+            {
+                name: {
+                    type: String,
+                    required: true,
+                },
+            },
+        ],
     })
 );
 

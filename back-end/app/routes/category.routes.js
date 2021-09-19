@@ -19,7 +19,11 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("/api/category/new", [verifyCategory.checkRequiredFields, verifyCategory.checkDuplicateUserCategory], controller.newCategory);
+    app.post(
+        "/api/category/new",
+        [verifyCategory.checkRequiredFields, verifyCategory.checkDuplicateUserCategory],
+        controller.newCategory
+    );
 
     app.post("/api/category/update", [verifyCategory.checkRequiredFieldsUpdate], controller.updateCategory);
 

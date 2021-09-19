@@ -26,17 +26,17 @@ const initialiseCategory = async (userId) => {
  */
 const newCategory = async (req, res) => {
     try {
-        const newCategory = {name: req.body.name};
+        const newCategory = { name: req.body.name };
         // add a category to a user's category list
         await Category.findOneAndUpdate(
-            {user: mongoose.Types.ObjectId(req.body.userId)},
+            { user: mongoose.Types.ObjectId(req.body.userId) },
             {
                 $push: {
                     categories: newCategory,
                 },
             }
         );
-        res.send({message: "New category added successfully!"});
+        res.send({ message: "New category added successfully!" });
     } catch (err) {
         res.status(500).send({ message: err });
         return;
@@ -54,7 +54,7 @@ const updateCategory = async (req, res) => {
                 name: { $elemMatch: { _id: mongoose.Types.ObjectId(req.body.categoryId) } },
             },
             {
-                $set: {"name": req.body.name}
+                $set: { name: req.body.name },
             }
         );
         res.send({ message: "Category updated successfully!" });
@@ -63,14 +63,13 @@ const updateCategory = async (req, res) => {
     }
 };
 
-
 /**
  * Controller to get one category
  */
 const getCategory = async (req, res) => {
     try {
         const category = await Category.find({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
-            category: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.categoryId) } },
+            categories: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.categoryId) } },
         });
         res.json(category);
     } catch (err) {
@@ -97,7 +96,7 @@ const deleteOneCategory = async (req, res) => {
     try {
         await Category.findOneAndUpdate(
             { user: mongoose.Types.ObjectId(req.body.userId) },
-            { $pull: { name: { _id: mongoose.Types.ObjectId(req.body.categoryId) } } }
+            { $pull: { categories: { _id: mongoose.Types.ObjectId(req.body.categoryId) } } }
         );
         res.send({ message: "Category deleted successfully" });
     } catch (err) {

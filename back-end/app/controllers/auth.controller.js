@@ -53,7 +53,7 @@ const signup = async (req, res) => {
         await categoryController.initialiseCategory(user._id);
         res.send({ message: "User was registered successfully!" });
     } catch (err) {
-        await User.findOneAndDelete({email: req.body.email});
+        await User.findOneAndDelete({ email: req.body.email });
         res.status(500).send({ message: err });
         return;
     }

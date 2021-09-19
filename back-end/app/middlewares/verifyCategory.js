@@ -2,31 +2,28 @@
  * middleware that helps check if a category is valid
  */
 const db = require("../models");
-const User = db.user;
+const Category = db.category;
 /**
- * check if a duplicate category for a user is trying to be created
+ * check if a duplicate category for a user is trying to be created;
  */
-checkDuplicateUserCategory = (req, res, next) => {
-    // user
-    User.findOne({
-        username: req.body.user
-    }).exec((err, user) => {
-        User.findOne({
-            name: req.body.name
-        }).exec((err, user) => {
-            if (err) {
-                res.status(500).send({ message: err });
-                return;
-            }
+const checkDuplicateUserCategory = async (req, res, next) => {
+    try {
+        const existingCategory = await Category.findOne(
+            { user: req.body.userId },
+            { categories: { $elemMatch: { name: req.body.name } } }
+        );
 
-            if (user) {
-                res.status(400).send({ message: "Failed! Category already created!" });
-                return;
-            }
+        console.log(existingCategory);
 
-            next();
-        });
-    });
+        if (existingCategory["categories"].length != 0) {
+            res.status(400).send({ message: "Failed! Category is already in use!" });
+            return;
+        }
+        next();
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return;
+    }
 };
 
 /**
