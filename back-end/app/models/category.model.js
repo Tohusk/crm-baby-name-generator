@@ -13,6 +13,10 @@ const Category = mongoose.model(
                     type: String,
                     required: true,
                 },
+                colour: {
+                    type: String,
+                    required: true,
+                }
             },
         ],
     })
