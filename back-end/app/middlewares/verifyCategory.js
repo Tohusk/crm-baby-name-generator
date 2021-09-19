@@ -38,14 +38,25 @@ const checkRequiredFields = (req, res, next) => {
         return;
     }
 
+    if (!req.body.colour) {
+        res.status(400).send({ message: "Failed! Needs to provide colour!" });
+        return;
+    }
+
     next();
 };
 
 const checkRequiredFieldsUpdate = (req, res, next) => {
     if (!req.body.name) {
-        res.status(400).send({ message: "Failed! Need contact name!" });
+        res.status(400).send({ message: "Failed! Need category name!" });
         return;
     }
+
+    if (!req.body.colour) {
+        res.status(400).send({ message: "Failed! Need category colour!" });
+        return;
+    }
+
     if (!req.body.userId || !req.body.categoryId) {
         res.status(400).send({ message: "Failed! Needs to provide userId or categoryId!" });
         return;

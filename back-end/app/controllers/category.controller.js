@@ -26,7 +26,7 @@ const initialiseCategory = async (userId) => {
  */
 const newCategory = async (req, res) => {
     try {
-        const newCategory = { name: req.body.name };
+        const newCategory = { name: req.body.name, colour: req.body.colour};
         // add a category to a user's category list
         await Category.findOneAndUpdate(
             { user: mongoose.Types.ObjectId(req.body.userId) },
@@ -39,7 +39,6 @@ const newCategory = async (req, res) => {
         res.send({ message: "New category added successfully!" });
     } catch (err) {
         res.status(500).send({ message: err });
-        return;
     }
 };
 
@@ -54,7 +53,8 @@ const updateCategory = async (req, res) => {
                 name: { $elemMatch: { _id: mongoose.Types.ObjectId(req.body.categoryId) } },
             },
             {
-                $set: { name: req.body.name },
+                $set: { "categories.$name": req.body.name,
+                        "categories.$colour": req.body.colour},
             }
         );
         res.send({ message: "Category updated successfully!" });
