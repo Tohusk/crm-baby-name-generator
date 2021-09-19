@@ -39,7 +39,7 @@ export default class CustomerList extends Component {
     
       
     componentDidMount(){
-        axios.get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser)
+        axios.get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser.id)
         .then(res => {
             this.setState({
                 customers: res.data
@@ -74,10 +74,10 @@ export default class CustomerList extends Component {
     }
 
       render() {
-    
         return (
 
           <div className="overview-table-wrapper">
+              
               <Table bordered hover>
                   <thead>
                       <tr>
