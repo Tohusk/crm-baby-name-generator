@@ -139,6 +139,53 @@
 }
 
 
+/* Add category */
+.addCategory-list-container {
+    margin-top: 3%;
+}
 
+.addCategory-list-container h1 {
+    color: #747474;
+    font-family: 'Inter';
+    font-size: 0.8em;
+}
 
+.addCategory-list {
+    list-style-type: none;
+    width: 15%;
+}
 
+.addCategory-list li {
+    border-bottom: 1px solid #747474;
+}
+
+.addCategory-addCategory {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #747474;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.addCategory-deleteCategory {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #747474;
+    float: right;
+}
+
+.addCategory-submit-group {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 25%;
+    align-items: center;
+}
+
+.addCategory-cancelButton {
+    text-decoration-line: underline;
+    color: #747474;
+    margin-right: 2vw;
+}
