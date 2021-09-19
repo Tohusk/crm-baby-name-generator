@@ -17,7 +17,7 @@ const Category = mongoose.model(
                     type: String,
                     required: true,
                     maxLength: HEX_COLOUR_CODE_LEN,
-                }
+                },
             },
         ],
     })
