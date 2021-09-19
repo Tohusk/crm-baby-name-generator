@@ -3,6 +3,7 @@ import AuthService from "../services/auth.service";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import ContactService from "../services/contact.service";
 
 import "../styles/AddItem.css";
 
@@ -24,7 +25,7 @@ export default class AddCustomer extends Component {
     this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeBusinessName = this.onChangeBusinessName.bind(this);
+    this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
@@ -32,7 +33,7 @@ export default class AddCustomer extends Component {
       phoneNumber: "",
       email: "",
       description: "",
-      businessName: "",
+      companyName: "",
       loading: false,
       message: ""
     };
@@ -49,11 +50,21 @@ export default class AddCustomer extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-        this.setState({
+      try {
+        const res = await ContactService.addNewCustomer(this.state.name, this.state.email, 
+          this.state.phoneNumber, this.state.companyName, this.state.description, this.state.currentUser.id);
+          this.setState({
+          message: res.data.message,
           loading: false,
-          message: "Not implemented"
+      });
+    } catch (err) {
+        const resMessage =
+            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+        this.setState({
+            loading: false,
+            message: resMessage,
         });
-
+      }
     }
     else {
       this.setState({
@@ -87,9 +98,9 @@ export default class AddCustomer extends Component {
   }
 
   
-  onChangeBusinessName(e) {
+  onChangeCompanyName(e) {
     this.setState({
-      businessName: e.target.value
+      companyName: e.target.value
     });
   }
 
@@ -158,13 +169,13 @@ export default class AddCustomer extends Component {
           </div>
 
           <div className="addCustomer-form-group">
-            <label htmlFor="businessName">BUSINESS NAME (Optional)</label>
+            <label htmlFor="companyName">BUSINESS NAME (Optional)</label>
             <Input
               type="text"
               className="form-control"
-              name="businessName"
-              value={this.state.businessName}
-              onChange={this.onChangeBusinessName}
+              name="companyName"
+              value={this.state.companyName}
+              onChange={this.onChangecompanyName}
             />
           </div>
 

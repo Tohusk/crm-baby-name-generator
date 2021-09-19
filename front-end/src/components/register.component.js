@@ -57,13 +57,13 @@ export default class Register extends Component {
         this.handleRegister = this.handleRegister.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangeBusinessName = this.onChangeBusinessName.bind(this);
+        this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
 
         this.state = {
             name: "",
             email: "",
-            businessName: "",
+            companyName: "",
             password: "",
             successful: false,
             message: "",
@@ -82,9 +82,9 @@ export default class Register extends Component {
         });
     }
   
-    onChangeBusinessName(e) {
+    onChangeCompanyName(e) {
         this.setState({
-            businessName: e.target.value,
+            companyName: e.target.value,
         });
     }
 
@@ -109,7 +109,7 @@ export default class Register extends Component {
                 const res = await AuthService.register(
                     this.state.name,
                     this.state.email,
-                    this.state.businessName,
+                    this.state.companyName,
                     this.state.password
                 );
 
@@ -177,14 +177,14 @@ export default class Register extends Component {
                   </div>
 
                   <div className="authentication-form-group">
-                    <label htmlFor="businessName">BUSINESS NAME (Optional)</label>
+                    <label htmlFor="companyName">BUSINESS NAME (Optional)</label>
                     <Input
                       type="text"
                       className="form-control"
-                      name="businessName"
-                      value={this.state.businessName}
-                      onChange={this.onChangeBusinessName}
-                      // validations={[required, businessName]}
+                      name="companyName"
+                      value={this.state.companyName}
+                      onChange={this.onChangeCompanyName}
+                      // validations={[required, companyName]}
                     />
                   </div>
 
