@@ -185,3 +185,12 @@
     color: #747474;
     margin-right: 2vw;
 }
+
+@media only screen and (max-width:1366px) {
+    .addItem-title{
+        margin-left: 6vw;
+    }
+    .addTransaction-container  {
+        margin-left: 9vw;
+    }
+}
