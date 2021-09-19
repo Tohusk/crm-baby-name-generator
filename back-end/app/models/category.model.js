@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const HEX_COLOUR_CODE_LEN = 7;
 /**
  * model for a product's category
  */
@@ -16,6 +16,7 @@ const Category = mongoose.model(
                 colour: {
                     type: String,
                     required: true,
+                    maxLength: HEX_COLOUR_CODE_LEN,
                 }
             },
         ],
