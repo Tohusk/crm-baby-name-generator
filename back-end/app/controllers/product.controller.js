@@ -1,5 +1,5 @@
 /**
- * Controllers related to categories of a user
+ * Controllers related to products of a user
  */
 
 const db = require("../models");
@@ -97,27 +97,27 @@ const deleteOneProduct = async (req, res) => {
     try {
         await Product.findOneAndUpdate(
             { user: mongoose.Types.ObjectId(req.body.userId) },
-            { $pull: { categories: { _id: mongoose.Types.ObjectId(req.body.categoryId) } } }
+            { $pull: { products: { _id: mongoose.Types.ObjectId(req.body.productId) } } }
         );
-        res.send({ message: "Category deleted successfully" });
+        res.send({ message: "Product deleted successfully" });
     } catch (err) {
         res.status(500).send({ message: err });
     }
 };
 
 /**
- * Controller for deleting all category entries for a given user
+ * Controller for deleting all product entries for a given user
  */
-const deleteAllCategories = async (userId) => {
-    await Category.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
+const deleteAllProducts = async (userId) => {
+    await Product.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
 module.exports = {
-    initialiseCategory,
-    newCategory,
-    updateCategory,
-    getCategory,
-    getAllCategories,
-    deleteOneCategory,
-    deleteAllCategories,
+    initialiseProduct,
+    newProduct,
+    updateProduct,
+    getProduct,
+    getAllProducts,
+    deleteOneProduct,
+    deleteAllProducts,
 };
