@@ -71,10 +71,10 @@ const updateProduct = async (req, res) => {
  */
 const getProduct = async (req, res) => {
     try {
-        const product = await Product.find({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+        const product = await Product.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             products: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.productId) } },
         });
-        res.json(product);
+        res.json(product.products[0]);
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -85,8 +85,8 @@ const getProduct = async (req, res) => {
  */
 const getAllProducts = async (req, res) => {
     try {
-        const allProducts = await Product.find({ user: mongoose.Types.ObjectId(req.query.userId) });
-        res.json(allProducts);
+        const allProducts = await Product.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
+        res.json(allProducts.products);
     } catch (err) {
         res.status(500).send({ message: err });
     }

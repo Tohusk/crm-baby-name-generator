@@ -15,8 +15,6 @@ const checkDuplicateUserProduct = async (req, res, next) => {
             { products: { $elemMatch: { name: req.body.name, price: req.body.price } } }
         );
 
-        console.log(existingProduct);
-
         if (existingProduct["products"].length !== 0) {
             res.status(400).send({ message: "Failed! Product is already in use!" });
             return;
@@ -36,9 +34,7 @@ const checkDuplicateUserProduct = async (req, res, next) => {
  */
 const checkProductCategoryExists = async (req, res, next) => {
     try {
-        if (!req.body.categoryId) return;
-
-        if (await verifyCategory.checkCategoryExists(req, res)) next();
+        if (!req.body.categoryId || (await verifyCategory.checkCategoryExists(req, res))) next();
         else res.status(400).send({ message: "Failed! Trying to insert product in a category that does not exist!" });
     } catch (err) {
         res.status(500).send({ message: err });
