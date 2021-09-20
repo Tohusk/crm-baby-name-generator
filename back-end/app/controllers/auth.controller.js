@@ -9,6 +9,7 @@ const User = db.user;
 const Role = db.role;
 
 const contactController = require("./contact.controller");
+const categoryController = require("./category.controller");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -49,9 +50,10 @@ const signup = async (req, res) => {
     try {
         user = await user.save();
         await contactController.initialiseContact(user._id);
+        await categoryController.initialiseCategory(user._id);
         res.send({ message: "User was registered successfully!" });
     } catch (err) {
-        await User.findOneAndDelete({email: req.body.email});
+        await User.findOneAndDelete({ email: req.body.email });
         res.status(500).send({ message: err });
         return;
     }
@@ -126,8 +128,9 @@ const signin = async (req, res) => {
  */
 const deleteAccount = async (req, res) => {
     try {
-        // delete contact, products, transactions etc for user
+        // delete transactions etc for user
         await contactController.deleteAllContacts(req.body.userId);
+        await categoryController.deleteAllCategories(req.body.userId);
 
         // delete user
         await User.findOneAndDelete({ _id: mongoose.Types.ObjectId(req.body.userId) });

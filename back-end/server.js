@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // routes
 require("./app/routes/auth.routes")(app);
 require("./app/routes/contact.routes")(app);
+require("./app/routes/category.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {
