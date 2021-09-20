@@ -11,6 +11,7 @@ const Role = db.role;
 const contactController = require("./contact.controller");
 const categoryController = require("./category.controller");
 const productController = require("./product.controller");
+const productController = require("./product.controller");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -55,6 +56,7 @@ const signup = async (req, res) => {
 
         // create new contact, product list for this user
         await contactController.initialiseContact(user._id);
+        await productController.initialiseProduct(user._id);
         await categoryController.initialiseCategory(user._id);
 
         res.send({ message: "User was registered successfully!" });
