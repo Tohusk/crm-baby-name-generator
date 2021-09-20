@@ -1,16 +1,16 @@
 /**
- * routes relating to categories
+ * routes relating to products
  */
 
-const { verifyCategory } = require("../middlewares");
-const controller = require("../controllers/category.controller");
+const { verifyProduct } = require("../middlewares");
+const controller = require("../controllers/product.controller");
 
 /**
- * POST /api/category/new
- * POST /api/category/update
- * GET /api/category/get
- * GET /api/category/getAll
- * DELETE /api/category/delete
+ * POST /api/product/new
+ * POST /api/product/update
+ * GET /api/product/get
+ * GET /api/product/getAll
+ * DELETE /api/product/delete
  * @param app
  */
 module.exports = function (app) {
@@ -20,16 +20,16 @@ module.exports = function (app) {
     });
 
     app.post(
-        "/api/category/new",
-        [verifyCategory.checkRequiredFields, verifyCategory.checkDuplicateUserCategory],
-        controller.newCategory
+        "/api/product/new",
+        [verifyProduct.checkRequiredFields, verifyProduct.checkDuplicateUserProduct],
+        controller.newProduct
     );
 
-    app.post("/api/category/update", [verifyCategory.checkRequiredFieldsUpdate], controller.updateCategory);
+    app.post("/api/product/update", [verifyProduct.checkRequiredFieldsUpdate], controller.updateProduct);
 
-    app.get("/api/category/get", controller.getCategory);
+    app.get("/api/product/get", controller.getProduct);
 
-    app.get("/api/category/getAll", controller.getAllCategories);
+    app.get("/api/product/getAll", controller.getAllProducts);
 
-    app.delete("/api/category/deleteOne", controller.deleteOneCategory);
+    app.delete("/api/product/deleteOne", controller.deleteOneProduct);
 };
