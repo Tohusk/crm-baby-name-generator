@@ -2,6 +2,7 @@
  * middleware that helps check if a category is valid
  */
 const db = require("../models");
+const mongoose = require("mongoose");
 const Category = db.category;
 /**
  * check if a duplicate category for a user is trying to be created;
@@ -26,7 +27,7 @@ const checkDuplicateUserCategory = async (req, res, next) => {
 };
 
 /**
- * searches for a categoryId in a user's category list. Returns true if it does exist
+ * searches for a categoryId or category name in a user's category list. Returns true if it does exist
  * @param req
  * @param res
  * @returns {Promise<boolean>}
@@ -35,7 +36,8 @@ const checkCategoryExists = async (req, res) => {
     try {
         const existingCategory = await Category.findOne(
             { user: req.body.userId },
-            { categories: { $elemMatch: { name: req.body.name } } }
+            { categories: { $elemMatch: {"$or": [{name: req.body.name},
+                {_id: mongoose.Types.ObjectId(req.body.categoryId)}] } } }
         );
 
         return existingCategory["categories"].length !== 0;

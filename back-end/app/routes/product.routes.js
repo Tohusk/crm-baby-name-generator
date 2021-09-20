@@ -21,7 +21,7 @@ module.exports = function (app) {
 
     app.post(
         "/api/product/new",
-        [verifyProduct.checkRequiredFields, verifyProduct.checkDuplicateUserProduct],
+        [verifyProduct.checkRequiredFields, verifyProduct.checkDuplicateUserProduct, verifyProduct.checkProductCategoryExists],
         controller.newProduct
     );
 
