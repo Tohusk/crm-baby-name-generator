@@ -1,22 +1,22 @@
 /**
- * middleware that helps check if a category is valid
+ * middleware that helps check if a product is valid
  */
 const db = require("../models");
-const Category = db.category;
+const Product = db.product;
 /**
- * check if a duplicate category for a user is trying to be created;
+ * check if a duplicate product for a user is trying to be created;
  */
-const checkDuplicateUserCategory = async (req, res, next) => {
+const checkDuplicateUserProduct = async (req, res, next) => {
     try {
-        const existingCategory = await Category.findOne(
+        const existingProduct = await Product.findOne(
             { user: req.body.userId },
-            { categories: { $elemMatch: { name: req.body.name } } }
+            { products: { $elemMatch: { name: req.body.name, price: req.body.price } } }
         );
 
         console.log(existingCategory);
 
-        if (existingCategory["categories"].length !== 0) {
-            res.status(400).send({ message: "Failed! Category is already in use!" });
+        if (existingProduct["products"].length !== 0) {
+            res.status(400).send({ message: "Failed! Product is already in use!" });
             return;
         }
         next();
@@ -30,7 +30,7 @@ const checkDuplicateUserCategory = async (req, res, next) => {
  */
 const checkRequiredFields = (req, res, next) => {
     if (!req.body.name) {
-        res.status(400).send({ message: "Failed! Need category name!" });
+        res.status(400).send({ message: "Failed! Need product name!" });
         return;
     }
     if (!req.body.userId) {
@@ -38,8 +38,8 @@ const checkRequiredFields = (req, res, next) => {
         return;
     }
 
-    if (!req.body.colour) {
-        res.status(400).send({ message: "Failed! Needs to provide colour!" });
+    if (!req.body.price) {
+        res.status(400).send({ message: "Failed! Needs to provide price!" });
         return;
     }
 
@@ -48,27 +48,27 @@ const checkRequiredFields = (req, res, next) => {
 
 const checkRequiredFieldsUpdate = (req, res, next) => {
     if (!req.body.name) {
-        res.status(400).send({ message: "Failed! Need category name!" });
+        res.status(400).send({ message: "Failed! Need product name!" });
         return;
     }
 
-    if (!req.body.colour) {
-        res.status(400).send({ message: "Failed! Need category colour!" });
+    if (!req.body.price) {
+        res.status(400).send({ message: "Failed! Need product price!" });
         return;
     }
 
-    if (!req.body.userId || !req.body.categoryId) {
-        res.status(400).send({ message: "Failed! Needs to provide userId or categoryId!" });
+    if (!req.body.userId || !req.body.productId) {
+        res.status(400).send({ message: "Failed! Needs to provide userId or productId!" });
         return;
     }
 
     next();
 };
 
-const verifyContact = {
-    checkDuplicateUserCategory,
+const verifyProduct = {
+    checkDuplicateUserProduct,
     checkRequiredFields,
     checkRequiredFieldsUpdate,
 };
 
-module.exports = verifyContact;
+module.exports = verifyProduct;
