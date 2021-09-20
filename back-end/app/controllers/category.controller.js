@@ -67,10 +67,10 @@ const updateCategory = async (req, res) => {
  */
 const getCategory = async (req, res) => {
     try {
-        const category = await Category.find({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+        const category = await Category.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             categories: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.categoryId) } },
         });
-        res.json(category);
+        res.json(category.categories[0]);
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -81,8 +81,8 @@ const getCategory = async (req, res) => {
  */
 const getAllCategories = async (req, res) => {
     try {
-        const allCategories = await Category.find({ user: mongoose.Types.ObjectId(req.query.userId) });
-        res.json(allCategories);
+        const allCategories = await Category.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
+        res.json(allCategories.categories);
     } catch (err) {
         res.status(500).send({ message: err });
     }
