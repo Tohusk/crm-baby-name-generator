@@ -63,10 +63,10 @@ const checkRequiredFieldsUpdate = (req, res, next) => {
     next();
 };
 
-const verifyContact = {
+const verifyCategory = {
     checkDuplicateUserCategory,
     checkRequiredFields,
     checkRequiredFieldsUpdate,
 };
 
-module.exports = verifyContact;
+module.exports = verifyCategory;
