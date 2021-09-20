@@ -13,7 +13,7 @@ const initialiseProduct = async (userId) => {
     await Product.findOneAndDelete({ user: userId });
 
     // new product
-    const product = new Product ({
+    const product = new Product({
         user: userId,
     });
 
@@ -26,9 +26,7 @@ const initialiseProduct = async (userId) => {
  */
 const newProduct = async (req, res) => {
     try {
-        const newProduct = { name: req.body.name,
-            price: req.body.price,
-            categoryId: req.body.categoryId };
+        const newProduct = { name: req.body.name, price: req.body.price, categoryId: req.body.categoryId };
         // add a product to a user's product list
         await Product.findOneAndUpdate(
             { user: mongoose.Types.ObjectId(req.body.userId) },
@@ -55,9 +53,11 @@ const updateProduct = async (req, res) => {
                 products: { $elemMatch: { _id: mongoose.Types.ObjectId(req.body.productId) } },
             },
             {
-                $set: { "products.$.name": req.body.name,
-                        "products.$.price": req.body.price,
-                        "products.$.categoryId": req.body.categoryId },
+                $set: {
+                    "products.$.name": req.body.name,
+                    "products.$.price": req.body.price,
+                    "products.$.categoryId": req.body.categoryId,
+                },
             }
         );
         res.send({ message: "Product updated successfully!" });

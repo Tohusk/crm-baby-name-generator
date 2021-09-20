@@ -36,12 +36,16 @@ const checkCategoryExists = async (req, res) => {
     try {
         const existingCategory = await Category.findOne(
             { user: req.body.userId },
-            { categories: { $elemMatch: {"$or": [{name: req.body.name},
-                {_id: mongoose.Types.ObjectId(req.body.categoryId)}] } } }
+            {
+                categories: {
+                    $elemMatch: {
+                        $or: [{ name: req.body.name }, { _id: mongoose.Types.ObjectId(req.body.categoryId) }],
+                    },
+                },
+            }
         );
 
         return existingCategory["categories"].length !== 0;
-
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -91,7 +95,7 @@ const verifyCategory = {
     checkDuplicateUserCategory,
     checkRequiredFields,
     checkRequiredFieldsUpdate,
-    checkCategoryExists
+    checkCategoryExists,
 };
 
 module.exports = verifyCategory;

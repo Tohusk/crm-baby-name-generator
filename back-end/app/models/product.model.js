@@ -14,10 +14,11 @@ const Product = mongoose.model(
                 },
                 price: {
                     type: Number,
-                    required: true
+                    required: true,
                 },
                 categoryId: {
-                    type: mongoose.Schema.Types.ObjectId, ref: "Category"
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Category",
                 },
             },
         ],
