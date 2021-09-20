@@ -26,7 +26,9 @@ const initialiseProduct = async (userId) => {
  */
 const newProduct = async (req, res) => {
     try {
-        const newProduct = { name: req.body.name, price: req.body.price, categoryId: req.body.categoryId };
+        const newProduct = { name: req.body.name,
+            price: req.body.price,
+            categoryId: req.body.categoryId };
         // add a product to a user's product list
         await Product.findOneAndUpdate(
             { user: mongoose.Types.ObjectId(req.body.userId) },
