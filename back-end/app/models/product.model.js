@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const HEX_COLOUR_CODE_LEN = 7;
 /**
  * model for a product
  */
