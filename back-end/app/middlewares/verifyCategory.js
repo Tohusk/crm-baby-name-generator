@@ -15,11 +15,31 @@ const checkDuplicateUserCategory = async (req, res, next) => {
 
         console.log(existingCategory);
 
-        if (existingCategory["categories"].length !== 0) {
+        if (await checkCategoryExists(req, res)) {
             res.status(400).send({ message: "Failed! Category is already in use!" });
             return;
         }
         next();
+    } catch (err) {
+        res.status(500).send({ message: err });
+    }
+};
+
+/**
+ * searches for a categoryId in a user's category list. Returns true if it does exist
+ * @param req
+ * @param res
+ * @returns {Promise<boolean>}
+ */
+const checkCategoryExists = async (req, res) => {
+    try {
+        const existingCategory = await Category.findOne(
+            { user: req.body.userId },
+            { categories: { $elemMatch: { name: req.body.name } } }
+        );
+
+        return existingCategory["categories"].length !== 0;
+
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -69,6 +89,7 @@ const verifyCategory = {
     checkDuplicateUserCategory,
     checkRequiredFields,
     checkRequiredFieldsUpdate,
+    checkCategoryExists
 };
 
 module.exports = verifyCategory;

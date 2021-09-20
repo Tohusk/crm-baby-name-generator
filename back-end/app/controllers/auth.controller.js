@@ -11,7 +11,6 @@ const Role = db.role;
 const contactController = require("./contact.controller");
 const categoryController = require("./category.controller");
 const productController = require("./product.controller");
-const productController = require("./product.controller");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
