@@ -5,6 +5,8 @@
 const { verifyTransaction } = require("../middlewares");
 const controller = require("../controllers/transaction.controller");
 
+const { verifyContact } = require("../middlewares");
+
 /**
  * POST /api/transaction/new
  * POST /api/transaction/update
@@ -23,13 +25,12 @@ module.exports = function (app) {
         "/api/transaction/new",
         [
             verifyTransaction.checkRequiredFields,
-            verifyTransaction.checkDuplicateUserTransaction,
-            verifyTransaction.checkTransactionCategoryExists,
+            verifyContact.checkContactExists
         ],
         controller.newTransaction
     );
 
-    app.post("/api/transaction/update", [verifyTransaction.checkRequiredFieldsUpdate], controller.updateTransaction);
+    app.post("/api/transaction/update", [verifyTransaction.checkRequiredFieldsUpdate, verifyContact.checkContactExists], controller.updateTransaction);
 
     app.get("/api/transaction/get", controller.getTransaction);
 
