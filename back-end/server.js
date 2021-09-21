@@ -20,6 +20,7 @@ require("./app/routes/auth.routes")(app);
 require("./app/routes/contact.routes")(app);
 require("./app/routes/category.routes")(app);
 require("./app/routes/product.routes")(app);
+require("./app/routes/transaction.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {

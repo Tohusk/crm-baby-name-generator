@@ -141,7 +141,7 @@ const deleteAccount = async (req, res) => {
         await contactController.deleteAllContacts(req.body.userId);
         await categoryController.deleteAllCategories(req.body.userId);
         await productController.deleteAllProducts(req.body.userId);
-        await transactionController.deleteAllProducts(req.body.userId);
+        await transactionController.deleteAllTransactions(req.body.userId);
 
         // delete user
         await User.findOneAndDelete({ _id: mongoose.Types.ObjectId(req.body.userId) });
