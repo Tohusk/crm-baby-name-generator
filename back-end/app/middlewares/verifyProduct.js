@@ -36,7 +36,10 @@ const checkDuplicateUserProduct = async (req, res, next) => {
  */
 const checkProductCategoryExists = async (req, res, next) => {
     try {
-        if (!req.body.categoryId) return;
+        if (!req.body.categoryId) {
+            next();
+            return;
+        }
 
         if (await verifyCategory.checkCategoryExists(req, res)) next();
         else res.status(400).send({ message: "Failed! Trying to insert product in a category that does not exist!" });
