@@ -67,7 +67,7 @@ const checkContactExists = async (req, res, next) => {
 const verifyContact = {
     checkRequiredFields,
     checkRequiredFieldsUpdate,
-    checkContactExists
+    checkContactExists,
 };
 
 module.exports = verifyContact;

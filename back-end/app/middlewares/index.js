@@ -11,5 +11,5 @@ module.exports = {
     verifyContact,
     verifyCategory,
     verifyProduct,
-    verifyTransaction
+    verifyTransaction,
 };

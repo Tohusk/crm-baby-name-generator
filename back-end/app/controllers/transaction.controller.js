@@ -27,9 +27,9 @@ const initialiseTransaction = async (userId) => {
 const newTransaction = async (req, res) => {
     try {
         const newTransaction = {
-                                contactId: mongoose.Types.ObjectId(req.body.contactId),
-                                productsPurchased: parsePurchaseList(req, res),
-                                };
+            contactId: mongoose.Types.ObjectId(req.body.contactId),
+            productsPurchased: parsePurchaseList(req, res),
+        };
 
         // add a transaction to a user's transaction list
         await Transaction.findOneAndUpdate(
@@ -59,8 +59,8 @@ function parsePurchaseList(req, res) {
         for (var idx in req.body.productsPurchased) {
             const newProductPurchase = {
                 productId: mongoose.Types.ObjectId(req.body.productsPurchased[idx].productId),
-                quantity: req.body.productsPurchased[idx].quantity
-            }
+                quantity: req.body.productsPurchased[idx].quantity,
+            };
             newProductsPurchased.push(newProductPurchase);
         }
 
@@ -81,8 +81,10 @@ const updateTransaction = async (req, res) => {
                 transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.body.transactionId) } },
             },
             {
-                $set: { "transactions.$.contactId": req.body.contactId,
-                        "transactions.$.productsPurchased": parsePurchaseList(req, res) },
+                $set: {
+                    "transactions.$.contactId": req.body.contactId,
+                    "transactions.$.productsPurchased": parsePurchaseList(req, res),
+                },
             }
         );
         res.send({ message: "Transaction updated successfully!" });

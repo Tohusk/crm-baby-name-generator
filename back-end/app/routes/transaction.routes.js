@@ -23,14 +23,15 @@ module.exports = function (app) {
 
     app.post(
         "/api/transaction/new",
-        [
-            verifyTransaction.checkRequiredFields,
-            verifyContact.checkContactExists
-        ],
+        [verifyTransaction.checkRequiredFields, verifyContact.checkContactExists],
         controller.newTransaction
     );
 
-    app.post("/api/transaction/update", [verifyTransaction.checkRequiredFieldsUpdate, verifyContact.checkContactExists], controller.updateTransaction);
+    app.post(
+        "/api/transaction/update",
+        [verifyTransaction.checkRequiredFieldsUpdate, verifyContact.checkContactExists],
+        controller.updateTransaction
+    );
 
     app.get("/api/transaction/get", controller.getTransaction);
 
