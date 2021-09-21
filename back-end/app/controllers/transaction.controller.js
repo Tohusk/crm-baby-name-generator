@@ -124,7 +124,7 @@ const deleteOneTransaction = async (req, res) => {
     try {
         await Transaction.findOneAndUpdate(
             { user: mongoose.Types.ObjectId(req.body.userId) },
-            { $pull: { transaction: { _id: mongoose.Types.ObjectId(req.body.transactionId) } } }
+            { $pull: { transactions: { _id: mongoose.Types.ObjectId(req.body.transactionId) } } }
         );
         res.send({ message: "Transaction deleted successfully" });
     } catch (err) {
