@@ -41,18 +41,20 @@ const checkRequiredFieldsUpdate = (req, res, next) => {
  * @param res
  * @param next
  */
-const checkContactExists = (req, res, next) => {
+const checkContactExists = async (req, res, next) => {
     try {
-        const existingContact = Contact.findOne(
+        const existingContact = await Contact.findOne(
             { user: req.body.userId },
             {
-                contacts: {
+                customers: {
                     $elemMatch: { _id: mongoose.Types.ObjectId(req.body.contactId) },
                 },
             }
         );
 
-        if (existingContact["categories"].length === 0) {
+        console.log(existingContact);
+
+        if (!existingContact["customers"]) {
             res.status(400).send({ message: "Failed! Contact does not exist!" });
             return;
         }
