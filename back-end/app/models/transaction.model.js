@@ -21,12 +21,14 @@ const Transaction = mongoose.model(
                         },
                     },
                 ],
-
                 contactId: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Contact",
                     required: true,
                 },
+                satisfactionRating: {
+                    type: Number
+                }
             },
         ],
     })

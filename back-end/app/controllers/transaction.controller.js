@@ -29,6 +29,7 @@ const newTransaction = async (req, res) => {
         const newTransaction = {
             contactId: mongoose.Types.ObjectId(req.body.contactId),
             productsPurchased: parsePurchaseList(req, res),
+            transactionRating: req.body.transactionRating
         };
 
         // add a transaction to a user's transaction list
@@ -84,6 +85,7 @@ const updateTransaction = async (req, res) => {
                 $set: {
                     "transactions.$.contactId": req.body.contactId,
                     "transactions.$.productsPurchased": parsePurchaseList(req, res),
+                    "transactions.$.transactionRating": req.body.transactionRating
                 },
             }
         );
