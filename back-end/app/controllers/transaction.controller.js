@@ -28,7 +28,7 @@ const newTransaction = async (req, res) => {
     try {
         const newTransaction = {
                                 contactId: mongoose.Types.ObjectId(req.body.contactId),
-                                productsPurchased: await parsePurchaseList,
+                                productsPurchased: parsePurchaseList(req, res),
                                 };
 
         // add a transaction to a user's transaction list
@@ -47,18 +47,19 @@ const newTransaction = async (req, res) => {
 };
 
 /**
+/**
  * go through the list of products in JSON request and create structure
  * @param req
  * @param res
- * @returns {Promise<*[]>}
- */
-const parsePurchaseList = async (req, res) => {
+ * @returns {*[]}
+*/
+function parsePurchaseList(req, res) {
     try {
         const newProductsPurchased = [];
-        for (const product in req.body.productsPurchased) {
+        for (var idx in req.body.productsPurchased) {
             const newProductPurchase = {
-                productId: mongoose.Types.ObjectId(product.productId),
-                quantity: product.productId
+                productId: mongoose.Types.ObjectId(req.body.productsPurchased[idx].productId),
+                quantity: req.body.productsPurchased[idx].quantity
             }
             newProductsPurchased.push(newProductPurchase);
         }
@@ -80,7 +81,8 @@ const updateTransaction = async (req, res) => {
                 transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.body.transactionId) } },
             },
             {
-                $set: { "transactions.$.contactId": req.body.contactId, "transactions.$.colour": await parsePurchaseList },
+                $set: { "transactions.$.contactId": req.body.contactId,
+                        "transactions.$.productsPurchased": parsePurchaseList(req, res) },
             }
         );
         res.send({ message: "Transaction updated successfully!" });
