@@ -24,18 +24,23 @@ const checkRequiredFields = (req, res, next) => {
 };
 
 const checkRequiredFieldsUpdate = (req, res, next) => {
-    if (!req.body.name) {
-        res.status(400).send({ message: "Failed! Need product name!" });
+    if (!req.body.productsPurchased) {
+        res.status(400).send({ message: "Failed! Need list of products purchased!" });
         return;
     }
 
-    if (!req.body.price) {
-        res.status(400).send({ message: "Failed! Need product price!" });
+    if (!req.body.userId) {
+        res.status(400).send({ message: "Failed! Needs to provide userId!" });
         return;
     }
 
-    if (!req.body.contactId || !req.body.transactionId) {
-        res.status(400).send({ message: "Failed! Needs to provide contactId or transactionId!" });
+    if (!req.body.contactId) {
+        res.status(400).send({ message: "Failed! Need to provide contactId!" });
+        return;
+    }
+
+    if (!req.body.transactionId) {
+        res.status(400).send({ message: "Failed! Need to provide transactionId!" });
         return;
     }
 
