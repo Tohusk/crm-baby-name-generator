@@ -1,0 +1,90 @@
+.overview-flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.overview-pagename{
+    position: relative;
+    /* padding: 1em; */
+    /* padding-top: 1em; */
+    /* padding-bottom: 1em; */
+    font-size: 4em;
+    font-weight: bold;
+    color: black;
+    margin-top: 1em;
+    /* margin-left: 1em; */
+}
+
+.overview-subheading{
+    position: relative;
+    /* align-self: auto; */
+    text-align: left;
+    padding:0.5em;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #152536;
+}
+
+.overview-stats-card{
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    height: 100%;
+    text-align: center;
+    margin: 1%;
+    padding: 2%;
+}
+
+.overview-card-heading{
+    position: relative;
+    /* padding: 1em; */
+    /* padding-top: 0.5em; */
+    /* padding-bottom: 1em; */
+    font-size: 1em;
+    font-weight:bold;
+    color: #444;
+}
+
+.overview-card-stat{
+    position: relative;
+    /* padding: 1em; */
+    /* padding-top: 0.5em; */
+    /* padding-bottom: 1em; */
+    font-size: 3.5em;
+    font-weight:bold;
+    color: #444;
+}
+
+.overview-table-wrapper{
+    padding-left: 1em;
+    width: 100%;
+}
+
+.overview-button-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.overview-add-btn{
+    align-self: flex-end;
+    background-color: #404B7C;
+    color: white;
+    width: 10em;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    /* transform: translateX(-2em); */
+    height: 100%;
+    font-size: 1em;
+    padding: 0.75em;
+    text-align: center;
+    /* font-weight: bold; */
+}
+
+.overview-add-btn:hover{
+    background-color: #6c76a3;
+    color: white;
+}

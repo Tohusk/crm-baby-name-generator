@@ -1,53 +1,59 @@
-label {
-    display: block;
-    margin-top: 10px;
+.authentication-logo-container {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
-.logo-container {
-    display: flex;
-    align-content: flex-start;
-    padding-top: 2em;
-    padding-bottom: 2em;
+.authentication-logo-container img {
+    width: 10vw;
+    height: auto;
 }
 
-.logo-container img {
-    width: 175px;
-    height: 65px;
-}
-
-.flex-container {
+.authentication-content-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-content: center;
-    align-items: center;
-    align-self: center;
 }
 
-.left-container img {
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-left: 100%;
-    /* width: 200px;
-    height: auto; */
+.authentication-left-container {
+    width: 55%;
+    padding-right: 5vw;
+    border-right: 1px solid black;
 }
 
-.right-container {
-    padding-left: 5em;
-    border-left: 1px solid black;
-    
+.authentication-left-container img {
+    width: 100%;
+    height: auto;
 }
 
-.log-in-container {
-    font-size: 2em;
-    padding-bottom: 1em;
+.authentication-right-container {
+    margin-top: 1%;
+    margin-left: 5%;
+    flex-grow: 1;
 }
 
-.vl {
-    border-left: 1px solid rgb(0, 0, 0);
-    margin-top: 5%;
-    margin-bottom: 5%;
-    height: 450px;
-    position: relative;
-    margin-left: 30%;
+.authentication-title-container {
+    font-size: 3vw;
+}
+
+.authentication-form {
+    margin-top: 5vh;
+    font-size: 1vw;
+    font-family: 'Inter';
+    color: #747474;
+}
+
+.authentication-form-group {
+    margin-bottom: 5vh;
+}
+
+.other-authentication-link {
+    color:black;
+}
+
+.submitButton {
+    float: right;
+    border-style: none;
+    border-radius: 20px;
+    width: 7vw;
+    height: 5vh;
+    background: #FFD873;
 }

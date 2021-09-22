@@ -4,7 +4,8 @@ const API_URL = process.env.REACT_APP_API_URL + "/api/auth/";
 
 class AuthService {
     async login(email, password) {
-        const response = await axios.post(API_URL + "signin", {
+        // const response = await axios.post(API_URL + "signin", {
+        const response = await axios.post("http://localhost:8080/api/auth/signin", {
             email,
             password,
         });
@@ -21,11 +22,11 @@ class AuthService {
     }
 
     //TODO Add try catch stuff
-    register(name, email, businessName, password) {
+    register(name, email, companyName, password) {
         return axios.post(API_URL + "signup", {
             name,
             email,
-            businessName,
+            companyName,
             password,
         });
     }
