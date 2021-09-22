@@ -10,9 +10,9 @@ class ContactService {
             phoneNumber,
             companyName,
             description,
-            userId
+            userId,
         });
-    } 
+    }
 }
 
 export default new ContactService();

@@ -70,7 +70,6 @@ export default class Home extends Component {
                         <span className="tran-log-text">Handle</span>
                     </div>
                 </div>
-
             </div>
         );
     }
