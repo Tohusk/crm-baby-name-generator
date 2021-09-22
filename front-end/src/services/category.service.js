@@ -7,6 +7,15 @@ class CategoryService {
     async getAllCategories(userId) {
         return axios.get(API_URL + "getAll?userId=" + userId);
     }
+
+    async addNewCategory(name, userId) {
+        const colour = "ffffff"
+        return axios.post(API_URL + "new", {
+            userId,
+            name,
+            colour
+        });
+    }
 }
 
 export default new CategoryService();

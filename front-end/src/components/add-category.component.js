@@ -1,51 +1,25 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+
+import CategoryService from "../services/category.service";
 import "../styles/AddItem.css";
 import CategoryList from "./category-list.component";
 
 export default class AddCategory extends Component {
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
-        this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeBusinessName = this.onChangeBusinessName.bind(this);
-
+        //this.onChangeColour= this.onChangeColour.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             name: "",
-            phoneNumber: "",
-            email: "",
-            description: "",
-            businessName: "",
-            loading: false,
-            message: "",
+            //colour: ""
         };
-    }
-
-    async handleSubmit(e) {
-        e.preventDefault();
-
-        this.setState({
-            message: "",
-            loading: true,
-        });
-
-        this.form.validateAll();
-
-        if (this.checkBtn.context._errors.length === 0) {
-            this.setState({
-                loading: false,
-                message: "Not implemented",
-            });
-        } else {
-            this.setState({
-                loading: false,
-            });
-        }
     }
 
     onChangeName(e) {
@@ -53,30 +27,34 @@ export default class AddCategory extends Component {
             name: e.target.value,
         });
     }
-
-    onChangePhoneNumber(e) {
+    onChangeColour(e) {
         this.setState({
-            phoneNumber: e.target.value,
+            colour: e.target.value,
         });
     }
 
-    onChangeEmail(e) {
-        this.setState({
-            email: e.target.value,
-        });
+    async handleSubmit(event) {
+        try {
+            alert('A name was submitted: ' + this.state.name);
+            alert('id was submitted: ' + this.state.currentUser.id);
+            CategoryService.addNewCategory(
+                this.state.name,
+                //this.state.colour,
+                this.state.currentUser.id
+            );
+
+            // const res = await CategoryService.addNewCategory(
+            //     this.state.name,
+            //     //this.state.colour,
+            //     this.state.currentUser.id
+            // );
+        } catch (err) {
+            alert(" err");
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+        }
     }
 
-    onChangeDescription(e) {
-        this.setState({
-            description: e.target.value,
-        });
-    }
-
-    onChangeBusinessName(e) {
-        this.setState({
-            businessName: e.target.value,
-        });
-    }
 
     render() {
         return (
@@ -88,6 +66,36 @@ export default class AddCategory extends Component {
                     <div className="overview-flex-container">
                         <CategoryList />
                     </div>
+
+                    <Form className="addCategory-form" onSubmit={this.handleSubmit}>
+                    <div className="addCategory-form-group">
+                        <label htmlFor="name">NAME</label>
+                        <Input
+                            type="text"
+                            className="form-control"
+                            name="name"
+                            value={this.state.name}
+                            onChange={this.onChangeName}
+                        />
+                        {/* <Input
+                            type="text"
+                            className="form-control"
+                            name= "colour"
+                            value={this.state.colour}
+                            onChange={this.onChangeColour}
+                        /> */}
+                    </div>
+                    <div className="addCategory-submit-group">
+                    <a className="addCategory-cancelButton" href="/home">
+                        Cancel
+                    </a>
+                    {/* Add functionality to button to add category */}
+                    {/* <button className="submitButton">Save</button> */}
+                    <button className="submitButton" disabled={this.state.loading}>
+                            Add
+                    </button>
+                </div>
+                </Form>
                     {/* <ul className="addCategory-list">
                 <li>Fruit
                     <button className="addCategory-deleteCategory">
@@ -111,15 +119,9 @@ export default class AddCategory extends Component {
                     </button>
                 </li>
             </ul>  */}
-                    <button className="addCategory-addCategory">+ Add Category</button>
+                    {/* <button onclick = "addCategoryFunction()" className="addCategory-addCategory">+ Add Category</button> */}
                 </div>
-                <div className="addCategory-submit-group">
-                    <a className="addCategory-cancelButton" href="/home">
-                        Cancel
-                    </a>
-                    {/* Add functionality to button to add category */}
-                    <button className="submitButton">Save</button>
-                </div>
+                
             </div>
         );
     }
