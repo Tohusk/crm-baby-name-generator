@@ -27,8 +27,8 @@ const Transaction = mongoose.model(
                     required: true,
                 },
                 satisfactionRating: {
-                    type: Number
-                }
+                    type: Number,
+                },
             },
         ],
     })

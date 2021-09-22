@@ -26,34 +26,33 @@ import Button from "react-bootstrap/Button";
 
 import "../styles/Overview.css";
 
-
 export default class CustomerList extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-          currentUser: AuthService.getCurrentUser(),
-          customers: []
+            currentUser: AuthService.getCurrentUser(),
+            customers: [],
         };
-      }
-    
-      
-    componentDidMount(){
-        axios.get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser.id)
-        .then(res => {
-            this.setState({
-                customers: res.data
-                
-                // customer_id: res.data.customers._id,
-                // customer_name: res.data.customers.name,
-                // customer_email: res.data.customers.email,
+    }
+
+    componentDidMount() {
+        axios
+            .get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser.id)
+            .then((res) => {
+                this.setState({
+                    customers: res.data,
+
+                    // customer_id: res.data.customers._id,
+                    // customer_name: res.data.customers.name,
+                    // customer_email: res.data.customers.email,
+                });
+                console.log(res.data);
+                //console.log(res.data.customers);
+            })
+            .catch((error) => {
+                console.log(error);
             });
-            console.log(res.data);
-            //console.log(res.data.customers);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
     }
 
     // dataTable(){
@@ -61,36 +60,29 @@ export default class CustomerList extends Component {
     //         return <CustomerTableRow obj={res} key={i} />;
     //     });
     // }
-    
-    displayTable(){
+
+    displayTable() {
         return this.state.customers.map((currentcustomer, i) => {
-            return (
-                <CustomerTableRow
-                    customer={currentcustomer}
-                    key={i}
-                />
-            );
+            return <CustomerTableRow customer={currentcustomer} key={i} />;
         });
     }
 
-      render() {
+    render() {
         return (
-
-          <div className="overview-table-wrapper">
-              
-              <Table bordered hover>
-                  <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Name</th>
-                          <th>Email</th>
-                          {/* <th>Satisfaction Score</th>
+            <div className="overview-table-wrapper">
+                <Table bordered hover>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            {/* <th>Satisfaction Score</th>
                           <th>Preferred Categories</th> */}
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {this.displayTable()}
-                      {/* <tr>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.displayTable()}
+                        {/* <tr>
                           <td>1</td>
                           <td>Mark Otto</td>
                           <td>otto123@example.com</td>
@@ -104,13 +96,9 @@ export default class CustomerList extends Component {
                           <td>4.5</td>
                           <td>Bread, Fruit, Dairy</td>
                       </tr> */}
-                  </tbody>
-              </Table>
-             
-            
-    
-          </div>
-    
+                    </tbody>
+                </Table>
+            </div>
         );
     }
 }
