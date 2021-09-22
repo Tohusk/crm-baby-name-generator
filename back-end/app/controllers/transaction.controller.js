@@ -48,16 +48,12 @@ const newTransaction = async (req, res) => {
 };
 
 /**
-/**
  * go through the list of products in JSON request and create structure
- * @param req
- * @param res
- * @returns {*[]}
 */
 function parsePurchaseList(req, res) {
     try {
         const newProductsPurchased = [];
-        for (var idx in req.body.productsPurchased) {
+        for (let idx in req.body.productsPurchased) {
             const newProductPurchase = {
                 productId: mongoose.Types.ObjectId(req.body.productsPurchased[idx].productId),
                 quantity: req.body.productsPurchased[idx].quantity,
@@ -100,10 +96,10 @@ const updateTransaction = async (req, res) => {
  */
 const getTransaction = async (req, res) => {
     try {
-        const transaction = await Transaction.find({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+        const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.transactionId) } },
         });
-        res.json(transaction);
+        res.json(transaction.transactions[0]);
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -114,8 +110,8 @@ const getTransaction = async (req, res) => {
  */
 const getAllTransactions = async (req, res) => {
     try {
-        const allTransactions = await Transaction.find({ user: mongoose.Types.ObjectId(req.query.userId) });
-        res.json(allTransactions);
+        const allTransactions = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
+        res.json(allTransactions.transactions);
     } catch (err) {
         res.status(500).send({ message: err });
     }

@@ -52,8 +52,6 @@ const checkContactExists = async (req, res, next) => {
             }
         );
 
-        console.log(existingContact);
-
         if (!existingContact["customers"]) {
             res.status(400).send({ message: "Failed! Contact does not exist!" });
             return;
