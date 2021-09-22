@@ -9,13 +9,6 @@ const Category = db.category;
  */
 const checkDuplicateUserCategory = async (req, res, next) => {
     try {
-        const existingCategory = await Category.findOne(
-            { user: req.body.userId },
-            { categories: { $elemMatch: { name: req.body.name } } }
-        );
-
-        console.log(existingCategory);
-
         if (await checkCategoryExists(req, res)) {
             res.status(400).send({ message: "Failed! Category is already in use!" });
             return;

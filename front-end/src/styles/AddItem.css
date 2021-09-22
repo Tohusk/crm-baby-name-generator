@@ -1,0 +1,191 @@
+.addItem-container {
+    margin-left: 2vw;
+    position: relative;
+    left: 3vw;
+    z-index: 1;
+}
+
+.addItem-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 8vh 0vw 0vh;
+}
+
+/* Add Customer */
+.addCustomer-form {
+    width: 40%;
+}
+
+.addCustomer-form-group {
+    margin-top: 4vh;
+    margin-left: 1vw;
+    font-size: 1.2em;
+    font-family: 'Inter';
+    color: #747474;
+}
+
+.addCustomer-submit-group {
+    margin-top: 8vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.addCustomer-cancelButton {
+    margin-right: 2vw;
+    text-decoration-line: underline;
+    color: #747474;
+}
+
+/* Add Product */
+.addProduct-form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.addProduct-text-fields {
+    flex-basis: 40%;
+}
+
+.addProduct-form-group {
+    font-family: 'Inter';
+    color: #747474;
+    margin-top: 5vh;
+}
+
+.addProduct-radio-fields {
+    margin-top: 5vh;
+    margin-left: 20%;
+    flex: 1;
+}
+
+.addProduct-category-title {
+    font-family: 'Inter';
+    color: #747474;
+}
+
+.addProduct-radio-categories {
+    margin-top: 3vh;
+}
+
+.addProduct-addCategory {
+    text-decoration-line: underline;
+    color: #747474;
+}
+
+.addProduct-addCategory-container {
+    margin-top: 6vh;
+}
+
+.addProduct-submit-group {
+    margin-top: 15vh;
+    flex-basis: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 23%;
+    align-items: center;
+}
+
+.addProduct-cancelButton {
+    text-decoration-line: underline;
+    color: #747474;
+    margin-right: 4vw;
+}
+
+/* Add transaction */
+.addTransaction-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw 20vw;
+    margin-left: 2vw;
+}
+
+.addTransaction-sub-container {
+    margin-top: 5vh;
+    flex-basis: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vw;
+    /* justify-content: space-between; */
+}
+
+.addTransaction-subtitle {
+    font-size: 2em;
+}
+
+.addTransaction-add-button {
+    border-style: none;
+    border-radius: 20px;
+    width: 6vw;
+    height: 5vh;
+    background: #FFD873;
+    align-self: flex-end;
+}
+
+.addTransaction-submit-group {
+    flex-basis: 100%;
+    display: flex;
+    align-self: flex-end;
+    justify-content: flex-end;
+    margin-top: 6em;
+    padding-right: 10%;
+    align-items: center;
+}
+
+.addTransaction-cancelButton {
+    text-decoration-line: underline;
+    color: #747474;
+    margin-right: 4vw;
+}
+
+
+/* Add category */
+.addCategory-list-container {
+    margin-top: 3%;
+}
+
+.addCategory-list-container h1 {
+    color: #747474;
+    font-family: 'Inter';
+    font-size: 0.8em;
+}
+
+.addCategory-list {
+    list-style-type: none;
+    width: 15%;
+}
+
+.addCategory-list li {
+    border-bottom: 1px solid #747474;
+}
+
+.addCategory-addCategory {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #747474;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.addCategory-deleteCategory {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #747474;
+    float: right;
+}
+
+.addCategory-submit-group {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 25%;
+    align-items: center;
+}
+
+.addCategory-cancelButton {
+    text-decoration-line: underline;
+    color: #747474;
+    margin-right: 2vw;
+}

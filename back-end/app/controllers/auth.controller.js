@@ -137,7 +137,7 @@ const signin = async (req, res) => {
  */
 const deleteAccount = async (req, res) => {
     try {
-        // TODO: delete transactions etc for user
+        // delete transactions etc for user
         await contactController.deleteAllContacts(req.body.userId);
         await categoryController.deleteAllCategories(req.body.userId);
         await productController.deleteAllProducts(req.body.userId);

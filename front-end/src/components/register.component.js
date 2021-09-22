@@ -57,13 +57,13 @@ export default class Register extends Component {
         this.handleRegister = this.handleRegister.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangeBusinessName = this.onChangeBusinessName.bind(this);
+        this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
 
         this.state = {
             name: "",
             email: "",
-            businessName: "",
+            companyName: "",
             password: "",
             successful: false,
             message: "",
@@ -81,10 +81,10 @@ export default class Register extends Component {
             email: e.target.value,
         });
     }
-
-    onChangeBusinessName(e) {
+  
+    onChangeCompanyName(e) {
         this.setState({
-            businessName: e.target.value,
+            companyName: e.target.value,
         });
     }
 
@@ -93,8 +93,8 @@ export default class Register extends Component {
             password: e.target.value,
         });
     }
-
-    async handleRegister(e) {
+  
+   async handleRegister(e) {
         e.preventDefault();
 
         this.setState({
@@ -109,7 +109,7 @@ export default class Register extends Component {
                 const res = await AuthService.register(
                     this.state.name,
                     this.state.email,
-                    this.state.businessName,
+                    this.state.companyName,
                     this.state.password
                 );
 
@@ -128,106 +128,108 @@ export default class Register extends Component {
             }
         }
     }
+  render() {
+    return (
+      <div>
+        {/* BBY Logo */}
+        <div className="authentication-logo-container">
+          <img src={logo} alt="logo"/>
+        </div>
 
-    render() {
-        return (
-            <div>
-                <div className="logo-container">
-                    <img src={logo} alt="logo"></img>
-                    {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
+        <div className="authentication-content-container">
+          <div className = "authentication-left-container">
+            <img src={img} alt="loginillustration"/>
+          </div>
+          <div className="authentication-right-container">
+            <div className = "authentication-title-container">Sign Up</div>
+            
+            <Form
+              className="authentication-form"
+              onSubmit={this.handleRegister}
+              ref={c => {
+                this.form = c;
+              }}
+            >
+              {!this.state.successful && (
+                <div>
+                  <div className="authentication-form-group">
+                    <label htmlFor="name">NAME</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.onChangeUsername}
+                      validations={[required, vname]}
+                    />
+                  </div>
+
+                  <div className="authentication-form-group">
+                    <label htmlFor="email">EMAIL</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.onChangeEmail}
+                      validations={[required, email]}
+                    />
+                  </div>
+
+                  <div className="authentication-form-group">
+                    <label htmlFor="companyName">BUSINESS NAME (Optional)</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="companyName"
+                      value={this.state.companyName}
+                      onChange={this.onChangeCompanyName}
+                      // validations={[required, companyName]}
+                    />
+                  </div>
+
+                  <div className="authentication-form-group">
+                    <label htmlFor="password">PASSWORD</label>
+                    <Input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.onChangePassword}
+                      validations={[required, vpassword]}
+                    />
+                  </div>
+
+                  <div className="authentication-form-group">
+                    <button className="submitButton">Sign Up</button>
+                  </div>
+
+                  Already have an account?
+                  <div><a href="/login" className="other-authentication-link">Log in</a></div>
                 </div>
+              )}
+              
+              {this.state.message && (
+                  <div className="form-group">
+                      <div
+                          className={this.state.successful ? "alert alert-success" : "alert alert-danger"}
+                          role="alert"
+                      >
+                          {this.state.message}
+                      </div>
+                  </div>
+              )}
 
-                <div className="flex-container">
-                    <img src={img} alt="loginillustration"></img>
-                    {/* <div className="left-container"> */}
-                    {/* <img src="https://source.unsplash.com/random" alt="baby"></img> */}
-                    {/* </div> */}
-                    {/* <div className="vl"></div> */}
-                    <div className="right-container">
-                        <div className="log-in-container">Sign Up</div>
-                        <Form
-                            onSubmit={this.handleRegister}
-                            ref={(c) => {
-                                this.form = c;
-                            }}
-                        >
-                            {!this.state.successful && (
-                                <div>
-                                    <div className="form-group">
-                                        <label htmlFor="name">Name</label>
-                                        <Input
-                                            type="text"
-                                            className="form-control"
-                                            name="name"
-                                            value={this.state.name}
-                                            onChange={this.onChangeUsername}
-                                            validations={[required, vname]}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="email">Email</label>
-                                        <Input
-                                            type="text"
-                                            className="form-control"
-                                            name="email"
-                                            value={this.state.email}
-                                            onChange={this.onChangeEmail}
-                                            validations={[required, email]}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="businessName">Business Name (Optional)</label>
-                                        <Input
-                                            type="text"
-                                            className="form-control"
-                                            name="businessName"
-                                            value={this.state.businessName}
-                                            onChange={this.onChangeBusinessName}
-                                            // validations={[required, businessName]}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="password">Password</label>
-                                        <Input
-                                            type="password"
-                                            className="form-control"
-                                            name="password"
-                                            value={this.state.password}
-                                            onChange={this.onChangePassword}
-                                            validations={[required, vpassword]}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <button className="btn btn-primary btn-block">Sign Up</button>
-                                    </div>
-                                    Already have an account?
-                                    <div>
-                                        <a href="/login">Log in</a>
-                                    </div>
-                                </div>
-                            )}
-
-                            {this.state.message && (
-                                <div className="form-group">
-                                    <div
-                                        className={this.state.successful ? "alert alert-success" : "alert alert-danger"}
-                                        role="alert"
-                                    >
-                                        {this.state.message}
-                                    </div>
-                                </div>
-                            )}
-
-                            <CheckButton
-                                style={{ display: "none" }}
-                                ref={(c) => {
-                                    this.checkBtn = c;
-                                }}
-                            />
-                        </Form>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+              <CheckButton
+                  style={{ display: "none" }}
+                  ref={(c) => {
+                      this.checkBtn = c;
+                  }}
+              />
+            </Form>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
