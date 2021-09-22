@@ -12,7 +12,7 @@ export default class CategoryList extends Component {
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
-            categories: null,
+            categories: [],
         };
     }
 
@@ -22,17 +22,16 @@ export default class CategoryList extends Component {
             this.setState({
                 categories: res.data,
             });
-            console.log(res.data);
         } catch (err) {
             this.setState({
-                categories: null,
+                categories: [],
             });
         }
     }
 
     displayTable() {
-        if (this.state.categories === null) {
-            return <h1>No categories to show</h1>;
+        if (this.state.categories.length === 0) {
+            return <div>No categories to show</div>;
         }
         return this.state.categories.map((currentCategory, i) => {
             return <CategoryTableRow category={currentCategory} key={i} />;
@@ -45,6 +44,7 @@ export default class CategoryList extends Component {
                 <Table bordered hover>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Category Name</th>
                         </tr>
                     </thead>

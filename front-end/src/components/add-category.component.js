@@ -5,20 +5,33 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
+
 import CategoryService from "../services/category.service";
 import "../styles/AddItem.css";
 import CategoryList from "./category-list.component";
+
+const required = (value) => {
+    if (!value) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                This field is required!
+            </div>
+        );
+    }
+};
 
 export default class AddCategory extends Component {
     constructor(props) {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
-        //this.onChangeColour= this.onChangeColour.bind(this);
+        this.onChangeColour= this.onChangeColour.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             currentUser: AuthService.getCurrentUser(),
+            message: "",
+            loading: false,
             name: "",
-            //colour: ""
+            colour: "#000000"
         };
     }
 
@@ -33,25 +46,42 @@ export default class AddCategory extends Component {
         });
     }
 
-    async handleSubmit(event) {
-        try {
-            alert('A name was submitted: ' + this.state.name);
-            alert('id was submitted: ' + this.state.currentUser.id);
-            CategoryService.addNewCategory(
-                this.state.name,
-                //this.state.colour,
-                this.state.currentUser.id
-            );
+    async handleSubmit(e) {
+        e.preventDefault();
 
-            // const res = await CategoryService.addNewCategory(
-            //     this.state.name,
-            //     //this.state.colour,
-            //     this.state.currentUser.id
-            // );
-        } catch (err) {
-            alert(" err");
-            const resMessage =
+        this.setState({
+            message: "",
+            loading: true,
+        });
+
+        this.form.validateAll();
+
+        if (this.checkBtn.context._errors.length === 0) {
+            try {
+                const res = await CategoryService.addNewCategory(
+                    this.state.name,
+                    this.state.colour,
+                    this.state.currentUser.id
+                );
+                // Give success message
+                this.setState({
+                    message: res.data.message,
+                    loading: false
+                });
+
+                window.location.reload();
+            } catch (err) {
+                const resMessage =
                 (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                this.setState({
+                    message: resMessage,
+                    loading: false
+                });
+            }
+        } else {
+            this.setState({
+                loading: false
+            });
         }
     }
 
@@ -67,7 +97,12 @@ export default class AddCategory extends Component {
                         <CategoryList />
                     </div>
 
-                    <Form className="addCategory-form" onSubmit={this.handleSubmit}>
+                    <Form className="addCategory-form" 
+                    onSubmit={this.handleSubmit}
+                    ref={(c) => {
+                        this.form = c;
+                    }}
+                    >
                     <div className="addCategory-form-group">
                         <label htmlFor="name">NAME</label>
                         <Input
@@ -76,14 +111,17 @@ export default class AddCategory extends Component {
                             name="name"
                             value={this.state.name}
                             onChange={this.onChangeName}
+                            validations={[required]}
                         />
-                        {/* <Input
-                            type="text"
+                        <label htmlFor="colour">Colour</label>
+                        <Input
+                            type="color"
                             className="form-control"
                             name= "colour"
                             value={this.state.colour}
                             onChange={this.onChangeColour}
-                        /> */}
+                            validations={[required]}
+                        />
                     </div>
                     <div className="addCategory-submit-group">
                     <a className="addCategory-cancelButton" href="/home">
@@ -95,30 +133,22 @@ export default class AddCategory extends Component {
                             Add
                     </button>
                 </div>
+
+                {this.state.message && (
+                        <div className="authentication-form-group">
+                            <div className="alert alert-danger" role="alert">
+                                {this.state.message}
+                            </div>
+                        </div>
+                    )}
+
+                <CheckButton
+                        style={{ display: "none" }}
+                        ref={(c) => {
+                            this.checkBtn = c;
+                        }}
+                    />
                 </Form>
-                    {/* <ul className="addCategory-list">
-                <li>Fruit
-                    <button className="addCategory-deleteCategory">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                    </button>
-                </li>
-                <li>Vegetable
-                    <button className="addCategory-deleteCategory">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                    </button>
-                </li>
-                <li>Bread
-                    <button className="addCategory-deleteCategory">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                    </button>
-                </li>
-            </ul>  */}
                     {/* <button onclick = "addCategoryFunction()" className="addCategory-addCategory">+ Add Category</button> */}
                 </div>
                 

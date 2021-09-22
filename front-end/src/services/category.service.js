@@ -8,9 +8,7 @@ class CategoryService {
         return axios.get(API_URL + "getAll?userId=" + userId);
     }
 
-    async addNewCategory(name, userId) {
-        //TODO change so not always white
-        const colour = "ffffff"
+    async addNewCategory(name, colour, userId) {
         return axios.post(API_URL + "new", {
             userId,
             name,
