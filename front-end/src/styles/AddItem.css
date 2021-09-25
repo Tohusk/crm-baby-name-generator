@@ -144,15 +144,29 @@
     margin-top: 3%;
 }
 
-.addCategory-list-container h1 {
+.addCategory-list-container p {
     color: #747474;
     font-family: 'Inter';
     font-size: 0.8em;
 }
 
+.addCategory-form-group {
+    width: 20%;
+}
+
 .addCategory-list {
     list-style-type: none;
     width: 15%;
+}
+
+.addCategory-delete {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }
 
 .addCategory-list li {
@@ -180,12 +194,20 @@
     flex-basis: 100%;
     display: flex;
     justify-content: flex-start;
-    margin-left: 25%;
     align-items: center;
+    margin-top: 2%;
+    margin-left: 2%;
 }
 
 .addCategory-cancelButton {
     text-decoration-line: underline;
     color: #747474;
     margin-right: 2vw;
+
+
+    background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
 }
