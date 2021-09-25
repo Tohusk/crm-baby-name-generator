@@ -27,6 +27,7 @@ export default class AddCategory extends Component {
         this.onChangeColour= this.onChangeColour.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.showAddForm = this.showAddForm.bind(this);
+        this.hideForm = this.hideForm.bind(this);
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             message: "",
@@ -40,6 +41,12 @@ export default class AddCategory extends Component {
     showAddForm() {
         this.setState({
             showAddForm: true,
+        });
+    }
+
+    hideForm() {
+        this.setState({
+            showAddForm: false,
         });
     }
 
@@ -132,9 +139,9 @@ export default class AddCategory extends Component {
                         />
                     </div>
                     <div className="addCategory-submit-group">
-                    <a className="addCategory-cancelButton" href="/home">
+                    <button onClick={this.hideForm} className="addCategory-cancelButton" href="/home">
                         Cancel
-                    </a>
+                    </button>
                     <button className="submitButton" disabled={this.state.loading}>
                             Add
                     </button>
