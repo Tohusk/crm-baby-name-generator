@@ -11,6 +11,7 @@ const Role = db.role;
 const contactController = require("./contact.controller");
 const categoryController = require("./category.controller");
 const productController = require("./product.controller");
+const transactionController = require("./transaction.controller");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -57,6 +58,7 @@ const signup = async (req, res) => {
         await contactController.initialiseContact(user._id);
         await productController.initialiseProduct(user._id);
         await categoryController.initialiseCategory(user._id);
+        await transactionController.initialiseTransaction(user._id);
 
         res.send({ message: "User was registered successfully!" });
     } catch (err) {
@@ -139,6 +141,7 @@ const deleteAccount = async (req, res) => {
         await contactController.deleteAllContacts(req.body.userId);
         await categoryController.deleteAllCategories(req.body.userId);
         await productController.deleteAllProducts(req.body.userId);
+        await transactionController.deleteAllTransactions(req.body.userId);
 
         // delete user
         await User.findOneAndDelete({ _id: mongoose.Types.ObjectId(req.body.userId) });

@@ -5,7 +5,6 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-
 import CategoryService from "../services/category.service";
 import "../styles/AddItem.css";
 import CategoryList from "./category-list.component";
@@ -55,6 +54,7 @@ export default class AddCategory extends Component {
             name: e.target.value,
         });
     }
+
     onChangeColour(e) {
         this.setState({
             colour: e.target.value,
@@ -99,7 +99,6 @@ export default class AddCategory extends Component {
             });
         }
     }
-
 
     render() {
         return (
@@ -166,7 +165,6 @@ export default class AddCategory extends Component {
                     
                     <button onClick={this.showAddForm} className="addCategory-addCategory">+ Add Category</button>
                 </div>
-                
             </div>
         );
     }
