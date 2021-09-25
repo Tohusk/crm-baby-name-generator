@@ -26,13 +26,21 @@ export default class AddCategory extends Component {
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeColour= this.onChangeColour.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.showAddForm = this.showAddForm.bind(this);
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             message: "",
             loading: false,
+            showAddForm: false,
             name: "",
             colour: "#000000"
         };
+    }
+
+    showAddForm() {
+        this.setState({
+            showAddForm: true,
+        });
     }
 
     onChangeName(e) {
@@ -89,14 +97,14 @@ export default class AddCategory extends Component {
     render() {
         return (
             <div className="addItem-container">
-                {/*Page Name*/}
                 <div className="addItem-title">Edit Categories</div>
                 <div className="addCategory-list-container">
-                    <h1>CATEGORIES</h1>
+                    <p>CATEGORIES</p>
                     <div className="overview-flex-container">
                         <CategoryList />
                     </div>
 
+                    { this.state.showAddForm ? 
                     <Form className="addCategory-form" 
                     onSubmit={this.handleSubmit}
                     ref={(c) => {
@@ -127,8 +135,6 @@ export default class AddCategory extends Component {
                     <a className="addCategory-cancelButton" href="/home">
                         Cancel
                     </a>
-                    {/* Add functionality to button to add category */}
-                    {/* <button className="submitButton">Save</button> */}
                     <button className="submitButton" disabled={this.state.loading}>
                             Add
                     </button>
@@ -148,8 +154,10 @@ export default class AddCategory extends Component {
                             this.checkBtn = c;
                         }}
                     />
-                </Form>
-                    {/* <button onclick = "addCategoryFunction()" className="addCategory-addCategory">+ Add Category</button> */}
+                </Form> 
+                : null }
+                    
+                    <button onClick={this.showAddForm} className="addCategory-addCategory">+ Add Category</button>
                 </div>
                 
             </div>

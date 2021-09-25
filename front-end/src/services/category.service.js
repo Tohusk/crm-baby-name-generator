@@ -15,6 +15,14 @@ class CategoryService {
             colour
         });
     }
+
+    async deleteCategory(userId, categoryId) {
+        return axios.delete(API_URL + "deleteOne", { data: {
+                userId: userId,
+                categoryId: categoryId
+            }
+        });
+    }
 }
 
 export default new CategoryService();

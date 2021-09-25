@@ -34,7 +34,7 @@ export default class CategoryList extends Component {
             return <div>No categories to show</div>;
         }
         return this.state.categories.map((currentCategory, i) => {
-            return <CategoryTableRow category={currentCategory} key={i} />;
+            return <CategoryTableRow currentUser={this.state.currentUser} category={currentCategory} key={i} />;
         });
     }
 
