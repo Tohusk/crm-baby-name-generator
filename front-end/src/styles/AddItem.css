@@ -44,17 +44,21 @@
 }
 
 .addProduct-text-fields {
+    margin-top: 4%;
     flex-basis: 40%;
 }
 
-.addProduct-form-group {
+.addProduct-text-fields input {
+    margin-bottom: 4%;
+}
+
+.addProduct-text-fields label {
     font-family: 'Inter';
     color: #747474;
-    margin-top: 5vh;
 }
 
 .addProduct-radio-fields {
-    margin-top: 5vh;
+    margin-top: 4%;
     margin-left: 20%;
     flex: 1;
 }
@@ -65,7 +69,13 @@
 }
 
 .addProduct-radio-categories {
-    margin-top: 3vh;
+    margin-top: 2%;
+}
+
+.addProduct-radio-categories input {
+    margin-top: 1%;
+    margin-right: 3%;
+    float: left;
 }
 
 .addProduct-addCategory {
