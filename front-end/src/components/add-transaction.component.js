@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+
 import "../styles/AddItem.css";
 
 export default class AddTransaction extends Component {
@@ -43,6 +46,80 @@ export default class AddTransaction extends Component {
           <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Product/s:</div>
           </div>
+          {/* <div className="addTransaction-sub-container"> */}
+          <div className="addTransaction-form">
+          <div className="addTransaction-subtitle">How satisfied was the customer?</div>
+          <br />
+            <Form>
+            
+              <div className="form-check form-check-inline">
+                <label className="radio">
+                  <Input
+                    type="radio"
+                    className="form-check-input"
+                    name="name"
+                    value="1"//{this.state.name}
+                  // onChange={this.onChangeName}
+                  // validations={[required]}
+                  />
+                  Very Unsatisfied (1)              
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <label className="radio">
+                  <Input
+                    type="radio"
+                    className="form-check-input"
+                    name="name"
+                    value="2"//{this.state.name}
+                  // onChange={this.onChangeName}
+                  // validations={[required]}
+                  />
+                  Unsatisfied (2)           
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <label className="radio">
+                  <Input
+                    type="radio"
+                    className="form-check-input"
+                    name="name"
+                    value="3"//{this.state.name}
+                  // onChange={this.onChangeName}
+                  // validations={[required]}
+                  />
+                  Neutral (3)              
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <label className="radio">
+                  <Input
+                    type="radio"
+                    className="form-check-input"
+                    name="name"
+                    value="4"//{this.state.name}
+                  // onChange={this.onChangeName}
+                  // validations={[required]}
+                  />
+                  Satisfied (4)              
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <label className="radio">
+                  <Input
+                    type="radio"
+                    className="form-check-input"
+                    name="name"
+                    value="5"//{this.state.name}
+                  // onChange={this.onChangeName}
+                  // validations={[required]}
+                  />
+                  Very Satisfied (5)              
+                </label>
+              </div>
+            </Form>
+          </div>
+
           <div className="addTransaction-submit-group">
             <a className="addTransaction-cancelButton" href="/home">Cancel</a>
             <button
