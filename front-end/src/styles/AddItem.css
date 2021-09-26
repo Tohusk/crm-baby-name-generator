@@ -189,3 +189,21 @@
     color: #747474;
     margin-right: 2vw;
 }
+
+.radio {
+    margin-right: 10px;
+}
+
+.addTrans-form-check-input{
+    display: inline;
+    margin-right: 10px;
+    align-items: center;
+}
+
+.editItem-delete-btn{
+    text-decoration-line: underline;
+    margin-left: 67%;
+    border: none;
+    background-color: transparent;
+    color: #D80707;
+}
