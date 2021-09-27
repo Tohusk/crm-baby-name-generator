@@ -24,6 +24,8 @@ import Sidebar from "./components/sidebar.component";
 
 import Sales from "./components/sales-overview.component";
 
+import { withRouter } from "react-router";
+
 // import BoardModerator from "./components/board-moderator.component";
 // import BoardAdmin from "./components/board-admin.component";
 
@@ -134,4 +136,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withRouter(App);
