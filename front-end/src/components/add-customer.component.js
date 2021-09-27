@@ -122,7 +122,7 @@ export default class AddCustomer extends Component {
                     }}
                 >
                     <div className="addCustomer-form-group">
-                        <label htmlFor="name">NAME</label>
+                        <label htmlFor="name">NAME (Required)</label>
                         <Input
                             type="text"
                             className="form-control"
@@ -141,7 +141,6 @@ export default class AddCustomer extends Component {
                             name="phoneNumber"
                             value={this.state.phoneNumber}
                             onChange={this.onChangePhoneNumber}
-                            validations={[required]}
                         />
                     </div>
 
@@ -153,7 +152,7 @@ export default class AddCustomer extends Component {
                             name="email"
                             value={this.state.email}
                             onChange={this.onChangeEmail}
-                            validations={[required]}
+                            
                         />
                     </div>
 
@@ -165,12 +164,12 @@ export default class AddCustomer extends Component {
                             name="description"
                             value={this.state.description}
                             onChange={this.onChangeDescription}
-                            validations={[required]}
+                            
                         />
                     </div>
 
                     <div className="addCustomer-form-group">
-                        <label htmlFor="companyName">BUSINESS NAME (Optional)</label>
+                        <label htmlFor="companyName">BUSINESS NAME</label>
                         <Input
                             type="text"
                             className="form-control"
@@ -181,7 +180,7 @@ export default class AddCustomer extends Component {
                     </div>
 
                     <div className="addCustomer-submit-group">
-                        <a className="addCustomer-cancelButton" href="/home">
+                        <a className="addCustomer-cancelButton" href="/customers">
                             Cancel
                         </a>
                         <button className="submitButton" disabled={this.state.loading}>
