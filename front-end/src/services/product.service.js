@@ -8,7 +8,7 @@ class ProductService {
             name,
             price,
             categoryId,
-            userId
+            userId,
         });
     }
 }

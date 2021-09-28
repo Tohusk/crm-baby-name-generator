@@ -12,15 +12,16 @@ class CategoryService {
         return axios.post(API_URL + "new", {
             userId,
             name,
-            colour
+            colour,
         });
     }
 
     async deleteCategory(userId, categoryId) {
-        return axios.delete(API_URL + "deleteOne", { data: {
+        return axios.delete(API_URL + "deleteOne", {
+            data: {
                 userId: userId,
-                categoryId: categoryId
-            }
+                categoryId: categoryId,
+            },
         });
     }
 }

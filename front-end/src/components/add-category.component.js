@@ -23,18 +23,18 @@ export default class AddCategory extends Component {
     constructor(props) {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
-        this.onChangeColour= this.onChangeColour.bind(this);
+        this.onChangeColour = this.onChangeColour.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.showAddForm = this.showAddForm.bind(this);
         this.hideForm = this.hideForm.bind(this);
-        
+
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             message: "",
             loading: false,
             showAddForm: false,
             name: "",
-            colour: "#000000"
+            colour: "#000000",
         };
     }
 
@@ -82,21 +82,21 @@ export default class AddCategory extends Component {
                 // Give success message
                 this.setState({
                     message: res.data.message,
-                    loading: false
+                    loading: false,
                 });
 
                 window.location.reload();
             } catch (err) {
                 const resMessage =
-                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                    (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
                 this.setState({
                     message: resMessage,
-                    loading: false
+                    loading: false,
                 });
             }
         } else {
             this.setState({
-                loading: false
+                loading: false,
             });
         }
     }
@@ -111,61 +111,64 @@ export default class AddCategory extends Component {
                         <CategoryList />
                     </div>
 
-                    { this.state.showAddForm ? 
-                    <Form className="addCategory-form" 
-                    onSubmit={this.handleSubmit}
-                    ref={(c) => {
-                        this.form = c;
-                    }}
-                    >
-                    <div className="addCategory-form-group">
-                        <label htmlFor="name">NAME</label>
-                        <Input
-                            type="text"
-                            className="form-control"
-                            name="name"
-                            value={this.state.name}
-                            onChange={this.onChangeName}
-                            validations={[required]}
-                        />
-                        <label htmlFor="colour">Colour</label>
-                        <Input
-                            type="color"
-                            className="form-control"
-                            name= "colour"
-                            value={this.state.colour}
-                            onChange={this.onChangeColour}
-                            validations={[required]}
-                        />
-                    </div>
-                    <div className="addCategory-submit-group">
-                    <button onClick={this.hideForm} className="addCategory-cancelButton" href="/home">
-                        Cancel
-                    </button>
-                    <button className="submitButton" disabled={this.state.loading}>
-                        {this.state.loading && <span className="spinner-border spinner-border-sm"></span>}
-                        Add
-                    </button>
-                </div>
-
-                {this.state.message && (
-                        <div className="authentication-form-group">
-                            <div className="alert alert-danger" role="alert">
-                                {this.state.message}
+                    {this.state.showAddForm ? (
+                        <Form
+                            className="addCategory-form"
+                            onSubmit={this.handleSubmit}
+                            ref={(c) => {
+                                this.form = c;
+                            }}
+                        >
+                            <div className="addCategory-form-group">
+                                <label htmlFor="name">NAME</label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.onChangeName}
+                                    validations={[required]}
+                                />
+                                <label htmlFor="colour">Colour</label>
+                                <Input
+                                    type="color"
+                                    className="form-control"
+                                    name="colour"
+                                    value={this.state.colour}
+                                    onChange={this.onChangeColour}
+                                    validations={[required]}
+                                />
                             </div>
-                        </div>
-                    )}
+                            <div className="addCategory-submit-group">
+                                <button onClick={this.hideForm} className="addCategory-cancelButton" href="/home">
+                                    Cancel
+                                </button>
+                                <button className="submitButton" disabled={this.state.loading}>
+                                    {this.state.loading && <span className="spinner-border spinner-border-sm"></span>}
+                                    Add
+                                </button>
+                            </div>
 
-                <CheckButton
-                        style={{ display: "none" }}
-                        ref={(c) => {
-                            this.checkBtn = c;
-                        }}
-                    />
-                </Form> 
-                : null }
-                    
-                    <button onClick={this.showAddForm} className="addCategory-addCategory">+ Add Category</button>
+                            {this.state.message && (
+                                <div className="authentication-form-group">
+                                    <div className="alert alert-danger" role="alert">
+                                        {this.state.message}
+                                    </div>
+                                </div>
+                            )}
+
+                            <CheckButton
+                                style={{ display: "none" }}
+                                ref={(c) => {
+                                    this.checkBtn = c;
+                                }}
+                            />
+                        </Form>
+                    ) : null}
+
+                    <button onClick={this.showAddForm} className="addCategory-addCategory">
+                        + Add Category
+                    </button>
                 </div>
             </div>
         );

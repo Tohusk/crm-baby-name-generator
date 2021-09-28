@@ -6,11 +6,9 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-
 import "../styles/AddItem.css";
 import CategoryService from "../services/category.service";
 import ProductService from "../services/product.service";
-
 
 const required = (value) => {
     if (!value) {
@@ -29,7 +27,6 @@ export default class AddProduct extends Component {
         this.onChangePrice = this.onChangePrice.bind(this);
         this.onChangeCategoryId = this.onChangeCategoryId.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
@@ -61,14 +58,13 @@ export default class AddProduct extends Component {
     }
 
     async componentDidMount() {
-    // Load categories into state
+        // Load categories into state
         try {
             const res = await CategoryService.getAllCategories(this.state.currentUser.id);
             this.setState({
                 categories: res.data,
             });
-        }
-        catch (err) {
+        } catch (err) {
             alert(err);
         }
     }
@@ -95,19 +91,19 @@ export default class AddProduct extends Component {
                 // Give success message
                 this.setState({
                     message: res.data.message,
-                    loading: false
+                    loading: false,
                 });
             } catch (err) {
                 const resMessage =
-                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                    (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
                 this.setState({
                     message: resMessage,
-                    loading: false
+                    loading: false,
                 });
             }
         } else {
             this.setState({
-                loading: false
+                loading: false,
             });
         }
     }
@@ -151,20 +147,19 @@ export default class AddProduct extends Component {
                         <div className="addProduct-category-title">CATEGORY</div>
                         {/* Loop over categories for radio button options */}
                         {this.state.categories.map((category, i) => {
-                                return (
-                                    <div className="addProduct-radio-categories" key={i}>
-                                        <Input 
-                                            type="radio" 
-                                            value={category._id} 
-                                            name="category" 
-                                            onChange={this.onChangeCategoryId} 
-                                            validations={[required]}
-                                        />
-                                        <label htmlFor="category">{category.name}</label>
-                                    </div>
-                                );
-                            })
-                        }
+                            return (
+                                <div className="addProduct-radio-categories" key={i}>
+                                    <Input
+                                        type="radio"
+                                        value={category._id}
+                                        name="category"
+                                        onChange={this.onChangeCategoryId}
+                                        validations={[required]}
+                                    />
+                                    <label htmlFor="category">{category.name}</label>
+                                </div>
+                            );
+                        })}
 
                         <div className="addProduct-addCategory-container">
                             <a className="addProduct-addCategory" href="/addCategory">
@@ -178,8 +173,8 @@ export default class AddProduct extends Component {
                             Cancel
                         </a>
                         <button className="submitButton" disabled={this.state.loading}>
-                        {this.state.loading && <span className="spinner-border spinner-border-sm"></span>}
-                        Add
+                            {this.state.loading && <span className="spinner-border spinner-border-sm"></span>}
+                            Add
                         </button>
                     </div>
 
@@ -192,12 +187,12 @@ export default class AddProduct extends Component {
                 </Form>
 
                 {this.state.message && (
-                        <div className="authentication-form-group">
-                            <div className="alert alert-danger" role="alert">
-                                {this.state.message}
-                            </div>
+                    <div className="authentication-form-group">
+                        <div className="alert alert-danger" role="alert">
+                            {this.state.message}
                         </div>
-                    )}
+                    </div>
+                )}
             </div>
         );
     }
