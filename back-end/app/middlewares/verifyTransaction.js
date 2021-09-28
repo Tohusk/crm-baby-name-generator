@@ -24,7 +24,7 @@ const checkRequiredFields = (req, res, next) => {
 };
 
 const checkRequiredFieldsUpdate = (req, res, next) => {
-    if (!req.body.productsPurchased) {
+    if (!req.body.productsPurchased || req.body.productsPurchased.length == 0) {
         res.status(400).send({ message: "Failed! Need list of products purchased!" });
         return;
     }

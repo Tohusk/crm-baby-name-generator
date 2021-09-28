@@ -26,7 +26,7 @@ const Transaction = mongoose.model(
                     ref: "Contact",
                     required: true,
                 },
-                satisfactionRating: {
+                transactionRating: {
                     type: Number,
                 },
             },
