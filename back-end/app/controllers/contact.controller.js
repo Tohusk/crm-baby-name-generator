@@ -83,10 +83,10 @@ const updateContact = async (req, res) => {
  */
 const getContact = async (req, res) => {
     try {
-        const contact = await Contacts.find({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+        const contact = await Contacts.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             customers: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.contactId) } },
         });
-        res.json(contact);
+        res.json(contact.customers[0]);
     } catch (err) {
         res.status(500).send({ message: err });
         return;

@@ -9,10 +9,15 @@ const User = db.user;
 const Role = db.role;
 
 const contactController = require("./contact.controller");
+const categoryController = require("./category.controller");
+const productController = require("./product.controller");
+const transactionController = require("./transaction.controller");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+
+// TODO: ensure that a new list is initialised and deleted when new users are created or removed
 
 /**
  * controller for a signup request
@@ -48,10 +53,16 @@ const signup = async (req, res) => {
     // try to save user
     try {
         user = await user.save();
+
+        // create new contact, product list for this user
         await contactController.initialiseContact(user._id);
+        await productController.initialiseProduct(user._id);
+        await categoryController.initialiseCategory(user._id);
+        await transactionController.initialiseTransaction(user._id);
+
         res.send({ message: "User was registered successfully!" });
     } catch (err) {
-        await User.findOneAndDelete({email: req.body.email});
+        await User.findOneAndDelete({ email: req.body.email });
         res.status(500).send({ message: err });
         return;
     }
@@ -126,8 +137,11 @@ const signin = async (req, res) => {
  */
 const deleteAccount = async (req, res) => {
     try {
-        // delete contact, products, transactions etc for user
+        // delete transactions etc for user
         await contactController.deleteAllContacts(req.body.userId);
+        await categoryController.deleteAllCategories(req.body.userId);
+        await productController.deleteAllProducts(req.body.userId);
+        await transactionController.deleteAllTransactions(req.body.userId);
 
         // delete user
         await User.findOneAndDelete({ _id: mongoose.Types.ObjectId(req.body.userId) });

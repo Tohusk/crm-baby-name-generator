@@ -7,22 +7,20 @@ import Input from "react-validation/build/input";
 import "../styles/AddItem.css";
 
 export default class AddTransaction extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      currentUser: AuthService.getCurrentUser()
-    };
-  }
+        this.state = {
+            currentUser: AuthService.getCurrentUser(),
+        };
+    }
 
-  render() {
-
-    return (
-      <div>
-      <div className="addItem-container">
-        {/*Page Name*/}
-        <div className="addItem-title">New Transaction</div>
-
+    render() {
+        return (
+            <div>
+                <div className="addItem-container">
+                    {/*Page Name*/}
+                    <div className="addItem-title">New Transaction</div>
         <div className="addTransaction-container"> 
           <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Select Customer</div>
