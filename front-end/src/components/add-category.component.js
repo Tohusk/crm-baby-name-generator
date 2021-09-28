@@ -27,6 +27,7 @@ export default class AddCategory extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.showAddForm = this.showAddForm.bind(this);
         this.hideForm = this.hideForm.bind(this);
+        
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             message: "",
@@ -142,7 +143,8 @@ export default class AddCategory extends Component {
                         Cancel
                     </button>
                     <button className="submitButton" disabled={this.state.loading}>
-                            Add
+                        {this.state.loading && <span className="spinner-border spinner-border-sm"></span>}
+                        Add
                     </button>
                 </div>
 

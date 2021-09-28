@@ -23,7 +23,7 @@ export default class Products extends Component {
                 <div className="overview-pagename">Products</div>
                 <div className="overview-button-box">
                     <Link
-                        to="/add-product"
+                        to="/addProduct"
                         className="overview-add-btn"
                         // style={{ textDecoration: "none" }}
                     >
