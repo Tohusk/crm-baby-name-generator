@@ -1291,7 +1291,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/deleteOne"
+                "url": "{{rootUrl}}/api/product/deleteOne"
               },
               "response": []
             },
@@ -1320,12 +1320,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/product/get?userId={{userId}}&productId={{productId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/product/get?userId={{userId}}&productId={{productId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "product",
