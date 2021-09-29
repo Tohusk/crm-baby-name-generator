@@ -1833,7 +1833,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/update"
+            "url": "http://localhost:8080/api/auth/update"
           },
           "response": []
         },
@@ -1882,7 +1882,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/signin"
+            "url": "http://localhost:8080/api/auth/signin"
           },
           "response": []
         },
@@ -1918,7 +1918,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/deleteAccount"
+            "url": "http://localhost:8080/api/auth/deleteAccount"
           },
           "response": []
         },
@@ -1954,7 +1954,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/signin"
+            "url": "http://localhost:8080/api/auth/signin"
           },
           "response": []
         },
