@@ -5,9 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: CD to back-end
-      run: cd back-end/
-    - name: Install modules
-      run: npm install
     - name: Run ESLint
-      run: npx eslint .
+      run: cd back-end/ && npm install && npx eslint .
