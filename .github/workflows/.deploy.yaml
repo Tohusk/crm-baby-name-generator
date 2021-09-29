@@ -21,7 +21,7 @@ jobs:
         heroku_email: ${{secrets.HEROKU_API_KEY}}
       env:
         HD_APP_BASE: "back-end"
-        HD_MONGODB_CONNECTION: "mongodb+srv://CRMApplication:bUglbophQCd5DZH0@cluster0.eunfy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+        HD_MONGODB_CONNECTION: ${{secrets.MONGODB_CONNECTION_STRING}}
     - name: Release Web Client
       uses: akhileshns/heroku-deploy@v3.0.4
       with:
