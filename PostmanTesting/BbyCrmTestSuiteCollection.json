@@ -530,7 +530,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/contact/deleteOne"
+                "url": "http://localhost:8080/api/contact/deleteOne"
               },
               "response": []
             },
