@@ -364,7 +364,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/contact/new"
+                "url": "http://localhost:8080/api/contact/new"
               },
               "response": []
             },
@@ -414,10 +414,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{rootUrl}}/api/contact/getAll?userId={{userId}}",
+                  "raw": "http://localhost:8080/api/contact/getAll?userId={{userId}}",
+                  "protocol": "http",
                   "host": [
-                    "{{rootUrl}}"
+                    "localhost"
                   ],
+                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
@@ -451,7 +453,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/contact/update"
+                "url": "http://localhost:8080/api/contact/update"
               },
               "response": []
             },
