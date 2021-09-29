@@ -1918,7 +1918,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/deleteAccount"
+            "url": "{{rootUrl}}/api/auth/deleteAccount"
           },
           "response": []
         },
