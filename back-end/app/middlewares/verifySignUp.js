@@ -33,7 +33,7 @@ const checkRolesExisted = (req, res, next) => {
         for (const role of req.body.roles) {
             if (!ROLES.includes(role)) {
                 res.status(400).send({
-                    message: `Failed! Role ${req.body.roles[i]} does not exist!`,
+                    message: `Failed! Role ${role} does not exist!`,
                 });
                 return;
             }
