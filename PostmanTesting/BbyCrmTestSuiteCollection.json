@@ -1121,7 +1121,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             },
@@ -1176,12 +1176,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/product/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/product/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "product",
