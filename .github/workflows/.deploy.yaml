@@ -1,0 +1,33 @@
+name: Push to heroku
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main      
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Release API
+      uses: akhileshns/heroku-deploy@v3.0.4
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "bbycrm-api"
+        heroku_email: ${{secrets.HEROKU_API_KEY}}
+      env:
+        HD_APP_BASE: "back-end"
+        HD_MONGODB_CONNECTION: "mongodb+srv://CRMApplication:bUglbophQCd5DZH0@cluster0.eunfy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    - name: Release Web Client
+      uses: akhileshns/heroku-deploy@v3.0.4
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "bbycrm"
+        heroku_email: ${{secrets.HEROKU_API_KEY}}
+      env:
+        HD_APP_BASE: "front-end"
+        HD_REACT_APP_API_URL: "https://bbycrm-api.herokuapp.com"
