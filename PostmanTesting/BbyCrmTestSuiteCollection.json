@@ -1833,7 +1833,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/update"
+            "url": "{{rootUrl}}/api/auth/update"
           },
           "response": []
         },
