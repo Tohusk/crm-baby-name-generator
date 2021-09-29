@@ -341,7 +341,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/new"
+                "url": "{{rootUrl}}/api/contact/new"
               },
               "response": []
             },
@@ -364,7 +364,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/new"
+                "url": "{{rootUrl}}/api/contact/new"
               },
               "response": []
             },
@@ -414,12 +414,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/contact/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/contact/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
@@ -453,7 +451,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/update"
+                "url": "{{rootUrl}}/api/contact/update"
               },
               "response": []
             },
@@ -487,12 +485,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
@@ -530,7 +526,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/deleteOne"
+                "url": "{{rootUrl}}/api/contact/deleteOne"
               },
               "response": []
             },
@@ -560,12 +556,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
