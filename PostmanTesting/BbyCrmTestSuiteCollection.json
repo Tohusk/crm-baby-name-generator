@@ -1215,7 +1215,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/product/update"
+                "url": "http://localhost:8080/api/product/update"
               },
               "response": []
             },
