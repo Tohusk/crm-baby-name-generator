@@ -6,7 +6,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: CD to back-end
-      run: cd /back-end/
+      run: cd back-end/
     - name: Install modules
       run: npm install
     - name: Run ESLint
