@@ -655,7 +655,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/new"
+                "url": "{{rootUrl}}/api/contact/new"
               },
               "response": []
             }
