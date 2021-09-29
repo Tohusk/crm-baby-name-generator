@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "6bc6751d-21c5-4a39-af22-f94c003ca0ce",
-    "name": "BBY CRM Test Suite",
+    "name": "BbyCrmTestSuite",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
@@ -29,7 +29,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/auth/signup"
+                "url": "{{rootUrl}}/api/auth/signup"
               },
               "response": []
             },
@@ -74,7 +74,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/auth/signin"
+                "url": "{{rootUrl}}/api/auth/signin"
               },
               "response": []
             }
@@ -140,7 +140,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/auth/signup"
+                "url": "{{rootUrl}}/api/auth/signup"
               },
               "response": []
             },
@@ -176,7 +176,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/auth/signup"
+                "url": "{{rootUrl}}/api/auth/signup"
               },
               "response": []
             },
@@ -212,7 +212,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/auth/signup"
+                "url": "{{rootUrl}}/api/auth/signup"
               },
               "response": []
             },
@@ -248,7 +248,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/auth/signup"
+                "url": "{{rootUrl}}/api/auth/signup"
               },
               "response": []
             },
@@ -284,7 +284,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/auth/signin"
+                "url": "{{rootUrl}}/api/auth/signin"
               },
               "response": []
             }
@@ -341,7 +341,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/new"
+                "url": "{{rootUrl}}/api/contact/new"
               },
               "response": []
             },
@@ -364,7 +364,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/new"
+                "url": "{{rootUrl}}/api/contact/new"
               },
               "response": []
             },
@@ -414,12 +414,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/contact/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/contact/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
@@ -453,7 +451,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/update"
+                "url": "{{rootUrl}}/api/contact/update"
               },
               "response": []
             },
@@ -487,12 +485,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
@@ -530,7 +526,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/deleteOne"
+                "url": "{{rootUrl}}/api/contact/deleteOne"
               },
               "response": []
             },
@@ -560,12 +556,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
@@ -633,7 +627,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/new"
+                "url": "{{rootUrl}}/api/contact/new"
               },
               "response": []
             },
@@ -655,7 +649,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/contact/new"
+                "url": "{{rootUrl}}/api/contact/new"
               },
               "response": []
             }
@@ -713,7 +707,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/category/new"
+                "url": "{{rootUrl}}/api/category/new"
               },
               "response": []
             },
@@ -735,7 +729,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/category/new"
+                "url": "{{rootUrl}}/api/category/new"
               },
               "response": []
             },
@@ -781,12 +775,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/category/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/category/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "category",
@@ -820,7 +812,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/category/update"
+                "url": "{{rootUrl}}/api/category/update"
               },
               "response": []
             },
@@ -852,12 +844,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/category/get?userId={{userId}}&categoryId={{categoryId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/category/get?userId={{userId}}&categoryId={{categoryId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "category",
@@ -895,7 +885,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/category/deleteOne"
+                "url": "{{rootUrl}}/api/category/deleteOne"
               },
               "response": []
             },
@@ -924,12 +914,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/category/get?userId={{userId}}&categoryId={{categoryId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/category/get?userId={{userId}}&categoryId={{categoryId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "category",
@@ -997,7 +985,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/category/new"
+                "url": "{{rootUrl}}/api/category/new"
               },
               "response": []
             },
@@ -1031,7 +1019,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/category/new"
+                "url": "{{rootUrl}}/api/category/new"
               },
               "response": []
             }
@@ -1089,7 +1077,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             },
@@ -1111,7 +1099,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             },
@@ -1133,7 +1121,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             },
@@ -1188,12 +1176,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/product/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/product/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "product",
@@ -1227,7 +1213,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/update"
+                "url": "{{rootUrl}}/api/product/update"
               },
               "response": []
             },
@@ -1260,12 +1246,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/product/get?userId={{userId}}&productId={{productId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/product/get?userId={{userId}}&productId={{productId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "product",
@@ -1303,7 +1287,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/deleteOne"
+                "url": "{{rootUrl}}/api/product/deleteOne"
               },
               "response": []
             },
@@ -1332,12 +1316,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/product/get?userId={{userId}}&productId={{productId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/product/get?userId={{userId}}&productId={{productId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "product",
@@ -1405,7 +1387,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             },
@@ -1427,7 +1409,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             }
@@ -1485,7 +1467,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/new"
+                "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
             },
@@ -1507,7 +1489,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/new"
+                "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
             },
@@ -1553,12 +1535,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/transaction/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/transaction/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "transaction",
@@ -1592,7 +1572,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/update"
+                "url": "{{rootUrl}}/api/transaction/update"
               },
               "response": []
             },
@@ -1631,12 +1611,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "transaction",
@@ -1674,7 +1652,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/deleteOne"
+                "url": "{{rootUrl}}/api/transaction/deleteOne"
               },
               "response": []
             },
@@ -1703,12 +1681,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "transaction",
@@ -1776,7 +1752,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/new"
+                "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
             }
@@ -1845,7 +1821,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/update"
+            "url": "{{rootUrl}}/api/auth/update"
           },
           "response": []
         },
@@ -1894,7 +1870,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/signin"
+            "url": "{{rootUrl}}/api/auth/signin"
           },
           "response": []
         },
@@ -1930,7 +1906,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/deleteAccount"
+            "url": "{{rootUrl}}/api/auth/deleteAccount"
           },
           "response": []
         },
@@ -1966,7 +1942,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/signin"
+            "url": "{{rootUrl}}/api/auth/signin"
           },
           "response": []
         },
@@ -1995,12 +1971,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/api/contact/getAll?userId={{userId}}",
-              "protocol": "http",
+              "raw": "{{rootUrl}}/api/contact/getAll?userId={{userId}}",
               "host": [
-                "localhost"
+                "{{rootUrl}}"
               ],
-              "port": "8080",
               "path": [
                 "api",
                 "contact",
@@ -2041,12 +2015,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/api/category/getAll?userId={{userId}}",
-              "protocol": "http",
+              "raw": "{{rootUrl}}/api/category/getAll?userId={{userId}}",
               "host": [
-                "localhost"
+                "{{rootUrl}}"
               ],
-              "port": "8080",
               "path": [
                 "api",
                 "category",
@@ -2087,12 +2059,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/api/product/getAll?userId={{userId}}",
-              "protocol": "http",
+              "raw": "{{rootUrl}}/api/product/getAll?userId={{userId}}",
               "host": [
-                "localhost"
+                "{{rootUrl}}"
               ],
-              "port": "8080",
               "path": [
                 "api",
                 "product",
@@ -2133,12 +2103,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/api/transaction/getAll?userId={{userId}}",
-              "protocol": "http",
+              "raw": "{{rootUrl}}/api/transaction/getAll?userId={{userId}}",
               "host": [
-                "localhost"
+                "{{rootUrl}}"
               ],
-              "port": "8080",
               "path": [
                 "api",
                 "transaction",
