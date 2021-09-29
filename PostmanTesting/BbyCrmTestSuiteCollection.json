@@ -924,12 +924,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/category/get?userId={{userId}}&categoryId={{categoryId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/category/get?userId={{userId}}&categoryId={{categoryId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "category",
