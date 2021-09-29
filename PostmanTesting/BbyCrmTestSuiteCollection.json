@@ -1541,12 +1541,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/transaction/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/transaction/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "transaction",
@@ -1580,7 +1578,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/update"
+                "url": "{{rootUrl}}/api/transaction/update"
               },
               "response": []
             },
