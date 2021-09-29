@@ -31,3 +31,15 @@ jobs:
       env:
         HD_APP_BASE: "front-end"
         HD_REACT_APP_API_URL: "https://bbycrm-api.herokuapp.com"
+  run-tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install newman
+      uses: actions/setup-node@v1
+      with:
+          node-version: '14'
+      run: npm install -g newman
+    - name: Run Postman Tests
+      run: newman run PostmanTesting/BbyCrmTestSuite.postman_collection.json -e PostmanTesting/BbyCrmTestEnv.postman_environment.json
