@@ -895,7 +895,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/category/deleteOne"
+                "url": "{{rootUrl}}/api/category/deleteOne"
               },
               "response": []
             },
