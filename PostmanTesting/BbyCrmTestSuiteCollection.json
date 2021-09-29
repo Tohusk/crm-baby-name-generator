@@ -1393,7 +1393,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             },
@@ -1415,7 +1415,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             }
@@ -1473,7 +1473,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/new"
+                "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
             },
@@ -1495,7 +1495,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/new"
+                "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
             },
@@ -1541,12 +1541,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/transaction/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/transaction/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "transaction",
@@ -1580,7 +1578,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/update"
+                "url": "{{rootUrl}}/api/transaction/update"
               },
               "response": []
             },
@@ -1619,12 +1617,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "transaction",
