@@ -453,7 +453,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/contact/update"
+                "url": "http://localhost:8080/api/contact/update"
               },
               "response": []
             },
@@ -487,10 +487,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{rootUrl}}/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
+                  "raw": "http://localhost:8080/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
+                  "protocol": "http",
                   "host": [
-                    "{{rootUrl}}"
+                    "localhost"
                   ],
+                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
@@ -528,7 +530,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/contact/deleteOne"
+                "url": "http://localhost:8080/api/contact/deleteOne"
               },
               "response": []
             },
@@ -558,10 +560,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{rootUrl}}/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
+                  "raw": "http://localhost:8080/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
+                  "protocol": "http",
                   "host": [
-                    "{{rootUrl}}"
+                    "localhost"
                   ],
+                  "port": "8080",
                   "path": [
                     "api",
                     "contact",
