@@ -74,7 +74,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/auth/signin"
+                "url": "{{rootUrl}}/api/auth/signin"
               },
               "response": []
             }
