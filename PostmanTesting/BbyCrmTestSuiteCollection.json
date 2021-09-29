@@ -1320,10 +1320,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{rootUrl}}/api/product/get?userId={{userId}}&productId={{productId1}}",
+                  "raw": "http://localhost:8080/api/product/get?userId={{userId}}&productId={{productId1}}",
+                  "protocol": "http",
                   "host": [
-                    "{{rootUrl}}"
+                    "localhost"
                   ],
+                  "port": "8080",
                   "path": [
                     "api",
                     "product",
@@ -1391,7 +1393,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/product/new"
+                "url": "http://localhost:8080/api/product/new"
               },
               "response": []
             },
@@ -1413,7 +1415,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/product/new"
+                "url": "http://localhost:8080/api/product/new"
               },
               "response": []
             }
@@ -1471,7 +1473,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/transaction/new"
+                "url": "http://localhost:8080/api/transaction/new"
               },
               "response": []
             },
