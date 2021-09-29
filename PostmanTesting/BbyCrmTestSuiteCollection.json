@@ -1473,7 +1473,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/new"
+                "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
             },
