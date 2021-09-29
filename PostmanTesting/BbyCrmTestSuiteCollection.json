@@ -1954,7 +1954,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/signin"
+            "url": "{{rootUrl}}/api/auth/signin"
           },
           "response": []
         },
@@ -1983,12 +1983,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/api/contact/getAll?userId={{userId}}",
-              "protocol": "http",
+              "raw": "{{rootUrl}}/api/contact/getAll?userId={{userId}}",
               "host": [
-                "localhost"
+                "{{rootUrl}}"
               ],
-              "port": "8080",
               "path": [
                 "api",
                 "contact",
