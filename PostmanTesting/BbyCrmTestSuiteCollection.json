@@ -1099,7 +1099,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             },
@@ -1121,7 +1121,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/new"
+                "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
             },
@@ -1176,12 +1176,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/product/getAll?userId={{userId}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/product/getAll?userId={{userId}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "product",
@@ -1215,7 +1213,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/product/update"
+                "url": "{{rootUrl}}/api/product/update"
               },
               "response": []
             },
@@ -1248,12 +1246,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/product/get?userId={{userId}}&productId={{productId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/product/get?userId={{userId}}&productId={{productId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "product",
