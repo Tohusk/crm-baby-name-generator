@@ -1619,12 +1619,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "transaction",
@@ -1662,7 +1660,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/deleteOne"
+                "url": "{{rootUrl}}/api/transaction/deleteOne"
               },
               "response": []
             },
@@ -1691,12 +1689,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
-                  "protocol": "http",
+                  "raw": "{{rootUrl}}/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
                   "host": [
-                    "localhost"
+                    "{{rootUrl}}"
                   ],
-                  "port": "8080",
                   "path": [
                     "api",
                     "transaction",
@@ -1764,7 +1760,7 @@
                     }
                   }
                 },
-                "url": "http://localhost:8080/api/transaction/new"
+                "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
             }
@@ -1833,7 +1829,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/update"
+            "url": "{{rootUrl}}/api/auth/update"
           },
           "response": []
         },
@@ -1882,7 +1878,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/signin"
+            "url": "{{rootUrl}}/api/auth/signin"
           },
           "response": []
         },
@@ -1918,7 +1914,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/deleteAccount"
+            "url": "{{rootUrl}}/api/auth/deleteAccount"
           },
           "response": []
         },
@@ -1954,7 +1950,7 @@
                 }
               }
             },
-            "url": "http://localhost:8080/api/auth/signin"
+            "url": "{{rootUrl}}/api/auth/signin"
           },
           "response": []
         },
