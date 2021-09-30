@@ -117,6 +117,9 @@ export default class Register extends Component {
                     message: res.data.message,
                     successful: true,
                 });
+
+                this.props.history.push("/login");
+                window.location.reload();
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
