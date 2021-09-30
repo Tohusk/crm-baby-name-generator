@@ -11,12 +11,15 @@ export default class CategoryTableRow extends Component {
     async deleteOneCategory() {
         try {
             const res = await CategoryService.deleteCategory(this.props.currentUser.id, this.props.category._id);
+            // Refresh to refresh category table
+            //TODO: trigger a rerender of the table only instead of the entire page
             window.location.reload();
         } catch (err) {
             alert("Error deleting category");
         }
     }
 
+    // Colour background of table row with colour of category
     render() {
         let styles = {};
         const colour = this.props.category.colour;
