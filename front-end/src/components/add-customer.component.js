@@ -152,7 +152,6 @@ export default class AddCustomer extends Component {
                             name="email"
                             value={this.state.email}
                             onChange={this.onChangeEmail}
-                            
                         />
                     </div>
 
@@ -164,7 +163,6 @@ export default class AddCustomer extends Component {
                             name="description"
                             value={this.state.description}
                             onChange={this.onChangeDescription}
-                            
                         />
                     </div>
 

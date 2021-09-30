@@ -1,0 +1,20 @@
+name: Lint
+on: push
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: install front-end dependencies
+        run: npm install
+        working-directory: ./front-end
+      - name: front-end lint
+        run: npx eslint .
+        working-directory: ./front-end
+      - name: install back-end dependencies
+        run: npm install
+        working-directory: ./back-end
+      - name: back-end lint
+        run: npx eslint .
+        working-directory: ./back-end
