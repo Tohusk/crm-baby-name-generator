@@ -10,11 +10,11 @@ jobs:
         run: npm install
         working-directory: ./front-end
       - name: front-end lint
-        run: eslint .
+        run: npx eslint .
         working-directory: ./front-end
       - name: install back-end dependencies
         run: npm install
         working-directory: ./back-end
       - name: back-end lint
-        run: eslint .
+        run: npx eslint .
         working-directory: ./back-end
