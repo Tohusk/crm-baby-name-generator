@@ -19,13 +19,12 @@ export default class CustomerTableRow extends Component {
                     </Link> */}
                     <Link
                         to={{
-                            pathname: "/customer-profile/" ,
-                            state: { contactId: this.props.customer._id }
+                            pathname: "/customer-profile/",
+                            state: { contactId: this.props.customer._id },
                         }}
-                        >
+                    >
                         <button>View</button>
                     </Link>
-
 
                     {/* <Button size="sm" variant="danger">
                         Delete
