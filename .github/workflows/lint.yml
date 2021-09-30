@@ -1,9 +1,22 @@
-name: CI
+name: Lint
 on: push
 jobs:
-  build:
+  eslint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Run ESLint
-      run: eslint ./back-end
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "1.0.0"
+      - name: install front-end dependencies
+        run: npm install
+        working-directory: ./front-end
+      - name: front-end lint
+        run: eslint .
+        working-directory: ./front-end
+      - name: install back-end dependencies
+        run: npm install
+        working-directory: ./back-end
+      - name: back-end lint
+        run: eslint .
+        working-directory: ./back-end
