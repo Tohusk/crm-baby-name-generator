@@ -41,4 +41,4 @@ jobs:
           node-version: '14'
     - run: npm install -g newman
     - name: Run Postman Tests
-      run: newman run PostmanTesting/BbyCrmTestSuite.postman_collection.json -e PostmanTesting/BbyCrmTestEnv.postman_environment.json
+      run: newman run PostmanTesting/BbyCrmTestSuiteCollection.json -e PostmanTesting/BbyCrmTestEnv.postman_environment.json
