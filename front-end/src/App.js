@@ -69,8 +69,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
-                        <Route exact path="/api/testAllRoutes" component={TestingPage} />
-
+                        <Route exact path="/testing/testAllServices" component={TestingPage} />
                         <Route exact path={["/", "/landing"]}>
                             <Sidebar />
                             <Landing />

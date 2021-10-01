@@ -35,9 +35,11 @@ export default class TestingPage extends Component {
         };
     }
 
+    // Need tests for signup, signin, update, delete
     async testAuth() {
+        console.log("Testing Auth: ");
         try {
-            console.log("Signing up")
+            console.log("Signing up");
             const res = await AuthService.register(this.state.userName, this.state.userEmail, this.state.userCompanyName, this.state.userPassword);
             console.log(res.data.message);
         } catch (err) {
@@ -47,7 +49,7 @@ export default class TestingPage extends Component {
         }
 
         try {
-            console.log("Logging in")
+            console.log("Logging in");
             await AuthService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
@@ -59,9 +61,14 @@ export default class TestingPage extends Component {
 
             console.log(resMessage);
         }
+
+        console.log("update not yet implemented");
+        console.log("delete not yet implemented");
     }
 
+    // Need tests for new, update, get, getAll, delete
     async testCategory() {
+        console.log("Testing Category: ");
         try {
             console.log("Adding category")
             await AuthService.login(this.state.userEmail, this.state.userPassword);
@@ -106,9 +113,13 @@ export default class TestingPage extends Component {
             console.log(resMessage);
         }
 
+        console.log("get not implemented");
+        console.log("update not implemented");
     }
 
+    // Need tests for new, update, get, getAll, delete
     async testContact() {
+        console.log("Testing Contact: ");
         try {
             console.log("Adding contact")
             await AuthService.login(this.state.userEmail, this.state.userPassword);
@@ -155,10 +166,13 @@ export default class TestingPage extends Component {
             console.log(resMessage);
         }
 
-        //TODO: Need deleting category
+        console.log("update not implemented yet");
+        console.log("delete not implemented yet");
     }
 
+    // Need tests for new, update, get, getAll, delete
     async testProduct() {
+        console.log("Testing Product: ");
         try {
             console.log("Adding product")
             await AuthService.login(this.state.userEmail, this.state.userPassword);
@@ -167,20 +181,27 @@ export default class TestingPage extends Component {
                 loggedInUser: AuthService.getCurrentUser(),
             });
 
-            // const res = await ProductService.addNewCustomer(
-            //     this.state.contactName, 
-            //     this.state.contactEmail, 
-            //     this.state.contactPhoneNumber, 
-            //     this.state.contactCompanyName, 
-            //     this.state.contactDescription, 
-            //     this.state.loggedInUser.id
-            // );
-            // console.log(res.data.message);
+            const res = await ProductService.addNewCustomer(
+                this.state.contactName, 
+                this.state.contactEmail, 
+                this.state.contactPhoneNumber, 
+                this.state.contactCompanyName, 
+                this.state.contactDescription, 
+                this.state.loggedInUser.id
+            );
+            console.log(res.data.message);
 
 
         } catch (err) {
-
+            const resMessage =
+            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
         }
+
+        console.log("update not implemented yet");
+        console.log("get not implemented yet");
+        console.log("getAll not implemented yet");
+        console.log("delete not implemented yet");
     }
         
     render() {
