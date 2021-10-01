@@ -33,9 +33,9 @@ export default class TestingPage extends Component {
             contactDescription: "Not Michael Jackson's lover",
             contactId: "",
 
-            productName: "Not another chicken burger",
+            productName: "Chicken Burger",
             productPrice: "5",
-            productCategoryId: "",
+            productCategoryId: null,
         };
     }
 
@@ -189,7 +189,7 @@ export default class TestingPage extends Component {
                 this.state.productName, 
                 this.state.productPrice, 
                 this.state.productCategoryId, 
-                this.state.loggedInUser, 
+                this.state.loggedInUser.id, 
             );
             console.log(res.data.message);
 

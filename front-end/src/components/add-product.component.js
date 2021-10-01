@@ -33,7 +33,7 @@ export default class AddProduct extends Component {
             categories: [],
             name: "",
             price: "",
-            categoryId: "",
+            categoryId: null,
             message: "",
             loading: false,
         };
