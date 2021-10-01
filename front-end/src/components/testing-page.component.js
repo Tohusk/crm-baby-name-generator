@@ -32,6 +32,10 @@ export default class TestingPage extends Component {
             contactCompanyName: "Propane and Propane Accessories",
             contactDescription: "Not Michael Jackson's lover",
             contactId: "",
+
+            productName: "Not another chicken burger",
+            productPrice: "5",
+            productCategoryId: "",
         };
     }
 
@@ -181,13 +185,11 @@ export default class TestingPage extends Component {
                 loggedInUser: AuthService.getCurrentUser(),
             });
 
-            const res = await ProductService.addNewCustomer(
-                this.state.contactName, 
-                this.state.contactEmail, 
-                this.state.contactPhoneNumber, 
-                this.state.contactCompanyName, 
-                this.state.contactDescription, 
-                this.state.loggedInUser.id
+            const res = await ProductService.addNewProduct(
+                this.state.productName, 
+                this.state.productPrice, 
+                this.state.productCategoryId, 
+                this.state.loggedInUser, 
             );
             console.log(res.data.message);
 
