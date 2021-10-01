@@ -23,7 +23,7 @@ import EditCustomer from "./components/edit-customer.component";
 import Sidebar from "./components/sidebar.component";
 
 import Sales from "./components/sales-overview.component";
-
+import TestingPage from "./components/testing-page.component";
 import { withRouter } from "react-router";
 
 // import BoardModerator from "./components/board-moderator.component";
@@ -69,6 +69,8 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
+                        <Route exact path="/api/testAllRoutes" component={TestingPage} />
+
                         <Route exact path={["/", "/landing"]}>
                             <Sidebar />
                             <Landing />
