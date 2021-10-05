@@ -21,6 +21,7 @@ class CustomerProfile extends Component {
     //contactId is specified in customertablerow
     async componentDidMount() {
         try {
+            // contactId is specified in customer-table-row
             const res = await ContactService.getOneCustomer(
                 this.state.currentUser.id,
                 this.props.location.state.contactId

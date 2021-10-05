@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-// import Input from "react-validation/build/input";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -10,6 +9,7 @@ import "../styles/AddItem.css";
 import CategoryService from "../services/category.service";
 import ProductService from "../services/product.service";
 
+// If argument is empty, then return a div bar warning message
 const required = (value) => {
     if (!value) {
         return (
@@ -81,7 +81,6 @@ export default class AddProduct extends Component {
 
         if (this.checkBtn.context._errors.length === 0) {
             try {
-                // get id from category name
                 const res = await ProductService.addNewProduct(
                     this.state.name,
                     this.state.price,
@@ -113,7 +112,6 @@ export default class AddProduct extends Component {
             <div className="addItem-container">
                 <div className="addItem-title">Add Product</div>
                 {/* One form for submitting add product query */}
-
                 <Form
                     className="addProduct-form"
                     onSubmit={this.handleSubmit}
