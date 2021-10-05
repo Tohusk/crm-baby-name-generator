@@ -5,6 +5,8 @@ import Table from "react-bootstrap/Table";
 import CustomerTableRow from "./customer-table-row.component";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import ContactService from "../services/contact.service";
+
 
 // const showCustomers = (props) => (
 //     <tr>
@@ -36,23 +38,20 @@ export default class CustomerList extends Component {
         };
     }
 
-    componentDidMount() {
-        axios
-            .get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser.id)
-            .then((res) => {
-                this.setState({
-                    customers: res.data,
+    async componentDidMount() {
+        try {
+            const res = await ContactService.getAllCustomers(this.state.currentUser.id);
+            this.setState({
+                customers: res.data,
 
-                    // customer_id: res.data.customers._id,
-                    // customer_name: res.data.customers.name,
-                    // customer_email: res.data.customers.email,
-                });
-                console.log(res.data);
-                //console.log(res.data.customers);
-            })
-            .catch((error) => {
-                console.log(error);
+                // customer_id: res.data.customers._id,
+                // customer_name: res.data.customers.name,
+                // customer_email: res.data.customers.email,
             });
+        }
+        catch (err) {
+            alert(err);
+        }
     }
 
     // dataTable(){

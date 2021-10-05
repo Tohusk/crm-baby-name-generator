@@ -21,7 +21,7 @@ import EditCustomer from "./components/edit-customer.component";
 import Sidebar from "./components/sidebar.component";
 
 import Sales from "./components/sales-overview.component";
-
+import TestingPage from "./components/testing-page.component";
 import { Redirect, withRouter } from "react-router";
 
 
@@ -60,6 +60,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
+                        <Route exact path="/testing/testAllServices" component={TestingPage} />
                         <Route exact path="/">
                             <Redirect to="/login" />
                         </Route>
