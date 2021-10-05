@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router';
 
 export default class CustomerTableRow extends Component {
     constructor(props) {
@@ -20,7 +20,6 @@ export default class CustomerTableRow extends Component {
 
     render() {
         return (
-
             <tr onClick={this.handleClick}>
                 {this.state.redirect ? 
                 (
