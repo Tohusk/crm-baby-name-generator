@@ -7,6 +7,7 @@ import ContactService from "../services/contact.service";
 
 import "../styles/AddItem.css";
 
+// If argument is empty, then return a div bar warning message
 const required = (value) => {
     if (!value) {
         return (
@@ -59,6 +60,7 @@ export default class AddCustomer extends Component {
                     this.state.description,
                     this.state.currentUser.id
                 );
+                // Show success message
                 this.setState({
                     message: res.data.message,
                     loading: false,

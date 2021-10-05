@@ -18,8 +18,8 @@ class CustomerProfile extends Component {
     //we can check the id from currentUser from user models
     //contactId is specified in customertablerow
     async componentDidMount() {
-        const res = await ContactService.getOneCustomer(this.state.currentUser.id, this.props.location.state.contactId);
         try {
+            // contactId is specified in customer-table-row
             const res = await ContactService.getOneCustomer(
                 this.state.currentUser.id,
                 this.props.location.state.contactId

@@ -9,6 +9,7 @@ import CategoryService from "../services/category.service";
 import "../styles/AddItem.css";
 import CategoryList from "./category-list.component";
 
+// If argument is empty, then return a div bar warning message
 const required = (value) => {
     if (!value) {
         return (
@@ -84,7 +85,8 @@ export default class AddCategory extends Component {
                     message: res.data.message,
                     loading: false,
                 });
-
+                
+                // Refresh the category list (probs better way by rerendering individual component)
                 window.location.reload();
             } catch (err) {
                 const resMessage =
