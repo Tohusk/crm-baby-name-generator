@@ -146,7 +146,7 @@ class EditCustomer extends Component {
             <div className="addItem-container">
                 {/*Page Name*/}
                 <div className="addItem-title">Edit Customer Profile</div>
-
+                <button className="editCustomer-deleteContainer" onClick={this.handleDelete}><u>Delete Customer</u></button>
                 {/* Input values need to be filled automatically from customer details */}
                 <Form                    
                     className="addCustomer-form"
@@ -237,10 +237,6 @@ class EditCustomer extends Component {
                         }}
                     />
                 </Form>
-
-                <div className="editCustomer-deleteContainer">
-                    <button onClick={this.handleDelete}>Delete</button>
-                </div>
             </div>
         );
     }

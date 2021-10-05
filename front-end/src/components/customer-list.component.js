@@ -62,7 +62,7 @@ export default class CustomerList extends Component {
 
     displayTable() {
         return this.state.customers.map((currentcustomer, i) => {
-            return <CustomerTableRow customer={currentcustomer} key={i} />;
+            return <CustomerTableRow customer={currentcustomer} key={i} id={i+1}/>;
         });
     }
 
