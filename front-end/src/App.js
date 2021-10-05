@@ -23,6 +23,8 @@ import EditCustomer from "./components/edit-customer.component";
 import Sidebar from "./components/sidebar.component";
 
 import Sales from "./components/sales-overview.component";
+import TestingPage from "./components/testing-page.component";
+import { withRouter } from "react-router";
 
 // import BoardModerator from "./components/board-moderator.component";
 // import BoardAdmin from "./components/board-admin.component";
@@ -38,8 +40,8 @@ class App extends Component {
             currentUser: undefined,
         };
     }
-  
-  componentDidMount() {
+
+    componentDidMount() {
         const user = AuthService.getCurrentUser();
 
         if (user) {
@@ -49,90 +51,90 @@ class App extends Component {
                 showAdminBoard: user.roles.includes("ROLE_ADMIN"),
             });
         }
-  }
+    }
 
-  logOut() {
-    AuthService.logout();
-    this.setState({
-      showModeratorBoard: false,
-      showAdminBoard: false,
-      currentUser: undefined,
-    });
-  }
+    logOut() {
+        AuthService.logout();
+        this.setState({
+            showModeratorBoard: false,
+            showAdminBoard: false,
+            currentUser: undefined,
+        });
+    }
 
-  render() {
-    return (
-      <div>
-        
-        <div className="container mt-3">
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path={["/", "/landing"]}>
-              <Sidebar/>
-              <Landing/>
-            </Route>
-            <Route exact path="/profile">
-              <Sidebar/>
-              <Profile/>
-            </Route>
-            <Route exact path="/user">
-              <Sidebar/>
-              <BoardUser/>
-            </Route>
-            <Route exact path="/home">
-              <Sidebar/>
-              <Home/>
-            </Route>
-            <Route exact path="/customer-profile">
-              <Sidebar/>
-              <CustomerProfile/>
-            </Route>
-            <Route exact path="/addCustomer">
-              <Sidebar/>
-              <AddCustomer/>
-            </Route>
-            <Route exact path="/addProduct">
-              <Sidebar/>
-              <AddProduct/>
-            </Route>
-            <Route exact path="/addTransaction">
-              <Sidebar/>
-              <AddTransaction/>
-            </Route>
-            <Route exact path="/addCategory">
-              <Sidebar/>
-              <AddCategory/>
-            </Route>
-            <Route exact path="/editCustomer">
-              <Sidebar/>
-              <EditCustomer/>
-            </Route>
-            <Route exact path="/customers">
-              <Sidebar/>
-              <Customers/>
-            </Route>
-            <Route exact path="/products">
-              <Sidebar/>
-              <Products/>
-            </Route>
-            <Route exact path="/sales">
-              <Sidebar/>
-              <Sales/>
-            </Route>
-            <Route exact path="/customer-profile">
-              <Sidebar/>
-              <CustomerProfile/>
-            </Route>
-            {/* <Route path="/mod" component={BoardModerator} /> */}
-            {/* <Route path="/admin" component={BoardAdmin} /> */}
-          </Switch>
-        </div>
+    render() {
+        return (
+            <div>
+                <div className="container mt-3">
+                    <Switch>
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/register" component={Register} />
+                        <Route exact path="/testing/testAllServices" component={TestingPage} />
+                        <Route exact path={["/", "/landing"]}>
+                            <Sidebar />
+                            <Landing />
+                        </Route>
+                        <Route exact path="/profile">
+                            <Sidebar />
+                            <Profile />
+                        </Route>
+                        <Route exact path="/user">
+                            <Sidebar />
+                            <BoardUser />
+                        </Route>
+                        <Route exact path="/home">
+                            <Sidebar />
+                            <Home />
+                        </Route>
+                        <Route exact path="/customer-profile">
+                            <Sidebar />
+                            <CustomerProfile />
+                        </Route>
+                        <Route exact path="/addCustomer">
+                            <Sidebar />
+                            <AddCustomer />
+                        </Route>
+                        <Route exact path="/addProduct">
+                            <Sidebar />
+                            <AddProduct />
+                        </Route>
+                        <Route exact path="/addTransaction">
+                            <Sidebar />
+                            <AddTransaction />
+                        </Route>
+                        <Route exact path="/addCategory">
+                            <Sidebar />
+                            <AddCategory />
+                        </Route>
+                        <Route exact path="/editCustomer">
+                            <Sidebar />
+                            <EditCustomer />
+                        </Route>
+                        <Route exact path="/customers">
+                            <Sidebar />
+                            <Customers />
+                        </Route>
+                        <Route exact path="/products">
+                            <Sidebar />
+                            <Products />
+                        </Route>
+                        <Route exact path="/sales">
+                            <Sidebar />
+                            <Sales />
+                        </Route>
+                        <Route exact path="/customer-profile">
+                            <Sidebar />
+                            <CustomerProfile />
+                        </Route>
+                        {/* <Route path="/mod" component={BoardModerator} /> */}
+                        {/* <Route path="/admin" component={BoardAdmin} /> */}
+                    </Switch>
+                </div>
 
-        <AuthVerify logOut={this.logOut}/>
-      </div>
-    );
-  }
+                <AuthVerify logOut={this.logOut} />
+            </div>
+        );
+    }
 }
 
-export default App;
+export default withRouter(App);

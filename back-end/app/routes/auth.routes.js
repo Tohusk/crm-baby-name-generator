@@ -6,7 +6,6 @@
 
 const { verifySignUp } = require("../middlewares");
 const controller = require("../controllers/auth.controller");
-
 /**
  * POST /api/auth/signup
  * POST /api/auth/update

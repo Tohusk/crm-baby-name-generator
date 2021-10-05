@@ -3,6 +3,7 @@ import AuthService from "../services/auth.service";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import CustomerList from "./customer-list.component";
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
@@ -47,6 +48,9 @@ export default class Customers extends Component {
                 <div className="overview-subheading">Customer List</div>
 
                 <div className="overview-flex-container">
+                    <CustomerList></CustomerList>
+                    {/* <div className="table-wrapper">
+                <div className="overview-flex-container">
                     <div className="overview-table-wrapper">
                         <Table bordered hover>
                             <thead>
@@ -75,7 +79,7 @@ export default class Customers extends Component {
                                 </tr>
                             </tbody>
                         </Table>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );
