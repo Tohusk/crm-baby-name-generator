@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import ContactService from "../services/contact.service";
 
@@ -18,7 +19,6 @@ class CustomerProfile extends Component {
     //we can check the id from currentUser from user models
     //contactId is specified in customertablerow
     async componentDidMount() {
-        const res = await ContactService.getOneCustomer(this.state.currentUser.id, this.props.location.state.contactId);
         try {
             const res = await ContactService.getOneCustomer(
                 this.state.currentUser.id,
@@ -70,7 +70,6 @@ class CustomerProfile extends Component {
                             )}
                         </u>
                     </div>
-
                     <div className="smallerText">EMAIL</div>
                     <div className="userText">
                         <u>
@@ -86,7 +85,25 @@ class CustomerProfile extends Component {
                             <div> no description</div>
                         )}
                     </div>
+                    <div className="smallerText">COMPANY NAME</div>
+                    <div className="userText">
+                        {this.state.currentContact.companyName ? (
+                            this.state.currentContact.companyName
+                        ) : (
+                            <div> no company name</div>
+                        )}
+                    </div>         
+                    <Link
+                        to={{
+                            pathname: "/editcustomer",
+                            state: { contact: this.state.currentContact },
+                        }}
+                    >
+                    Edit
+                    </Link>
+
                 </div>
+                {/* Need to implement logic */}
                 <div className="score-container">
                     <div className="smallerText">SATISFACTION SCORE</div>
                     <div className="userText">1.2</div>
@@ -99,9 +116,7 @@ class CustomerProfile extends Component {
 
                 <div className="pageTitleMedium">
                     Transaction History
-                    <span className="transaction-button">
-                        <u>+Add Transaction</u>
-                    </span>
+                    <a className="transaction-button" href="/addtransaction"> +Add Transaction </a>
                 </div>
                 <div className="tranhis-container">
                     <div className="tran-log">
