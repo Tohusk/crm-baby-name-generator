@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import ProductList from "./product-list.component";
+
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
@@ -46,6 +47,10 @@ export default class Products extends Component {
                     </div>
                 </div>
                 <div className="overview-subheading">Product List</div>
+
+                <div className="overview-flex-container">
+                    <ProductList></ProductList>
+                </div>
 
                 <div className="overview-flex-container">
                     <div className="overview-table-wrapper">

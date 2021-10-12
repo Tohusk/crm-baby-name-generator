@@ -11,6 +11,10 @@ class ProductService {
             userId,
         });
     }
+
+    async getAllProducts(userId) {
+        return axios.get(API_URL + "getAll?userId=" + userId);
+    }
 }
 
 export default new ProductService();
