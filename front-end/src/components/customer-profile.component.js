@@ -123,10 +123,10 @@ class CustomerProfile extends Component {
                         </div>
                         <div className="customerProfile-smallerText">PREFERRED CATEGORY</div>
                         <div className="category-containerProfile">
-                            <div className="category-containerTag" style={{ background: "#ff80ff" }}>
+                            <div className="category-containerTag" style={{ background: "#ffd873" }}>
                                 Fruits
                             </div>
-                            <div className="category-containerTag" style={{ background: "#8080ff" }}>
+                            <div className="category-containerTag" style={{ background: "#e0bdfb" }}>
                                 Veges
                             </div>
                         </div>

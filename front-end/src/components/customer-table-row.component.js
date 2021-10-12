@@ -34,10 +34,10 @@ export default class CustomerTableRow extends Component {
                 <td>{this.props.customer.satisfactionScore ? this.props.customer.satisfactionScore : "N/A"}</td>
                 <td>
                     <div className="category-containerOverview">
-                        <div className="category-containerTag" style={{ background: "#ff80ff" }}>
+                        <div className="category-containerTag" style={{ background: "#ffd873" }}>
                             Fruits
                         </div>
-                        <div className="category-containerTag" style={{ background: "#8080ff" }}>
+                        <div className="category-containerTag" style={{ background: "#e0bdfb" }}>
                             Veges
                         </div>
                     </div>
