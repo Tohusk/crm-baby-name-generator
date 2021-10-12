@@ -75,8 +75,8 @@ export default class CustomerList extends Component {
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            {/* <th>Satisfaction Score</th>
-                          <th>Preferred Categories</th> */}
+                            <th>Satisfaction Score</th>
+                            <th>Preferred Categories</th>
                         </tr>
                     </thead>
                     <tbody>

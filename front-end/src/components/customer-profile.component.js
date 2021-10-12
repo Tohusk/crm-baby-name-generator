@@ -6,6 +6,7 @@ import ContactService from "../services/contact.service";
 import DropdownButton from 'react-bootstrap/DropdownButton'
 
 import "../styles/Customer-Profile.css";
+import "../styles/Category.css";
 
 class CustomerProfile extends Component {
     constructor(props) {
@@ -100,12 +101,12 @@ class CustomerProfile extends Component {
                                 <div> no description</div>
                             )}
                         </div>
-                        <div className="customerProfile-smallerText">COMPANY NAME</div>
+                        <div className="customerProfile-smallerText">BUSINESS NAME</div>
                         <div className="customerProfile-userText">
                             {this.state.currentContact.companyName ? (
                                 this.state.currentContact.companyName
                             ) : (
-                                <div> no company name</div>
+                                <div> no business name</div>
                             )}
                         </div>         
 
@@ -115,9 +116,12 @@ class CustomerProfile extends Component {
 
                     <div className="customerProfile-score-container">
                         <div className="customerProfile-smallerText">SATISFACTION SCORE</div>
-                        <div className="customerProfile-userText">1.2</div>
+                        <div className="customerProfile-userText">{this.state.currentContact.satisfactionScore ? this.state.currentContact.satisfactionScore : <div>N/A</div>}</div>
                         <div className="customerProfile-smallerText">PREFERRED CATEGORY</div>
-                        <div className="customerProfile-userText">Fruits</div>
+                        <div className="category-containerProfile">
+                            <div className="category-containerTag" style={{background: '#ff80ff'}}>Fruits</div>
+                            <div className="category-containerTag" style={{background: '#8080ff'}}>Veges</div>
+                        </div>
                     </div>
                 </div>
                 

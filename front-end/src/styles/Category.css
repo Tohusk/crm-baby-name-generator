@@ -1,0 +1,19 @@
+.category-containerProfile {
+    border: none;
+    padding: 10px;
+    display: flex;
+}
+
+.category-containerOverview {
+    border: none;
+    display: flex;
+}
+
+.category-containerTag {
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
