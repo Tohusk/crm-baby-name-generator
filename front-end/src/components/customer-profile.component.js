@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import ContactService from "../services/contact.service";
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 import "../styles/Customer-Profile.css";
 import "../styles/Category.css";
@@ -41,7 +41,7 @@ class CustomerProfile extends Component {
         return (
             <div>
                 <div className="customerProfile-smallText">
-                    <a className="customerProfile-backButton"href="/customers">                    
+                    <a className="customerProfile-backButton" href="/customers">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -50,12 +50,12 @@ class CustomerProfile extends Component {
                             className="bi bi-arrow-left-short"
                             viewBox="0 0 16 16"
                         >
-                        <path
-                            fillRule="evenodd"
-                            d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
-                        />
-                        </svg> 
-                        Back 
+                            <path
+                                fillRule="evenodd"
+                                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+                            />
+                        </svg>
+                        Back
                     </a>
                 </div>
                 {/*Page Name*/}
@@ -63,10 +63,7 @@ class CustomerProfile extends Component {
 
                 <div className="customerProfile-topContainer">
                     <div className="customerProfile-profile-container">
-                        <DropdownButton 
-                            id="dropdown-basic-button"
-                            className="customerProfile-dropdown"
-                            variant="">
+                        <DropdownButton id="dropdown-basic-button" className="customerProfile-dropdown" variant="">
                             <Link
                                 className="customerProfile-dropdown-link"
                                 to={{
@@ -74,7 +71,7 @@ class CustomerProfile extends Component {
                                     state: { contact: this.state.currentContact },
                                 }}
                             >
-                            Edit
+                                Edit
                             </Link>
                         </DropdownButton>
                         <div className="customerProfile-smallerText">NAME</div>
@@ -90,7 +87,11 @@ class CustomerProfile extends Component {
                         <div className="customerProfile-smallerText">EMAIL</div>
                         <div className="customerProfile-userText">
                             <u>
-                                {this.state.currentContact.email ? this.state.currentContact.email : <div> no email</div>}
+                                {this.state.currentContact.email ? (
+                                    this.state.currentContact.email
+                                ) : (
+                                    <div> no email</div>
+                                )}
                             </u>
                         </div>
                         <div className="customerProfile-smallerText">DESCRIPTION</div>
@@ -108,27 +109,37 @@ class CustomerProfile extends Component {
                             ) : (
                                 <div> no business name</div>
                             )}
-                        </div>         
-
-
-
+                        </div>
                     </div>
 
                     <div className="customerProfile-score-container">
                         <div className="customerProfile-smallerText">SATISFACTION SCORE</div>
-                        <div className="customerProfile-userText">{this.state.currentContact.satisfactionScore ? this.state.currentContact.satisfactionScore : <div>N/A</div>}</div>
+                        <div className="customerProfile-userText">
+                            {this.state.currentContact.satisfactionScore ? (
+                                this.state.currentContact.satisfactionScore
+                            ) : (
+                                <div>N/A</div>
+                            )}
+                        </div>
                         <div className="customerProfile-smallerText">PREFERRED CATEGORY</div>
                         <div className="category-containerProfile">
-                            <div className="category-containerTag" style={{background: '#ff80ff'}}>Fruits</div>
-                            <div className="category-containerTag" style={{background: '#8080ff'}}>Veges</div>
+                            <div className="category-containerTag" style={{ background: "#ff80ff" }}>
+                                Fruits
+                            </div>
+                            <div className="category-containerTag" style={{ background: "#8080ff" }}>
+                                Veges
+                            </div>
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Need to implement logic */}
                 <div className="customerProfile-pageTitleMedium">
                     Transaction History
-                    <a className="customerProfile-transaction-button" href="/addtransaction"> +Add Transaction </a>
+                    <a className="customerProfile-transaction-button" href="/addtransaction">
+                        {" "}
+                        +Add Transaction{" "}
+                    </a>
                 </div>
                 <div className="customerProfile-tranhis-container">
                     <div className="customerProfile-tran-log">
