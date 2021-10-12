@@ -1,5 +1,7 @@
 import React from 'react';
+import Form from "react-validation/build/form";
 import "../styles/AutoCompleteText.css";
+import "../styles/AddItem.css";
 
 export default class AutoCompleteText extends React.Component {
     constructor(props) {
@@ -13,6 +15,7 @@ export default class AutoCompleteText extends React.Component {
 
     //filtering for matching items when typed into input
     onTextChanged = (e) => {
+        
         const { items } = this.props;
         const value = e.target.value;
         let suggestions = [];
@@ -44,12 +47,32 @@ export default class AutoCompleteText extends React.Component {
         }));
     }
 
+    onTrigger = (e) => {
+        console.log(this.state.text);
+        this.props.parentCallback(this.state.text);
+        // e.preventDefault();
+    }
+
     render () {
         const {text} = this.state;
+
         return (
+            <div>
             <div className="AutoCompleteText">
-                <input value={text} onChange={this.onTextChanged} type="text" />
-                {this.renderSuggestions()}
+                {/* <form onSubmit={this.onTrigger}> */}
+                    <input 
+                        value={text}
+                        onFocus={this.value=''} 
+                        onChange={this.onTextChanged} 
+                        type="text" 
+                        name="myname"
+                        placeholder="Enter name..."/>
+                    {this.renderSuggestions()}
+                    
+                {/* </form> */}
+            </div>
+            <br />
+            <button className="addTransaction-add-button" onClick={this.onTrigger}>Select</button>
             </div>
         )
     }
