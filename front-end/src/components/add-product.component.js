@@ -8,6 +8,7 @@ import CheckButton from "react-validation/build/button";
 import "../styles/AddItem.css";
 import CategoryService from "../services/category.service";
 import ProductService from "../services/product.service";
+import { Redirect } from "react-router";
 
 // If argument is empty, then return a div bar warning message
 const required = (value) => {
@@ -65,7 +66,8 @@ export default class AddProduct extends Component {
                 categories: res.data,
             });
         } catch (err) {
-            alert(err);
+            //do not alert for user experience
+            //alert(err);
         }
     }
 
@@ -108,6 +110,13 @@ export default class AddProduct extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div className="addItem-container">
                 <div className="addItem-title">Add Product</div>
