@@ -32,7 +32,7 @@ export default class ProductList extends Component {
 
     displayTable() {
         return this.state.products.map((currentProduct, i) => {
-            return <ProductTableRow customer={currentProduct} key={i} id={i+1}/>;
+            return <ProductTableRow product={currentProduct} key={i} id={i+1}/>;
         });
     }
 
@@ -44,7 +44,8 @@ export default class ProductList extends Component {
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Email</th>
+                            <th>Price</th>
+                            <th>Category</th>
                             {/* <th>Satisfaction Score</th>
                           <th>Preferred Categories</th> */}
                         </tr>

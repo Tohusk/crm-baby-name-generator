@@ -8,6 +8,10 @@ class CategoryService {
         return axios.get(API_URL + "getAll?userId=" + userId);
     }
 
+    async getOneCategory(userId, categoryId) {
+        return axios.get(API_URL + "get?userId=" + userId + "&categoryId=" + categoryId);
+    }
+
     async addNewCategory(name, colour, userId) {
         return axios.post(API_URL + "new", {
             userId,

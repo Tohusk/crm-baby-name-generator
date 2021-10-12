@@ -1,37 +1,37 @@
 import React, { Component } from "react";
+import AuthService from "../services/auth.service";
 import { Redirect } from 'react-router';
+import CategoryService from "../services/category.service";
 
 export default class ProductTableRow extends Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
         
         this.state = {
-            redirect: false,
+            currentUser: AuthService.getCurrentUser(),
+            category: "",
         };
     }
 
-    handleClick(e) {
-        this.setState({
-            redirect: true,
-        });
+    async componentDidMount() {
+        try {
+            const res = await CategoryService.getOneCategory(this.state.currentUser.id, this.props.product.categoryId);
+            this.setState({
+                category: res.data,
+            }); 
+        } catch (err) {
+            alert(err)
+        }
+
     }
 
     render() {
         return (
-            <tr onClick={this.handleClick}>
-                {this.state.redirect ? 
-                (
-                <Redirect to={{
-                    pathname: "/customer-profile",
-                    state: { contactId: this.props.customer._id },
-                }}/>
-                ) 
-                : null
-                }
+            <tr>                
                 <td>{this.props.id}</td>
-                <td>{this.props.customer.name}</td>
-                <td>{this.props.customer.email}</td>
+                <td>{this.props.product.name}</td>
+                <td>{this.props.product.price}</td>
+                <td>{this.state.category.name}</td>
                 {/* <td>{this.props.obj.score}</td> */}
                 {/* <td>{this.props.obj.categories}</td> */}
             </tr>
