@@ -77,51 +77,6 @@
                 "url": "{{rootUrl}}/api/auth/signin"
               },
               "response": []
-            },
-            {
-              "name": "Sign in Copy",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "1d49972e-532e-48fa-932a-016a1e572dfe",
-                    "exec": [
-                      "const response = pm.response.json();\r",
-                      "\r",
-                      "pm.test(\"User Found and Logged In\", () => {\r",
-                      "    pm.expect(response).to.be.an('object');\r",
-                      "});\r",
-                      "\r",
-                      "pm.environment.set(\"userId\", response.id);\r",
-                      "\r",
-                      "pm.test(\"Correct user info registered in database\", () => {\r",
-                      "    pm.expect(response.name).to.eql(pm.environment.get(\"userName\"));\r",
-                      "    pm.expect(response.businessName).to.eql(pm.environment.get(\"userBusinessName\"));\r",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "id": "8c0475e6-6f79-4500-bb25-dd4b343df710",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"email\": \"{{userEmail}}\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{rootUrl}}/api/auth/signin"
-              },
-              "response": []
             }
           ],
           "id": "bc4f52e6-3f56-4ec2-ac90-bc4a4b0155e7",
