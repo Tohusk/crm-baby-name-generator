@@ -49,8 +49,6 @@ export default class ProductList extends Component {
                             <th>Name</th>
                             <th>Price</th>
                             <th>Category</th>
-                            {/* <th>Satisfaction Score</th>
-                          <th>Preferred Categories</th> */}
                         </tr>
                     </thead>
                     <tbody>

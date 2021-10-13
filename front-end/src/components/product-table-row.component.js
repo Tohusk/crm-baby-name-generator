@@ -48,7 +48,13 @@ export default class ProductTableRow extends Component {
                 <td>{this.props.id}</td>
                 <td>{this.props.product.name}</td>
                 <td>{this.props.product.price}</td>
-                <td>{this.state.category.name}</td>
+                <td>
+                    <div className="category-containerTable">
+                        <div className="category-containerTag" style={{ background: this.state.category.colour }}>
+                            {this.state.category.name}
+                        </div>
+                    </div>
+                </td>
                 <td>
                     <button className="addCategory-delete" onClick={this.deleteOneProduct}>
                         <svg
@@ -63,8 +69,6 @@ export default class ProductTableRow extends Component {
                         </svg>
                     </button>
                 </td>
-                {/* <td>{this.props.obj.score}</td> */}
-                {/* <td>{this.props.obj.categories}</td> */}
             </tr>
         );
     }

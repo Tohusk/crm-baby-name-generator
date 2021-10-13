@@ -8,6 +8,7 @@ import { Redirect } from "react-router";
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
+import CategoryOverview from "./category-overview.component";
 
 export default class Products extends Component {
     constructor(props) {
@@ -52,6 +53,27 @@ export default class Products extends Component {
                     </div>
                     <div className="overview-stats-card">
                         <div className="overview-card-heading">Products by Categories (chart)</div>
+                    </div>
+                </div>
+                <div className="overview-subheading">Categories</div>
+                <div className="category-flex-container">
+                    <CategoryOverview></CategoryOverview>
+                    {/*<div className="category-containerProductOverview">
+                        <div className="category-containerTag" style={{ background: "#ffd873" }}>
+                            Fruits
+                        </div>
+                        <div className="category-containerTag" style={{ background: "#e0bdfb" }}>
+                            Veges
+                        </div>
+                    </div>*/}
+                    <div className="overview-button-box">
+                        <Link
+                            to="/addCategory"
+                            className="overview-add-btn"
+                            // style={{ textDecoration: "none" }}
+                        >
+                            Edit Categories
+                        </Link>
                     </div>
                 </div>
                 <div className="overview-subheading">Product List</div>
