@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import ContactService from "../services/contact.service";
 
-
 // const showCustomers = (props) => (
 //     <tr>
 //         <td>{props.customer._id}</td>
@@ -48,8 +47,7 @@ export default class CustomerList extends Component {
                 // customer_name: res.data.customers.name,
                 // customer_email: res.data.customers.email,
             });
-        }
-        catch (err) {
+        } catch (err) {
             alert(err);
         }
     }
@@ -65,7 +63,7 @@ export default class CustomerList extends Component {
             return ;
         }
         return this.state.customers.map((currentcustomer, i) => {
-            return <CustomerTableRow customer={currentcustomer} key={i} id={i+1}/>;
+            return <CustomerTableRow customer={currentcustomer} key={i} id={i + 1} />;
         });
     }
 
@@ -81,8 +79,8 @@ export default class CustomerList extends Component {
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            {/* <th>Satisfaction Score</th>
-                          <th>Preferred Categories</th> */}
+                            <th>Satisfaction Score</th>
+                            <th>Preferred Categories</th>
                         </tr>
                     </thead>
                     <tbody>

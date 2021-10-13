@@ -98,7 +98,7 @@ class EditCustomer extends Component {
             }
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             this.setState({
                 loading: false,
                 message: resMessage,
@@ -159,9 +159,11 @@ class EditCustomer extends Component {
             <div className="addItem-container">
                 {/*Page Name*/}
                 <div className="addItem-title">Edit Customer Profile</div>
-                <button className="editCustomer-deleteContainer" onClick={this.handleDelete}><u>Delete Customer</u></button>
+                <button className="editCustomer-deleteContainer" onClick={this.handleDelete}>
+                    <u>Delete Customer</u>
+                </button>
                 {/* Input values need to be filled automatically from customer details */}
-                <Form                    
+                <Form
                     className="addCustomer-form"
                     onSubmit={this.handleSubmit}
                     ref={(c) => {
@@ -220,15 +222,15 @@ class EditCustomer extends Component {
                         />
                     </div>
                     <div className="addCustomer-submit-group">
-                    <Link
-                        className="addCustomer-cancelButton"
-                        to={{
-                            pathname: "/customer-profile",
-                            state: { contactId: this.state.currentContact._id },
-                        }}
-                    >
-                        Cancel
-                    </Link>
+                        <Link
+                            className="addCustomer-cancelButton"
+                            to={{
+                                pathname: "/customer-profile",
+                                state: { contactId: this.state.currentContact._id },
+                            }}
+                        >
+                            Cancel
+                        </Link>
                         <button className="submitButton" disabled={this.state.loading}>
                             {this.state.loading && <span className="spinner-border spinner-border-sm"></span>}
                             Update

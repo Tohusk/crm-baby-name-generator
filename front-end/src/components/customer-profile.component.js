@@ -7,6 +7,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Redirect } from "react-router";
 
 import "../styles/Customer-Profile.css";
+import "../styles/Category.css";
 
 class CustomerProfile extends Component {
     constructor(props) {
@@ -77,7 +78,7 @@ class CustomerProfile extends Component {
         return (
             <div>
                 <div className="customerProfile-smallText">
-                    <a className="customerProfile-backButton"href="/customers">                    
+                    <a className="customerProfile-backButton" href="/customers">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -86,12 +87,12 @@ class CustomerProfile extends Component {
                             className="bi bi-arrow-left-short"
                             viewBox="0 0 16 16"
                         >
-                        <path
-                            fillRule="evenodd"
-                            d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
-                        />
-                        </svg> 
-                        Back 
+                            <path
+                                fillRule="evenodd"
+                                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+                            />
+                        </svg>
+                        Back
                     </a>
                 </div>
                 {/*Page Name*/}
@@ -142,31 +143,44 @@ class CustomerProfile extends Component {
                                 <div> N/A </div>
                             )}
                         </div>
-                        <div className="customerProfile-smallerText">COMPANY NAME</div>
+                        <div className="customerProfile-smallerText">BUSINESS NAME</div>
                         <div className="customerProfile-userText">
                             {this.state.currentContact.companyName ? (
                                 this.state.currentContact.companyName
                             ) : (
                                 <div> N/A </div>
                             )}
-                        </div>         
-
-
-
+                        </div>
                     </div>
 
                     <div className="customerProfile-score-container">
                         <div className="customerProfile-smallerText">SATISFACTION SCORE</div>
-                        <div className="customerProfile-userText">1.2</div>
+                        <div className="customerProfile-userText">
+                            {this.state.currentContact.satisfactionScore ? (
+                                this.state.currentContact.satisfactionScore
+                            ) : (
+                                <div>N/A</div>
+                            )}
+                        </div>
                         <div className="customerProfile-smallerText">PREFERRED CATEGORY</div>
-                        <div className="customerProfile-userText">Fruits</div>
+                        <div className="category-containerProfile">
+                            <div className="category-containerTag" style={{ background: "#ffd873" }}>
+                                Fruits
+                            </div>
+                            <div className="category-containerTag" style={{ background: "#e0bdfb" }}>
+                                Veges
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+
                 {/* Need to implement logic */}
                 <div className="customerProfile-pageTitleMedium">
                     Transaction History
-                    <a className="customerProfile-transaction-button" href="/addtransaction"> +Add Transaction </a>
+                    <a className="customerProfile-transaction-button" href="/addtransaction">
+                        {" "}
+                        +Add Transaction{" "}
+                    </a>
                 </div>
                 <div className="customerProfile-tranhis-container">
                     <div className="customerProfile-tran-log">

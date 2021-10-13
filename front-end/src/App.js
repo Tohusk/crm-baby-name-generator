@@ -24,7 +24,6 @@ import Sales from "./components/sales-overview.component";
 import TestingPage from "./components/testing-page.component";
 import { Redirect, withRouter } from "react-router";
 
-
 class App extends Component {
     constructor(props) {
         super(props);

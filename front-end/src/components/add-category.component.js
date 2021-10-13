@@ -87,7 +87,7 @@ export default class AddCategory extends Component {
                     message: res.data.message,
                     loading: false,
                 });
-                
+
                 // Refresh the category list (probs better way by rerendering individual component)
                 window.location.reload();
             } catch (err) {
