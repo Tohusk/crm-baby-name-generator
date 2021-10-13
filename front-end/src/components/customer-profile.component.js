@@ -11,11 +11,40 @@ import "../styles/Customer-Profile.css";
 class CustomerProfile extends Component {
     constructor(props) {
         super(props);
+        this.handleDelete = this.handleDelete.bind(this);
+
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             currentContact: "",
         };
+    }
+
+    async handleDelete(e) {
+        e.preventDefault();
+
+        this.setState({
+            message: "",
+            loading: true,
+        });
+
+        try {
+            if (window.confirm("Are you sure you wish to delete this?")) {
+                const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
+                this.setState({
+                    message: res.data.message,
+                    loading: false,
+                });
+                this.props.history.push('/customers');
+            }
+        } catch (err) {
+            const resMessage =
+            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            this.setState({
+                loading: false,
+                message: resMessage,
+            });
+        }
     }
 
     //we can check the id from currentUser from user models
@@ -74,15 +103,20 @@ class CustomerProfile extends Component {
                             id="dropdown-basic-button"
                             className="customerProfile-dropdown"
                             variant="">
-                            <Link
-                                className="customerProfile-dropdown-link"
-                                to={{
-                                    pathname: "/editcustomer",
-                                    state: { contact: this.state.currentContact },
-                                }}
-                            >
-                            Edit
-                            </Link>
+                            <div className="customerProfile-link-container">
+                                <Link
+                                    className="customerProfile-dropdown-link"
+                                    to={{
+                                        pathname: "/editcustomer",
+                                        state: { contact: this.state.currentContact },
+                                    }}
+                                >
+                                Edit
+                                </Link>
+                            </div>
+                            <div className="customerProfile-deleteButton-container">
+                                <button className="customerProfile-deleteButton" onClick={this.handleDelete}>Delete</button>
+                            </div>
                         </DropdownButton>
                         <div className="customerProfile-smallerText">NAME</div>
                         <div className="customerProfile-userText">{this.state.currentContact.name}</div>

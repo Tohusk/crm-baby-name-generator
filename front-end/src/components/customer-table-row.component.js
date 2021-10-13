@@ -19,7 +19,7 @@ export default class CustomerTableRow extends Component {
 
     render() {
         return (
-            <tr onClick={this.handleClick}>
+            <tr className="overview-table-row" onClick={this.handleClick}>
                 {this.state.redirect ? 
                 (
                 <Redirect to={{
