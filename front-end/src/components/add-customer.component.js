@@ -4,6 +4,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import ContactService from "../services/contact.service";
+import { Redirect } from "react-router";
 
 import "../styles/AddItem.css";
 
@@ -111,6 +112,13 @@ export default class AddCustomer extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div className="addItem-container">
                 {/*Page Name*/}

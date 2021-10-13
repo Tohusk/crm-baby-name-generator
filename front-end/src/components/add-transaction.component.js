@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 
 import "../styles/AddItem.css";
+import { Redirect } from "react-router";
 
 export default class AddTransaction extends Component {
     constructor(props) {
@@ -13,6 +14,13 @@ export default class AddTransaction extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div>
                 <div className="addItem-container">

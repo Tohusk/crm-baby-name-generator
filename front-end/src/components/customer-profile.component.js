@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import ContactService from "../services/contact.service";
 import DropdownButton from 'react-bootstrap/DropdownButton'
+import { Redirect } from "react-router";
 
 import "../styles/Customer-Profile.css";
 
@@ -37,6 +38,13 @@ class CustomerProfile extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div>
                 <div className="customerProfile-smallText">
@@ -135,7 +143,8 @@ class CustomerProfile extends Component {
                     </div>
                 </div>
             </div>
-        );
+        )
+        
     }
 }
 export default withRouter(CustomerProfile);
