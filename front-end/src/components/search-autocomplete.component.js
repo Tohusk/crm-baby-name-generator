@@ -62,7 +62,7 @@ export default class AutoCompleteText extends React.Component {
                 {/* <form onSubmit={this.onTrigger}> */}
                     <input 
                         value={text}
-                        onFocus={this.value=''} 
+                        onFocus={this.value=""} 
                         onChange={this.onTextChanged} 
                         type="text" 
                         name="myname"

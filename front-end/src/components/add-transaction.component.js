@@ -23,7 +23,12 @@ export default class AddTransaction extends Component {
             showProduct: false,
             customer: {},
             products: [],
-            productsPurchased: [],
+            productsPurchased: [{
+              productId: '',
+              quantity: 1,
+              name: '',
+              price: 0,
+            }],
             rating: 0,
             total: 0,
             //custName: {},
@@ -98,6 +103,16 @@ export default class AddTransaction extends Component {
             products: [...prevState.products, allProducts[k]]
           }))
           
+          const item = {
+            productId: allProducts[k]['_id'],
+            quantity: 1,
+            name: allProducts[k]['name'],
+            price: allProducts[k]['price'],
+          }
+          this.setState(prevState => ({
+            productsPurchased: [...prevState.productsPurchased, item]
+          }))
+          
         }
       }
       console.log(this.state.products);
@@ -156,14 +171,14 @@ export default class AddTransaction extends Component {
           <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Product/s:</div>.
 
-            <AddTransProductForm selectedProducts={this.state.products}></AddTransProductForm>
-
+            {/* <AddTransProductForm selectedProducts={this.state.products}></AddTransProductForm> */}
+            <AddTransProductForm selectedProducts={this.state.products} customer={this.state.customer} userId={this.state.currentUser.id}></AddTransProductForm>
 
           </div>
           {/* <div className="addTransaction-sub-container"> */}
           {/* <div className="addTransaction-form"> */}
-          <Form>
-          <div className="addTransaction-subtitle">How satisfied was the customer?</div>
+          {/* <Form>
+          <div className="addTransaction-subtitle">How satisfied was the customer? (Optional)</div>
           <br />
             
             
@@ -240,12 +255,8 @@ export default class AddTransaction extends Component {
                   Done
                 </button>
               </div>
-            </Form>
+            </Form> */}
             
-            {this.state.products.map(({_id, name}) => {
-              <p key={_id}>{name}</p>
-            })}
-          {/* </div> */}
 
           {/* <div className="addTransaction-submit-group">
             <a className="addTransaction-cancelButton" href="/home">Cancel</a>

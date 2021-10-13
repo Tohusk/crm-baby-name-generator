@@ -23,7 +23,7 @@ export default class Sales extends Component {
                 <div className="overview-pagename">Sales</div>
                 <div className="overview-button-box">
                     <Link
-                        to="/add-sales"
+                        to="/addtransaction"
                         className="overview-add-btn"
                         // style={{ textDecoration: "none" }}
                     >

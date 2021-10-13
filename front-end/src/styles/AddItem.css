@@ -207,6 +207,10 @@
     align-items: center;
 }
 
+.addTrans-products-form{
+    border: none;
+}
+
 .editItem-delete-btn{
     text-decoration-line: underline;
     margin-left: 67%;

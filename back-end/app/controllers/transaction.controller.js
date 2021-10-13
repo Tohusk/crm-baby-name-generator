@@ -30,6 +30,7 @@ const newTransaction = async (req, res) => {
             contactId: mongoose.Types.ObjectId(req.body.contactId),
             productsPurchased: parsePurchaseList(req, res),
             transactionRating: req.body.transactionRating,
+            total: req.body.total,
         };
 
         // add a transaction to a user's transaction list
