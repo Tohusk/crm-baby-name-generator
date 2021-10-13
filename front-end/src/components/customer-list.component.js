@@ -61,6 +61,9 @@ export default class CustomerList extends Component {
     // }
 
     displayTable() {
+        if (this.state.customers.length === 0) {
+            return ;
+        }
         return this.state.customers.map((currentcustomer, i) => {
             return <CustomerTableRow customer={currentcustomer} key={i} id={i+1}/>;
         });
@@ -69,6 +72,9 @@ export default class CustomerList extends Component {
     render() {
         return (
             <div className="overview-table-wrapper">
+                {this.state.customers.length === 0 ?
+                <div className="overview-no-data-title">No Customers Found</div>
+                :
                 <Table bordered hover>
                     <thead>
                         <tr>
@@ -97,6 +103,7 @@ export default class CustomerList extends Component {
                       </tr> */}
                     </tbody>
                 </Table>
+                }
             </div>
         );
     }

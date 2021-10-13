@@ -92,3 +92,7 @@
 .overview-table-row {
     cursor: pointer;
 }
+
+.overview-no-data-title {
+    margin-left: 5%;
+}

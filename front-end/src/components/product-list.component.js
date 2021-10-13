@@ -39,6 +39,9 @@ export default class ProductList extends Component {
     render() {
         return (
             <div className="overview-table-wrapper">
+                {this.state.products.length === 0 ?
+                <div className="overview-no-data-title">No Products Found</div>
+                :
                 <Table bordered hover>
                     <thead>
                         <tr>
@@ -54,6 +57,7 @@ export default class ProductList extends Component {
                         {this.displayTable()}
                     </tbody>
                 </Table>
+                }
             </div>
         );
     }
