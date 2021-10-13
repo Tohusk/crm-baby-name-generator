@@ -11,6 +11,19 @@ class ProductService {
             userId,
         });
     }
+
+    async getAllProducts(userId) {
+        return axios.get(API_URL + "getAll?userId=" + userId);
+    }
+
+    async deleteProduct(userId, productId) {
+        return axios.delete(API_URL + "deleteOne", {
+            data: {
+                userId: userId,
+                productId: productId,
+            },
+        });
+    }
 }
 
 export default new ProductService();

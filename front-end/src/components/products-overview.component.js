@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import ProductList from "./product-list.component";
+import { Redirect } from "react-router";
+
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
@@ -17,6 +19,13 @@ export default class Products extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div>
                 {/*Page Name*/}
@@ -48,32 +57,7 @@ export default class Products extends Component {
                 <div className="overview-subheading">Product List</div>
 
                 <div className="overview-flex-container">
-                    <div className="overview-table-wrapper">
-                        <Table bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Category</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Apples (500g)</td>
-                                    <td>$5.00</td>
-                                    <td>Fruit</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Bananas (500g)</td>
-                                    <td>$4.50</td>
-                                    <td>Fruit</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </div>
+                    <ProductList></ProductList>
                 </div>
             </div>
         );

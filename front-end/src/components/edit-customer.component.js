@@ -6,6 +6,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import ContactService from "../services/contact.service";
+import { Redirect } from "react-router";
 
 import "../styles/EditCustomer.css";
 
@@ -31,18 +32,21 @@ class EditCustomer extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
 
-        this.state = {
-            currentUser: AuthService.getCurrentUser(),
-            currentContact: this.props.location.state.contact,
-            newName: this.props.location.state.contact.name,
-            newPhoneNumber: this.props.location.state.contact.phoneNumber,
-            newEmail: this.props.location.state.contact.email,
-            newDescription: this.props.location.state.contact.description,
-            newCompanyName: this.props.location.state.contact.companyName,
-
-            loading: false,
-            message: "",
-        };
+        if (AuthService.getCurrentUser()){
+            this.state = {
+                currentUser: AuthService.getCurrentUser(),
+                currentContact: this.props.location.state.contact,
+                newName: this.props.location.state.contact.name,
+                newPhoneNumber: this.props.location.state.contact.phoneNumber,
+                newEmail: this.props.location.state.contact.email,
+                newDescription: this.props.location.state.contact.description,
+                newCompanyName: this.props.location.state.contact.companyName,
+    
+                loading: false,
+                message: "",
+            };
+        }
+        
     }
 
     onChangeName(e) {
@@ -84,12 +88,14 @@ class EditCustomer extends Component {
         });
 
         try {
-            const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
-            this.setState({
-                message: res.data.message,
-                loading: false,
-            });
-            this.props.history.push("/customers");
+            if (window.confirm("Are you sure you wish to delete this?")) {
+                const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
+                this.setState({
+                    message: res.data.message,
+                    loading: false,
+                });
+                this.props.history.push('/customers');
+            }
         } catch (err) {
             const resMessage =
                 (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
@@ -142,6 +148,13 @@ class EditCustomer extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+            return(
+                <Redirect to={{ pathname: '/login' }} />
+            )
+        }
         return (
             <div className="addItem-container">
                 {/*Page Name*/}

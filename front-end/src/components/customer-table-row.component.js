@@ -19,15 +19,16 @@ export default class CustomerTableRow extends Component {
 
     render() {
         return (
-            <tr onClick={this.handleClick}>
-                {this.state.redirect ? (
-                    <Redirect
-                        to={{
-                            pathname: "/customer-profile",
-                            state: { contactId: this.props.customer._id },
-                        }}
-                    />
-                ) : null}
+            <tr className="overview-table-row" onClick={this.handleClick}>
+                {this.state.redirect ? 
+                (
+                <Redirect to={{
+                    pathname: "/customer-profile",
+                    state: { contactId: this.props.customer._id },
+                }}/>
+                ) 
+                : null
+                }
                 <td>{this.props.id}</td>
                 <td>{this.props.customer.name}</td>
                 <td>{this.props.customer.email}</td>

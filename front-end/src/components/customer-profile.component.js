@@ -3,7 +3,8 @@ import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import ContactService from "../services/contact.service";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import { Redirect } from "react-router";
 
 import "../styles/Customer-Profile.css";
 import "../styles/Category.css";
@@ -11,11 +12,40 @@ import "../styles/Category.css";
 class CustomerProfile extends Component {
     constructor(props) {
         super(props);
+        this.handleDelete = this.handleDelete.bind(this);
+
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             currentContact: "",
         };
+    }
+
+    async handleDelete(e) {
+        e.preventDefault();
+
+        this.setState({
+            message: "",
+            loading: true,
+        });
+
+        try {
+            if (window.confirm("Are you sure you wish to delete this?")) {
+                const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
+                this.setState({
+                    message: res.data.message,
+                    loading: false,
+                });
+                this.props.history.push('/customers');
+            }
+        } catch (err) {
+            const resMessage =
+            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            this.setState({
+                loading: false,
+                message: resMessage,
+            });
+        }
     }
 
     //we can check the id from currentUser from user models
@@ -38,6 +68,13 @@ class CustomerProfile extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div>
                 <div className="customerProfile-smallText">
@@ -63,16 +100,24 @@ class CustomerProfile extends Component {
 
                 <div className="customerProfile-topContainer">
                     <div className="customerProfile-profile-container">
-                        <DropdownButton id="dropdown-basic-button" className="customerProfile-dropdown" variant="">
-                            <Link
-                                className="customerProfile-dropdown-link"
-                                to={{
-                                    pathname: "/editcustomer",
-                                    state: { contact: this.state.currentContact },
-                                }}
-                            >
+                        <DropdownButton 
+                            id="dropdown-basic-button"
+                            className="customerProfile-dropdown"
+                            variant="">
+                            <div className="customerProfile-link-container">
+                                <Link
+                                    className="customerProfile-dropdown-link"
+                                    to={{
+                                        pathname: "/editcustomer",
+                                        state: { contact: this.state.currentContact },
+                                    }}
+                                >
                                 Edit
-                            </Link>
+                                </Link>
+                            </div>
+                            <div className="customerProfile-deleteButton-container">
+                                <button className="customerProfile-deleteButton" onClick={this.handleDelete}>Delete</button>
+                            </div>
                         </DropdownButton>
                         <div className="customerProfile-smallerText">NAME</div>
                         <div className="customerProfile-userText">{this.state.currentContact.name}</div>
@@ -150,7 +195,8 @@ class CustomerProfile extends Component {
                     </div>
                 </div>
             </div>
-        );
+        )
+        
     }
 }
 export default withRouter(CustomerProfile);
