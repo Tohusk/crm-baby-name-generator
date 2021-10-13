@@ -126,25 +126,21 @@ class CustomerProfile extends Component {
                             {this.state.currentContact.phoneNumber ? (
                                 this.state.currentContact.phoneNumber
                             ) : (
-                                <div> no phone number</div>
+                                <div> N/A </div>
                             )}
                         </div>
                         <div className="customerProfile-smallerText">EMAIL</div>
                         <div className="customerProfile-userText">
-                            <u>
-                                {this.state.currentContact.email ? (
-                                    this.state.currentContact.email
-                                ) : (
-                                    <div> no email</div>
-                                )}
-                            </u>
+                            
+                                {this.state.currentContact.email ? <u>{this.state.currentContact.email}</u> : <div> N/A </div>}
+                            
                         </div>
                         <div className="customerProfile-smallerText">DESCRIPTION</div>
                         <div className="customerProfile-userText">
                             {this.state.currentContact.description ? (
                                 this.state.currentContact.description
                             ) : (
-                                <div> no description</div>
+                                <div> N/A </div>
                             )}
                         </div>
                         <div className="customerProfile-smallerText">BUSINESS NAME</div>
@@ -152,7 +148,7 @@ class CustomerProfile extends Component {
                             {this.state.currentContact.companyName ? (
                                 this.state.currentContact.companyName
                             ) : (
-                                <div> no business name</div>
+                                <div> N/A </div>
                             )}
                         </div>
                     </div>

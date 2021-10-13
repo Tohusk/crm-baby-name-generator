@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+import { withRouter } from "react-router";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -21,7 +22,7 @@ const required = (value) => {
     }
 };
 
-export default class AddProduct extends Component {
+class AddProduct extends Component {
     constructor(props) {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
@@ -94,6 +95,7 @@ export default class AddProduct extends Component {
                     message: res.data.message,
                     loading: false,
                 });
+                this.props.history.push('/products');
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
@@ -204,3 +206,5 @@ export default class AddProduct extends Component {
         );
     }
 }
+
+export default withRouter(AddProduct);
