@@ -167,7 +167,7 @@ export default class AddProduct extends Component {
                     </div>
 
                     <div className="addProduct-submit-group">
-                        <a className="addProduct-cancelButton" href="/home">
+                        <a className="addProduct-cancelButton" href="/products">
                             Cancel
                         </a>
                         <button className="submitButton" disabled={this.state.loading}>
