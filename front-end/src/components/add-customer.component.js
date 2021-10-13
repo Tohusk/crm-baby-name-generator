@@ -183,7 +183,7 @@ export default class AddCustomer extends Component {
                             className="form-control"
                             name="companyName"
                             value={this.state.companyName}
-                            onChange={this.onChangecompanyName}
+                            onChange={this.onChangeCompanyName}
                         />
                     </div>
 
