@@ -84,12 +84,14 @@ class EditCustomer extends Component {
         });
 
         try {
-            const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
-            this.setState({
-                message: res.data.message,
-                loading: false,
-            });
-            this.props.history.push('/customers');
+            if (window.confirm("Are you sure you wish to delete this?")) {
+                const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
+                this.setState({
+                    message: res.data.message,
+                    loading: false,
+                });
+                this.props.history.push('/customers');
+            }
         } catch (err) {
             const resMessage =
             (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
