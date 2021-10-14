@@ -131,48 +131,46 @@ const deleteAllContacts = async (userId) => {
     await Contacts.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
-/**
- * Controller to get all transactions of a given contact
- */
-const getContactTransaction = async (req, res) => {
+const getContactStatistics = async (req, res) => {
     try {
-        const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
-            transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.contactId) } },
+        const transaction = await Transaction.findOne({
+            user: mongoose.Types.ObjectId(req.query.userId),
+            transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }
         });
+        // const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+        //     transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } },
+        // });
+        console.log(JSON.stringify(transaction));
 
-        const TRANSACTION_RATING_IDX = 2;
-        const n = transaction.transactions[TRANSACTION_RATING_IDX].length;
-        let sum = 0;
-        for (let i = 0; i < n; i++) {
-            sum += transaction.transactions[TRANSACTION_RATING_IDX][i];
-        }
-        const avg = sum / n;
-        res.json({"average score": avg});
+        const avgRating = await getContactAvgRating(transaction.transactions);
+
+        res.json(avgRating);
+
     } catch (err) {
         res.status(500).send({ message: err });
     }
 };
 
-const getContactStatistics = async (req, res) => {
-    try {
-        const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
-            transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } },
-        });
-        console.log(transaction.transactions);
-        const TRANSACTION_RATING_IDX = 2;
-        const n = transaction.transactions[TRANSACTION_RATING_IDX].length;
-        let sum = 0;
-        for (let i = 0; i < n; i++) {
-            sum += transaction.transactions[TRANSACTION_RATING_IDX][i];
-            console.log(sum);
-        }
-
-        const avg = sum/n;
-
-        res.json({"average score": avg});
-    } catch (err) {
-        res.status(500).send({ message: err });
+/**
+ * Auxiliary function to help statistics get average rating for a contact
+ */
+const getContactAvgRating = async (transactions) => {
+    let n = transactions.length;
+    let sum = 0;
+    for (let i = 0; i < n; i++) {
+        let currRating = transactions[i]["transactionRating"];
+        if (!isNaN(currRating))
+            sum += currRating;
+        else
+            n--;    // don't wanna count transactions without ratings in our average
     }
+
+    if (n === 0)
+        return {"average score": 0};
+
+    const avg = sum/n;
+
+    return {"average score": avg};
 };
 
 const calculateTopCategories = async (transactions, userId) => {
