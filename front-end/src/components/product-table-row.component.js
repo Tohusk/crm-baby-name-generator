@@ -19,10 +19,12 @@ export default class ProductTableRow extends Component {
 
     async deleteOneProduct() {
         try {
-            const res = await ProductService.deleteProduct(this.state.currentUser.id, this.props.product._id);
-            // Refresh to refresh category table
-            //TODO: trigger a rerender of the table only instead of the entire page
-            window.location.reload();
+            if (window.confirm("Are you sure you wish to delete this?")) {
+                const res = await ProductService.deleteProduct(this.state.currentUser.id, this.props.product._id);
+                // Refresh to refresh category table
+                //TODO: trigger a rerender of the table only instead of the entire page
+                window.location.reload();
+            }
         } catch (err) {
             alert("Error deleting product");
         }
@@ -46,7 +48,13 @@ export default class ProductTableRow extends Component {
                 <td>{this.props.id}</td>
                 <td>{this.props.product.name}</td>
                 <td>{this.props.product.price}</td>
-                <td>{this.state.category.name}</td>
+                <td>
+                    <div className="category-containerTable">
+                        <div className="category-containerTag" style={{ background: this.state.category.colour }}>
+                            {this.state.category.name}
+                        </div>
+                    </div>
+                </td>
                 <td>
                     <button className="addCategory-delete" onClick={this.deleteOneProduct}>
                         <svg
@@ -61,8 +69,6 @@ export default class ProductTableRow extends Component {
                         </svg>
                     </button>
                 </td>
-                {/* <td>{this.props.obj.score}</td> */}
-                {/* <td>{this.props.obj.categories}</td> */}
             </tr>
         );
     }

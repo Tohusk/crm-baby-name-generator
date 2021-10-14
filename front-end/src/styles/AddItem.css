@@ -150,6 +150,20 @@
 
 
 /* Add category */
+
+.addCategory-smallText{
+    font-size: 1em;
+    color: grey;
+    justify-content: space-around;
+    margin-top: 2em;
+}
+
+.addCategory-backButton {
+    text-decoration: none;
+    color: #747474;
+}
+
+
 .addCategory-list-container {
     margin-top: 3%;
 }

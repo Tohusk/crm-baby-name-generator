@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 import { Link } from "react-router-dom";
 import CustomerList from "./customer-list.component";
+import { Redirect } from "react-router";
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
@@ -16,6 +17,13 @@ export default class Customers extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div>
                 {/*Page Name*/}

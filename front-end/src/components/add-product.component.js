@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+import { withRouter } from "react-router";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -8,6 +9,7 @@ import CheckButton from "react-validation/build/button";
 import "../styles/AddItem.css";
 import CategoryService from "../services/category.service";
 import ProductService from "../services/product.service";
+import { Redirect } from "react-router";
 
 // If argument is empty, then return a div bar warning message
 const required = (value) => {
@@ -20,7 +22,7 @@ const required = (value) => {
     }
 };
 
-export default class AddProduct extends Component {
+class AddProduct extends Component {
     constructor(props) {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
@@ -65,7 +67,8 @@ export default class AddProduct extends Component {
                 categories: res.data,
             });
         } catch (err) {
-            alert(err);
+            //do not alert for user experience
+            //alert(err);
         }
     }
 
@@ -92,6 +95,7 @@ export default class AddProduct extends Component {
                     message: res.data.message,
                     loading: false,
                 });
+                this.props.history.push('/products');
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
@@ -108,6 +112,13 @@ export default class AddProduct extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div className="addItem-container">
                 <div className="addItem-title">Add Product</div>
@@ -167,7 +178,7 @@ export default class AddProduct extends Component {
                     </div>
 
                     <div className="addProduct-submit-group">
-                        <a className="addProduct-cancelButton" href="/home">
+                        <a className="addProduct-cancelButton" href="/products">
                             Cancel
                         </a>
                         <button className="submitButton" disabled={this.state.loading}>
@@ -195,3 +206,5 @@ export default class AddProduct extends Component {
         );
     }
 }
+
+export default withRouter(AddProduct);

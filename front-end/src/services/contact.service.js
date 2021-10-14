@@ -22,7 +22,7 @@ class ContactService {
             companyName,
             description,
             userId,
-            contactId
+            contactId,
         });
     }
 
@@ -36,7 +36,7 @@ class ContactService {
     }
 
     // contact routes to specify get, contact controller for get?userId
-    async getOneCustomer(userId, contactId){
+    async getOneCustomer(userId, contactId) {
         return axios.get(API_URL + "get?userId=" + userId + "&contactId=" + contactId);
     }
 

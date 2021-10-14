@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router';
+import { Redirect } from "react-router";
 
 export default class CustomerTableRow extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
-        
+
         this.state = {
             redirect: false,
         };
@@ -19,7 +19,7 @@ export default class CustomerTableRow extends Component {
 
     render() {
         return (
-            <tr onClick={this.handleClick}>
+            <tr className="overview-table-row" onClick={this.handleClick}>
                 {this.state.redirect ? 
                 (
                 <Redirect to={{
@@ -32,6 +32,17 @@ export default class CustomerTableRow extends Component {
                 <td>{this.props.id}</td>
                 <td>{this.props.customer.name}</td>
                 <td>{this.props.customer.email}</td>
+                <td>{this.props.customer.satisfactionScore ? this.props.customer.satisfactionScore : "N/A"}</td>
+                <td>
+                    <div className="category-containerTable">
+                        <div className="category-containerTag" style={{ background: "#ffd873" }}>
+                            Fruits
+                        </div>
+                        <div className="category-containerTag" style={{ background: "#e0bdfb" }}>
+                            Veges
+                        </div>
+                    </div>
+                </td>
                 {/* <td>{this.props.obj.score}</td> */}
                 {/* <td>{this.props.obj.categories}</td> */}
             </tr>

@@ -12,7 +12,6 @@ export default class TestingPage extends Component {
         this.testContact = this.testContact.bind(this);
         this.testProduct = this.testProduct.bind(this);
 
-
         this.state = {
             // Define testing data
             userName: "John Smith",
@@ -44,11 +43,16 @@ export default class TestingPage extends Component {
         console.log("Testing Auth: ");
         try {
             console.log("Signing up");
-            const res = await AuthService.register(this.state.userName, this.state.userEmail, this.state.userCompanyName, this.state.userPassword);
+            const res = await AuthService.register(
+                this.state.userName,
+                this.state.userEmail,
+                this.state.userCompanyName,
+                this.state.userPassword
+            );
             console.log(res.data.message);
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             console.log(resMessage);
         }
 
@@ -61,7 +65,7 @@ export default class TestingPage extends Component {
             });
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
 
             console.log(resMessage);
         }
@@ -74,7 +78,7 @@ export default class TestingPage extends Component {
     async testCategory() {
         console.log("Testing Category: ");
         try {
-            console.log("Adding category")
+            console.log("Adding category");
             await AuthService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
@@ -90,12 +94,12 @@ export default class TestingPage extends Component {
             console.log(res.data.message);
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             console.log(resMessage);
         }
 
         try {
-            console.log("Getting all categories")
+            console.log("Getting all categories");
             const res = await CategoryService.getAllCategories(this.state.loggedInUser.id);
             this.setState({
                 categoryId: res.data[0]._id,
@@ -103,17 +107,17 @@ export default class TestingPage extends Component {
             console.log(res.data);
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             console.log(resMessage);
         }
 
         try {
-            console.log("Deleting category")
+            console.log("Deleting category");
             const res = await CategoryService.deleteCategory(this.state.loggedInUser.id, this.state.categoryId);
             console.log(res.data.message);
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             console.log(resMessage);
         }
 
@@ -125,7 +129,7 @@ export default class TestingPage extends Component {
     async testContact() {
         console.log("Testing Contact: ");
         try {
-            console.log("Adding contact")
+            console.log("Adding contact");
             await AuthService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
@@ -133,22 +137,22 @@ export default class TestingPage extends Component {
             });
 
             const res = await ContactService.addNewCustomer(
-                this.state.contactName, 
-                this.state.contactEmail, 
-                this.state.contactPhoneNumber, 
-                this.state.contactCompanyName, 
-                this.state.contactDescription, 
+                this.state.contactName,
+                this.state.contactEmail,
+                this.state.contactPhoneNumber,
+                this.state.contactCompanyName,
+                this.state.contactDescription,
                 this.state.loggedInUser.id
             );
             console.log(res.data.message);
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             console.log(resMessage);
         }
 
         try {
-            console.log("Getting all contacts")
+            console.log("Getting all contacts");
             const res = await ContactService.getAllCustomers(this.state.loggedInUser.id);
             this.setState({
                 contactId: res.data[0]._id,
@@ -156,17 +160,17 @@ export default class TestingPage extends Component {
             console.log(res.data);
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             console.log(resMessage);
         }
 
         try {
-            console.log("Getting single contact")
+            console.log("Getting single contact");
             const res = await ContactService.getOneCustomer(this.state.loggedInUser.id, this.state.contactId);
             console.log(res.data);
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             console.log(resMessage);
         }
 
@@ -178,7 +182,7 @@ export default class TestingPage extends Component {
     async testProduct() {
         console.log("Testing Product: ");
         try {
-            console.log("Adding product")
+            console.log("Adding product");
             await AuthService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
@@ -186,17 +190,15 @@ export default class TestingPage extends Component {
             });
 
             const res = await ProductService.addNewProduct(
-                this.state.productName, 
-                this.state.productPrice, 
-                this.state.productCategoryId, 
-                this.state.loggedInUser.id, 
+                this.state.productName,
+                this.state.productPrice,
+                this.state.productCategoryId,
+                this.state.loggedInUser.id
             );
             console.log(res.data.message);
-
-
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             console.log(resMessage);
         }
 
@@ -205,20 +207,20 @@ export default class TestingPage extends Component {
         console.log("getAll not implemented yet");
         console.log("delete not implemented yet");
     }
-        
+
     render() {
         return (
             <div>
-            <h1>Auth Service</h1>
-            <button onClick={this.testAuth}>Test</button>
-            <h1>Category Service</h1>
-            <button onClick={this.testCategory}>Test</button>
-            <h1>Contact Service</h1>
-            <button onClick={this.testContact}>Test</button>
-            <h1>Product Service</h1>
-            <button onClick={this.testProduct}>Test</button>
-            <h1>Transaction Service</h1>
-            <div>Not implemented yet</div>
+                <h1>Auth Service</h1>
+                <button onClick={this.testAuth}>Test</button>
+                <h1>Category Service</h1>
+                <button onClick={this.testCategory}>Test</button>
+                <h1>Contact Service</h1>
+                <button onClick={this.testContact}>Test</button>
+                <h1>Product Service</h1>
+                <button onClick={this.testProduct}>Test</button>
+                <h1>Transaction Service</h1>
+                <div>Not implemented yet</div>
             </div>
         );
     }
