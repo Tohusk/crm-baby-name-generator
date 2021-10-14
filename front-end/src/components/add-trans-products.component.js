@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
 import TransactionService from "../services/transaction.service";
 import "../styles/AddItem.css";
 
@@ -14,29 +15,33 @@ class SelectedProduct extends React.Component {
             qty: 1,
             //productList: [],
         }
-        this.incrementQty = this.incrementQty.bind(this);
+        //this.incrementQty = this.incrementQty.bind(this);
+        this.addQty = this.addQty.bind(this);
         this.reduceQty = this.reduceQty.bind(this);
         this._onChange = this._onChange.bind(this);
         this._onClick = this._onClick.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         //this.calculateTotal = this.calculateTotal.bind(this);
         //this.showProduct = this.showProduct.bind(this);
 
     }
 
     //increase quantity by one
-    incrementQty() {
-        this.setState({
-            qty: this.state.qty + 1
-        });
-        this.props.handleTotal(this.props.price);
+    addQty() {
+        this.props.addQty(this.props.product);
+        // this.setState({
+        //     qty: this.state.qty + 1
+        // });
+        this.props.handleTotal(this.props.product.price);
     }
 
     //decrease quantity by one
     reduceQty() {
-        this.setState({
-          qty: this.state.qty - 1
-        });
-        this.props.handleTotal(-this.props.price);
+        this.props.reduceQty(this.props.product);
+        // this.setState({
+        //   qty: this.state.qty - 1
+        // });
+        this.props.handleTotal(-this.props.product.price);
     }
 
     //!!!make sure price is getting added as soon as it is added
@@ -49,7 +54,7 @@ class SelectedProduct extends React.Component {
 
     _onChange(e) {
         this.props.updateQty(e.target.value, this.props.product);
-        this.props.handleTotal(this.props.product);
+        //this.props.handleTotal(this.props.product);
         
     }
     //!!!PROBLEM: THE TWO FUNCTIONS IN ONCHANGE NEED TO BE ASYMC
@@ -58,6 +63,10 @@ class SelectedProduct extends React.Component {
 
     _onClick(e) {
         this.props.handleTotal(this.props.product);
+    }
+
+    handleDelete(e) {
+        this.props.deleteProduct(this.props.product);
     }
 
     render() {
@@ -71,14 +80,19 @@ class SelectedProduct extends React.Component {
                     </div>
                     
                     <div className="col-sm-2 text-right">
-                        <input
+                        {/* <input
                             type="number" 
                             min="1"
                             value={this.props.product.qty}
                             onChange={this._onChange}
                             defaultValue={this.props.product.qty}
-                        />
+                        /> */}
                         {/* <button onClick={this._onClick}>Update</button> */}
+                        
+                    <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.qty <= 1}>-</button>
+                    <span>{this.props.product.qty}</span>
+                    <button className="btn btn-outline-dark" onClick={this.addQty}>+</button>
+                        <button className="btn btn-outline-dark" onClick={this.handleDelete}>Delete</button>
                                 
                         
                     {/* <span>
@@ -105,11 +119,10 @@ export default class AddTransProductForm extends React.Component {
             //qty: 1,
             
             contactId: '',
-            satisfactionRating: 0,
+            transactionRating: 0,
             total: 0,
             productList: [],
-            loading: false,
-            message: "",
+            
         }
         //this.incrementQty = this.incrementQty.bind(this);
         //this.reduceQty = this.reduceQty.bind(this);
@@ -117,9 +130,13 @@ export default class AddTransProductForm extends React.Component {
         //this.setProductList = this.setProductList.bind(this);
 
         this.calculateTotal = this.calculateTotal.bind(this);
-        this.updateQty = this.updateQty.bind(this);
+        //this.updateQty = this.updateQty.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
+        this.addQty = this.addQty.bind(this);
+        this.reduceQty = this.reduceQty.bind(this);
+
         this.handleRating = this.handleRating.bind(this);
-        this.handleSumbit = this.handleSumbit.bind(this);
+        this.hSumbit = this.hSumbit.bind(this);
     }
     
     //creating an array of objects with quantity attribute
@@ -146,42 +163,45 @@ export default class AddTransProductForm extends React.Component {
     }
 
     //calculating the total price of purchase
-    calculateTotal(product) {
+    calculateTotal(price) {
+        this.setState({
+            total: this.state.total + price
+        });
         console.log(this.state.total);
-        let newTotal = 0;
-        for(let i in this.state.productList){
-                newTotal -= this.state.productList[i]['price'];
-                newTotal += this.state.productList[i]['price'] * this.state.productList[i]['qty'];
-                console.log(this.state.productList[i]['price']);
-                console.log(this.state.productList[i]['qty']);
-                console.log(newTotal);
-        }
-        this.setState({ total: newTotal});
-        // let newPrice = this.state.total + product.price * product.qty; 
-        // this.setState({
-        //     total: newPrice
-        // });
-        console.log(newTotal);
-        console.log(this.state.total);
+        // let newTotal = 0;
+        // for(let i in this.state.productList){
+        //         newTotal -= this.state.productList[i]['price'];
+        //         newTotal += this.state.productList[i]['price'] * this.state.productList[i]['qty'];
+        //         console.log(this.state.productList[i]['price']);
+        //         console.log(this.state.productList[i]['qty']);
+        //         console.log(newTotal);
+        // }
+        // this.setState({ total: newTotal});
+        // // let newPrice = this.state.total + product.price * product.qty; 
+        // // this.setState({
+        // //     total: newPrice
+        // // });
+        // console.log(newTotal);
+        // console.log(this.state.total);
     }
 
-        updateQty(quantity, product) {
-        //need to update the quantity - but qty for each product
-        //(probably have to update the matching product object within the product list) 
-        //console.log(product);
+        // updateQty(quantity, product) {
+        // //need to update the quantity - but qty for each product
+        // //(probably have to update the matching product object within the product list) 
+        // //console.log(product);
         
-        let items = [...this.state.productList];
-        //var key = 0;
-        for(let i in this.state.productList){
-            if(product['productId'] === this.state.productList[i]['productId']){
-                let item = {
-                    ...items[i],
-                    qty: quantity
-                }
-                items[i] = item;
-                this.setState({productList: items});
-            }
-        }
+        // let items = [...this.state.productList];
+        // //var key = 0;
+        // for(let i in this.state.productList){
+        //     if(product['productId'] === this.state.productList[i]['productId']){
+        //         let item = {
+        //             ...items[i],
+        //             qty: quantity
+        //         }
+        //         items[i] = item;
+        //         this.setState({productList: items});
+        //     }
+        // }
 
         //var value = product[qty];
         // for(let i in this.state.productList){
@@ -196,52 +216,68 @@ export default class AddTransProductForm extends React.Component {
         //         // }));
         //     }
         // }
-    };
+    // };
+
+    deleteProduct(deletedProduct) {
+        const filteredProducts = this.state.productList.filter((product) => product.productId !== deletedProduct.productId);
+        this.setState({ productList: filteredProducts });
+    }
+
+    addQty(product) {
+        console.log(product.qty);
+        const qty = product.qty + 1;
+        const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { qty }) : el));
+        this.setState({ productList: updateQtyProducts });
+        console.log(this.state.productList);
+        //this.calculateTotal(this.props.price);
+    }
+
+    reduceQty(product) {
+        const qty = product.qty - 1;
+        const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { qty }) : el));
+        this.setState({ productList: updateQtyProducts });
+        //this.calculateTotal(-this.props.price);
+    }
 
     handleRating(e) {
         this.setState({
-            satisfactionRating: e.target.value
+            transactionRating: e.target.value
         });
     }
 
     //sending post request with the correct request body
-    async handleSumbit(e){
+    async hSumbit(e){
+        //alert("dsfdfs");
         e.preventDefault();
-
-        this.form.validateAll();
-
-        if (this.checkBtn.context._errors.length === 0) {
+            console.log(this.state.total);
+            console.log(this.state.transactionRating);
+            console.log(this.state.productList);
+            console.log(this.props.customer._id);
+            console.log(this.props.userId);
             try {
                 const res = await TransactionService.addNewTransaction(
                     this.state.total,
-                    this.state.satisfactionRating,
+                    this.state.transactionRating,
                     this.state.productList,
                     this.props.customer._id,
                     this.props.userId,
                 );
-                this.setState({
-                    message: res.data.message,
-                    loading: false,
-                });
+                console.log(res.data);
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
-                this.setState({
-                    loading: false,
-                    message: resMessage,
-                });
+                console.log(resMessage);
             }
-        } else {
-            this.setState({
-                loading: false,
-            });
-        }
+        
 
     }
 
     render() {
         const calcTotal = this.calculateTotal;
         const getQty = this.updateQty;
+        const deleteProduct = this.deleteProduct;
+        const addQty = this.addQty;
+        const reduceQty = this.reduceQty;
 
         let total = this.state.total;
 
@@ -256,6 +292,9 @@ export default class AddTransProductForm extends React.Component {
                 product={product}
                 handleTotal={calcTotal}
                 updateQty={getQty}
+                deleteProduct={deleteProduct}
+                addQty={addQty}
+                reduceQty={reduceQty}
                 />
             );
         });
@@ -268,14 +307,14 @@ export default class AddTransProductForm extends React.Component {
                 </div>
                 <div>
                     <br />
-                <Form onSubmit={this.handleSubmit}>
+                {/* <form onSubmit={this.hSubmit}> */}
           <div className="addTransaction-subtitle">How satisfied was the customer? (Optional)</div>
           <br />
             
             
               <div className="form-check form-check-inline">
                 <label className="radio">
-                  <Input
+                  <input
                     type="radio"
                     className="form-check-input"
                     name="name"
@@ -288,7 +327,7 @@ export default class AddTransProductForm extends React.Component {
               </div>
               <div className="form-check form-check-inline">
                 <label className="radio">
-                  <Input
+                  <input
                     type="radio"
                     className="form-check-input"
                     name="name"
@@ -301,7 +340,7 @@ export default class AddTransProductForm extends React.Component {
               </div>
               <div className="form-check form-check-inline">
                 <label className="radio">
-                  <Input
+                  <input
                     type="radio"
                     className="form-check-input"
                     name="name"
@@ -314,7 +353,7 @@ export default class AddTransProductForm extends React.Component {
               </div>
               <div className="form-check form-check-inline">
                 <label className="radio">
-                  <Input
+                  <input
                     type="radio"
                     className="form-check-input"
                     name="name"
@@ -327,7 +366,7 @@ export default class AddTransProductForm extends React.Component {
               </div>
               <div className="form-check form-check-inline">
                 <label className="radio">
-                  <Input
+                  <input
                     type="radio"
                     className="form-check-input"
                     name="name"
@@ -340,13 +379,15 @@ export default class AddTransProductForm extends React.Component {
               </div>
               <div className="addTransaction-submit-group">
                 <a className="addTransaction-cancelButton" href="/home">Cancel</a>
-                <button
-                className="submitButton"
-                >
-                  Done
+                <button onClick={this.hSumbit} className="submitButton">
+                  Submit
                 </button>
               </div>
-            </Form>
+
+              
+            
+              
+            {/* </form> */}
             <br />
             </div>
             </div>

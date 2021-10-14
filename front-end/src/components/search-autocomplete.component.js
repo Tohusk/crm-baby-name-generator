@@ -66,6 +66,7 @@ export default class AutoCompleteText extends React.Component {
                         onChange={this.onTextChanged} 
                         type="text" 
                         name="myname"
+                        autoComplete="off"
                         placeholder="Enter name..."/>
                     {this.renderSuggestions()}
                     
