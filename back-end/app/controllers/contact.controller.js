@@ -4,6 +4,8 @@
 
 const db = require("../models");
 const Contacts = db.contacts;
+const Product = db.product;
+const Transaction = db.transaction;
 const mongoose = require("mongoose");
 
 /**
@@ -129,7 +131,72 @@ const deleteAllContacts = async (userId) => {
     await Contacts.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
+/**
+ * Controller to get all transactions of a given contact
+ */
+const getContactTransaction = async (req, res) => {
+    try {
+        const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+            transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.contactId) } },
+        });
+
+        const TRANSACTION_RATING_IDX = 2;
+        const n = transaction.transactions[TRANSACTION_RATING_IDX].length;
+        let sum = 0;
+        for (let i = 0; i < n; i++) {
+            sum += transaction.transactions[TRANSACTION_RATING_IDX][i];
+        }
+        const avg = sum / n;
+        res.json({"average score": avg});
+    } catch (err) {
+        res.status(500).send({ message: err });
+    }
+};
+
+const getContactStatistics = async (req, res) => {
+    try {
+        const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+            transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } },
+        });
+        console.log(transaction.transactions);
+        const TRANSACTION_RATING_IDX = 2;
+        const n = transaction.transactions[TRANSACTION_RATING_IDX].length;
+        let sum = 0;
+        for (let i = 0; i < n; i++) {
+            sum += transaction.transactions[TRANSACTION_RATING_IDX][i];
+            console.log(sum);
+        }
+
+        const avg = sum/n;
+
+        res.json({"average score": avg});
+    } catch (err) {
+        res.status(500).send({ message: err });
+    }
+};
+
+const calculateTopCategories = async (transactions, userId) => {
+    const categoryCount = new Map();
+
+    // iterate through ev
+    for (let i = 0; transactions[0].length; i++) {
+        // iterate through products in the transaction
+        for (let j = 0; transactions[0][j]; i++) {
+            transactions[0][j]
+        }
+        // get product
+
+        // search for product using productId, then get categories in that product
+
+        // add the categories in our categoryCount
+    }
+    const product = await Product.findOne({ user: mongoose.Types.ObjectId(userId) }).select({
+        products: { $elemMatch: { _id: mongoose.Types.ObjectId(productId) } },
+    });
+}
+
 module.exports = {
+    getContactStatistics,
     initialiseContact,
     newContact,
     updateContact,

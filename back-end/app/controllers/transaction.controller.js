@@ -99,7 +99,7 @@ const getTransaction = async (req, res) => {
         const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.transactionId) } },
         });
-        res.json(transaction.transactions[0]);
+        res.json(transaction.transactions[0]);  // 0th index gives productsPurchased
     } catch (err) {
         res.status(500).send({ message: err });
     }
