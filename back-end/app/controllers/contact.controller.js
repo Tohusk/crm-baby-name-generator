@@ -6,6 +6,7 @@ const db = require("../models");
 const Contacts = db.contacts;
 const Product = db.product;
 const Transaction = db.transaction;
+const Category = db.category;
 const mongoose = require("mongoose");
 
 /**
@@ -120,7 +121,6 @@ const deleteOneContact = async (req, res) => {
         res.send({ message: "Contact deleted successfully" });
     } catch (err) {
         res.status(500).send({ message: err });
-        return;
     }
 };
 
@@ -133,23 +133,64 @@ const deleteAllContacts = async (userId) => {
 
 const getContactStatistics = async (req, res) => {
     try {
-        const transaction = await Transaction.findOne({
-            user: mongoose.Types.ObjectId(req.query.userId),
-            transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }
-        });
-        // const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
-        //     transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } },
-        // });
-        console.log(JSON.stringify(transaction));
+        const transaction = await Transaction.findOne(
+        {user: mongoose.Types.ObjectId(req.query.userId),
+        transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }}
+        );
 
         const avgRating = await getContactAvgRating(transaction.transactions);
 
-        res.json(avgRating);
+        const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
 
+        res.json(avgRating);
     } catch (err) {
         res.status(500).send({ message: err });
     }
 };
+
+/**
+ * Auxiliary function to get top categories of a contact
+ */
+const getContactTopCategories = async (transactions, userId) => {
+    let categoryCount = new Map();
+
+    // iterate through every transaction
+    for (let i = 0; i < transactions.length; i++) {
+        // iterate through products in a transaction
+        let products = transactions[i].productsPurchased;
+        console.log(JSON.stringify(products));
+        for (let j = 0; j < products.length; j++) {
+            // search for product using productId
+            let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
+            {products: { $elemMatch: { _id: mongoose.Types.ObjectId(products[j]["productId"]) }}});
+
+            // get the value from the "categoryId" field
+            let categoryId = product["products"][0]["categoryId"];
+
+            // categories are optional for products. Skip if product doesn't have categoryId
+            if (categoryId == null)
+                continue;
+
+            // Do a similar thing as above but this time, getting categoryName
+            let category = await Category.findOne({user: mongoose.Types.ObjectId(userId)}).select({
+                categories: { $elemMatch: { _id: mongoose.Types.ObjectId(categoryId) } }
+            });
+
+            let categoryName = category["categories"][0]["name"];
+
+            // increment categoryCount
+            if (categoryCount.has(categoryName))
+                categoryCount.set(categoryName, categoryCount.get(categoryName)+1);
+            else
+                categoryCount.set(categoryName, 1);
+            console.log(categoryCount);
+        }
+    }
+
+    // sort categoryCount map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
+    const sortedCount = new Map([...categoryCount.entries()].sort((a, b) => b[1] - a[1]));
+    console.log(sortedCount);
+}
 
 /**
  * Auxiliary function to help statistics get average rating for a contact
@@ -172,26 +213,6 @@ const getContactAvgRating = async (transactions) => {
 
     return {"average score": avg};
 };
-
-const calculateTopCategories = async (transactions, userId) => {
-    const categoryCount = new Map();
-
-    // iterate through ev
-    for (let i = 0; transactions[0].length; i++) {
-        // iterate through products in the transaction
-        for (let j = 0; transactions[0][j]; i++) {
-            transactions[0][j]
-        }
-        // get product
-
-        // search for product using productId, then get categories in that product
-
-        // add the categories in our categoryCount
-    }
-    const product = await Product.findOne({ user: mongoose.Types.ObjectId(userId) }).select({
-        products: { $elemMatch: { _id: mongoose.Types.ObjectId(productId) } },
-    });
-}
 
 module.exports = {
     getContactStatistics,
