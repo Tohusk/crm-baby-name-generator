@@ -24,6 +24,10 @@ class ProductService {
             },
         });
     }
+
+    async getTotalProducts(userId) {
+        return axios.get(API_URL + "getTotal?userId=" + userId);
+    }
 }
 
 export default new ProductService();

@@ -139,6 +139,18 @@ const deleteAllTransactions = async (userId) => {
     await Transaction.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
+const getPastWeekTransactions = async (userId) => {
+    const weekLength = 7;
+    const today = new Date();
+    let sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - weekLength);
+
+    const transactionsPastWeek = await Transaction.findOne({
+        user: mongoose.Types.ObjectId(userId),
+        transactions: { $elemMatch: { dateAdded: { $gte: sevenDaysAgo } } }
+    });
+}
+
 module.exports = {
     initialiseTransaction,
     newTransaction,
@@ -147,4 +159,5 @@ module.exports = {
     getAllTransactions,
     deleteOneTransaction,
     deleteAllTransactions,
+    getPastWeekTransactions,
 };

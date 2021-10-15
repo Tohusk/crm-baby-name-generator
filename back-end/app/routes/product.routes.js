@@ -36,4 +36,6 @@ module.exports = function (app) {
     app.get("/api/product/getAll", controller.getAllProducts);
 
     app.delete("/api/product/deleteOne", controller.deleteOneProduct);
+
+    app.get("/api/product/getTotal", controller.getTotalProducts);
 };

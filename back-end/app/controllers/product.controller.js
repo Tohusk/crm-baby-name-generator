@@ -114,6 +114,19 @@ const deleteAllProducts = async (userId) => {
     await Product.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
+/**
+ * Controller to get a user's product list
+ */
+const getTotalProducts = async (req, res) => {
+    try {
+        const allProducts = await Product.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
+        const total = allProducts.products.length.toString();
+        res.send(total);
+    } catch (err) {
+        res.status(500).send({ message: err });
+    }
+};
+
 module.exports = {
     initialiseProduct,
     newProduct,
@@ -122,4 +135,5 @@ module.exports = {
     getAllProducts,
     deleteOneProduct,
     deleteAllProducts,
+    getTotalProducts,
 };
