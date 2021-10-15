@@ -14,12 +14,10 @@ export default class Home extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div>

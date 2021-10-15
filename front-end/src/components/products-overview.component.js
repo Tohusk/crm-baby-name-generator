@@ -5,7 +5,6 @@ import Table from "react-bootstrap/Table";
 import ProductList from "./product-list.component";
 import { Redirect } from "react-router";
 
-
 import "../styles/Home.css";
 import "../styles/Overview.css";
 import CategoryOverview from "./category-overview.component";
@@ -20,12 +19,10 @@ export default class Products extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div>

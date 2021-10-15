@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import ContactService from "../services/contact.service";
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import DropdownButton from "react-bootstrap/DropdownButton";
 import { Redirect } from "react-router";
 
 import "../styles/Customer-Profile.css";
@@ -13,7 +13,6 @@ class CustomerProfile extends Component {
     constructor(props) {
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
-
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
@@ -31,16 +30,19 @@ class CustomerProfile extends Component {
 
         try {
             if (window.confirm("Are you sure you wish to delete this?")) {
-                const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
+                const res = await ContactService.deleteCustomer(
+                    this.state.currentUser.id,
+                    this.state.currentContact._id
+                );
                 this.setState({
                     message: res.data.message,
                     loading: false,
                 });
-                this.props.history.push('/customers');
+                this.props.history.push("/customers");
             }
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             this.setState({
                 loading: false,
                 message: resMessage,
@@ -68,12 +70,10 @@ class CustomerProfile extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div>
@@ -100,10 +100,7 @@ class CustomerProfile extends Component {
 
                 <div className="customerProfile-topContainer">
                     <div className="customerProfile-profile-container">
-                        <DropdownButton 
-                            id="dropdown-basic-button"
-                            className="customerProfile-dropdown"
-                            variant="">
+                        <DropdownButton id="dropdown-basic-button" className="customerProfile-dropdown" variant="">
                             <div className="customerProfile-link-container">
                                 <Link
                                     className="customerProfile-dropdown-link"
@@ -112,11 +109,13 @@ class CustomerProfile extends Component {
                                         state: { contact: this.state.currentContact },
                                     }}
                                 >
-                                Edit
+                                    Edit
                                 </Link>
                             </div>
                             <div className="customerProfile-deleteButton-container">
-                                <button className="customerProfile-deleteButton" onClick={this.handleDelete}>Delete</button>
+                                <button className="customerProfile-deleteButton" onClick={this.handleDelete}>
+                                    Delete
+                                </button>
                             </div>
                         </DropdownButton>
                         <div className="customerProfile-smallerText">NAME</div>
@@ -131,9 +130,11 @@ class CustomerProfile extends Component {
                         </div>
                         <div className="customerProfile-smallerText">EMAIL</div>
                         <div className="customerProfile-userText">
-                            
-                                {this.state.currentContact.email ? <u>{this.state.currentContact.email}</u> : <div> N/A </div>}
-                            
+                            {this.state.currentContact.email ? (
+                                <u>{this.state.currentContact.email}</u>
+                            ) : (
+                                <div> N/A </div>
+                            )}
                         </div>
                         <div className="customerProfile-smallerText">DESCRIPTION</div>
                         <div className="customerProfile-userText">
@@ -191,8 +192,7 @@ class CustomerProfile extends Component {
                     </div>
                 </div>
             </div>
-        )
-        
+        );
     }
 }
 export default withRouter(CustomerProfile);

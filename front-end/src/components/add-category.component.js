@@ -10,7 +10,6 @@ import "../styles/AddItem.css";
 import CategoryList from "./category-list.component";
 import { Redirect } from "react-router";
 
-
 // If argument is empty, then return a div bar warning message
 const required = (value) => {
     if (!value) {
@@ -106,17 +105,15 @@ export default class AddCategory extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div className="addItem-container">
                 <div className="addCategory-smallText">
-                    <a className="addCategory-backButton"href="/addproduct">                    
+                    <a className="addCategory-backButton" href="/addproduct">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -125,12 +122,12 @@ export default class AddCategory extends Component {
                             className="bi bi-arrow-left-short"
                             viewBox="0 0 16 16"
                         >
-                        <path
-                            fillRule="evenodd"
-                            d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
-                        />
-                        </svg> 
-                        Back 
+                            <path
+                                fillRule="evenodd"
+                                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+                            />
+                        </svg>
+                        Back
                     </a>
                 </div>
                 <div className="addItem-title">Edit Categories</div>
