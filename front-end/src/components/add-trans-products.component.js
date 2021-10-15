@@ -13,16 +13,12 @@ class SelectedProduct extends React.Component {
 
         this.state = {
             qty: 1,
-            //productList: [],
         }
-        //this.incrementQty = this.incrementQty.bind(this);
         this.addQty = this.addQty.bind(this);
         this.reduceQty = this.reduceQty.bind(this);
         this._onChange = this._onChange.bind(this);
         this._onClick = this._onClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        //this.calculateTotal = this.calculateTotal.bind(this);
-        //this.showProduct = this.showProduct.bind(this);
 
     }
 
@@ -44,33 +40,22 @@ class SelectedProduct extends React.Component {
         this.props.handleTotal(-this.props.product.price);
     }
 
-    //!!!make sure price is getting added as soon as it is added
-    // calculateTotal(price) {
-    //     this.setState({
-    //         total: this.state.total + price
-    //     });
-    //     console.log(this.state.total);
-    // }
-
     _onChange(e) {
         this.props.updateQty(e.target.value, this.props.product);
         //this.props.handleTotal(this.props.product);
         
     }
-    //!!!PROBLEM: THE TWO FUNCTIONS IN ONCHANGE NEED TO BE ASYMC
-    //WORKS WELL IF THERE'S A SEPARATE UPDATE QUANTITY BUTTON
-    //May need to change back to an input with two buttons on the side with increment and reduce
 
     _onClick(e) {
         this.props.handleTotal(this.props.product);
     }
 
     handleDelete(e) {
-        this.props.deleteProduct(this.props.product);
+        this.props.deleteProduct(this.props.product, this.props.total);
     }
 
     render() {
-        //const qtyprice = this.props.price * this.state.qty;
+
         return (
             <div>
                 <div className="row form-group">
@@ -80,26 +65,13 @@ class SelectedProduct extends React.Component {
                     </div>
                     
                     <div className="col-sm-2 text-right">
-                        {/* <input
-                            type="number" 
-                            min="1"
-                            value={this.props.product.qty}
-                            onChange={this._onChange}
-                            defaultValue={this.props.product.qty}
-                        /> */}
-                        {/* <button onClick={this._onClick}>Update</button> */}
                         
-                    <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.qty <= 1}>-</button>
-                    <span>{this.props.product.qty}</span>
+                    <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.quantity <= 1}>-</button>
+                    <span>{this.props.product.quantity}</span>
                     <button className="btn btn-outline-dark" onClick={this.addQty}>+</button>
-                        <button className="btn btn-outline-dark" onClick={this.handleDelete}>Delete</button>
+                    <button className="btn btn-outline-dark" onClick={this.handleDelete}>Delete</button>
                                 
-                        
-                    {/* <span>
-                    <button className="btn btn-outline-dark" onClick={this.incrementQty}>+</button>
-                    <p>{this.state.qty}</p>
-                    <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.state.qty <= 1}>-</button>
-                    </span> */}
+
                     </div>
                     
                     
@@ -124,10 +96,6 @@ export default class AddTransProductForm extends React.Component {
             productList: [],
             
         }
-        //this.incrementQty = this.incrementQty.bind(this);
-        //this.reduceQty = this.reduceQty.bind(this);
-        //this.showProduct = this.showProduct.bind(this);
-        //this.setProductList = this.setProductList.bind(this);
 
         this.calculateTotal = this.calculateTotal.bind(this);
         //this.updateQty = this.updateQty.bind(this);
@@ -143,19 +111,21 @@ export default class AddTransProductForm extends React.Component {
     componentDidUpdate(prevProps) {
         if(this.props.selectedProducts.length !== prevProps.selectedProducts.length){
             console.log(this.props.selectedProducts);
+
+
             for(let i in this.props.selectedProducts){
-                
                 console.log(this.props.selectedProducts[i]);
                 console.log(this.props.selectedProducts[i]['_id']);
                 this.setState({
                     productList: [...this.state.productList, {
                         productId: this.props.selectedProducts[i]['_id'],
-                        qty: 1,
+                        quantity: 1,
                         name: this.props.selectedProducts[i]['name'],
                         price: this.props.selectedProducts[i]['price'],
                     }]
-                })
+                });
             }
+
             console.log(this.state.productList);
         }
         
@@ -168,80 +138,41 @@ export default class AddTransProductForm extends React.Component {
             total: this.state.total + price
         });
         console.log(this.state.total);
-        // let newTotal = 0;
-        // for(let i in this.state.productList){
-        //         newTotal -= this.state.productList[i]['price'];
-        //         newTotal += this.state.productList[i]['price'] * this.state.productList[i]['qty'];
-        //         console.log(this.state.productList[i]['price']);
-        //         console.log(this.state.productList[i]['qty']);
-        //         console.log(newTotal);
-        // }
-        // this.setState({ total: newTotal});
-        // // let newPrice = this.state.total + product.price * product.qty; 
-        // // this.setState({
-        // //     total: newPrice
-        // // });
-        // console.log(newTotal);
-        // console.log(this.state.total);
+
     }
 
-        // updateQty(quantity, product) {
-        // //need to update the quantity - but qty for each product
-        // //(probably have to update the matching product object within the product list) 
-        // //console.log(product);
-        
-        // let items = [...this.state.productList];
-        // //var key = 0;
-        // for(let i in this.state.productList){
-        //     if(product['productId'] === this.state.productList[i]['productId']){
-        //         let item = {
-        //             ...items[i],
-        //             qty: quantity
-        //         }
-        //         items[i] = item;
-        //         this.setState({productList: items});
-        //     }
-        // }
 
-        //var value = product[qty];
-        // for(let i in this.state.productList){
-        //     if(product.productId === this.state.productList[i]['productId']){
-        //         this.setState({
-        //             productList[i]['productId']: 
-        //         })
-        //         // this.setState(prevState => ({
-        //         //     productList: prevState.productList.map(
-        //         //     obj => (obj._id === 1234 ? Object.assign(obj, { description: "New Description" }) : obj)
-        //         //   )
-        //         // }));
-        //     }
-        // }
-    // };
 
-    deleteProduct(deletedProduct) {
+    deleteProduct(deletedProduct, total) {
         const filteredProducts = this.state.productList.filter((product) => product.productId !== deletedProduct.productId);
         this.setState({ productList: filteredProducts });
+        const updateTotal = deletedProduct.price * deletedProduct.quantity;
+        console.log(total);
+        console.log(updateTotal);
+        this.setState({total: total - updateTotal});
+        console.log(this.state.total);
     }
 
     addQty(product) {
-        console.log(product.qty);
-        const qty = product.qty + 1;
-        const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { qty }) : el));
+        console.log(product.quantity);
+        const quantity = product.quantity + 1;
+        const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { quantity }) : el));
         this.setState({ productList: updateQtyProducts });
         console.log(this.state.productList);
         //this.calculateTotal(this.props.price);
     }
 
     reduceQty(product) {
-        const qty = product.qty - 1;
-        const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { qty }) : el));
+        const quantity = product.quantity - 1;
+        const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { quantity }) : el));
         this.setState({ productList: updateQtyProducts });
         //this.calculateTotal(-this.props.price);
     }
 
     handleRating(e) {
+        let rating = parseInt(e.target.value);
         this.setState({
-            transactionRating: e.target.value
+            transactionRating: rating
         });
     }
 
@@ -249,14 +180,14 @@ export default class AddTransProductForm extends React.Component {
     async hSumbit(e){
         //alert("dsfdfs");
         e.preventDefault();
-            console.log(this.state.total);
-            console.log(this.state.transactionRating);
-            console.log(this.state.productList);
-            console.log(this.props.customer._id);
-            console.log(this.props.userId);
+            //console.log(this.state.total);
+            // console.log(this.state.transactionRating);
+            // console.log(this.state.productList);
+            // console.log(this.props.customer._id);
+            // console.log(this.props.userId);
             try {
                 const res = await TransactionService.addNewTransaction(
-                    this.state.total,
+                    //this.state.total,
                     this.state.transactionRating,
                     this.state.productList,
                     this.props.customer._id,
@@ -266,7 +197,7 @@ export default class AddTransProductForm extends React.Component {
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
-                console.log(resMessage);
+                alert(resMessage);
             }
         
 
@@ -281,33 +212,30 @@ export default class AddTransProductForm extends React.Component {
 
         let total = this.state.total;
 
-        var products = this.state.productList.map(function(product) {
+        var products = this.state.productList.map( (product) => {
             console.log(product);
             total += product.price;
+            console.log(total);
             return (
                 <SelectedProduct
-                //name={product.name}
-                //price={product.price}
-                //qty={product.qty}
-                product={product}
-                handleTotal={calcTotal}
-                updateQty={getQty}
-                deleteProduct={deleteProduct}
-                addQty={addQty}
-                reduceQty={reduceQty}
+                    product={product}
+                    handleTotal={calcTotal}
+                    deleteProduct={deleteProduct}
+                    addQty={addQty}
+                    reduceQty={reduceQty}
+                    total={total}
                 />
             );
         });
+        console.log(this.state.total);
         return (
             <div>
                 <div>
                 {products}
-                {/* <input className="addTrans-products-form">{products}</input> */}
                 <h3>Total: ${total}</h3>
                 </div>
                 <div>
                     <br />
-                {/* <form onSubmit={this.hSubmit}> */}
           <div className="addTransaction-subtitle">How satisfied was the customer? (Optional)</div>
           <br />
             

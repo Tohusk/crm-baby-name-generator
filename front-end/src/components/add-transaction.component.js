@@ -46,8 +46,8 @@ export default class AddTransaction extends Component {
     //get request for all customers and products
     componentDidMount() {
       Promise.all([
-        axios.get("http://localhost:8080/api/contact/getAll?userId=61552b931899827324ec3114"),
-        axios.get("http://localhost:8080/api/product/getAll?userId=61552b931899827324ec3114")
+        axios.get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser.id),
+        axios.get("http://localhost:8080/api/product/getAll?userId=" + this.state.currentUser.id)
       ])
       .then(axios.spread((customerResponse, productResponse) => {
         console.log(productResponse.data);

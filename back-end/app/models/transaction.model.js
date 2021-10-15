@@ -37,10 +37,7 @@ const Transaction = mongoose.model(
                 transactionRating: {
                     type: Number,
                 },
-                total: {
-                    type: Number,
-                    required: true,
-                }
+                
             },
         ],
     })
