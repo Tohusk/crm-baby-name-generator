@@ -29,7 +29,7 @@ export default class Products extends Component {
             const mostPopular = await ProductService.getMostPopularProduct(this.state.currentUser.id);
             this.setState({
                 totalProducts: total.data,
-                mostPopularProduct: mostPopular.data.name,
+                mostPopularProduct: mostPopular.data.name ? mostPopular.data.name : 'N/A',
             });
         } catch (err) {
             this.setState({
