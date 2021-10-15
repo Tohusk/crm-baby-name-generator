@@ -1472,28 +1472,6 @@
               "response": []
             },
             {
-              "name": "New transaction T1 Copy",
-              "id": "8f033fc8-c9a1-43c1-ae28-447d078a60ad",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"productsPurchased\": [\r\n        {\r\n            \"productId\": \"{{productId3}}\",\r\n            \"quantity\": {{transactionQuantity1_1}}\r\n        },\r\n        {\r\n            \"productId\": \"{{productId2}}\",\r\n            \"quantity\": {{transactionQuantity1_2}}\r\n        }\r\n    ], \r\n    \"contactId\": \"{{contactId2}}\",\r\n    \"transactionRating\": {{transactionRating1}}\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{rootUrl}}/api/transaction/new"
-              },
-              "response": []
-            },
-            {
               "name": "New transaction T2",
               "id": "b2fc48bd-6e7b-438a-a352-c2f3a0e4ac06",
               "protocolProfileBehavior": {
