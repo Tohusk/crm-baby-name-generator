@@ -28,6 +28,10 @@ class ProductService {
     async getTotalProducts(userId) {
         return axios.get(API_URL + "getTotal?userId=" + userId);
     }
+
+    async getMostPopularProduct(userId) {
+        return axios.get(API_URL + "getMostPopular?userId=" + userId);
+    }
 }
 
 export default new ProductService();

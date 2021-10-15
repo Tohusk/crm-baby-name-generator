@@ -38,4 +38,6 @@ module.exports = function (app) {
     app.delete("/api/product/deleteOne", controller.deleteOneProduct);
 
     app.get("/api/product/getTotal", controller.getTotalProducts);
+
+    app.get("/api/product/getMostPopular", controller.getMostPopularProduct);
 };

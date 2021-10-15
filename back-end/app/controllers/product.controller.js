@@ -5,6 +5,7 @@
 const db = require("../models");
 const Product = db.product;
 const mongoose = require("mongoose");
+const transactionController = require("./transaction.controller");
 
 /**
  * Controller for initalise a user's product list
@@ -71,14 +72,22 @@ const updateProduct = async (req, res) => {
  */
 const getProduct = async (req, res) => {
     try {
-        const product = await Product.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
-            products: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.productId) } },
-        });
+        const product = (await getOneProduct(req.query.userId, req.query.productId));
         res.json(product.products[0]);
     } catch (err) {
         res.status(500).send({ message: err });
     }
 };
+
+/**
+ * function that contains the logic of getting one product from db
+ */
+const getOneProduct = async (userId, productId) => {
+    const oneProduct = await Product.findOne({ user: userId}).select({
+        products: { $elemMatch: { _id: productId } },
+    });
+    return oneProduct;
+}
 
 /**
  * Controller to get a user's product list
@@ -127,6 +136,39 @@ const getTotalProducts = async (req, res) => {
     }
 };
 
+/**
+ * Controller that gets the best selling products from the past 7 days
+ */
+const getMostPopularProduct = async (req, res) => {
+    try {
+        const transactions = await transactionController.getAllTransactionsForUser(req.query.userId);
+        let mostPopularCount = 0;
+        let mostPopularProduct;
+        let popularityMap = new Map();
+
+        for (const t of transactions) {
+            for (const p of t.productsPurchased) {
+                if (!popularityMap.get(p.productId.toString())) {
+                    popularityMap.set(p.productId.toString(), p.quantity);
+                } else {
+                    popularityMap.set(p.productId.toString(), popularityMap.get(p.productId.toString())+p.quantity)
+                }
+
+                if (popularityMap.get(p.productId.toString()) > mostPopularCount) {
+                    mostPopularCount = popularityMap.get(p.productId.toString());
+                    mostPopularProduct = p.productId.toString();
+                }
+            }
+        }
+
+        const product = await getOneProduct(req.query.userId, mostPopularProduct);
+        res.json(product.products[0]);
+
+    } catch (err) {
+        res.status(500).send({ message: err });
+    }
+}
+
 module.exports = {
     initialiseProduct,
     newProduct,
@@ -136,4 +178,5 @@ module.exports = {
     deleteOneProduct,
     deleteAllProducts,
     getTotalProducts,
+    getMostPopularProduct,
 };

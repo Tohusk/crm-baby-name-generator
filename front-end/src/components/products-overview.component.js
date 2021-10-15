@@ -19,14 +19,17 @@ export default class Products extends Component {
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             totalProducts: 0,
+            mostPopularProduct: 'N/A',
         };
     }
 
     async componentDidMount() {
         try {
-            const res = await ProductService.getTotalProducts(this.state.currentUser.id);
+            const total = await ProductService.getTotalProducts(this.state.currentUser.id);
+            const mostPopular = await ProductService.getMostPopularProduct(this.state.currentUser.id);
             this.setState({
-                totalProducts: res.data,
+                totalProducts: total.data,
+                mostPopularProduct: mostPopular.data.name,
             });
         } catch (err) {
             this.setState({
@@ -64,8 +67,8 @@ export default class Products extends Component {
                         <div className="overview-card-stat">{this.state.totalProducts}</div>
                     </div>
                     <div className="overview-stats-card">
-                        <div className="overview-card-heading">Top Product of the Week</div>
-                        <div className="overview-card-stat">Apples (500g)</div>
+                        <div className="overview-card-heading">Most Popular Product</div>
+                        <div className="overview-card-stat">{this.state.mostPopularProduct}</div>
                     </div>
                     <div className="overview-stats-card">
                         <div className="overview-card-heading">Products by Categories (chart)</div>
