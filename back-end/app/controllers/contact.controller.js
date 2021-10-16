@@ -4,9 +4,9 @@
 
 const db = require("../models");
 const Contacts = db.contacts;
-const Product = db.product;
+// const Product = db.product;
 const Transaction = db.transaction;
-const Category = db.category;
+// const Category = db.category;
 const mongoose = require("mongoose");
 
 /**
@@ -144,7 +144,7 @@ const getContactStatistics = async (req, res) => {
 
         const avgRating = await getContactAvgRating(transaction.transactions);
 
-        const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
+        // const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
 
         res.json({ averageRating: avgRating,
                    topCategories: topCategories });
@@ -154,7 +154,7 @@ const getContactStatistics = async (req, res) => {
 };
 
 /**
- * Auxiliary function to get top categories of a contact
+ * Auxiliary function to get top (at most) 3 categories of a contact
  */
 const getContactTopCategories = async (transactions, userId) => {
     let categoryCount = new Map();
