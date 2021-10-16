@@ -141,33 +141,47 @@ const getTotalProducts = async (req, res) => {
  */
 const getMostPopularProduct = async (req, res) => {
     try {
-        const transactions = await transactionController.getAllTransactionsForUser(req.query.userId);
-        let mostPopularCount = 0;
-        let mostPopularProduct;
-        let popularityMap = new Map();
-
-        for (const t of transactions) {
-            for (const p of t.productsPurchased) {
-                if (!popularityMap.get(p.productId.toString())) {
-                    popularityMap.set(p.productId.toString(), p.quantity);
-                } else {
-                    popularityMap.set(p.productId.toString(), popularityMap.get(p.productId.toString())+p.quantity)
-                }
-
-                if (popularityMap.get(p.productId.toString()) > mostPopularCount) {
-                    mostPopularCount = popularityMap.get(p.productId.toString());
-                    mostPopularProduct = p.productId.toString();
-                }
-            }
-        }
-
-        const product = await getOneProduct(req.query.userId, mostPopularProduct);
-        res.json(product.products[0]);
-
+        const productPopularityStats = await findMostPopularProduct(req.query.userId);
+        res.json(productPopularityStats.mostPopularProduct);
     } catch (err) {
         res.status(500).send({ message: err });
     }
 }
+
+const findMostPopularProduct = async (userId) => {
+    const transactions = await transactionController.getAllTransactionsForUser(userId);
+
+    // find most popular product and
+    let mostPopularCount = 0;
+    let mostPopularProduct;
+    let productPopularityMap = new Map();
+
+    for (const t of transactions) {
+        for (const p of t.productsPurchased) {
+            if (!productPopularityMap.get(p.productId.toString())) {
+                productPopularityMap.set(p.productId.toString(), p.quantity);
+            } else {
+                productPopularityMap.set(p.productId.toString(), productPopularityMap.get(p.productId.toString())+p.quantity)
+            }
+
+            if (productPopularityMap.get(p.productId.toString()) > mostPopularCount) {
+                mostPopularCount = productPopularityMap.get(p.productId.toString());
+                mostPopularProduct = p.productId;
+            }
+        }
+    }
+
+    const product = await getOneProduct(userId, mostPopularProduct);
+
+    const popularityStats = {
+        mostPopularProduct: product.products[0],
+        popularityMap: productPopularityMap,
+    }
+    console.log(JSON.stringify(popularityStats));
+
+    return popularityStats;
+}
+
 
 module.exports = {
     initialiseProduct,
