@@ -19,14 +19,6 @@ const Transaction = mongoose.model(
                             type: Number,
                             required: true,
                         },
-                        name: {
-                            type: String,
-                            required: true,
-                        },
-                        price: {
-                            type: Number,
-                            require: true,
-                        },
                     },
                 ],
                 contactId: {
@@ -37,6 +29,7 @@ const Transaction = mongoose.model(
                 transactionRating: {
                     type: Number,
                 },
+                transactionTotal: Number,
                 dateAdded: Date,
             },
         ],

@@ -26,10 +26,13 @@ const initialiseTransaction = async (userId) => {
  */
 const newTransaction = async (req, res) => {
     try {
+        const total = calcTotal(req.body.productsPurchased);
+
         const newTransaction = {
             contactId: mongoose.Types.ObjectId(req.body.contactId),
             productsPurchased: parsePurchaseList(req, res),
             transactionRating: req.body.transactionRating,
+            transactionTotal: total,
             dateAdded: new Date(),
         };
 
@@ -44,6 +47,7 @@ const newTransaction = async (req, res) => {
         );
         res.send({ message: "New transaction added successfully!" });
     } catch (err) {
+        console.log(err);
         res.status(500).send({ message: err });
     }
 };
@@ -58,7 +62,6 @@ function parsePurchaseList(req, res) {
             const newProductPurchase = {
                 productId: mongoose.Types.ObjectId(req.body.productsPurchased[idx].productId),
                 quantity: req.body.productsPurchased[idx].quantity,
-                price: req.body.productsPurchased[idx].price,
             };
             newProductsPurchased.push(newProductPurchase);
         }
@@ -67,6 +70,14 @@ function parsePurchaseList(req, res) {
     } catch (err) {
         res.status(500).send({ message: err });
     }
+}
+
+const calcTotal = (purchases) => {
+    let total = 0;
+    for (const p of purchases) {
+        total += p.quantity * p.price;
+    }
+    return total;
 }
 
 /**
@@ -84,6 +95,7 @@ const updateTransaction = async (req, res) => {
                     "transactions.$.contactId": req.body.contactId,
                     "transactions.$.productsPurchased": parsePurchaseList(req, res),
                     "transactions.$.transactionRating": req.body.transactionRating,
+                    "transactions.$.transactionTotal": calcTotal(req.body.productsPurchased),
                 },
             }
         );
