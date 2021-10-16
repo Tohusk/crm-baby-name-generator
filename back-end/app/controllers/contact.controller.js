@@ -98,6 +98,22 @@ const getContact = async (req, res) => {
 };
 
 /**
+ * Controller to get one contact by name
+ */
+ const getContactByName = async (req, res) => {
+    try {
+        const contact = await Contacts.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+            customers: { $elemMatch: { name: req.query.name } },
+        });
+        res.json(contact.customers[0]);
+    } catch (err) {
+        res.status(500).send({ message: err });
+        return;
+    }
+};
+
+
+/**
  * Controller to get a user's contact list
  */
 const getAllContacts = async (req, res) => {
@@ -248,6 +264,7 @@ module.exports = {
     updateContact,
     getContact,
     getAllContacts,
+    getContactByName,
     deleteOneContact,
     deleteAllContacts,
 };

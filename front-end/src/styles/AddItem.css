@@ -108,6 +108,7 @@
     flex-wrap: wrap;
     gap: 2vw 20vw;
     margin-left: 2vw;
+    flex-direction: row;
 }
 
 .addTransaction-sub-container {
@@ -146,6 +147,12 @@
     text-decoration-line: underline;
     color: #747474;
     margin-right: 4vw;
+}
+
+.addTransaction-sub-container li{
+    display: flex;
+    flex-direction: row;
+    margin: 0px 0;
 }
 
 
@@ -243,4 +250,26 @@
     .addTransaction-container  {
         margin-left: 9vw;
     }
+}
+
+.radio {
+    margin-right: 10px;
+}
+
+.addTrans-form-check-input{
+    display: inline;
+    margin-right: 10px;
+    align-items: center;
+}
+
+.addTrans-products-form{
+    border: none;
+}
+
+.editItem-delete-btn{
+    text-decoration-line: underline;
+    margin-left: 67%;
+    border: none;
+    background-color: transparent;
+    color: #D80707;
 }
