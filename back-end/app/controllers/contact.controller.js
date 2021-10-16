@@ -144,7 +144,7 @@ const getContactStatistics = async (req, res) => {
 
         const avgRating = await getContactAvgRating(transaction.transactions);
 
-        // const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
+        const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
 
         res.json({ averageRating: avgRating,
                    topCategories: topCategories });
