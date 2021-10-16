@@ -42,6 +42,7 @@ class EditCustomer extends Component {
                 newDescription: this.props.location.state.contact.description,
                 newCompanyName: this.props.location.state.contact.companyName,
     
+                redirect: false,
                 loading: false,
                 message: "",
             };
@@ -131,6 +132,7 @@ class EditCustomer extends Component {
                 this.setState({
                     message: res.data.message,
                     loading: false,
+                    redirect: true,
                 });
             } catch (err) {
                 const resMessage =
@@ -163,6 +165,16 @@ class EditCustomer extends Component {
                     <u>Delete Customer</u>
                 </button>
                 {/* Input values need to be filled automatically from customer details */}
+
+                {this.state.redirect ? 
+                (
+                <Redirect to={{
+                    pathname: "/customer-profile",
+                    state: { contactId: this.state.currentContact._id },
+                }}/>
+                ) 
+                : null
+                }
                 <Form
                     className="addCustomer-form"
                     onSubmit={this.handleSubmit}
