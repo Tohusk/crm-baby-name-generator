@@ -33,7 +33,7 @@ export default class Customers extends Component {
                     validScoreContacts += 1;
                 }
             }
-            console.log(validScoreContacts);
+            
             if (validScoreContacts === 0) {
                 this.setState({
                     avgScore: 'N/A',
@@ -41,7 +41,9 @@ export default class Customers extends Component {
                 });
             }
             else {
-                const avgScore = total / validScoreContacts;
+                let avgScore = total / validScoreContacts;
+                avgScore = Math.round(avgScore * 100) / 100;
+
                 this.setState({
                     avgScore: avgScore,
                     totalContacts: numContacts,
