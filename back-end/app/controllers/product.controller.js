@@ -148,6 +148,40 @@ const getMostPopularProduct = async (req, res) => {
     }
 }
 
+const getProductStats = async (req, res) => {
+    try {
+        // find most popular product
+        const productPopularityStats = await findProductPopularityStats(req.query.userId);
+        const mostPopularProduct = productPopularityStats.mostPopularProduct;
+        const productPopularityMap = productPopularityStats.popularityMap;
+
+        // find category popularity
+        let categoryPopularityMap = new Map();
+        for (const p of productPopularityMap.keys()) {
+            const dbQuery = await getOneProduct(req.query.userId, mongoose.Types.ObjectId(p));
+            const product = dbQuery.products[0];
+            const categoryId = product.categoryId.toString();
+
+            if (!categoryPopularityMap.get(categoryId)) {
+                categoryPopularityMap.set(categoryId, productPopularityMap.get(p));
+            } else {
+                categoryPopularityMap.set(categoryId, categoryPopularityMap.get(categoryId) + productPopularityMap.get(p));
+            }
+        }
+
+        console.log(categoryPopularityMap);
+
+        // convert category map to list
+
+        const productStats = {
+            mostPopularProduct: mostPopularProduct,
+        }
+        res.json(productStats);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: err });
+    }
+}
 
 /**
  * function that finds stats related to product popularity
@@ -195,4 +229,5 @@ module.exports = {
     deleteAllProducts,
     getTotalProducts,
     getMostPopularProduct,
+    getProductStats,
 };
