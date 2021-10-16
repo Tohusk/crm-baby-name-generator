@@ -132,7 +132,7 @@ const deleteAllContacts = async (userId) => {
 };
 
 /**
- * given a contactId, returns average satisfaction rating and returns their top (at most) 3 categories
+ * given a contactId, returns average satisfaction rating and returns their top (at most) 3 categories with category counts
  */
 const getContactStatistics = async (req, res) => {
     try {
@@ -145,7 +145,8 @@ const getContactStatistics = async (req, res) => {
 
         const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
 
-        res.json({averageRating: avgRating});
+        res.json({ averageRating: avgRating,
+                   topCategories: topCategories });
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -161,7 +162,7 @@ const getContactTopCategories = async (transactions, userId) => {
     for (let i = 0; i < transactions.length; i++) {
         // iterate through products in a transaction
         let products = transactions[i].productsPurchased;
-        console.log(JSON.stringify(products));
+        //console.log(JSON.stringify(products));
         for (let j = 0; j < products.length; j++) {
             // search for product using productId
             let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
@@ -186,15 +187,33 @@ const getContactTopCategories = async (transactions, userId) => {
                 categoryCount.set(categoryName, categoryCount.get(categoryName)+1);
             else
                 categoryCount.set(categoryName, 1);
-            console.log(categoryCount);
+
         }
     }
 
-    // sort categoryCount map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
-    const sortedCount = new Map([...categoryCount.entries()].sort((a, b) => b[1] - a[1]));
-    console.log(sortedCount);
+    return getTopNMap(categoryCount, 3);
 }
 
+/**
+ * sorts map and returns a JSON object that contains the top n items (if map has less than n items, a sorted map is returned)
+ * @param map
+ * @param n
+ * @returns {Promise<{}>}
+ */
+const getTopNMap = async (map, n) => {
+    // sort map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
+    // then get the keys from that sorted map and put said keys into an array
+    const sortedMapKeys = Array.from((new Map([...map.entries()].sort((a, b) => b[1] - a[1]))).keys());
+
+    let topnJSON = {};  // returning a JSON obj
+
+    // i < n because we only want top n items
+    for (let i = 0; i < sortedMapKeys.length && i < n; i++) {
+        topnJSON[sortedMapKeys[i]] = map.get(sortedMapKeys[i]);
+    }
+    console.log(topnJSON);
+    return topnJSON;
+}
 /**
  * Auxiliary function to help statistics get average rating for a contact
  */
