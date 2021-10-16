@@ -11,6 +11,7 @@ import "../styles/Home.css";
 import "../styles/Overview.css";
 import CategoryOverview from "./category-overview.component";
 import CategoryService from "../services/category.service";
+import {Pie} from "react-chartjs-2";
 
 export default class Products extends Component {
     constructor(props) {
@@ -20,16 +21,41 @@ export default class Products extends Component {
             currentUser: AuthService.getCurrentUser(),
             totalProducts: 0,
             mostPopularProduct: 'N/A',
+            // for chart
+            labels: [],
+            datasets: [
+                {
+                    backgroundColor: [],
+                    data: []
+                }
+            ],
         };
     }
 
     async componentDidMount() {
         try {
             const total = await ProductService.getTotalProducts(this.state.currentUser.id);
-            const mostPopular = await ProductService.getMostPopularProduct(this.state.currentUser.id);
+            const stats = await ProductService.getProductStats(this.state.currentUser.id);
+
+            const labelList = [];
+            const colourList = [];
+            const dataList = [];
+            for (const c of stats.data.categoryStats) {
+                labelList.push(c.name);
+                colourList.push(c.colour);
+                dataList.push(c.count);
+            }
+
+            const datasetList = [{
+                backgroundColor: colourList,
+                data: dataList,
+            }]
+
             this.setState({
                 totalProducts: total.data,
-                mostPopularProduct: mostPopular.data.name ? mostPopular.data.name : 'N/A',
+                mostPopularProduct: stats.data.mostPopularProduct ? stats.data.mostPopularProduct.name : 'N/A',
+                labels: labelList,
+                datasets: datasetList,
             });
         } catch (err) {
             this.setState({
@@ -59,7 +85,6 @@ export default class Products extends Component {
                         + Add Product
                     </Link>
                 </div>
-                {/* <break></break> */}
                 <div className="overview-subheading">Overview</div>
                 <div className="overview-flex-container">
                     <div className="overview-stats-card">
@@ -71,7 +96,20 @@ export default class Products extends Component {
                         <div className="overview-card-stat">{this.state.mostPopularProduct}</div>
                     </div>
                     <div className="overview-stats-card">
-                        <div className="overview-card-heading">Products by Categories (chart)</div>
+                        <div className="overview-chart-heading">Popularity by Categories</div>
+                        <Pie
+                            data={{
+                                labels: this.state.labels,
+                                datasets: this.state.datasets,
+                            }}
+                            options={{
+                                plugins: {
+                                    legend: {
+                                        display: false,
+                                    }
+                                },
+                            }}
+                        />
                     </div>
                 </div>
                 <div className="overview-subheading">Categories</div>

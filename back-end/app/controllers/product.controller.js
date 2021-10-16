@@ -6,6 +6,7 @@ const db = require("../models");
 const Product = db.product;
 const mongoose = require("mongoose");
 const transactionController = require("./transaction.controller");
+const Category = db.category;
 
 /**
  * Controller for initalise a user's product list
@@ -169,12 +170,28 @@ const getProductStats = async (req, res) => {
             }
         }
 
-        console.log(categoryPopularityMap);
-
         // convert category map to list
+        const categoryList = [];
+        for (const c of categoryPopularityMap.keys()) {
+            const queryResponse = await Category.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+                categories: { $elemMatch: { _id: mongoose.Types.ObjectId(c) } },
+            });
 
+            const category = queryResponse.categories[0];
+
+            const categoryInfo = {
+                _id : category._id,
+                name : category.name,
+                colour : category.colour,
+                count : categoryPopularityMap.get(c),
+            }
+            categoryList.push(categoryInfo);
+        }
+
+        // send back response
         const productStats = {
             mostPopularProduct: mostPopularProduct,
+            categoryStats: categoryList,
         }
         res.json(productStats);
     } catch (err) {
