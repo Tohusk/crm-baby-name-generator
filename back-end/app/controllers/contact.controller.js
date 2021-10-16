@@ -4,9 +4,9 @@
 
 const db = require("../models");
 const Contacts = db.contacts;
-const Product = db.product;
+// const Product = db.product;
 const Transaction = db.transaction;
-const Category = db.category;
+// const Category = db.category;
 const mongoose = require("mongoose");
 
 /**
@@ -199,17 +199,17 @@ const getContactStatistics = async (req, res) => {
  * @param n
  * @returns {Promise<Map<any, any>>}
  */
-const getTopNMap = async (map, n) => {
-    // sort map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
-    const sortedMapKeys = (new Map([...map.entries()].sort((a, b) => b[1] - a[1]))).keys();
-    const topNMap = new Map();
+// const getTopNMap = async (map, n) => {
+//     // sort map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
+//     const sortedMapKeys = (new Map([...map.entries()].sort((a, b) => b[1] - a[1]))).keys();
+//     const topNMap = new Map();
 
-    // i < n because we only want top n items
-    for (let i = 0; i < sortedMapKeys.size && i < n; i++) {
-        topNMap.set(sortedMapKeys[i], map.get(sortedMapKeys[i]));
-    }
-    return topNMap;
-}
+//     // i < n because we only want top n items
+//     for (let i = 0; i < sortedMapKeys.size && i < n; i++) {
+//         topNMap.set(sortedMapKeys[i], map.get(sortedMapKeys[i]));
+//     }
+//     return topNMap;
+// }
 
 /**
  * Auxiliary function to help statistics get average rating for a contact
