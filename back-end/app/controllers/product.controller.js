@@ -141,14 +141,18 @@ const getTotalProducts = async (req, res) => {
  */
 const getMostPopularProduct = async (req, res) => {
     try {
-        const productPopularityStats = await findMostPopularProduct(req.query.userId);
+        const productPopularityStats = await findProductPopularityStats(req.query.userId);
         res.json(productPopularityStats.mostPopularProduct);
     } catch (err) {
         res.status(500).send({ message: err });
     }
 }
 
-const findMostPopularProduct = async (userId) => {
+
+/**
+ * function that finds stats related to product popularity
+ */
+const findProductPopularityStats = async (userId) => {
     const transactions = await transactionController.getAllTransactionsForUser(userId);
 
     // find most popular product and
@@ -177,8 +181,6 @@ const findMostPopularProduct = async (userId) => {
         mostPopularProduct: product.products[0],
         popularityMap: productPopularityMap,
     }
-    console.log(JSON.stringify(popularityStats));
-
     return popularityStats;
 }
 
