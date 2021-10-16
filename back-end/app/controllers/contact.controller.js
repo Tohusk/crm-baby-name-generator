@@ -131,6 +131,9 @@ const deleteAllContacts = async (userId) => {
     await Contacts.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
+/**
+ * given a contactId, returns average satisfaction rating and returns their top (at most) 3 categories
+ */
 const getContactStatistics = async (req, res) => {
     try {
         const transaction = await Transaction.findOne(
@@ -142,7 +145,7 @@ const getContactStatistics = async (req, res) => {
 
         const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
 
-        res.json(avgRating);
+        res.json({averageRating: avgRating});
     } catch (err) {
         res.status(500).send({ message: err });
     }
