@@ -143,7 +143,7 @@ const getContactStatistics = async (req, res) => {
 
         const avgRating = await getContactAvgRating(transaction.transactions);
 
-        const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
+        // const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
 
         res.json({averageRating: avgRating});
     } catch (err) {
@@ -152,7 +152,7 @@ const getContactStatistics = async (req, res) => {
 };
 
 /**
- * Auxiliary function to get top categories of a contact
+ * Auxiliary function to get top (at most) 3 categories of a contact
  */
 const getContactTopCategories = async (transactions, userId) => {
     let categoryCount = new Map();
@@ -161,7 +161,7 @@ const getContactTopCategories = async (transactions, userId) => {
     for (let i = 0; i < transactions.length; i++) {
         // iterate through products in a transaction
         let products = transactions[i].productsPurchased;
-        console.log(JSON.stringify(products));
+
         for (let j = 0; j < products.length; j++) {
             // search for product using productId
             let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
@@ -190,9 +190,25 @@ const getContactTopCategories = async (transactions, userId) => {
         }
     }
 
-    // sort categoryCount map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
-    const sortedCount = new Map([...categoryCount.entries()].sort((a, b) => b[1] - a[1]));
-    console.log(sortedCount);
+    return getTopNMap(categoryCount, 3);
+}
+
+/**
+ * sorts map and returns at most top n items
+ * @param map
+ * @param n
+ * @returns {Promise<Map<any, any>>}
+ */
+const getTopNMap = async (map, n) => {
+    // sort map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
+    const sortedMapKeys = (new Map([...map.entries()].sort((a, b) => b[1] - a[1]))).keys();
+    const topNMap = new Map();
+
+    // i < n because we only want top n items
+    for (let i = 0; i < sortedMapKeys.size && i < n; i++) {
+        topNMap.set(sortedMapKeys[i], map.get(sortedMapKeys[i]));
+    }
+    return topNMap;
 }
 
 /**
