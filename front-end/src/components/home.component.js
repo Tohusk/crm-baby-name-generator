@@ -40,11 +40,10 @@ export default class Home extends Component {
                 </div>
                 <div className="home-stats">
 
-                    <div className="home-stats-card">
+                    {/* <div className="home-stats-card">
                         <div className="overview-card-heading">Total Customers</div>
                         <div className="overview-card-stat">20</div>
-                    </div>
-
+                    </div> */}
                     <div className="home-stats-card">
                         <div className="overview-card-heading">Satisfaction Score {">"} 4.0</div>
                         <div className="overview-card-stat">51%</div>
@@ -56,6 +55,10 @@ export default class Home extends Component {
                     <div className="home-stats-card">
                         <div className="overview-card-heading">Most Popular Product</div>
                         <div className="overview-card-stat">Bananas</div>
+                    </div>
+                    <div className="home-stats-card">
+                        <div className="overview-card-heading">Average Revenue</div>
+                        <div className="overview-card-stat">$6200</div>
                     </div>
                     
                 </div>
