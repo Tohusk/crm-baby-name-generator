@@ -218,6 +218,7 @@ export default class AddTransProductForm extends React.Component {
             console.log(total);
             return (
                 <SelectedProduct
+                    key={product.productId}
                     product={product}
                     handleTotal={calcTotal}
                     deleteProduct={deleteProduct}
