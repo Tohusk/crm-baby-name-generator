@@ -4,9 +4,9 @@
 
 const db = require("../models");
 const Contacts = db.contacts;
-// const Product = db.product;
+const Product = db.product;
 const Transaction = db.transaction;
-// const Category = db.category;
+const Category = db.category;
 const mongoose = require("mongoose");
 
 /**
@@ -133,7 +133,7 @@ const deleteAllContacts = async (userId) => {
 };
 
 /**
- * given a contactId, returns average satisfaction rating and returns their top (at most) 3 categories
+ * given a contactId, returns average satisfaction rating and returns their top (at most) 3 categories with category counts
  */
 const getContactStatistics = async (req, res) => {
     try {
@@ -144,9 +144,10 @@ const getContactStatistics = async (req, res) => {
 
         const avgRating = await getContactAvgRating(transaction.transactions);
 
-        // const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
+        const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
 
-        res.json({averageRating: avgRating});
+        res.json({ averageRating: avgRating,
+                   topCategories: topCategories });
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -155,63 +156,65 @@ const getContactStatistics = async (req, res) => {
 /**
  * Auxiliary function to get top (at most) 3 categories of a contact
  */
-// const getContactTopCategories = async (transactions, userId) => {
-//     let categoryCount = new Map();
+const getContactTopCategories = async (transactions, userId) => {
+    let categoryCount = new Map();
 
-//     // iterate through every transaction
-//     for (let i = 0; i < transactions.length; i++) {
-//         // iterate through products in a transaction
-//         let products = transactions[i].productsPurchased;
+    // iterate through every transaction
+    for (let i = 0; i < transactions.length; i++) {
+        // iterate through products in a transaction
+        let products = transactions[i].productsPurchased;
+        //console.log(JSON.stringify(products));
+        for (let j = 0; j < products.length; j++) {
+            // search for product using productId
+            let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
+            {products: { $elemMatch: { _id: mongoose.Types.ObjectId(products[j]["productId"]) }}});
 
-//         for (let j = 0; j < products.length; j++) {
-//             // search for product using productId
-//             let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
-//             {products: { $elemMatch: { _id: mongoose.Types.ObjectId(products[j]["productId"]) }}});
+            // get the value from the "categoryId" field
+            let categoryId = product["products"][0]["categoryId"];
 
-//             // get the value from the "categoryId" field
-//             let categoryId = product["products"][0]["categoryId"];
+            // categories are optional for products. Skip if product doesn't have categoryId
+            if (categoryId == null)
+                continue;
 
-//             // categories are optional for products. Skip if product doesn't have categoryId
-//             if (categoryId == null)
-//                 continue;
+            // Do a similar thing as above but this time, getting categoryName
+            let category = await Category.findOne({user: mongoose.Types.ObjectId(userId)}).select({
+                categories: { $elemMatch: { _id: mongoose.Types.ObjectId(categoryId) } }
+            });
 
-//             // Do a similar thing as above but this time, getting categoryName
-//             let category = await Category.findOne({user: mongoose.Types.ObjectId(userId)}).select({
-//                 categories: { $elemMatch: { _id: mongoose.Types.ObjectId(categoryId) } }
-//             });
+            let categoryName = category["categories"][0]["name"];
 
-//             let categoryName = category["categories"][0]["name"];
+            // increment categoryCount
+            if (categoryCount.has(categoryName))
+                categoryCount.set(categoryName, categoryCount.get(categoryName)+1);
+            else
+                categoryCount.set(categoryName, 1);
 
-//             // increment categoryCount
-//             if (categoryCount.has(categoryName))
-//                 categoryCount.set(categoryName, categoryCount.get(categoryName)+1);
-//             else
-//                 categoryCount.set(categoryName, 1);
-//             console.log(categoryCount);
-//         }
-//     }
+        }
+    }
 
-//     return getTopNMap(categoryCount, 3);
-// }
+    return getTopNMap(categoryCount, 3);
+}
 
 /**
- * sorts map and returns at most top n items
+ * sorts map and returns a JSON object that contains the top n items (if map has less than n items, a sorted map is returned)
  * @param map
  * @param n
- * @returns {Promise<Map<any, any>>}
+ * @returns {Promise<{}>}
  */
-// const getTopNMap = async (map, n) => {
-//     // sort map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
-//     const sortedMapKeys = (new Map([...map.entries()].sort((a, b) => b[1] - a[1]))).keys();
-//     const topNMap = new Map();
+const getTopNMap = async (map, n) => {
+    // sort map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
+    // then get the keys from that sorted map and put said keys into an array
+    const sortedMapKeys = Array.from((new Map([...map.entries()].sort((a, b) => b[1] - a[1]))).keys());
 
-//     // i < n because we only want top n items
-//     for (let i = 0; i < sortedMapKeys.size && i < n; i++) {
-//         topNMap.set(sortedMapKeys[i], map.get(sortedMapKeys[i]));
-//     }
-//     return topNMap;
-// }
+    let topnJSON = {};  // returning a JSON obj
 
+    // i < n because we only want top n items
+    for (let i = 0; i < sortedMapKeys.length && i < n; i++) {
+        topnJSON[sortedMapKeys[i]] = map.get(sortedMapKeys[i]);
+    }
+    console.log(topnJSON);
+    return topnJSON;
+}
 /**
  * Auxiliary function to help statistics get average rating for a contact
  */
