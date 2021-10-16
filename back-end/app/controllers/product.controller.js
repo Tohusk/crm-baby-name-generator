@@ -195,7 +195,6 @@ const getProductStats = async (req, res) => {
         }
         res.json(productStats);
     } catch (err) {
-        console.log(err);
         res.status(500).send({ message: err });
     }
 }
