@@ -154,44 +154,44 @@ const getContactStatistics = async (req, res) => {
 /**
  * Auxiliary function to get top (at most) 3 categories of a contact
  */
-const getContactTopCategories = async (transactions, userId) => {
-    let categoryCount = new Map();
+// const getContactTopCategories = async (transactions, userId) => {
+//     let categoryCount = new Map();
 
-    // iterate through every transaction
-    for (let i = 0; i < transactions.length; i++) {
-        // iterate through products in a transaction
-        let products = transactions[i].productsPurchased;
+//     // iterate through every transaction
+//     for (let i = 0; i < transactions.length; i++) {
+//         // iterate through products in a transaction
+//         let products = transactions[i].productsPurchased;
 
-        for (let j = 0; j < products.length; j++) {
-            // search for product using productId
-            let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
-            {products: { $elemMatch: { _id: mongoose.Types.ObjectId(products[j]["productId"]) }}});
+//         for (let j = 0; j < products.length; j++) {
+//             // search for product using productId
+//             let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
+//             {products: { $elemMatch: { _id: mongoose.Types.ObjectId(products[j]["productId"]) }}});
 
-            // get the value from the "categoryId" field
-            let categoryId = product["products"][0]["categoryId"];
+//             // get the value from the "categoryId" field
+//             let categoryId = product["products"][0]["categoryId"];
 
-            // categories are optional for products. Skip if product doesn't have categoryId
-            if (categoryId == null)
-                continue;
+//             // categories are optional for products. Skip if product doesn't have categoryId
+//             if (categoryId == null)
+//                 continue;
 
-            // Do a similar thing as above but this time, getting categoryName
-            let category = await Category.findOne({user: mongoose.Types.ObjectId(userId)}).select({
-                categories: { $elemMatch: { _id: mongoose.Types.ObjectId(categoryId) } }
-            });
+//             // Do a similar thing as above but this time, getting categoryName
+//             let category = await Category.findOne({user: mongoose.Types.ObjectId(userId)}).select({
+//                 categories: { $elemMatch: { _id: mongoose.Types.ObjectId(categoryId) } }
+//             });
 
-            let categoryName = category["categories"][0]["name"];
+//             let categoryName = category["categories"][0]["name"];
 
-            // increment categoryCount
-            if (categoryCount.has(categoryName))
-                categoryCount.set(categoryName, categoryCount.get(categoryName)+1);
-            else
-                categoryCount.set(categoryName, 1);
-            console.log(categoryCount);
-        }
-    }
+//             // increment categoryCount
+//             if (categoryCount.has(categoryName))
+//                 categoryCount.set(categoryName, categoryCount.get(categoryName)+1);
+//             else
+//                 categoryCount.set(categoryName, 1);
+//             console.log(categoryCount);
+//         }
+//     }
 
-    return getTopNMap(categoryCount, 3);
-}
+//     return getTopNMap(categoryCount, 3);
+// }
 
 /**
  * sorts map and returns at most top n items
