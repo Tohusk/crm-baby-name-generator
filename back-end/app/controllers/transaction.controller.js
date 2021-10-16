@@ -30,7 +30,7 @@ const newTransaction = async (req, res) => {
             contactId: mongoose.Types.ObjectId(req.body.contactId),
             productsPurchased: parsePurchaseList(req, res),
             transactionRating: req.body.transactionRating,
-            total: req.body.total,
+            dateAdded: new Date(),
         };
 
         // add a transaction to a user's transaction list
@@ -58,6 +58,7 @@ function parsePurchaseList(req, res) {
             const newProductPurchase = {
                 productId: mongoose.Types.ObjectId(req.body.productsPurchased[idx].productId),
                 quantity: req.body.productsPurchased[idx].quantity,
+                price: req.body.productsPurchased[idx].price,
             };
             newProductsPurchased.push(newProductPurchase);
         }

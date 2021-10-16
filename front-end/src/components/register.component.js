@@ -11,6 +11,7 @@ import AuthService from "../services/auth.service";
 import img from "../assets/img-signup.png";
 import logo from "../assets/logo.png";
 
+// If argument is empty, then return a div bar warning message
 const required = (value) => {
     if (!value) {
         return (
@@ -117,6 +118,11 @@ export default class Register extends Component {
                     message: res.data.message,
                     successful: true,
                 });
+
+                // Redirect to login page for user to login
+                //TODO: implement auto login after registering and redirect to home
+                this.props.history.push("/login");
+                window.location.reload();
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();

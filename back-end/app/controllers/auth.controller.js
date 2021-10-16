@@ -127,6 +127,8 @@ const signin = async (req, res) => {
     res.status(200).send({
         id: user._id,
         email: user.email,
+        name: user.name,
+        businessName: user.businessName,
         roles: authorities,
         accessToken: token,
     });

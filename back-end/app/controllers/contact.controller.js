@@ -33,6 +33,7 @@ const newContact = async (req, res) => {
             phoneNumber: req.body.phoneNumber,
             companyName: req.body.companyName,
             description: req.body.description,
+            dateAdded: new Date(),
         };
 
         // add a contact to a user's contact list

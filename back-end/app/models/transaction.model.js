@@ -37,7 +37,7 @@ const Transaction = mongoose.model(
                 transactionRating: {
                     type: Number,
                 },
-                
+                dateAdded: Date,
             },
         ],
     })

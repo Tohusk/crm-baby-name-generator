@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-
+import { withRouter } from "react-router";
 import logo from "../assets/logo.png";
 
 import "../styles/Sidebar.css";
 
-export default class Sidebar extends Component {
+class Sidebar extends Component {
     constructor(props) {
         super(props);
+        this.handleLogout = this.handleLogout.bind(this);
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
         };
+    }
+
+    handleLogout() {
+        AuthService.logout();
+        this.props.history.push("/login");
     }
 
     render() {
@@ -110,7 +116,7 @@ export default class Sidebar extends Component {
                     </div>
                 </a>
                 {/* implement logout logic */}
-                <a className="side-text-link" href="/login">
+                <button className="side-text-button" onClick={this.handleLogout}>
                     <div className="side-text">
                         <span className="sidebar-icon-container">
                             <svg
@@ -133,8 +139,10 @@ export default class Sidebar extends Component {
                         </span>
                         Log out
                     </div>
-                </a>
+                </button>
             </div>
         );
     }
 }
+
+export default withRouter(Sidebar);

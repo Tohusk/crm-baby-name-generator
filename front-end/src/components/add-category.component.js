@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
+import CategoryService from "../services/category.service";
 import "../styles/AddItem.css";
+import CategoryList from "./category-list.component";
+import { Redirect } from "react-router";
 
+
+// If argument is empty, then return a div bar warning message
 const required = (value) => {
     if (!value) {
         return (
@@ -19,23 +25,44 @@ const required = (value) => {
 export default class AddCategory extends Component {
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
-        this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeBusinessName = this.onChangeBusinessName.bind(this);
+        this.onChangeColour = this.onChangeColour.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.showAddForm = this.showAddForm.bind(this);
+        this.hideForm = this.hideForm.bind(this);
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
-            name: "",
-            phoneNumber: "",
-            email: "",
-            description: "",
-            businessName: "",
-            loading: false,
             message: "",
+            loading: false,
+            showAddForm: false,
+            name: "",
+            colour: "#000000",
         };
+    }
+
+    showAddForm() {
+        this.setState({
+            showAddForm: true,
+        });
+    }
+
+    hideForm() {
+        this.setState({
+            showAddForm: false,
+        });
+    }
+
+    onChangeName(e) {
+        this.setState({
+            name: e.target.value,
+        });
+    }
+
+    onChangeColour(e) {
+        this.setState({
+            colour: e.target.value,
+        });
     }
 
     async handleSubmit(e) {
@@ -49,10 +76,28 @@ export default class AddCategory extends Component {
         this.form.validateAll();
 
         if (this.checkBtn.context._errors.length === 0) {
-            this.setState({
-                loading: false,
-                message: "Not implemented",
-            });
+            try {
+                const res = await CategoryService.addNewCategory(
+                    this.state.name,
+                    this.state.colour,
+                    this.state.currentUser.id
+                );
+                // Give success message
+                this.setState({
+                    message: res.data.message,
+                    loading: false,
+                });
+
+                // Refresh the category list (probs better way by rerendering individual component)
+                window.location.reload();
+            } catch (err) {
+                const resMessage =
+                    (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                this.setState({
+                    message: resMessage,
+                    loading: false,
+                });
+            }
         } else {
             this.setState({
                 loading: false,
@@ -60,99 +105,99 @@ export default class AddCategory extends Component {
         }
     }
 
-    onChangeName(e) {
-        this.setState({
-            name: e.target.value,
-        });
-    }
-
-    onChangePhoneNumber(e) {
-        this.setState({
-            phoneNumber: e.target.value,
-        });
-    }
-
-    onChangeEmail(e) {
-        this.setState({
-            email: e.target.value,
-        });
-    }
-
-    onChangeDescription(e) {
-        this.setState({
-            description: e.target.value,
-        });
-    }
-
-    onChangeBusinessName(e) {
-        this.setState({
-            businessName: e.target.value,
-        });
-    }
-
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div className="addItem-container">
-                {/*Page Name*/}
+                <div className="addCategory-smallText">
+                    <a className="addCategory-backButton"href="/addproduct">                    
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-arrow-left-short"
+                            viewBox="0 0 16 16"
+                        >
+                        <path
+                            fillRule="evenodd"
+                            d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+                        />
+                        </svg> 
+                        Back 
+                    </a>
+                </div>
                 <div className="addItem-title">Edit Categories</div>
                 <div className="addCategory-list-container">
-                    <h1>CATEGORIES</h1>
-                    <ul className="addCategory-list">
-                        {/* Probably add image of colour of category next to category name */}
-                        <li>
-                            Fruit
-                            <button className="addCategory-deleteCategory">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-x"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                </svg>
-                            </button>
-                        </li>
-                        <li>
-                            Vegetable
-                            <button className="addCategory-deleteCategory">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-x"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                </svg>
-                            </button>
-                        </li>
-                        <li>
-                            Bread
-                            <button className="addCategory-deleteCategory">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-x"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                </svg>
-                            </button>
-                        </li>
-                    </ul>
-                    <button className="addCategory-addCategory">+ Add Category</button>
-                </div>
-                <div className="addCategory-submit-group">
-                    <a className="addCategory-cancelButton" href="/home">
-                        Cancel
-                    </a>
-                    {/* Add functionality to button to add category */}
-                    <button className="submitButton">Save</button>
+                    <p>CATEGORIES</p>
+                    <div className="overview-flex-container">
+                        <CategoryList />
+                    </div>
+
+                    {this.state.showAddForm ? (
+                        <Form
+                            className="addCategory-form"
+                            onSubmit={this.handleSubmit}
+                            ref={(c) => {
+                                this.form = c;
+                            }}
+                        >
+                            <div className="addCategory-form-group">
+                                <label htmlFor="name">NAME</label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.onChangeName}
+                                    validations={[required]}
+                                />
+                                <label htmlFor="colour">Colour</label>
+                                <Input
+                                    type="color"
+                                    className="form-control"
+                                    name="colour"
+                                    value={this.state.colour}
+                                    onChange={this.onChangeColour}
+                                    validations={[required]}
+                                />
+                            </div>
+                            <div className="addCategory-submit-group">
+                                <button onClick={this.hideForm} className="addCategory-cancelButton" href="/home">
+                                    Cancel
+                                </button>
+                                <button className="submitButton" disabled={this.state.loading}>
+                                    {this.state.loading && <span className="spinner-border spinner-border-sm"></span>}
+                                    Add
+                                </button>
+                            </div>
+
+                            {this.state.message && (
+                                <div className="authentication-form-group">
+                                    <div className="alert alert-danger" role="alert">
+                                        {this.state.message}
+                                    </div>
+                                </div>
+                            )}
+
+                            <CheckButton
+                                style={{ display: "none" }}
+                                ref={(c) => {
+                                    this.checkBtn = c;
+                                }}
+                            />
+                        </Form>
+                    ) : null}
+
+                    <button onClick={this.showAddForm} className="addCategory-addCategory">
+                        + Add Category
+                    </button>
                 </div>
             </div>
         );

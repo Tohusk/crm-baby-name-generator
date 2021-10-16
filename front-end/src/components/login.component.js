@@ -10,6 +10,7 @@ import AuthService from "../services/auth.service";
 import img from "../assets/img-login.png";
 import logo from "../assets/logo.png";
 
+// If argument is empty, then return a div bar warning message
 const required = (value) => {
     if (!value) {
         return (
@@ -60,6 +61,8 @@ export default class Login extends Component {
         if (this.checkBtn.context._errors.length === 0) {
             try {
                 await AuthService.login(this.state.email, this.state.password);
+                // After successful login, redirect to homepage
+                //TODO: Better way to both display successful login and redirect
                 this.props.history.push("/home");
                 window.location.reload();
             } catch (err) {

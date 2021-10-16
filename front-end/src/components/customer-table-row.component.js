@@ -1,24 +1,50 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import { Redirect } from "react-router";
 
 export default class CustomerTableRow extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+
+        this.state = {
+            redirect: false,
+        };
+    }
+
+    handleClick(e) {
+        this.setState({
+            redirect: true,
+        });
+    }
+
     render() {
         return (
-            <tr>
-                <td>{this.props.customer._id}</td>
+            <tr className="overview-table-row" onClick={this.handleClick}>
+                {this.state.redirect ? 
+                (
+                <Redirect to={{
+                    pathname: "/customer-profile",
+                    state: { contactId: this.props.customer._id },
+                }}/>
+                ) 
+                : null
+                }
+                <td>{this.props.id}</td>
                 <td>{this.props.customer.name}</td>
                 <td>{this.props.customer.email}</td>
+                <td>{this.props.customer.satisfactionScore ? this.props.customer.satisfactionScore : "N/A"}</td>
+                <td>
+                    <div className="category-containerTable">
+                        <div className="category-containerTag" style={{ background: "#ffd873" }}>
+                            Fruits
+                        </div>
+                        <div className="category-containerTag" style={{ background: "#e0bdfb" }}>
+                            Veges
+                        </div>
+                    </div>
+                </td>
                 {/* <td>{this.props.obj.score}</td> */}
                 {/* <td>{this.props.obj.categories}</td> */}
-                <td>
-                    <Link className="edit-link" to={"/customer-profile/" + this.props.customer._id}>
-                        View
-                    </Link>
-                    {/* <Button size="sm" variant="danger">
-                        Delete
-                    </Button> */}
-                </td>
             </tr>
         );
     }

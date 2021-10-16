@@ -88,3 +88,11 @@
     background-color: #6c76a3;
     color: white;
 }
+
+.overview-table-row {
+    cursor: pointer;
+}
+
+.overview-no-data-title {
+    margin-left: 5%;
+}

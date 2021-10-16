@@ -7,6 +7,7 @@ import AutoCompleteText from "./search-autocomplete.component";
 import AddTransProductForm from "./add-trans-products.component";
 
 import "../styles/AddItem.css";
+import { Redirect } from "react-router";
 
 export default class AddTransaction extends Component {
     constructor(props) {
@@ -136,6 +137,13 @@ export default class AddTransaction extends Component {
 
     render() {
       // const {customers} = this.state;
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
           <div>
             <div className="addItem-container">
