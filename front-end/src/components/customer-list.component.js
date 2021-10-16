@@ -42,10 +42,6 @@ export default class CustomerList extends Component {
             const res = await ContactService.getAllCustomers(this.state.currentUser.id);
             this.setState({
                 customers: res.data,
-
-                // customer_id: res.data.customers._id,
-                // customer_name: res.data.customers.name,
-                // customer_email: res.data.customers.email,
             });
         } catch (err) {
             alert(err);

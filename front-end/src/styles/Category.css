@@ -1,6 +1,8 @@
 .category-containerProfile {
     border: none;
-    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    padding-left: 10px;
     display: flex;
 }
 
