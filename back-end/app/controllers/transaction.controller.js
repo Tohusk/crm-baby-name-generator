@@ -111,12 +111,20 @@ const getTransaction = async (req, res) => {
  */
 const getAllTransactions = async (req, res) => {
     try {
-        const allTransactions = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
-        res.json(allTransactions.transactions);
+        const allTransactions = await getAllTransactionsForUser(req.query.userId);
+        res.json(allTransactions);
     } catch (err) {
         res.status(500).send({ message: err });
     }
 };
+
+/**
+ * Method for the logic of getting all the transactions of a user from db
+ */
+const getAllTransactionsForUser = async (userId) => {
+    const allTransaction = await Transaction.findOne({ user: userId });
+    return allTransaction.transactions;
+}
 
 /**
  * Controller for deleting one transaction
@@ -140,6 +148,23 @@ const deleteAllTransactions = async (userId) => {
     await Transaction.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
+/**
+ * Gets all transactions from the past 7 days for a user
+ */
+/*const getPastWeekTransactions = async (userId) => {
+    const WEEK_LENGTH = 7;
+    const today = new Date();
+    let sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - WEEK_LENGTH);
+
+    const transactionsPastWeek = await Transaction.findOne({
+        user: mongoose.Types.ObjectId(userId),
+        transactions: { $elemMatch: { dateAdded: { $gte: sevenDaysAgo } } }
+    });
+
+    return transactionsPastWeek.transactions;
+}*/
+
 module.exports = {
     initialiseTransaction,
     newTransaction,
@@ -148,4 +173,6 @@ module.exports = {
     getAllTransactions,
     deleteOneTransaction,
     deleteAllTransactions,
+    //getPastWeekTransactions,
+    getAllTransactionsForUser,
 };

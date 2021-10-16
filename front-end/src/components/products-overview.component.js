@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+import ProductService from "../services/product.service"
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import ProductList from "./product-list.component";
@@ -9,6 +10,7 @@ import { Redirect } from "react-router";
 import "../styles/Home.css";
 import "../styles/Overview.css";
 import CategoryOverview from "./category-overview.component";
+import CategoryService from "../services/category.service";
 
 export default class Products extends Component {
     constructor(props) {
@@ -16,7 +18,24 @@ export default class Products extends Component {
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
+            totalProducts: 0,
+            mostPopularProduct: 'N/A',
         };
+    }
+
+    async componentDidMount() {
+        try {
+            const total = await ProductService.getTotalProducts(this.state.currentUser.id);
+            const mostPopular = await ProductService.getMostPopularProduct(this.state.currentUser.id);
+            this.setState({
+                totalProducts: total.data,
+                mostPopularProduct: mostPopular.data.name ? mostPopular.data.name : 'N/A',
+            });
+        } catch (err) {
+            this.setState({
+                totalProducts: 'N/A',
+            });
+        }
     }
 
     render() {
@@ -45,11 +64,11 @@ export default class Products extends Component {
                 <div className="overview-flex-container">
                     <div className="overview-stats-card">
                         <div className="overview-card-heading">Total Products</div>
-                        <div className="overview-card-stat">20</div>
+                        <div className="overview-card-stat">{this.state.totalProducts}</div>
                     </div>
                     <div className="overview-stats-card">
-                        <div className="overview-card-heading">Top Product of the Week</div>
-                        <div className="overview-card-stat">Apples (500g)</div>
+                        <div className="overview-card-heading">Most Popular Product</div>
+                        <div className="overview-card-stat">{this.state.mostPopularProduct}</div>
                     </div>
                     <div className="overview-stats-card">
                         <div className="overview-card-heading">Products by Categories (chart)</div>
@@ -58,14 +77,6 @@ export default class Products extends Component {
                 <div className="overview-subheading">Categories</div>
                 <div className="category-flex-container">
                     <CategoryOverview></CategoryOverview>
-                    {/*<div className="category-containerProductOverview">
-                        <div className="category-containerTag" style={{ background: "#ffd873" }}>
-                            Fruits
-                        </div>
-                        <div className="category-containerTag" style={{ background: "#e0bdfb" }}>
-                            Veges
-                        </div>
-                    </div>*/}
                     <div className="overview-button-box">
                         <Link
                             to="/addCategory"
