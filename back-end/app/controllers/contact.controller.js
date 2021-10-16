@@ -4,9 +4,9 @@
 
 const db = require("../models");
 const Contacts = db.contacts;
-// const Product = db.product;
+const Product = db.product;
 const Transaction = db.transaction;
-// const Category = db.category;
+const Category = db.category;
 const mongoose = require("mongoose");
 
 /**
