@@ -18,6 +18,8 @@ class CustomerProfile extends Component {
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             currentContact: "",
+            averageRating: '',
+            topCategories: [],
         };
     }
 
@@ -53,18 +55,35 @@ class CustomerProfile extends Component {
     async componentDidMount() {
         try {
             // contactId is specified in customer-table-row
-            const res = await ContactService.getOneCustomer(
+            const customer = await ContactService.getOneCustomer(
                 this.state.currentUser.id,
                 this.props.location.state.contactId
             );
+
+            const stats = await ContactService.getContactStatistics(this.state.currentUser.id, this.props.location.state.contactId);
             this.setState({
-                currentContact: res.data,
+                currentContact: customer.data,
+                averageRating: stats.data.averageRating ? (Math.round(stats.data.averageRating * 100) / 100).toFixed(1) : 'N/A',
+                topCategories: stats.data.topCategories,
             });
         } catch (err) {
             this.setState({
                 currentContact: "",
             });
         }
+    }
+
+    displayCategories() {
+        if (this.state.topCategories.length === 0) {
+            return (<div>N/A</div>);
+        }
+        return this.state.topCategories.map((currentCategory) => {
+            return (
+                <div key={currentCategory.id} className="category-containerTag" style={{ background: currentCategory.colour }}>
+                    {currentCategory.name}
+                </div>
+            );
+        });
     }
 
     render() {
@@ -156,20 +175,11 @@ class CustomerProfile extends Component {
                     <div className="customerProfile-score-container">
                         <div className="customerProfile-smallerText">SATISFACTION SCORE</div>
                         <div className="customerProfile-userText">
-                            {this.state.currentContact.satisfactionScore ? (
-                                this.state.currentContact.satisfactionScore
-                            ) : (
-                                <div>N/A</div>
-                            )}
+                            {<td>{this.state.averageRating}</td>}
                         </div>
                         <div className="customerProfile-smallerText">PREFERRED CATEGORY</div>
                         <div className="category-containerProfile">
-                            <div className="category-containerTag" style={{ background: "#ffd873" }}>
-                                Fruits
-                            </div>
-                            <div className="category-containerTag" style={{ background: "#e0bdfb" }}>
-                                Veges
-                            </div>
+                            {this.displayCategories()}
                         </div>
                     </div>
                 </div>

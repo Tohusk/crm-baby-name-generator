@@ -17,8 +17,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 
-// TODO: ensure that a new list is initialised and deleted when new users are created or removed
-
 /**
  * controller for a signup request
  */

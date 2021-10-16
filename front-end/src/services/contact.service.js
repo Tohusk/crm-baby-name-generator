@@ -43,6 +43,10 @@ class ContactService {
     async getAllCustomers(userId) {
         return axios.get(API_URL + "getAll?userId=" + userId);
     }
+
+    async getContactStatistics(userId, contactId) {
+        return axios.get(API_URL + "getContactStatistics?contactId=" + contactId + "&userId=" + userId);
+    }
 }
 
 export default new ContactService();

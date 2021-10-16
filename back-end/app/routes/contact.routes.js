@@ -27,5 +27,7 @@ module.exports = function (app) {
 
     app.get("/api/contact/getAll", controller.getAllContacts);
 
+    app.get("/api/contact/getContactStatistics", controller.getContactStatistics);
+
     app.delete("/api/contact/deleteOne", controller.deleteOneContact);
 };
