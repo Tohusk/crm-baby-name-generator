@@ -58,8 +58,8 @@ export default class CustomerList extends Component {
         if (this.state.customers.length === 0) {
             return ;
         }
-        return this.state.customers.map((currentcustomer, i) => {
-            return <CustomerTableRow customer={currentcustomer} key={i} id={i + 1} />;
+        return this.state.customers.map((currentCustomer, i) => {
+            return <CustomerTableRow customer={currentCustomer} key={i} id={i + 1} />;
         });
     }
 
@@ -81,20 +81,6 @@ export default class CustomerList extends Component {
                     </thead>
                     <tbody>
                         {this.displayTable()}
-                        {/* <tr>
-                          <td>1</td>
-                          <td>Mark Otto</td>
-                          <td>otto123@example.com</td>
-                          <td>4.0</td>
-                          <td>Fruit, Vegetable, Dairy</td>
-                      </tr>
-                      <tr>
-                          <td>2</td>
-                          <td>Bob The Bird</td>
-                          <td>bobbird@example.com</td>
-                          <td>4.5</td>
-                          <td>Bread, Fruit, Dairy</td>
-                      </tr> */}
                     </tbody>
                 </Table>
                 }

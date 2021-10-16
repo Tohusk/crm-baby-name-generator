@@ -7,6 +7,7 @@ import { Redirect } from "react-router";
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
+import TransactionList from "./transaction-list.component";
 
 export default class Sales extends Component {
     constructor(props) {
@@ -56,32 +57,7 @@ export default class Sales extends Component {
                 <div className="overview-subheading">Recent Transaction History</div>
 
                 <div className="overview-flex-container">
-                    <div className="overview-table-wrapper">
-                        <Table bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Date</th>
-                                    <th>Customer Name</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>01/02/2020 4:15PM</td>
-                                    <td>Tom Smith</td>
-                                    <td>$60.00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>01/02/2020 7:15PM</td>
-                                    <td>Mark Otto</td>
-                                    <td>$10.50</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </div>
+                    <TransactionList></TransactionList>
                 </div>
             </div>
         );
