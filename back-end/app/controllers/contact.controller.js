@@ -137,18 +137,32 @@ const deleteAllContacts = async (userId) => {
  */
 const getContactStatistics = async (req, res) => {
     try {
-        const transaction = await Transaction.findOne(
-        {user: mongoose.Types.ObjectId(req.query.userId),
-        transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }}
+        const queryResponse = await Transaction.findOne(
+        {user: mongoose.Types.ObjectId(req.query.userId)/*,
+        transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }*/}
         );
 
-        const avgRating = await getContactAvgRating(transaction.transactions);
+        if (!queryResponse || queryResponse.transactions.length == 0) {
+            res.json({ averageRating: null,
+                topCategories: [] });
+            return;
+        }
+        const transactions = queryResponse.transactions;
+        const transactionsByThisCustomer = [];
+        for (const t of transactions) {
+            if (t.contactId.toString() === req.query.contactId.toString()) {
+                transactionsByThisCustomer.push(t);
+            }
+        }
 
-        const topCategories = await getContactTopCategories(transaction.transactions, req.query.userId);
+        const avgRating = await getContactAvgRating(transactionsByThisCustomer);
+
+        const topCategories = await getContactTopCategories(transactionsByThisCustomer, req.query.userId);
 
         res.json({ averageRating: avgRating,
                    topCategories: topCategories });
     } catch (err) {
+        console.log(err);
         res.status(500).send({ message: err });
     }
 };
@@ -163,58 +177,48 @@ const getContactTopCategories = async (transactions, userId) => {
     for (let i = 0; i < transactions.length; i++) {
         // iterate through products in a transaction
         let products = transactions[i].productsPurchased;
-        //console.log(JSON.stringify(products));
         for (let j = 0; j < products.length; j++) {
             // search for product using productId
             let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
             {products: { $elemMatch: { _id: mongoose.Types.ObjectId(products[j]["productId"]) }}});
-
             // get the value from the "categoryId" field
-            let categoryId = product["products"][0]["categoryId"];
+            let categoryId = product["products"][0]["categoryId"]?.toString();
 
             // categories are optional for products. Skip if product doesn't have categoryId
             if (categoryId == null)
                 continue;
 
-            // Do a similar thing as above but this time, getting categoryName
-            let category = await Category.findOne({user: mongoose.Types.ObjectId(userId)}).select({
-                categories: { $elemMatch: { _id: mongoose.Types.ObjectId(categoryId) } }
-            });
-
-            let categoryName = category["categories"][0]["name"];
-
             // increment categoryCount
-            if (categoryCount.has(categoryName))
-                categoryCount.set(categoryName, categoryCount.get(categoryName)+1);
+            if (categoryCount.has(categoryId))
+                categoryCount.set(categoryId, categoryCount.get(categoryId) + products[j].quantity);
             else
-                categoryCount.set(categoryName, 1);
+                categoryCount.set(categoryId, products[j].quantity);
 
         }
     }
 
-    return getTopNMap(categoryCount, 3);
-}
+    // sort categories by count
+    const sortedCategories = new Map([...categoryCount.entries()].sort((a, b) => b[1] - a[1]));
 
-/**
- * sorts map and returns a JSON object that contains the top n items (if map has less than n items, a sorted map is returned)
- * @param map
- * @param n
- * @returns {Promise<{}>}
- */
-const getTopNMap = async (map, n) => {
-    // sort map (sort code from https://stackoverflow.com/questions/37982476/how-to-sort-a-map-by-value-in-javascript)
-    // then get the keys from that sorted map and put said keys into an array
-    const sortedMapKeys = Array.from((new Map([...map.entries()].sort((a, b) => b[1] - a[1]))).keys());
+    // get top 3 into a list
+    let count = 0;
+    let topCategories = [];
+    for (const c of sortedCategories.keys()) {
+        const queryResponse = await Category.findOne({user: mongoose.Types.ObjectId(userId)}).select({
+            categories: { $elemMatch: { _id: mongoose.Types.ObjectId(c) } }
+        });
+        const oneCategory = queryResponse.categories[0];
+        topCategories.push(oneCategory);
 
-    let topnJSON = {};  // returning a JSON obj
-
-    // i < n because we only want top n items
-    for (let i = 0; i < sortedMapKeys.length && i < n; i++) {
-        topnJSON[sortedMapKeys[i]] = map.get(sortedMapKeys[i]);
+        count++;
+        if (count == 3) {
+            break;
+        }
     }
-    console.log(topnJSON);
-    return topnJSON;
+
+    return topCategories;
 }
+
 /**
  * Auxiliary function to help statistics get average rating for a contact
  */
@@ -230,11 +234,11 @@ const getContactAvgRating = async (transactions) => {
     }
 
     if (n === 0)
-        return {"average score": 0};
+        return 0;
 
     const avg = sum/n;
 
-    return {"average score": avg};
+    return avg;
 };
 
 module.exports = {
