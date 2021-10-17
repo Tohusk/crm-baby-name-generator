@@ -47,6 +47,10 @@ class ContactService {
     async getContactStatistics(userId, contactId) {
         return axios.get(API_URL + "getContactStatistics?contactId=" + contactId + "&userId=" + userId);
     }
+
+    async getUserAvgRating(userId) {
+        return axios.get(API_URL + "getUserAvgRating?userId=" + userId);
+    }
 }
 
 export default new ContactService();
