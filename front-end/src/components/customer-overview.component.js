@@ -22,30 +22,18 @@ export default class Customers extends Component {
 
     async componentDidMount() {
         try {
+            const res = await ContactService.getUserAvgRating(this.state.currentUser.id);
             const allContacts = await ContactService.getAllCustomers(this.state.currentUser.id);
             const numContacts = allContacts.data.length;
-            let total = 0;
-            let validScoreContacts = 0;
-            for (const contact of allContacts.data) {
-                const res = await ContactService.getContactStatistics(this.state.currentUser.id, contact._id);
-                if (res.data.averageRating !== 0) {
-                    total += res.data.averageRating;
-                    validScoreContacts += 1;
-                }
-            }
-            
-            if (validScoreContacts === 0) {
+
+            if (res.data.avgUserRating !== null) {
                 this.setState({
-                    avgScore: 'N/A',
+                    avgScore: res.data.avgUserRating,
                     totalContacts: numContacts,
                 });
             }
             else {
-                let avgScore = total / validScoreContacts;
-                avgScore = Math.round(avgScore * 100) / 100;
-
                 this.setState({
-                    avgScore: avgScore,
                     totalContacts: numContacts,
                 });
             }
