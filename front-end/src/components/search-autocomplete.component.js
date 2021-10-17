@@ -58,6 +58,8 @@ export default class AutoCompleteText extends React.Component {
 
         return (
             <div>
+            {/* <div className="addTransaction-sub-container">
+            <div className="addTransaction-subtitle">Select Customer</div> */}
             <div className="AutoCompleteText">
                 {/* <form onSubmit={this.onTrigger}> */}
                     <input 
@@ -74,6 +76,7 @@ export default class AutoCompleteText extends React.Component {
             </div>
             <br />
             <button className="addTransaction-add-button" onClick={this.onTrigger}>Select</button>
+            {/* </div> */}
             </div>
         )
     }
