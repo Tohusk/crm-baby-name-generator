@@ -66,6 +66,16 @@
     color: #444;
 }
 
+.overview-chart-heading{
+    position: relative;
+    /* padding: 1em; */
+    /* padding-top: 0.5em; */
+    padding-bottom: 1em;
+    font-size: 1em;
+    font-weight:bold;
+    color: #444;
+}
+
 .overview-card-stat{
     position: relative;
     /* padding: 1em; */
