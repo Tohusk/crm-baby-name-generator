@@ -26,10 +26,17 @@ export default class Customers extends Component {
         // Loop through all contacts and find dates to make labels,
         // number of customers on those dates is data
         const customerDatesHashMap = {};
+        let total = 0;
         for (const contact of allContacts) {
             if (contact.dateAdded !== undefined) {
-                customerDatesHashMap[contact.dateAdded.substring(0, 10)] =
-                    (customerDatesHashMap[contact.dateAdded.substring(0, 10)] || 0) + 1;
+                if (!customerDatesHashMap[contact.dateAdded.substring(0, 10)]) {
+                    customerDatesHashMap[contact.dateAdded.substring(0, 10)] =
+                        (customerDatesHashMap[contact.dateAdded.substring(0, 10)] || 0) + total + 1;
+                } else {
+                    customerDatesHashMap[contact.dateAdded.substring(0, 10)] =
+                        (customerDatesHashMap[contact.dateAdded.substring(0, 10)] || 0) + 1;
+                }
+                total++;
             }
         }
 
