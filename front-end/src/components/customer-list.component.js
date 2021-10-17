@@ -56,7 +56,7 @@ export default class CustomerList extends Component {
 
     displayTable() {
         if (this.state.customers.length === 0) {
-            return ;
+            return;
         }
         return this.state.customers.map((currentcustomer, i) => {
             return <CustomerTableRow customer={currentcustomer} key={i} id={i + 1} />;
@@ -66,22 +66,22 @@ export default class CustomerList extends Component {
     render() {
         return (
             <div className="overview-table-wrapper">
-                {this.state.customers.length === 0 ?
-                <div className="overview-no-data-title">No Customers Found</div>
-                :
-                <Table bordered hover>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Satisfaction Score</th>
-                            <th>Preferred Categories</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.displayTable()}
-                        {/* <tr>
+                {this.state.customers.length === 0 ? (
+                    <div className="overview-no-data-title">No Customers Found</div>
+                ) : (
+                    <Table bordered hover>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Satisfaction Score</th>
+                                <th>Preferred Categories</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.displayTable()}
+                            {/* <tr>
                           <td>1</td>
                           <td>Mark Otto</td>
                           <td>otto123@example.com</td>
@@ -95,9 +95,9 @@ export default class CustomerList extends Component {
                           <td>4.5</td>
                           <td>Bread, Fruit, Dairy</td>
                       </tr> */}
-                    </tbody>
-                </Table>
-                }
+                        </tbody>
+                    </Table>
+                )}
             </div>
         );
     }

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-import ProductService from "../services/product.service"
+import ProductService from "../services/product.service";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import ProductList from "./product-list.component";
 import { Redirect } from "react-router";
-
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
@@ -19,7 +18,7 @@ export default class Products extends Component {
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             totalProducts: 0,
-            mostPopularProduct: 'N/A',
+            mostPopularProduct: "N/A",
         };
     }
 
@@ -29,22 +28,20 @@ export default class Products extends Component {
             const mostPopular = await ProductService.getMostPopularProduct(this.state.currentUser.id);
             this.setState({
                 totalProducts: total.data,
-                mostPopularProduct: mostPopular.data.name ? mostPopular.data.name : 'N/A',
+                mostPopularProduct: mostPopular.data.name ? mostPopular.data.name : "N/A",
             });
         } catch (err) {
             this.setState({
-                totalProducts: 'N/A',
+                totalProducts: "N/A",
             });
         }
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div>

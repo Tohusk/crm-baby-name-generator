@@ -95,7 +95,7 @@ class AddProduct extends Component {
                     message: res.data.message,
                     loading: false,
                 });
-                this.props.history.push('/products');
+                this.props.history.push("/products");
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
@@ -112,12 +112,10 @@ class AddProduct extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div className="addItem-container">

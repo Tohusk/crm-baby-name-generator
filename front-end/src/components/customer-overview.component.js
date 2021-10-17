@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CustomerList from "./customer-list.component";
 import ContactService from "../services/contact.service";
 import { Redirect } from "react-router";
-import { Line } from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
@@ -15,7 +15,7 @@ export default class Customers extends Component {
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
-            avgScore: 'N/A',
+            avgScore: "N/A",
             totalContacts: 0,
             labels: [],
             datasets: [],
@@ -23,13 +23,13 @@ export default class Customers extends Component {
     }
 
     getGraphData(allContacts) {
-        
         // Loop through all contacts and find dates to make labels,
         // number of customers on those dates is data
         const customerDatesHashMap = {};
         for (const contact of allContacts) {
             if (contact.dateAdded !== undefined) {
-                customerDatesHashMap[contact.dateAdded.substring(0,10)] = (customerDatesHashMap[contact.dateAdded.substring(0,10)] || 0) + 1;
+                customerDatesHashMap[contact.dateAdded.substring(0, 10)] =
+                    (customerDatesHashMap[contact.dateAdded.substring(0, 10)] || 0) + 1;
             }
         }
 
@@ -40,17 +40,19 @@ export default class Customers extends Component {
             data.push(customerDatesHashMap[entry]);
         }
 
-        const datasets = [{
-            data: data,
-            fill: true,
-            borderColor: 'rgb(82, 137, 223)',
-            backgroundColor: 'rgba(165, 222, 255, 0.4)'
-        }]
+        const datasets = [
+            {
+                data: data,
+                fill: true,
+                borderColor: "rgb(82, 137, 223)",
+                backgroundColor: "rgba(165, 222, 255, 0.4)",
+            },
+        ];
 
         this.setState({
             labels: labels,
             datasets: datasets,
-        })
+        });
     }
 
     async componentDidMount() {
@@ -69,47 +71,47 @@ export default class Customers extends Component {
             }
         } catch (err) {
             this.setState({
-                avgScore: 'N/A',
-                totalContacts: 'N/A',
+                avgScore: "N/A",
+                totalContacts: "N/A",
             });
         }
     }
 
     showCustomerChart() {
         if (this.state.labels.length === 0) {
-            return (<div className="overview-card-stat">No Data</div>);
+            return <div className="overview-card-stat">No Data</div>;
         } else {
-            return (<Line 
-                data={{
-                    labels: this.state.labels,
-                    datasets: this.state.datasets,
-                }} 
-                height={100}
-                options={{
-                    plugins: {
-                        legend: {
-                            display: false,
+            return (
+                <Line
+                    data={{
+                        labels: this.state.labels,
+                        datasets: this.state.datasets,
+                    }}
+                    height={100}
+                    options={{
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
                         },
-                    },
-                    scales: {
-                        yAxes: {
-                            ticks: {
-                                stepSize: 1,
-                            }
-                        }
-                    }
-                }}
-            />);
+                        scales: {
+                            yAxes: {
+                                ticks: {
+                                    stepSize: 1,
+                                },
+                            },
+                        },
+                    }}
+                />
+            );
         }
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div>
