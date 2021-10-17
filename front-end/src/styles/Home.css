@@ -14,15 +14,55 @@
     margin-left: 5em;
 }
 
-.home-overview{
-    height: 10em;
-    margin-left: 10em;
+.home-charts{
+    /* background: chartreuse; */
+    display: flex;
+    margin-bottom: 5vh;
 }
-.home-overview-stats{
-    float: left;
-    border: 0.1em solid rgb(0, 0, 0);
-    border-radius: 2em;
-    height: 10em;
-    width: 21em;
-    margin-right: 2em;
+
+.home-stats{
+    /* background: chartreuse; */
+    display: flex;
+    margin-bottom: 5vh;
+    margin-left: 5vw;
 }
+
+.home-bar-overview{
+    margin: 2%;
+    margin-left: 5%;
+    width: 50%;
+    /* background: chartreuse; */
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    text-align: center;
+    padding: 2%;
+}
+
+.home-pie-overview{
+    margin: 2%;
+    margin-left: 5%;
+    height: 10%;
+    width: 30%;
+    /* background: chartreuse; */
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    text-align: center;
+    padding: 2%;
+}
+
+
+.home-stats-card{
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    height: 100%;
+    text-align: center;
+    margin: 1%;
+    margin-left: 3%;
+    padding: 2%;
+}
+
+
+
