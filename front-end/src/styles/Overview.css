@@ -6,6 +6,16 @@
     align-self: center;
 }
 
+.overview-product-flex-container {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    margin-right: 30%;
+    margin-left: 5%;
+}
+
 .overview-pagename{
     position: relative;
     /* padding: 1em; */
@@ -33,6 +43,12 @@
     margin-left: 1%;
 }
 
+.overview-product-stats {
+    flex-grow: 1;
+    margin-left: 1%;
+    margin-right: 10%
+}
+
 .overview-stats-card{
     border-radius: 20px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
@@ -45,6 +61,18 @@
     margin-bottom: 8%;
 }
 
+.overview-product-stats-card{
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    height: 100%;
+    width: 70%;
+    text-align: center;
+    margin: 1%;
+    padding: 2%;
+    margin-bottom: 4%;
+}
+
 .overview-graph-card{
     border-radius: 20px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
@@ -54,6 +82,19 @@
     margin: 1%;
     padding: 2%;
     flex-basis: 70%;
+}
+
+.overview-pie-chart-card{
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    height: 25%;
+    width: 35%;
+    text-align: center;
+    margin: 1%;
+    padding: 2%;
+    margin-bottom: 5%;
+    /*flex-basis: 70%;*/
 }
 
 .overview-card-heading{
