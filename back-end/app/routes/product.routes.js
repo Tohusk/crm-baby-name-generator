@@ -40,4 +40,6 @@ module.exports = function (app) {
     app.get("/api/product/getTotal", controller.getTotalProducts);
 
     app.get("/api/product/getMostPopular", controller.getMostPopularProduct);
+
+    app.get("/api/product/getStats", controller.getProductStats);
 };

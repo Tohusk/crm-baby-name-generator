@@ -162,7 +162,6 @@ const getContactStatistics = async (req, res) => {
         res.json({ averageRating: avgRating,
                    topCategories: topCategories });
     } catch (err) {
-        console.log(err);
         res.status(500).send({ message: err });
     }
 };

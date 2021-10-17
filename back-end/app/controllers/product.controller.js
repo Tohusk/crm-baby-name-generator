@@ -6,6 +6,7 @@ const db = require("../models");
 const Product = db.product;
 const mongoose = require("mongoose");
 const transactionController = require("./transaction.controller");
+const Category = db.category;
 
 /**
  * Controller for initalise a user's product list
@@ -148,6 +149,55 @@ const getMostPopularProduct = async (req, res) => {
     }
 }
 
+const getProductStats = async (req, res) => {
+    try {
+        // find most popular product
+        const productPopularityStats = await findProductPopularityStats(req.query.userId);
+        const mostPopularProduct = productPopularityStats.mostPopularProduct;
+        const productPopularityMap = productPopularityStats.popularityMap;
+
+        // find category popularity
+        let categoryPopularityMap = new Map();
+        for (const p of productPopularityMap.keys()) {
+            const dbQuery = await getOneProduct(req.query.userId, mongoose.Types.ObjectId(p));
+            const product = dbQuery.products[0];
+            const categoryId = product.categoryId.toString();
+
+            if (!categoryPopularityMap.get(categoryId)) {
+                categoryPopularityMap.set(categoryId, productPopularityMap.get(p));
+            } else {
+                categoryPopularityMap.set(categoryId, categoryPopularityMap.get(categoryId) + productPopularityMap.get(p));
+            }
+        }
+
+        // convert category map to list
+        const categoryList = [];
+        for (const c of categoryPopularityMap.keys()) {
+            const queryResponse = await Category.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
+                categories: { $elemMatch: { _id: mongoose.Types.ObjectId(c) } },
+            });
+
+            const category = queryResponse.categories[0];
+
+            const categoryInfo = {
+                _id : category._id,
+                name : category.name,
+                colour : category.colour,
+                count : categoryPopularityMap.get(c),
+            }
+            categoryList.push(categoryInfo);
+        }
+
+        // send back response
+        const productStats = {
+            mostPopularProduct: mostPopularProduct,
+            categoryStats: categoryList,
+        }
+        res.json(productStats);
+    } catch (err) {
+        res.status(500).send({ message: err });
+    }
+}
 
 /**
  * function that finds stats related to product popularity
@@ -195,4 +245,5 @@ module.exports = {
     deleteAllProducts,
     getTotalProducts,
     getMostPopularProduct,
+    getProductStats,
 };
