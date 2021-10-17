@@ -5,12 +5,9 @@ import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import ProductList from "./product-list.component";
 import { Redirect } from "react-router";
-
-
 import "../styles/Home.css";
 import "../styles/Overview.css";
 import CategoryOverview from "./category-overview.component";
-import CategoryService from "../services/category.service";
 import {Pie} from "react-chartjs-2";
 
 export default class Products extends Component {
@@ -64,6 +61,26 @@ export default class Products extends Component {
         }
     }
 
+    showCategoryChart() {
+        if (this.state.labels.length === 0) {
+            return (<div className="overview-card-stat">No Data</div>);
+        } else {
+            return (<Pie
+                data={{
+                    labels: this.state.labels,
+                    datasets: this.state.datasets,
+                }}
+                options={{
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                }}
+            />);
+        }
+    }
+
     render() {
         if (AuthService.getCurrentUser() == null){
             alert("Please login first.");
@@ -97,19 +114,7 @@ export default class Products extends Component {
                     </div>
                     <div className="overview-stats-card">
                         <div className="overview-chart-heading">Popularity by Categories</div>
-                        <Pie
-                            data={{
-                                labels: this.state.labels,
-                                datasets: this.state.datasets,
-                            }}
-                            options={{
-                                plugins: {
-                                    legend: {
-                                        display: false,
-                                    }
-                                },
-                            }}
-                        />
+                        <div>{this.showCategoryChart()}</div>
                     </div>
                 </div>
                 <div className="overview-subheading">Categories</div>
