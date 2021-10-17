@@ -27,14 +27,15 @@ export default class Customers extends Component {
         // number of customers on those dates is data
         const customerDatesHashMap = {};
         let total = 0;
+        customerDatesHashMap[' '] = total;
         for (const contact of allContacts) {
             if (contact.dateAdded !== undefined) {
-                if (!customerDatesHashMap[contact.dateAdded.substring(0, 10)]) {
-                    customerDatesHashMap[contact.dateAdded.substring(0, 10)] =
-                        (customerDatesHashMap[contact.dateAdded.substring(0, 10)] || 0) + total + 1;
+                if (!customerDatesHashMap[contact.dateAdded.substring(0, 7)]) {
+                    customerDatesHashMap[contact.dateAdded.substring(0, 7)] =
+                        (customerDatesHashMap[contact.dateAdded.substring(0, 7)] || 0) + total + 1;
                 } else {
-                    customerDatesHashMap[contact.dateAdded.substring(0, 10)] =
-                        (customerDatesHashMap[contact.dateAdded.substring(0, 10)] || 0) + 1;
+                    customerDatesHashMap[contact.dateAdded.substring(0, 7)] =
+                        (customerDatesHashMap[contact.dateAdded.substring(0, 7)] || 0) + 1;
                 }
                 total++;
             }
