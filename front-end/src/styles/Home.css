@@ -64,5 +64,14 @@
     padding: 2%;
 }
 
+.home-chart-heading{
+    position: relative;
+    /* padding: 1em; */
+    /* padding-top: 0.5em; */
+    /* padding-bottom: 1em; */
+    font-size: 2em;
+    font-weight:bold;
+    color: #444;
+}
 
 

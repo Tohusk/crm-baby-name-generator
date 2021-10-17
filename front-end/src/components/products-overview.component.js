@@ -84,7 +84,6 @@ export default class Products extends Component {
     render() {
         if (AuthService.getCurrentUser() == null){
             alert("Please login first.");
-
                 return(
                     <Redirect to={{ pathname: '/login' }} />
                 )

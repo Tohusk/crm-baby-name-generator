@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Pie } from 'react-chartjs-2';
 
-const data = {
+/*const data = {
   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
   datasets: [
     {
@@ -26,15 +26,59 @@ const data = {
       borderWidth: 1,
     },
   ],
-};
+};*/
 
-const PieChart = () => (
-  <>
-    <div className='header'>
-      <h1 className='title'>Pie Chart</h1>
-    </div>
-    <Pie data={data} />
-  </>
-);
+export default class PieChart extends Component {
+  constructor(props) {
+    super(props);
 
-export default PieChart;
+    const labelList = [];
+    const colourList = [];
+    const dataList = [];
+    for (const c of this.props.categoryChartStat) {
+      labelList.push(c.name);
+      colourList.push(c.colour);
+      dataList.push(c.count);
+    }
+
+    const datasetList = [{
+      backgroundColor: colourList,
+      data: dataList,
+    }]
+
+    this.state = {
+      labels: labelList,
+      datasets: datasetList,
+    };
+  }
+
+  showChart() {
+    if (this.state.labels.length === 0) {
+      return "No Data";
+    } else {
+      return (
+          <div>
+            <div className='home-chart-heading'>Category Popularity</div>
+            <Pie
+              data={{
+                labels: this.state.labels,
+                datasets: this.state.datasets,
+              }}
+              options={{
+                plugins: {
+                  legend: {
+                    display: true,
+                  },
+                },
+              }}
+            />
+          </div>);
+    }
+  }
+  // Colour background of table row with colour of category
+  render() {
+    return (
+        <div>{this.showChart()}</div>
+    );
+  }
+}
