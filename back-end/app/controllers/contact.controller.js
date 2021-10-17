@@ -240,8 +240,54 @@ const getContactAvgRating = async (transactions) => {
     return avg;
 };
 
+const getUserAvgRating = async (req, res) => {
+    try {
+        const queryResponse = await Transaction.findOne(
+            {user: mongoose.Types.ObjectId(req.query.userId)/*,
+            transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }*/}
+        );
+    
+        // if no transactions recorded for the user
+        if (!queryResponse || queryResponse.transactions.length == 0) {
+            res.json({ avgUserRating: null });
+            return;
+        }
+    
+        const transactions = queryResponse.transactions;
+        const contacts = await Contacts.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
+
+        let total = 0;
+        let validScoreContacts = 0;
+        
+        for (const contact of contacts.customers) {
+            const transactionsByThisCustomer = [];
+            for (const t of transactions) {
+                if (t.contactId.toString() === contact._id.toString()) {
+                    transactionsByThisCustomer.push(t);
+                }
+            }
+    
+            const avgRating = await getContactAvgRating(transactionsByThisCustomer);
+            if (avgRating !== 0) {
+                validScoreContacts += 1;
+                total += avgRating;
+            }
+        }
+    
+        let avgUserRating = total / validScoreContacts;
+        avgUserRating = Math.round(avgUserRating * 100) / 100;
+    
+        res.json({ avgUserRating: avgUserRating });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: err });
+    }
+    
+}
+
 module.exports = {
     getContactStatistics,
+    getUserAvgRating,
     initialiseContact,
     newContact,
     updateContact,
