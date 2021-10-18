@@ -23,7 +23,7 @@ const Transaction = mongoose.model(
                 ],
                 contactId: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "Contact",
+                    ref: "Contacts",
                     required: true,
                 },
                 transactionRating: {

@@ -27,7 +27,7 @@ export default class CustomerTableRow extends Component {
             const res = await ContactService.getContactStatistics(this.state.currentUser.id, this.props.customer._id);
             this.setState({
                 averageRating: res.data.averageRating
-                    ? (Math.round(res.data.averageRating * 100) / 100).toFixed(1)
+                    ? (Math.round(res.data.averageRating * 100) / 100).toFixed(2)
                     : "N/A",
                 topCategories: res.data.topCategories,
             });
