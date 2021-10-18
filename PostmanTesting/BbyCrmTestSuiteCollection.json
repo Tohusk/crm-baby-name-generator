@@ -1625,7 +1625,7 @@
                       "const p1 = response.productsPurchased[0];\r",
                       "const p2 = response.productsPurchased[1];\r",
                       "\r",
-                      "pm.test(\"Got the right category back\", () => {\r",
+                      "pm.test(\"Got the right transaction back\", () => {\r",
                       "    pm.expect(response).to.be.an('object');\r",
                       "    pm.expect(p1.productId).to.eql(pm.environment.get(\"productId3\"));\r",
                       "    pm.expect(p1.quantity).to.eql(parseFloat(pm.environment.get(\"transactionQuantity1_1\")));\r",
