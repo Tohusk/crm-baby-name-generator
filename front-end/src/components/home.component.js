@@ -74,16 +74,20 @@ export default class Home extends Component {
         }
     }
 
+    displayRatingsChart() {
+        if (this.state.categoryChartStat.length === 0) {
+            return (<div className="overview-card-stat">No Data</div>);
+        } else {
+            return (<VerticalBar ratingsFreq={this.state.ratingsFreq}/>);
+        }
+    }
+
     displayCategoryChart() {
         if (this.state.categoryChartStat.length === 0) {
             return (<div className="overview-card-stat">No Data</div>);
         } else {
             return (<PieChart categoryChartStat={this.state.categoryChartStat}/>);
         }
-    }
-
-    displayRatingsChart() {
-
     }
 
     render() {
@@ -97,16 +101,15 @@ export default class Home extends Component {
                 <div className="overview-pagename">Home</div>
                 <div className="home-charts">
                     <div className="home-bar-overview">
-                        <VerticalBar ratingsFreq={this.state.ratingsFreq}/>
+                        <div className='home-chart-heading'>Transaction Ratings</div>
+                        <div>{this.displayRatingsChart()}</div>
                     </div>
-                    <div className="home-pie-overview">{this.displayCategoryChart()}</div>
+                    <div className="home-pie-overview">
+                        <div className='home-chart-heading'>Category Popularity</div>
+                        <div>{this.displayCategoryChart()}</div>
+                    </div>
                 </div>
                 <div className="home-stats">
-
-                    {/* <div className="home-stats-card">
-                        <div className="overview-card-heading">Total Customers</div>
-                        <div className="overview-card-stat">20</div>
-                    </div> */}
                     <div className="home-stats-card">
                         <div className="overview-card-heading">Average Satisfaction Score</div>
                         <div className="overview-card-stat">{this.state.avgSatisfactionScore}</div>
