@@ -202,11 +202,15 @@ const getSalesStats = async (req, res) => {
             }
         }
 
-        const ratingsArray = Array.from(ratingsMap, ([name, value]) => value);
-        console.log(ratingsArray);
+        const ratingsArray = [];
+
+        for (const t of ratingsMap.keys()) {
+            ratingsArray.push(ratingsMap.get(t));
+        }
 
         const stats = {
             totalRevenue: totalRevenue,
+            ratingsFreq: ratingsArray,
         }
 
         res.json(stats);

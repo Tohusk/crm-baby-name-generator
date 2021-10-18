@@ -47,7 +47,7 @@ export default class Sales extends Component {
     }
 
     displayRatingsGraph() {
-        if (this.state.ratingsFreq.length ===0) {
+        if (this.state.ratingsFreq.length === 0) {
             return <div className="overview-card-stat">No Data</div>;
         } else {
             return (
@@ -120,7 +120,7 @@ export default class Sales extends Component {
                     </div>
                     <div className="overview-graph-card">
                         <div className="overview-card-heading">Transaction Ratings</div>
-                        <div className="overview-card-stat">{this.displayRatingsGraph()}</div>
+                        <div>{this.displayRatingsGraph()}</div>
                     </div>
                 </div>
                 <div className="overview-subheading">Recent Transaction History</div>
