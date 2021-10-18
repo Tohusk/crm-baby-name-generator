@@ -17,6 +17,7 @@ const Contacts = mongoose.model(
                 phoneNumber: String,
                 companyName: String,
                 description: String,
+                dateAdded: Date,
             },
         ],
     })

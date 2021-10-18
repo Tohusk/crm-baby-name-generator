@@ -3,6 +3,7 @@ import AuthService from "../services/auth.service";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import { Redirect } from "react-router";
 
 import "../styles/Home.css";
 import "../styles/Overview.css";
@@ -17,13 +18,20 @@ export default class Sales extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div>
                 {/*Page Name*/}
                 <div className="overview-pagename">Sales</div>
                 <div className="overview-button-box">
                     <Link
-                        to="/add-sales"
+                        to="/addtransaction"
                         className="overview-add-btn"
                         // style={{ textDecoration: "none" }}
                     >

@@ -26,10 +26,14 @@ const initialiseTransaction = async (userId) => {
  */
 const newTransaction = async (req, res) => {
     try {
+        const total = calcTotal(req.body.productsPurchased);
+
         const newTransaction = {
             contactId: mongoose.Types.ObjectId(req.body.contactId),
             productsPurchased: parsePurchaseList(req, res),
             transactionRating: req.body.transactionRating,
+            transactionTotal: total,
+            dateAdded: new Date(),
         };
 
         // add a transaction to a user's transaction list
@@ -43,6 +47,7 @@ const newTransaction = async (req, res) => {
         );
         res.send({ message: "New transaction added successfully!" });
     } catch (err) {
+        console.log(err);
         res.status(500).send({ message: err });
     }
 };
@@ -67,6 +72,14 @@ function parsePurchaseList(req, res) {
     }
 }
 
+const calcTotal = (purchases) => {
+    let total = 0;
+    for (const p of purchases) {
+        total += p.quantity * p.price;
+    }
+    return total;
+}
+
 /**
  * Controller for updating a transaction
  */
@@ -82,6 +95,7 @@ const updateTransaction = async (req, res) => {
                     "transactions.$.contactId": req.body.contactId,
                     "transactions.$.productsPurchased": parsePurchaseList(req, res),
                     "transactions.$.transactionRating": req.body.transactionRating,
+                    "transactions.$.transactionTotal": calcTotal(req.body.productsPurchased),
                 },
             }
         );
@@ -99,7 +113,7 @@ const getTransaction = async (req, res) => {
         const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.transactionId) } },
         });
-        res.json(transaction.transactions[0]);
+        res.json(transaction.transactions[0]);  // 0th index gives productsPurchased
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -110,12 +124,20 @@ const getTransaction = async (req, res) => {
  */
 const getAllTransactions = async (req, res) => {
     try {
-        const allTransactions = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
-        res.json(allTransactions.transactions);
+        const allTransactions = await getAllTransactionsForUser(req.query.userId);
+        res.json(allTransactions);
     } catch (err) {
         res.status(500).send({ message: err });
     }
 };
+
+/**
+ * Method for the logic of getting all the transactions of a user from db
+ */
+const getAllTransactionsForUser = async (userId) => {
+    const allTransaction = await Transaction.findOne({ user: userId });
+    return allTransaction.transactions;
+}
 
 /**
  * Controller for deleting one transaction
@@ -139,6 +161,23 @@ const deleteAllTransactions = async (userId) => {
     await Transaction.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
+/**
+ * Gets all transactions from the past 7 days for a user
+ */
+/*const getPastWeekTransactions = async (userId) => {
+    const WEEK_LENGTH = 7;
+    const today = new Date();
+    let sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - WEEK_LENGTH);
+
+    const transactionsPastWeek = await Transaction.findOne({
+        user: mongoose.Types.ObjectId(userId),
+        transactions: { $elemMatch: { dateAdded: { $gte: sevenDaysAgo } } }
+    });
+
+    return transactionsPastWeek.transactions;
+}*/
+
 module.exports = {
     initialiseTransaction,
     newTransaction,
@@ -147,4 +186,6 @@ module.exports = {
     getAllTransactions,
     deleteOneTransaction,
     deleteAllTransactions,
+    //getPastWeekTransactions,
+    getAllTransactionsForUser,
 };

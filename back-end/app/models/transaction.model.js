@@ -29,6 +29,8 @@ const Transaction = mongoose.model(
                 transactionRating: {
                     type: Number,
                 },
+                transactionTotal: Number,
+                dateAdded: Date,
             },
         ],
     })

@@ -1,32 +1,7 @@
 import React, { Component } from "react";
 
-import UserService from "../services/user.service";
-
 export default class Landing extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            content: "",
-        };
-    }
-
-    async componentDidMount() {
-        try {
-            const response = await UserService.getPublicContent();
-            this.setState({
-                content: response.data,
-            });
-        } catch (err) {
-            this.setState({
-                content: (err.response && err.response.data) || err.message || err.toString(),
-            });
-        }
-    }
-
     render() {
-        return (
-            <div>UwU</div>
-        );
+        return <div>UwU</div>;
     }
 }

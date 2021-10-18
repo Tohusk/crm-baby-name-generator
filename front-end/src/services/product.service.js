@@ -11,6 +11,31 @@ class ProductService {
             userId,
         });
     }
+
+    async getAllProducts(userId) {
+        return axios.get(API_URL + "getAll?userId=" + userId);
+    }
+
+    async deleteProduct(userId, productId) {
+        return axios.delete(API_URL + "deleteOne", {
+            data: {
+                userId: userId,
+                productId: productId,
+            },
+        });
+    }
+
+    async getTotalProducts(userId) {
+        return axios.get(API_URL + "getTotal?userId=" + userId);
+    }
+
+    async getMostPopularProduct(userId) {
+        return axios.get(API_URL + "getMostPopular?userId=" + userId);
+    }
+
+    async getProductStats(userId) {
+        return axios.get(API_URL + "getStats?userId=" + userId);
+    }
 }
 
 export default new ProductService();

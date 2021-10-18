@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import CustomerTableRow from "./customer-table-row.component";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import ContactService from "../services/contact.service";
 
 // const showCustomers = (props) => (
 //     <tr>
@@ -36,23 +37,15 @@ export default class CustomerList extends Component {
         };
     }
 
-    componentDidMount() {
-        axios
-            .get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser.id)
-            .then((res) => {
-                this.setState({
-                    customers: res.data,
-
-                    // customer_id: res.data.customers._id,
-                    // customer_name: res.data.customers.name,
-                    // customer_email: res.data.customers.email,
-                });
-                console.log(res.data);
-                //console.log(res.data.customers);
-            })
-            .catch((error) => {
-                console.log(error);
+    async componentDidMount() {
+        try {
+            const res = await ContactService.getAllCustomers(this.state.currentUser.id);
+            this.setState({
+                customers: res.data,
             });
+        } catch (err) {
+            alert(err);
+        }
     }
 
     // dataTable(){
@@ -62,22 +55,28 @@ export default class CustomerList extends Component {
     // }
 
     displayTable() {
+        if (this.state.customers.length === 0) {
+            return ;
+        }
         return this.state.customers.map((currentcustomer, i) => {
-            return <CustomerTableRow customer={currentcustomer} key={i} />;
+            return <CustomerTableRow customer={currentcustomer} key={i} id={i + 1} />;
         });
     }
 
     render() {
         return (
             <div className="overview-table-wrapper">
+                {this.state.customers.length === 0 ?
+                <div className="overview-no-data-title">No Customers Found</div>
+                :
                 <Table bordered hover>
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            {/* <th>Satisfaction Score</th>
-                          <th>Preferred Categories</th> */}
+                            <th>Satisfaction Score</th>
+                            <th>Preferred Categories</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,6 +97,7 @@ export default class CustomerList extends Component {
                       </tr> */}
                     </tbody>
                 </Table>
+                }
             </div>
         );
     }

@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+import { withRouter } from "react-router";
+
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import ContactService from "../services/contact.service";
+import { Redirect } from "react-router";
 
 import "../styles/AddItem.css";
 
+// If argument is empty, then return a div bar warning message
 const required = (value) => {
     if (!value) {
         return (
@@ -17,7 +21,7 @@ const required = (value) => {
     }
 };
 
-export default class AddCustomer extends Component {
+class AddCustomer extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,10 +63,13 @@ export default class AddCustomer extends Component {
                     this.state.description,
                     this.state.currentUser.id
                 );
+                // Show success message
                 this.setState({
                     message: res.data.message,
                     loading: false,
                 });
+                this.props.history.push('/customers');
+
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
@@ -109,6 +116,13 @@ export default class AddCustomer extends Component {
     }
 
     render() {
+        if (AuthService.getCurrentUser() == null){
+            alert("Please login first.");
+
+                return(
+                    <Redirect to={{ pathname: '/login' }} />
+                )
+        }
         return (
             <div className="addItem-container">
                 {/*Page Name*/}
@@ -173,7 +187,7 @@ export default class AddCustomer extends Component {
                             className="form-control"
                             name="companyName"
                             value={this.state.companyName}
-                            onChange={this.onChangecompanyName}
+                            onChange={this.onChangeCompanyName}
                         />
                     </div>
 
@@ -206,3 +220,5 @@ export default class AddCustomer extends Component {
         );
     }
 }
+
+export default withRouter(AddCustomer);

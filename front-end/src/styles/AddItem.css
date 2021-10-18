@@ -108,6 +108,14 @@
     flex-wrap: wrap;
     gap: 2vw 20vw;
     margin-left: 2vw;
+    flex-direction: row;
+}
+
+.addTransaction-second-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3vw 21vw;
+    flex-direction: row;
 }
 
 .addTransaction-sub-container {
@@ -129,7 +137,7 @@
     width: 6vw;
     height: 5vh;
     background: #FFD873;
-    align-self: flex-end;
+    
 }
 
 .addTransaction-submit-group {
@@ -148,8 +156,61 @@
     margin-right: 4vw;
 }
 
+.addTransaction-sub-container li{
+    display: flex;
+    flex-direction: row;
+    margin: 0px 0;
+}
+
+.addTransaction-question {
+    font-size: 1.5em;
+}
+
+.addTransaction-buttons-wrapper {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    grid-template-rows: 60px;
+    grid-template-areas: 
+        "producename add qty min delete";
+    gap: 5px 7px;
+    /* justify-items: start; */
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid #c4c4c4;
+
+}
+
+.addTransaction-no-style-button {
+    padding-left: 1em;
+    border: none;
+    background-color: transparent;
+    color: #747474;
+}
+
+.addTransaction-products-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.addTransaction-total {
+    align-self: flex-end;
+}
 
 /* Add category */
+
+.addCategory-smallText{
+    font-size: 1em;
+    color: grey;
+    justify-content: space-around;
+    margin-top: 2em;
+}
+
+.addCategory-backButton {
+    text-decoration: none;
+    color: #747474;
+}
+
+
 .addCategory-list-container {
     margin-top: 3%;
 }
@@ -220,4 +281,35 @@
 	padding: 0;
 	cursor: pointer;
 	outline: inherit;
+}
+
+@media only screen and (max-width:1366px) {
+    .addItem-title{
+        margin-left: 6vw;
+    }
+    .addTransaction-container  {
+        margin-left: 9vw;
+    }
+}
+
+.radio {
+    margin-right: 10px;
+}
+
+.addTrans-form-check-input{
+    display: inline;
+    margin-right: 10px;
+    align-items: center;
+}
+
+.addTrans-products-form{
+    border: none;
+}
+
+.editItem-delete-btn{
+    text-decoration-line: underline;
+    margin-left: 67%;
+    border: none;
+    background-color: transparent;
+    color: #D80707;
 }
