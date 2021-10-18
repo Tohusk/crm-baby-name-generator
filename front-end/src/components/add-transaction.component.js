@@ -146,11 +146,12 @@ export default class AddTransaction extends Component {
         }
         return (
           <div>
-            <div className="addItem-container">
+            <div className="addItem-title">New Transaction</div>
+            <div className="addTransaction-container">
               
               
                     {/*Page Name*/}
-              <div className="addItem-title">New Transaction</div>
+              
               {/* <div className="addTransaction-container">  */}
         {/* <div className="addTransaction-form"> */}
                 
@@ -171,110 +172,19 @@ export default class AddTransaction extends Component {
             {/* <button className="addTransaction-add-button">Add</button> */}
           </div>
           {/* <Form> */}
-          <div className="addTransaction-sub-container">
+          {/* <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Customer:</div>
             <p>{this.state.customer['name']}</p>
-            {/* {this.state.showCustomer && <p>{this.state.customer}</p>} */}
-          </div>
-          <div className="addTransaction-sub-container">
-            <div className="addTransaction-subtitle">Product/s:</div>.
+            
+          </div> */}
+          {/* <div className="addTransaction-sub-container">
+            <div className="addTransaction-subtitle">Product/s:</div> */}
 
             {/* <AddTransProductForm selectedProducts={this.state.products}></AddTransProductForm> */}
             <AddTransProductForm selectedProducts={this.state.products} customer={this.state.customer} userId={this.state.currentUser.id}></AddTransProductForm>
 
-          </div>
-          {/* <div className="addTransaction-sub-container"> */}
-          {/* <div className="addTransaction-form"> */}
-          {/* <Form>
-          <div className="addTransaction-subtitle">How satisfied was the customer? (Optional)</div>
-          <br />
-            
-            
-              <div className="form-check form-check-inline">
-                <label className="radio">
-                  <Input
-                    type="radio"
-                    className="form-check-input"
-                    name="name"
-                    value="1"//{this.state.name}
-                  // onChange={this.onChangeName}
-                  // validations={[required]}
-                  />
-                  Very Unsatisfied (1)              
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="radio">
-                  <Input
-                    type="radio"
-                    className="form-check-input"
-                    name="name"
-                    value="2"//{this.state.name}
-                  // onChange={this.onChangeName}
-                  // validations={[required]}
-                  />
-                  Unsatisfied (2)           
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="radio">
-                  <Input
-                    type="radio"
-                    className="form-check-input"
-                    name="name"
-                    value="3"//{this.state.name}
-                  // onChange={this.onChangeName}
-                  // validations={[required]}
-                  />
-                  Neutral (3)              
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="radio">
-                  <Input
-                    type="radio"
-                    className="form-check-input"
-                    name="name"
-                    value="4"//{this.state.name}
-                  // onChange={this.onChangeName}
-                  // validations={[required]}
-                  />
-                  Satisfied (4)              
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="radio">
-                  <Input
-                    type="radio"
-                    className="form-check-input"
-                    name="name"
-                    value="5"//{this.state.name}
-                  // onChange={this.onChangeName}
-                  // validations={[required]}
-                  />
-                  Very Satisfied (5)              
-                </label>
-              </div>
-              <div className="addTransaction-submit-group">
-                <a className="addTransaction-cancelButton" href="/home">Cancel</a>
-                <button
-                className="submitButton"
-                >
-                  Done
-                </button>
-              </div>
-            </Form> */}
-            
-
-          {/* <div className="addTransaction-submit-group">
-            <a className="addTransaction-cancelButton" href="/home">Cancel</a>
-            <button
-              className="submitButton"
-            >
-              Done
-            </button>
-          </div> */}
-        {/* </div> */}
+          {/* </div> */}
+         
       </div>
       </div>
 

@@ -55,28 +55,34 @@ class SelectedProduct extends React.Component {
     }
 
     render() {
-
+        const productTotal = this.props.product.price * this.props.product.quantity;
         return (
             <div>
-                <div className="row form-group">
+                <div className="addTransaction-buttons-wrapper">
                 
-                    <div className="col-sm-10">
-                        <h4>{this.props.product.name}: ${this.props.product.price}</h4>
-                    </div>
                     
-                    <div className="col-sm-2 text-right">
+                        <div className="addTransaction-question">{this.props.product.name}: ${productTotal}</div>
                         
-                    <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.quantity <= 1}>-</button>
-                    <span>{this.props.product.quantity}</span>
-                    <button className="btn btn-outline-dark" onClick={this.addQty}>+</button>
-                    <button className="btn btn-outline-dark" onClick={this.handleDelete}>Delete</button>
-                                
-
-                    </div>
-                    
-                    
+                            <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.quantity <= 1}>-</button>
+                            <span>{this.props.product.quantity} </span>
+                            <span className="addTransaction-qty-btn"><button className="btn btn-outline-dark" onClick={this.addQty}>+</button></span>
+                            <button className="addTransaction-no-style-button" onClick={this.handleDelete}>x</button>
+                        
+                        
                     
                 </div>
+                
+                    
+                    {/* <div className="addTransaction-products-container">
+                    <h4>{this.props.product.name}: ${this.props.product.price}</h4>
+                    <div className="addTransaction-buttons-wrapper">
+                    <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.quantity <= 1}>-</button>
+                    <span>{this.props.product.quantity} </span>
+                    <button className="btn btn-outline-dark" onClick={this.addQty}>+</button>
+                    <button className="addTransaction-no-style-button" onClick={this.handleDelete}>x</button>
+                    </div> 
+            </div> */}
+
             </div>
         );
     }
@@ -231,13 +237,25 @@ export default class AddTransProductForm extends React.Component {
         console.log(this.state.total);
         return (
             <div>
-                <div>
-                {products}
-                <h3>Total: ${total}</h3>
-                </div>
-                <div>
+                <div className="addTransaction-second-container">
+                    <div className="addTransaction-sub-container">
+                        <div className="addTransaction-subtitle">Customer:</div>
+                            <h4>{this.props.customer['name']}</h4>
+            
+                        </div>
+                    <div className="addTransaction-sub-container">
+                        <div className="addTransaction-subtitle">Product/s:</div>
+                            <div>
+                                {products}
+                                <br />
+                                <h4 className="addTransaction-total">Total: ${total}</h4>
+                            </div>
+                    </div>
+                
                     <br />
-          <div className="addTransaction-subtitle">How satisfied was the customer? (Optional)</div>
+                </div>
+            <div>
+          <div className="addTransaction-question">How satisfied was the customer? (Optional)</div>
           <br />
             
             
@@ -307,7 +325,7 @@ export default class AddTransProductForm extends React.Component {
                 </label>
               </div>
               <div className="addTransaction-submit-group">
-                <a className="addTransaction-cancelButton" href="/home">Cancel</a>
+                <a className="addTransaction-cancelButton" href="/sales">Cancel</a>
                 <button onClick={this.hSumbit} className="submitButton">
                   Submit
                 </button>
@@ -320,6 +338,7 @@ export default class AddTransProductForm extends React.Component {
             <br />
             </div>
             </div>
+            
         );
     }
 

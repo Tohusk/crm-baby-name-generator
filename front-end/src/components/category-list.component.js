@@ -31,7 +31,7 @@ export default class CategoryList extends Component {
 
     displayTable() {
         if (this.state.categories.length === 0) {
-            return <div>No categories to show</div>;
+            return <div>No categories found</div>;
         }
         return this.state.categories.map((currentCategory, i) => {
             return <CategoryTableRow currentUser={this.state.currentUser} category={currentCategory} key={i} />;

@@ -5,12 +5,10 @@ import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import ProductList from "./product-list.component";
 import { Redirect } from "react-router";
-
-
 import "../styles/Home.css";
 import "../styles/Overview.css";
 import CategoryOverview from "./category-overview.component";
-import CategoryService from "../services/category.service";
+import {Pie} from "react-chartjs-2";
 
 export default class Products extends Component {
     constructor(props) {
@@ -20,21 +18,66 @@ export default class Products extends Component {
             currentUser: AuthService.getCurrentUser(),
             totalProducts: 0,
             mostPopularProduct: 'N/A',
+            // for chart
+            labels: [],
+            datasets: [
+                {
+                    backgroundColor: [],
+                    data: []
+                }
+            ],
         };
     }
 
     async componentDidMount() {
         try {
             const total = await ProductService.getTotalProducts(this.state.currentUser.id);
-            const mostPopular = await ProductService.getMostPopularProduct(this.state.currentUser.id);
+            const stats = await ProductService.getProductStats(this.state.currentUser.id);
+
+            const labelList = [];
+            const colourList = [];
+            const dataList = [];
+            for (const c of stats.data.categoryStats) {
+                labelList.push(c.name);
+                colourList.push(c.colour);
+                dataList.push(c.count);
+            }
+
+            const datasetList = [{
+                backgroundColor: colourList,
+                data: dataList,
+            }]
+
             this.setState({
                 totalProducts: total.data,
-                mostPopularProduct: mostPopular.data.name ? mostPopular.data.name : 'N/A',
+                mostPopularProduct: stats.data.mostPopularProduct ? stats.data.mostPopularProduct.name : 'N/A',
+                labels: labelList,
+                datasets: datasetList,
             });
         } catch (err) {
             this.setState({
                 totalProducts: 'N/A',
             });
+        }
+    }
+
+    showCategoryChart() {
+        if (this.state.labels.length === 0) {
+            return (<div className="overview-card-stat">No Data</div>);
+        } else {
+            return (<Pie
+                data={{
+                    labels: this.state.labels,
+                    datasets: this.state.datasets,
+                }}
+                options={{
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                }}
+            />);
         }
     }
 
@@ -59,19 +102,21 @@ export default class Products extends Component {
                         + Add Product
                     </Link>
                 </div>
-                {/* <break></break> */}
                 <div className="overview-subheading">Overview</div>
-                <div className="overview-flex-container">
-                    <div className="overview-stats-card">
-                        <div className="overview-card-heading">Total Products</div>
-                        <div className="overview-card-stat">{this.state.totalProducts}</div>
+                <div className="overview-product-flex-container">
+                    <div className="overview-product-stats">
+                        <div className="overview-stats-card">
+                            <div className="overview-card-heading">Total Products</div>
+                            <div className="overview-card-stat">{this.state.totalProducts}</div>
+                        </div>
+                        <div className="overview-stats-card">
+                            <div className="overview-card-heading">Most Popular Product</div>
+                            <div className="overview-card-stat">{this.state.mostPopularProduct}</div>
+                        </div>
                     </div>
-                    <div className="overview-stats-card">
-                        <div className="overview-card-heading">Most Popular Product</div>
-                        <div className="overview-card-stat">{this.state.mostPopularProduct}</div>
-                    </div>
-                    <div className="overview-stats-card">
-                        <div className="overview-card-heading">Products by Categories (chart)</div>
+                    <div className="overview-pie-chart-card">
+                        <div className="overview-chart-heading">Popularity by Categories</div>
+                        <div>{this.showCategoryChart()}</div>
                     </div>
                 </div>
                 <div className="overview-subheading">Categories</div>
