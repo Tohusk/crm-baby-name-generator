@@ -5,6 +5,7 @@
 const db = require("../models");
 const Transaction = db.transaction;
 const mongoose = require("mongoose");
+const contactController = require("./contact.controller");
 
 /**
  * Controller for initialise a user's transaction list
@@ -125,8 +126,25 @@ const getTransaction = async (req, res) => {
 const getAllTransactions = async (req, res) => {
     try {
         const allTransactions = await getAllTransactionsForUser(req.query.userId);
-        res.json(allTransactions);
+
+        let processedTransactions = [];
+
+        for (const t of allTransactions) {
+            const contact = await contactController.getOneContact(req.query.userId, t.contactId);
+
+            const transactionInfo = {
+                _id: t?._id,
+                contactName: contact?.name,
+                dateAdded: t?.dateAdded,
+                transactionTotal: t?.transactionTotal,
+            }
+
+            processedTransactions.push(transactionInfo);
+        }
+
+        res.json(processedTransactions.reverse());
     } catch (err) {
+        console.log(err);
         res.status(500).send({ message: err });
     }
 };
@@ -162,6 +180,48 @@ const deleteAllTransactions = async (userId) => {
 };
 
 /**
+ * controller for getting stats related to sales
+ */
+const getSalesStats = async (req, res) => {
+    try {
+        const allTransactions = await getAllTransactionsForUser(req.query.userId);
+
+        let totalRevenue = 0;
+        let ratingsMap = new Map([["1", 0], ["2", 0], ["3", 0], ["4", 0], ["5", 0]]);
+
+
+        for (const t of allTransactions) {
+            if (t.transactionTotal) {
+                totalRevenue += t.transactionTotal;
+            }
+
+            if (ratingsMap.get(t.transactionRating.toString())) {
+                ratingsMap.set(t.transactionRating.toString(), ratingsMap.get(t.transactionRating.toString())+1);
+            } else {
+                ratingsMap.set(t.transactionRating.toString(), 1);
+            }
+        }
+
+        const ratingsArray = [];
+
+        for (const t of ratingsMap.keys()) {
+            ratingsArray.push(ratingsMap.get(t));
+        }
+
+        const stats = {
+            totalRevenue: totalRevenue,
+            ratingsFreq: ratingsArray,
+        }
+
+        res.json(stats);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: err });
+    }
+}
+
+/**
  * Gets all transactions from the past 7 days for a user
  */
 /*const getPastWeekTransactions = async (userId) => {
@@ -188,4 +248,5 @@ module.exports = {
     deleteAllTransactions,
     //getPastWeekTransactions,
     getAllTransactionsForUser,
+    getSalesStats,
 };

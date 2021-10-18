@@ -80,7 +80,7 @@ export default class Customers extends Component {
 
             if (res.data.avgUserRating !== null) {
                 this.setState({
-                    avgScore: res.data.avgUserRating,
+                    avgScore: (Math.round(res.data.avgUserRating * 100) / 100).toFixed(2),
                 });
             }
         } catch (err) {

@@ -87,15 +87,20 @@ const updateContact = async (req, res) => {
  */
 const getContact = async (req, res) => {
     try {
-        const contact = await Contacts.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
-            customers: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.contactId) } },
-        });
-        res.json(contact.customers[0]);
+        const contact = await getOneContact(req.query.userId, req.query.contactId);
+        res.json(contact);
     } catch (err) {
         res.status(500).send({ message: err });
         return;
     }
 };
+
+const getOneContact = async (userId, contactId) => {
+    const contact = await Contacts.findOne({ user: mongoose.Types.ObjectId(userId) }).select({
+        customers: { $elemMatch: { _id: mongoose.Types.ObjectId(contactId) } },
+    });
+    return contact.customers[0];
+}
 
 /**
  * Controller to get one contact by name
@@ -300,6 +305,7 @@ module.exports = {
     newContact,
     updateContact,
     getContact,
+    getOneContact,
     getAllContacts,
     getContactByName,
     deleteOneContact,
