@@ -62,7 +62,7 @@ export default class Home extends Component {
             }];*/
 
         } catch (err) {
-            alert(err);
+            console.log(err);
             this.setState({
                 avgSatisfactionScore: 'N/A',
                 totalProducts: 'N/A',
