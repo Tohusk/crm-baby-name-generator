@@ -1528,9 +1528,19 @@
               "name": "Get all transactions",
               "event": [
                 {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8f66cbb0-de38-40bd-bd13-35866259fa44",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
                   "listen": "test",
                   "script": {
-                    "id": "cd2159c9-70de-4e09-a559-f3e6440c3cff",
+                    "id": "9d92415f-8637-46f9-8586-2c6d8a0ec658",
                     "exec": [
                       "const response = pm.response.json();\r",
                       "\r",
