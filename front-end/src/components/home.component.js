@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 import ProductService from "../services/product.service";
 import ContactService from "../services/contact.service";
+import TransactionService from "../services/transaction.service";
 import { Redirect } from "react-router";
 
 import VerticalBar from "./verticalBar.component";
@@ -20,6 +21,8 @@ export default class Home extends Component {
             totalProducts: 'N/A',
             mostPopularProduct: 'N/A',
             categoryChartStat: [],
+            totalRevenue: 'N/A',
+            ratingsFreq: [],
         };
     }
 
@@ -28,12 +31,15 @@ export default class Home extends Component {
             const avgSatisfactionScore = await ContactService.getUserAvgRating(this.state.currentUser.id);
             const totalProducts = await ProductService.getTotalProducts(this.state.currentUser.id);
             const productStats = await ProductService.getProductStats(this.state.currentUser.id);
+            const salesStats = await TransactionService.getSalesStats(this.state.currentUser.id);
 
             this.setState({
                 avgSatisfactionScore: avgSatisfactionScore?.data.avgUserRating ? avgSatisfactionScore.data.avgUserRating : 'N/A',
                 totalProducts: totalProducts?.data ? totalProducts.data : 'N/A',
                 mostPopularProduct: productStats?.data.mostPopularProduct?.name ? productStats.data.mostPopularProduct.name : 'N/A',
                 categoryChartStat: productStats?.data.categoryStats ? productStats.data.categoryStats : [],
+                totalRevenue: salesStats?.data.totalRevenue,
+                ratingsFreq: salesStats?.data.ratingsFreq,
             });
 
             /*const avgSatisfactionScore = await ContactService.getUserAvgRating(this.state.currentUser.id);
@@ -62,6 +68,8 @@ export default class Home extends Component {
                 totalProducts: 'N/A',
                 mostPopularProduct: 'N/A',
                 categoryChartStat: [],
+                totalRevenue: 'N/A',
+                ratingsFreq: [],
             });
         }
     }
@@ -72,6 +80,10 @@ export default class Home extends Component {
         } else {
             return (<PieChart categoryChartStat={this.state.categoryChartStat}/>);
         }
+    }
+
+    displayRatingsChart() {
+
     }
 
     render() {
@@ -85,10 +97,7 @@ export default class Home extends Component {
                 <div className="overview-pagename">Home</div>
                 <div className="home-charts">
                     <div className="home-bar-overview">
-                        {/* <HomeChart> </HomeChart> */}
-                        <VerticalBar></VerticalBar>
-                        {/* <Chart></Chart> */}
-                        {/* <RainFall></RainFall> */}
+                        <VerticalBar ratingsFreq={this.state.ratingsFreq}/>
                     </div>
                     <div className="home-pie-overview">{this.displayCategoryChart()}</div>
                 </div>
@@ -111,8 +120,8 @@ export default class Home extends Component {
                         <div className="overview-card-stat">{this.state.mostPopularProduct}</div>
                     </div>
                     <div className="home-stats-card">
-                        <div className="overview-card-heading">Average Revenue</div>
-                        <div className="overview-card-stat">$6200</div>
+                        <div className="overview-card-heading">Total Revenue</div>
+                        <div className="overview-card-stat">${this.state.totalRevenue}</div>
                     </div>
                     
                 </div>

@@ -57,8 +57,6 @@ export default class PieChart extends Component {
       return "No Data";
     } else {
       return (
-          <div>
-            <div className='home-chart-heading'>Category Popularity</div>
             <Pie
               data={{
                 labels: this.state.labels,
@@ -71,14 +69,16 @@ export default class PieChart extends Component {
                   },
                 },
               }}
-            />
-          </div>);
+            />);
     }
   }
   // Colour background of table row with colour of category
   render() {
     return (
-        <div>{this.showChart()}</div>
+        <div>
+          <div className='home-chart-heading'>Category Popularity</div>
+          <div>{this.showChart()}</div>
+        </div>
     );
   }
 }
