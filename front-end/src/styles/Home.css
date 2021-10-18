@@ -39,6 +39,10 @@
     padding: 2%;
 }
 
+.home-bar-chart {
+    margin-top: 2%;
+}
+
 .home-pie-overview{
     margin: 2%;
     margin-left: 5%;
@@ -64,5 +68,14 @@
     padding: 2%;
 }
 
+.home-chart-heading{
+    position: relative;
+    /* padding: 1em; */
+    /* padding-top: 0.5em; */
+    /* padding-bottom: 1em; */
+    font-size: 2em;
+    font-weight:bold;
+    color: #444;
+}
 
 
