@@ -1548,13 +1548,11 @@
                       "pm.environment.set(\"transactionId2\", T2._id);\r",
                       "\r",
                       "pm.test(\"T1 stored correctly\", () => {\r",
-                      "    pm.expect(T1.productsPurchased.length).to.eql(2);\r",
-                      "    pm.expect(T1.transactionRating).to.eql(parseFloat(pm.environment.get(\"transactionRating1\")));\r",
+                      "    pm.expect(T1.contactName).to.eql(parseFloat(pm.environment.get(\"contactName2\")));\r",
                       "});\r",
                       "\r",
                       "pm.test(\"T2 stored correctly\", () => {\r",
-                      "    pm.expect(T2.productsPurchased.length).to.eql(1);\r",
-                      "    pm.expect(T2.transactionRating).to.eql(parseFloat(pm.environment.get(\"transactionRating2\")));\r",
+                      "    pm.expect(T2.transactionRating).to.eql(parseFloat(pm.environment.get(\"transactionRcontactName2ating2\")));\r",
                       "});"
                     ],
                     "type": "text/javascript"
