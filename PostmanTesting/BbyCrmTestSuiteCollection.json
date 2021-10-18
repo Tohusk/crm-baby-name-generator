@@ -1473,6 +1473,22 @@
             },
             {
               "name": "New transaction T2",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "6453c2c3-58cb-469b-8cb1-cf08642d1733",
+                    "exec": [
+                      "const total1 = (parseFloat(pm.environment.get(\"productPrice2\"))) * (parseFloat(pm.environment.get(\"transactionQuantity2\")));\r",
+                      "\r",
+                      "const total = total1 + total2;\r",
+                      "\r",
+                      "pm.environment.set(\"transactionTotal2\", total);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "b2fc48bd-6e7b-438a-a352-c2f3a0e4ac06",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
