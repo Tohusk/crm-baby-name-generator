@@ -73,7 +73,7 @@ const updateProduct = async (req, res) => {
  */
 const getProduct = async (req, res) => {
     try {
-        const product = (await getOneProduct(req.query.userId, req.query.productId));
+        const product = await getOneProduct(req.query.userId, req.query.productId);
         res.json(product.products[0]);
     } catch (err) {
         res.status(500).send({ message: err });
@@ -84,11 +84,11 @@ const getProduct = async (req, res) => {
  * function that contains the logic of getting one product from db
  */
 const getOneProduct = async (userId, productId) => {
-    const oneProduct = await Product.findOne({ user: userId}).select({
+    const oneProduct = await Product.findOne({ user: userId }).select({
         products: { $elemMatch: { _id: productId } },
     });
     return oneProduct;
-}
+};
 
 /**
  * Controller to get a user's product list
@@ -215,7 +215,10 @@ const findProductPopularityStats = async (userId) => {
             if (!productPopularityMap.get(p.productId.toString())) {
                 productPopularityMap.set(p.productId.toString(), p.quantity);
             } else {
-                productPopularityMap.set(p.productId.toString(), productPopularityMap.get(p.productId.toString())+p.quantity)
+                productPopularityMap.set(
+                    p.productId.toString(),
+                    productPopularityMap.get(p.productId.toString()) + p.quantity
+                );
             }
 
             if (productPopularityMap.get(p.productId.toString()) > mostPopularCount) {
@@ -230,10 +233,9 @@ const findProductPopularityStats = async (userId) => {
     const popularityStats = {
         mostPopularProduct: product.products[0],
         popularityMap: productPopularityMap,
-    }
+    };
     return popularityStats;
-}
-
+};
 
 module.exports = {
     initialiseProduct,

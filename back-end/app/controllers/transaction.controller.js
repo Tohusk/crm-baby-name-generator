@@ -113,7 +113,7 @@ const getTransaction = async (req, res) => {
         const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.transactionId) } },
         });
-        res.json(transaction.transactions[0]);  // 0th index gives productsPurchased
+        res.json(transaction.transactions[0]); // 0th index gives productsPurchased
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -137,7 +137,7 @@ const getAllTransactions = async (req, res) => {
 const getAllTransactionsForUser = async (userId) => {
     const allTransaction = await Transaction.findOne({ user: userId });
     return allTransaction.transactions;
-}
+};
 
 /**
  * Controller for deleting one transaction

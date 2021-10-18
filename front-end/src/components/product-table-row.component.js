@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-import { Redirect } from 'react-router';
+import { Redirect } from "react-router";
 import CategoryService from "../services/category.service";
 import ProductService from "../services/product.service";
-
 
 export default class ProductTableRow extends Component {
     constructor(props) {
         super(props);
         this.deleteOneProduct = this.deleteOneProduct.bind(this);
 
-        
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             category: "",
@@ -35,16 +33,15 @@ export default class ProductTableRow extends Component {
             const res = await CategoryService.getOneCategory(this.state.currentUser.id, this.props.product.categoryId);
             this.setState({
                 category: res.data,
-            }); 
+            });
         } catch (err) {
-            alert(err)
+            alert(err);
         }
-
     }
 
     render() {
         return (
-            <tr>                
+            <tr>
                 <td>{this.props.id}</td>
                 <td>{this.props.product.name}</td>
                 <td>{this.props.product.price}</td>

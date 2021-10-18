@@ -32,7 +32,7 @@ class EditCustomer extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
 
-        if (AuthService.getCurrentUser()){
+        if (AuthService.getCurrentUser()) {
             this.state = {
                 currentUser: AuthService.getCurrentUser(),
                 currentContact: this.props.location.state.contact,
@@ -41,13 +41,12 @@ class EditCustomer extends Component {
                 newEmail: this.props.location.state.contact.email,
                 newDescription: this.props.location.state.contact.description,
                 newCompanyName: this.props.location.state.contact.companyName,
-    
+
                 redirect: false,
                 loading: false,
                 message: "",
             };
         }
-        
     }
 
     onChangeName(e) {
@@ -90,12 +89,15 @@ class EditCustomer extends Component {
 
         try {
             if (window.confirm("Are you sure you wish to delete this?")) {
-                const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
+                const res = await ContactService.deleteCustomer(
+                    this.state.currentUser.id,
+                    this.state.currentContact._id
+                );
                 this.setState({
                     message: res.data.message,
                     loading: false,
                 });
-                this.props.history.push('/customers');
+                this.props.history.push("/customers");
             }
         } catch (err) {
             const resMessage =
@@ -150,12 +152,10 @@ class EditCustomer extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-            return(
-                <Redirect to={{ pathname: '/login' }} />
-            )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div className="addItem-container">
@@ -166,15 +166,14 @@ class EditCustomer extends Component {
                 </button>
                 {/* Input values need to be filled automatically from customer details */}
 
-                {this.state.redirect ? 
-                (
-                <Redirect to={{
-                    pathname: "/customer-profile",
-                    state: { contactId: this.state.currentContact._id },
-                }}/>
-                ) 
-                : null
-                }
+                {this.state.redirect ? (
+                    <Redirect
+                        to={{
+                            pathname: "/customer-profile",
+                            state: { contactId: this.state.currentContact._id },
+                        }}
+                    />
+                ) : null}
                 <Form
                     className="addCustomer-form"
                     onSubmit={this.handleSubmit}
