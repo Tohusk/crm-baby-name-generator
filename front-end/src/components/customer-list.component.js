@@ -66,24 +66,24 @@ export default class CustomerList extends Component {
     render() {
         return (
             <div className="overview-table-wrapper">
-                {this.state.customers.length === 0 ?
-                <div className="overview-no-data-title">No Customers Found</div>
-                :
-                <Table bordered hover>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Satisfaction Score</th>
-                            <th>Preferred Categories</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.displayTable()}
-                    </tbody>
-                </Table>
-                }
+                {this.state.customers.length === 0 ? (
+                    <div className="overview-no-data-title">No Customers Found</div>
+                ) : (
+                    <Table bordered hover>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Satisfaction Score</th>
+                                <th>Preferred Categories</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.displayTable()}
+                        </tbody>
+                    </Table>
+                )}
             </div>
         );
     }
