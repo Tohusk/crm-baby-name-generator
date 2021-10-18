@@ -1552,7 +1552,7 @@
                       "});\r",
                       "\r",
                       "pm.test(\"T2 stored correctly\", () => {\r",
-                      "    pm.expect(T2.transactionRating).to.eql(parseFloat(pm.environment.get(\"transactionRcontactName2ating2\")));\r",
+                      "    pm.expect(T2.transactionRating).to.eql(parseFloat(pm.environment.get(\"contactName2\")));\r",
                       "});"
                     ],
                     "type": "text/javascript"
