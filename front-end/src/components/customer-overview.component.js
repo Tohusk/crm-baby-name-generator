@@ -67,14 +67,20 @@ export default class Customers extends Component {
         try {
             const res = await ContactService.getUserAvgRating(this.state.currentUser.id);
             const allContacts = await ContactService.getAllCustomers(this.state.currentUser.id);
+            console.log(allContacts.data);
             const numContacts = allContacts.data.length;
+            console.log(numContacts);
+
 
             this.getGraphData(allContacts.data);
+
+            this.setState({
+                totalContacts: numContacts,
+            })
 
             if (res.data.avgUserRating !== null) {
                 this.setState({
                     avgScore: (Math.round(res.data.avgUserRating * 100) / 100).toFixed(2),
-                    totalContacts: numContacts,
                 });
             }
         } catch (err) {
