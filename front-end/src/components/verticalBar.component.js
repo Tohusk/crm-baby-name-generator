@@ -24,11 +24,11 @@ export default class VerticalBar extends Component {
                   datasets: [{
                     data: this.state.data,
                     backgroundColor: [
-                      'rgba(255, 68, 68, 0.2)',
-                      'rgba(255, 170, 30, 0.2)',
-                      'rgba(255, 215, 68, 0.2)',
-                      'rgba(177, 229, 64, 0.2)',
-                      'rgba(64, 221, 64, 0.2)'
+                      'rgba(255, 68, 68, 0.4)',
+                      'rgba(255, 170, 30, 0.4)',
+                      'rgba(255, 215, 68, 0.4)',
+                      'rgba(177, 229, 64, 0.4)',
+                      'rgba(64, 221, 64, 0.4)'
                     ],
                     borderColor: [
                       'rgba(255, 68, 68, 1)',
