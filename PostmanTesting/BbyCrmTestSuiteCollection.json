@@ -1491,9 +1491,7 @@
                   "script": {
                     "id": "6453c2c3-58cb-469b-8cb1-cf08642d1733",
                     "exec": [
-                      "const total = (parseFloat(pm.environment.get(\"productPrice2\"))) * (parseFloat(pm.environment.get(\"transactionQuantity2\")));\r",
-                      "\r",
-                      "pm.environment.set(\"transactionTotal2\", total);"
+                      ""
                     ],
                     "type": "text/javascript"
                   }
