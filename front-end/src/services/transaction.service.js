@@ -24,6 +24,10 @@ class TransactionService {
     async getAllTransactions(userId) {
         return axios.get(API_URL + "getAll?userId=" + userId);
     }
+
+    async getSalesStats(userId) {
+        return axios.get(API_URL + "getStats?userId=" + userId);
+    }
 }
 
 export default new TransactionService();

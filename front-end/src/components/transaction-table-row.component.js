@@ -31,7 +31,7 @@ export default class CustomerTableRow extends Component {
                 <td>{this.props.id}</td>
                 <td>{this.props.transaction.dateAdded.substring(0, 10)}</td>
                 <td>{this.props.transaction.contactName}</td>
-                <td>{this.props.transaction.transactionTotal}</td>
+                <td>${(Math.round(this.props.transaction.transactionTotal * 100) / 100).toFixed(2)}</td>
                 <td>
                     <button className="addCategory-delete" onClick={this.deleteOneTrans}>
                         <svg

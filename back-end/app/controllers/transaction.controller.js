@@ -180,6 +180,44 @@ const deleteAllTransactions = async (userId) => {
 };
 
 /**
+ * controller for getting stats related to sales
+ */
+const getSalesStats = async (req, res) => {
+    try {
+        const allTransactions = await getAllTransactionsForUser(req.query.userId);
+
+        let totalRevenue = 0;
+        let ratingsMap = new Map([["1", 0], ["2", 0], ["3", 0], ["4", 0], ["5", 0]]);
+
+
+        for (const t of allTransactions) {
+            if (t.transactionTotal) {
+                totalRevenue += t.transactionTotal;
+            }
+
+            if (ratingsMap.get(t.transactionRating.toString())) {
+                ratingsMap.set(t.transactionRating.toString(), ratingsMap.get(t.transactionRating.toString())+1);
+            } else {
+                ratingsMap.set(t.transactionRating.toString(), 1);
+            }
+        }
+
+        const ratingsArray = Array.from(ratingsMap, ([name, value]) => value);
+        console.log(ratingsArray);
+
+        const stats = {
+            totalRevenue: totalRevenue,
+        }
+
+        res.json(stats);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: err });
+    }
+}
+
+/**
  * Gets all transactions from the past 7 days for a user
  */
 /*const getPastWeekTransactions = async (userId) => {
@@ -206,4 +244,5 @@ module.exports = {
     deleteAllTransactions,
     //getPastWeekTransactions,
     getAllTransactionsForUser,
+    getSalesStats,
 };
