@@ -1451,6 +1451,23 @@
           "item": [
             {
               "name": "New transaction T1",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "dd31ebbd-dc4c-4afe-b346-11cf037aeb05",
+                    "exec": [
+                      "const total1 = (parseFloat(pm.environment.get(\"productPrice3\"))) * (parseFloat(pm.environment.get(\"transactionQuantity1_1\")));\r",
+                      "const total2 = (parseFloat(pm.environment.get(\"productPrice2\"))) * (parseFloat(pm.environment.get(\"transactionQuantity1_2\")));\r",
+                      "\r",
+                      "const total = total1 + total2;\r",
+                      "\r",
+                      "pm.environment.set(\"transactionTotal1\", total);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "0ad88576-6e38-431a-b8ba-6266737ac565",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -1460,7 +1477,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"productsPurchased\": [\r\n        {\r\n            \"productId\": \"{{productId3}}\",\r\n            \"quantity\": {{transactionQuantity1_1}}\r\n        },\r\n        {\r\n            \"productId\": \"{{productId2}}\",\r\n            \"quantity\": {{transactionQuantity1_2}}\r\n        }\r\n    ], \r\n    \"contactId\": \"{{contactId2}}\",\r\n    \"transactionRating\": {{transactionRating1}}\r\n}",
+                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"productsPurchased\": [\r\n        {\r\n            \"productId\": \"{{productId3}}\",\r\n            \"quantity\": {{transactionQuantity1_1}}\r\n        },\r\n        {\r\n            \"productId\": \"{{productId2}}\",\r\n            \"quantity\": {{transactionQuantity1_2}}\r\n        }\r\n    ], \r\n    \"contactId\": \"{{contactId2}}\",\r\n    \"transactionRating\": {{transactionRating1}},\r\n    \"transactionTotal\": {{transactionTotal1}}\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
