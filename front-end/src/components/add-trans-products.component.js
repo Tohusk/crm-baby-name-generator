@@ -4,6 +4,8 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import TransactionService from "../services/transaction.service";
 import "../styles/AddItem.css";
+import { withRouter } from "react-router";
+
 
 
 //displaying row of product that is selected
@@ -55,7 +57,9 @@ class SelectedProduct extends React.Component {
     }
 
     render() {
-        const productTotal = this.props.product.price * this.props.product.quantity;
+        let productTotal = this.props.product.price * this.props.product.quantity;
+        productTotal = (Math.round(productTotal * 100) / 100).toFixed(2);
+
         return (
             <div>
                 <div className="addTransaction-buttons-wrapper">
@@ -89,7 +93,7 @@ class SelectedProduct extends React.Component {
 }
 
 //the form to send through
-export default class AddTransProductForm extends React.Component {
+class AddTransProductForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -200,6 +204,7 @@ export default class AddTransProductForm extends React.Component {
                     this.props.userId,
                 );
                 console.log(res.data);
+                this.props.history.push('/sales');
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
@@ -221,6 +226,7 @@ export default class AddTransProductForm extends React.Component {
         var products = this.state.productList.map( (product) => {
             console.log(product);
             total += product.price;
+            total = (Math.round(total * 100) / 100).toFixed(2);
             console.log(total);
             return (
                 <SelectedProduct
@@ -344,5 +350,6 @@ export default class AddTransProductForm extends React.Component {
 
 }
 
+export default withRouter(AddTransProductForm);
 
 
