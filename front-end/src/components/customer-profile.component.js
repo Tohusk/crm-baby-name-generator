@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import ContactService from "../services/contact.service";
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import DropdownButton from "react-bootstrap/DropdownButton";
 import { Redirect } from "react-router";
 
 import "../styles/Customer-Profile.css";
@@ -14,11 +14,10 @@ class CustomerProfile extends Component {
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
 
-
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             currentContact: "",
-            averageRating: '',
+            averageRating: "",
             topCategories: [],
         };
     }
@@ -33,16 +32,19 @@ class CustomerProfile extends Component {
 
         try {
             if (window.confirm("Are you sure you wish to delete this?")) {
-                const res = await ContactService.deleteCustomer(this.state.currentUser.id, this.state.currentContact._id);
+                const res = await ContactService.deleteCustomer(
+                    this.state.currentUser.id,
+                    this.state.currentContact._id
+                );
                 this.setState({
                     message: res.data.message,
                     loading: false,
                 });
-                this.props.history.push('/customers');
+                this.props.history.push("/customers");
             }
         } catch (err) {
             const resMessage =
-            (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
             this.setState({
                 loading: false,
                 message: resMessage,
@@ -60,10 +62,15 @@ class CustomerProfile extends Component {
                 this.props.location.state.contactId
             );
 
-            const stats = await ContactService.getContactStatistics(this.state.currentUser.id, this.props.location.state.contactId);
+            const stats = await ContactService.getContactStatistics(
+                this.state.currentUser.id,
+                this.props.location.state.contactId
+            );
             this.setState({
                 currentContact: customer.data,
-                averageRating: stats.data.averageRating ? (Math.round(stats.data.averageRating * 100) / 100).toFixed(1) : 'N/A',
+                averageRating: stats.data.averageRating
+                    ? (Math.round(stats.data.averageRating * 100) / 100).toFixed(1)
+                    : "N/A",
                 topCategories: stats.data.topCategories,
             });
         } catch (err) {
@@ -75,11 +82,15 @@ class CustomerProfile extends Component {
 
     displayCategories() {
         if (this.state.topCategories.length === 0) {
-            return (<div>N/A</div>);
+            return <div>N/A</div>;
         }
         return this.state.topCategories.map((currentCategory) => {
             return (
-                <div key={currentCategory.id} className="category-containerTag" style={{ background: currentCategory.colour }}>
+                <div
+                    key={currentCategory.id}
+                    className="category-containerTag"
+                    style={{ background: currentCategory.colour }}
+                >
                     {currentCategory.name}
                 </div>
             );
@@ -87,12 +98,10 @@ class CustomerProfile extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div>
@@ -119,10 +128,7 @@ class CustomerProfile extends Component {
 
                 <div className="customerProfile-topContainer">
                     <div className="customerProfile-profile-container">
-                        <DropdownButton 
-                            id="dropdown-basic-button"
-                            className="customerProfile-dropdown"
-                            variant="">
+                        <DropdownButton id="dropdown-basic-button" className="customerProfile-dropdown" variant="">
                             <div className="customerProfile-link-container">
                                 <Link
                                     className="customerProfile-dropdown-link"
@@ -131,11 +137,13 @@ class CustomerProfile extends Component {
                                         state: { contact: this.state.currentContact },
                                     }}
                                 >
-                                Edit
+                                    Edit
                                 </Link>
                             </div>
                             <div className="customerProfile-deleteButton-container">
-                                <button className="customerProfile-deleteButton" onClick={this.handleDelete}>Delete</button>
+                                <button className="customerProfile-deleteButton" onClick={this.handleDelete}>
+                                    Delete
+                                </button>
                             </div>
                         </DropdownButton>
                         <div className="customerProfile-smallerText">NAME</div>
@@ -150,9 +158,11 @@ class CustomerProfile extends Component {
                         </div>
                         <div className="customerProfile-smallerText">EMAIL</div>
                         <div className="customerProfile-userText">
-                            
-                                {this.state.currentContact.email ? <u>{this.state.currentContact.email}</u> : <div> N/A </div>}
-                            
+                            {this.state.currentContact.email ? (
+                                <u>{this.state.currentContact.email}</u>
+                            ) : (
+                                <div> N/A </div>
+                            )}
                         </div>
                         <div className="customerProfile-smallerText">DESCRIPTION</div>
                         <div className="customerProfile-userText">
@@ -174,13 +184,9 @@ class CustomerProfile extends Component {
 
                     <div className="customerProfile-score-container">
                         <div className="customerProfile-smallerText">SATISFACTION SCORE</div>
-                        <div className="customerProfile-userText">
-                            {<td>{this.state.averageRating}</td>}
-                        </div>
+                        <div className="customerProfile-userText">{<td>{this.state.averageRating}</td>}</div>
                         <div className="customerProfile-smallerText">PREFERRED CATEGORY</div>
-                        <div className="category-containerProfile">
-                            {this.displayCategories()}
-                        </div>
+                        <div className="category-containerProfile">{this.displayCategories()}</div>
                     </div>
                 </div>
 
@@ -201,8 +207,7 @@ class CustomerProfile extends Component {
                     </div>
                 </div>
             </div>
-        )
-        
+        );
     }
 }
 export default withRouter(CustomerProfile);

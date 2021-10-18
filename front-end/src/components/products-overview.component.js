@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-import ProductService from "../services/product.service"
+import ProductService from "../services/product.service";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import ProductList from "./product-list.component";
@@ -56,7 +56,7 @@ export default class Products extends Component {
             });
         } catch (err) {
             this.setState({
-                totalProducts: 'N/A',
+                totalProducts: "N/A",
             });
         }
     }
@@ -82,11 +82,10 @@ export default class Products extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div>
@@ -102,16 +101,18 @@ export default class Products extends Component {
                     </Link>
                 </div>
                 <div className="overview-subheading">Overview</div>
-                <div className="overview-flex-container">
-                    <div className="overview-stats-card">
-                        <div className="overview-card-heading">Total Products</div>
-                        <div className="overview-card-stat">{this.state.totalProducts}</div>
+                <div className="overview-product-flex-container">
+                    <div className="overview-product-stats">
+                        <div className="overview-stats-card">
+                            <div className="overview-card-heading">Total Products</div>
+                            <div className="overview-card-stat">{this.state.totalProducts}</div>
+                        </div>
+                        <div className="overview-stats-card">
+                            <div className="overview-card-heading">Most Popular Product</div>
+                            <div className="overview-card-stat">{this.state.mostPopularProduct}</div>
+                        </div>
                     </div>
-                    <div className="overview-stats-card">
-                        <div className="overview-card-heading">Most Popular Product</div>
-                        <div className="overview-card-stat">{this.state.mostPopularProduct}</div>
-                    </div>
-                    <div className="overview-stats-card">
+                    <div className="overview-pie-chart-card">
                         <div className="overview-chart-heading">Popularity by Categories</div>
                         <div>{this.showCategoryChart()}</div>
                     </div>

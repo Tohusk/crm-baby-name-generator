@@ -1,59 +1,39 @@
 import React, { Component } from "react";
+import TransactionService from "../services/transaction.service";
 import AuthService from "../services/auth.service";
-import { Redirect } from "react-router";
-import CategoryService from "../services/category.service";
-import ProductService from "../services/product.service";
 
-export default class ProductTableRow extends Component {
+export default class CustomerTableRow extends Component {
     constructor(props) {
         super(props);
-        this.deleteOneProduct = this.deleteOneProduct.bind(this);
+        this.deleteOneTrans = this.deleteOneTrans.bind(this);
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
-            category: "",
         };
     }
 
-    async deleteOneProduct() {
+    async deleteOneTrans() {
         try {
             if (window.confirm("Are you sure you wish to delete this?")) {
-                const res = await ProductService.deleteProduct(this.state.currentUser.id, this.props.product._id);
+                const res = await TransactionService.deleteTransaction(this.state.currentUser.id, this.props.transaction._id);
                 // Refresh to refresh category table
                 //TODO: trigger a rerender of the table only instead of the entire page
                 window.location.reload();
             }
         } catch (err) {
-            alert("Error deleting product");
-        }
-    }
-
-    async componentDidMount() {
-        try {
-            const res = await CategoryService.getOneCategory(this.state.currentUser.id, this.props.product.categoryId);
-            this.setState({
-                category: res.data,
-            });
-        } catch (err) {
-            alert(err);
+            alert("Error deleting transaction");
         }
     }
 
     render() {
         return (
-            <tr>
+            <tr className="overview-table-row">
                 <td>{this.props.id}</td>
-                <td>{this.props.product.name}</td>
-                <td>{this.props.product.price}</td>
+                <td>{this.props.transaction.dateAdded.substring(0, 10)}</td>
+                <td>{this.props.transaction.contactName}</td>
+                <td>${(Math.round(this.props.transaction.transactionTotal * 100) / 100).toFixed(2)}</td>
                 <td>
-                    <div className="category-containerTable">
-                        <div className="category-containerTag" style={{ background: this.state.category.colour }}>
-                            {this.state.category.name}
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <button className="addCategory-delete" onClick={this.deleteOneProduct}>
+                    <button className="addCategory-delete" onClick={this.deleteOneTrans}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1.3em"

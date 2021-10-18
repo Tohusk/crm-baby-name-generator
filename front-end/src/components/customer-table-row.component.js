@@ -11,7 +11,7 @@ export default class CustomerTableRow extends Component {
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             redirect: false,
-            averageRating: 'N/A',
+            averageRating: "N/A",
             topCategories: [],
         };
     }
@@ -26,7 +26,9 @@ export default class CustomerTableRow extends Component {
         try {
             const res = await ContactService.getContactStatistics(this.state.currentUser.id, this.props.customer._id);
             this.setState({
-                averageRating: res.data.averageRating ? (Math.round(res.data.averageRating * 100) / 100).toFixed(1) : 'N/A',
+                averageRating: res.data.averageRating
+                    ? (Math.round(res.data.averageRating * 100) / 100).toFixed(2)
+                    : "N/A",
                 topCategories: res.data.topCategories,
             });
         } catch (err) {
@@ -36,11 +38,15 @@ export default class CustomerTableRow extends Component {
 
     displayCategories() {
         if (this.state.topCategories.length === 0) {
-            return (<div>N/A</div>);
+            return <div>N/A</div>;
         }
         return this.state.topCategories.map((currentCategory) => {
             return (
-                <div key={currentCategory.id} className="category-containerTag" style={{ background: currentCategory.colour }}>
+                <div
+                    key={currentCategory.id}
+                    className="category-containerTag"
+                    style={{ background: currentCategory.colour }}
+                >
                     {currentCategory.name}
                 </div>
             );
@@ -50,23 +56,20 @@ export default class CustomerTableRow extends Component {
     render() {
         return (
             <tr className="overview-table-row" onClick={this.handleClick}>
-                {this.state.redirect ? 
-                (
-                <Redirect to={{
-                    pathname: "/customer-profile",
-                    state: { contactId: this.props.customer._id },
-                }}/>
-                ) 
-                : null
-                }
+                {this.state.redirect ? (
+                    <Redirect
+                        to={{
+                            pathname: "/customer-profile",
+                            state: { contactId: this.props.customer._id },
+                        }}
+                    />
+                ) : null}
                 <td>{this.props.id}</td>
                 <td>{this.props.customer.name}</td>
                 <td>{this.props.customer.email}</td>
                 <td>{this.state.averageRating}</td>
                 <td>
-                    <div className="category-containerTable">
-                        {this.displayCategories()}
-                    </div>
+                    <div className="category-containerTable">{this.displayCategories()}</div>
                 </td>
                 {/* <td>{this.props.obj.score}</td> */}
                 {/* <td>{this.props.obj.categories}</td> */}

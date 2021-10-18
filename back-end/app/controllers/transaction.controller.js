@@ -5,6 +5,7 @@
 const db = require("../models");
 const Transaction = db.transaction;
 const mongoose = require("mongoose");
+const contactController = require("./contact.controller");
 
 /**
  * Controller for initialise a user's transaction list
@@ -26,10 +27,13 @@ const initialiseTransaction = async (userId) => {
  */
 const newTransaction = async (req, res) => {
     try {
+        const total = calcTotal(req.body.productsPurchased);
+
         const newTransaction = {
             contactId: mongoose.Types.ObjectId(req.body.contactId),
             productsPurchased: parsePurchaseList(req, res),
             transactionRating: req.body.transactionRating,
+            transactionTotal: total,
             dateAdded: new Date(),
         };
 
@@ -44,6 +48,7 @@ const newTransaction = async (req, res) => {
         );
         res.send({ message: "New transaction added successfully!" });
     } catch (err) {
+        console.log(err);
         res.status(500).send({ message: err });
     }
 };
@@ -68,6 +73,14 @@ function parsePurchaseList(req, res) {
     }
 }
 
+const calcTotal = (purchases) => {
+    let total = 0;
+    for (const p of purchases) {
+        total += p.quantity * p.price;
+    }
+    return total;
+}
+
 /**
  * Controller for updating a transaction
  */
@@ -83,6 +96,7 @@ const updateTransaction = async (req, res) => {
                     "transactions.$.contactId": req.body.contactId,
                     "transactions.$.productsPurchased": parsePurchaseList(req, res),
                     "transactions.$.transactionRating": req.body.transactionRating,
+                    "transactions.$.transactionTotal": calcTotal(req.body.productsPurchased),
                 },
             }
         );
@@ -100,7 +114,7 @@ const getTransaction = async (req, res) => {
         const transaction = await Transaction.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             transactions: { $elemMatch: { _id: mongoose.Types.ObjectId(req.query.transactionId) } },
         });
-        res.json(transaction.transactions[0]);  // 0th index gives productsPurchased
+        res.json(transaction.transactions[0]); // 0th index gives productsPurchased
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -112,8 +126,25 @@ const getTransaction = async (req, res) => {
 const getAllTransactions = async (req, res) => {
     try {
         const allTransactions = await getAllTransactionsForUser(req.query.userId);
-        res.json(allTransactions);
+
+        let processedTransactions = [];
+
+        for (const t of allTransactions) {
+            const contact = await contactController.getOneContact(req.query.userId, t.contactId);
+
+            const transactionInfo = {
+                _id: t?._id,
+                contactName: contact?.name,
+                dateAdded: t?.dateAdded,
+                transactionTotal: t?.transactionTotal,
+            }
+
+            processedTransactions.push(transactionInfo);
+        }
+
+        res.json(processedTransactions.reverse());
     } catch (err) {
+        console.log(err);
         res.status(500).send({ message: err });
     }
 };
@@ -124,7 +155,7 @@ const getAllTransactions = async (req, res) => {
 const getAllTransactionsForUser = async (userId) => {
     const allTransaction = await Transaction.findOne({ user: userId });
     return allTransaction.transactions;
-}
+};
 
 /**
  * Controller for deleting one transaction
@@ -147,6 +178,48 @@ const deleteOneTransaction = async (req, res) => {
 const deleteAllTransactions = async (userId) => {
     await Transaction.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
+
+/**
+ * controller for getting stats related to sales
+ */
+const getSalesStats = async (req, res) => {
+    try {
+        const allTransactions = await getAllTransactionsForUser(req.query.userId);
+
+        let totalRevenue = 0;
+        let ratingsMap = new Map([["1", 0], ["2", 0], ["3", 0], ["4", 0], ["5", 0]]);
+
+
+        for (const t of allTransactions) {
+            if (t.transactionTotal) {
+                totalRevenue += t.transactionTotal;
+            }
+
+            if (ratingsMap.get(t.transactionRating.toString())) {
+                ratingsMap.set(t.transactionRating.toString(), ratingsMap.get(t.transactionRating.toString())+1);
+            } else {
+                ratingsMap.set(t.transactionRating.toString(), 1);
+            }
+        }
+
+        const ratingsArray = [];
+
+        for (const t of ratingsMap.keys()) {
+            ratingsArray.push(ratingsMap.get(t));
+        }
+
+        const stats = {
+            totalRevenue: totalRevenue,
+            ratingsFreq: ratingsArray,
+        }
+
+        res.json(stats);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: err });
+    }
+}
 
 /**
  * Gets all transactions from the past 7 days for a user
@@ -175,4 +248,5 @@ module.exports = {
     deleteAllTransactions,
     //getPastWeekTransactions,
     getAllTransactionsForUser,
+    getSalesStats,
 };
