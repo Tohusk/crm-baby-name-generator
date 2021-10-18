@@ -158,14 +158,13 @@ const deleteAllContacts = async (userId) => {
  */
 const getContactStatistics = async (req, res) => {
     try {
-        const queryResponse = await Transaction.findOne(
-        {user: mongoose.Types.ObjectId(req.query.userId)/*,
-        transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }*/}
-        );
+        const queryResponse = await Transaction.findOne({
+            user: mongoose.Types.ObjectId(req.query.userId) /*,
+        transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }*/,
+        });
 
         if (!queryResponse || queryResponse.transactions.length == 0) {
-            res.json({ averageRating: null,
-                topCategories: [] });
+            res.json({ averageRating: null, topCategories: [] });
             return;
         }
         const transactions = queryResponse.transactions;
@@ -180,8 +179,7 @@ const getContactStatistics = async (req, res) => {
 
         const topCategories = await getContactTopCategories(transactionsByThisCustomer, req.query.userId);
 
-        res.json({ averageRating: avgRating,
-                   topCategories: topCategories });
+        res.json({ averageRating: avgRating, topCategories: topCategories });
     } catch (err) {
         res.status(500).send({ message: err });
     }
@@ -199,21 +197,20 @@ const getContactTopCategories = async (transactions, userId) => {
         let products = transactions[i].productsPurchased;
         for (let j = 0; j < products.length; j++) {
             // search for product using productId
-            let product = await Product.findOne({ user: mongoose.Types.ObjectId(userId)},
-            {products: { $elemMatch: { _id: mongoose.Types.ObjectId(products[j]["productId"]) }}});
+            let product = await Product.findOne(
+                { user: mongoose.Types.ObjectId(userId) },
+                { products: { $elemMatch: { _id: mongoose.Types.ObjectId(products[j]["productId"]) } } }
+            );
             // get the value from the "categoryId" field
             let categoryId = product["products"][0]["categoryId"]?.toString();
 
             // categories are optional for products. Skip if product doesn't have categoryId
-            if (categoryId == null)
-                continue;
+            if (categoryId == null) continue;
 
             // increment categoryCount
             if (categoryCount.has(categoryId))
                 categoryCount.set(categoryId, categoryCount.get(categoryId) + products[j].quantity);
-            else
-                categoryCount.set(categoryId, products[j].quantity);
-
+            else categoryCount.set(categoryId, products[j].quantity);
         }
     }
 
@@ -224,8 +221,8 @@ const getContactTopCategories = async (transactions, userId) => {
     let count = 0;
     let topCategories = [];
     for (const c of sortedCategories.keys()) {
-        const queryResponse = await Category.findOne({user: mongoose.Types.ObjectId(userId)}).select({
-            categories: { $elemMatch: { _id: mongoose.Types.ObjectId(c) } }
+        const queryResponse = await Category.findOne({ user: mongoose.Types.ObjectId(userId) }).select({
+            categories: { $elemMatch: { _id: mongoose.Types.ObjectId(c) } },
         });
         const oneCategory = queryResponse.categories[0];
         topCategories.push(oneCategory);
@@ -237,7 +234,7 @@ const getContactTopCategories = async (transactions, userId) => {
     }
 
     return topCategories;
-}
+};
 
 /**
  * Auxiliary function to help statistics get average rating for a contact
@@ -247,39 +244,36 @@ const getContactAvgRating = async (transactions) => {
     let sum = 0;
     for (let i = 0; i < n; i++) {
         let currRating = transactions[i]["transactionRating"];
-        if (!isNaN(currRating))
-            sum += currRating;
-        else
-            n--;    // don't wanna count transactions without ratings in our average
+        if (!isNaN(currRating)) sum += currRating;
+        else n--; // don't wanna count transactions without ratings in our average
     }
 
-    if (n === 0)
-        return 0;
+    if (n === 0) return 0;
 
-    const avg = sum/n;
+    const avg = sum / n;
 
     return avg;
 };
 
 const getUserAvgRating = async (req, res) => {
     try {
-        const queryResponse = await Transaction.findOne(
-            {user: mongoose.Types.ObjectId(req.query.userId)/*,
-            transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }*/}
-        );
-    
+        const queryResponse = await Transaction.findOne({
+            user: mongoose.Types.ObjectId(req.query.userId) /*,
+            transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }*/,
+        });
+
         // if no transactions recorded for the user
         if (!queryResponse || queryResponse.transactions.length == 0) {
             res.json({ avgUserRating: null });
             return;
         }
-    
+
         const transactions = queryResponse.transactions;
         const contacts = await Contacts.findOne({ user: mongoose.Types.ObjectId(req.query.userId) });
 
         let total = 0;
         let validScoreContacts = 0;
-        
+
         for (const contact of contacts.customers) {
             const transactionsByThisCustomer = [];
             for (const t of transactions) {
@@ -287,24 +281,22 @@ const getUserAvgRating = async (req, res) => {
                     transactionsByThisCustomer.push(t);
                 }
             }
-    
+
             const avgRating = await getContactAvgRating(transactionsByThisCustomer);
             if (avgRating !== 0) {
                 validScoreContacts += 1;
                 total += avgRating;
             }
         }
-    
+
         let avgUserRating = total / validScoreContacts;
         avgUserRating = Math.round(avgUserRating * 100) / 100;
-    
+
         res.json({ avgUserRating: avgUserRating });
     } catch (err) {
-        console.log(err);
         res.status(500).send({ message: err });
     }
-    
-}
+};
 
 module.exports = {
     getContactStatistics,

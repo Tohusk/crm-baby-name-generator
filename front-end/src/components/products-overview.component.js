@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-import ProductService from "../services/product.service"
+import ProductService from "../services/product.service";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import ProductList from "./product-list.component";
@@ -56,7 +56,7 @@ export default class Products extends Component {
             });
         } catch (err) {
             this.setState({
-                totalProducts: 'N/A',
+                totalProducts: "N/A",
             });
         }
     }
@@ -82,12 +82,10 @@ export default class Products extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null){
+        if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
 
-                return(
-                    <Redirect to={{ pathname: '/login' }} />
-                )
+            return <Redirect to={{ pathname: "/login" }} />;
         }
         return (
             <div>

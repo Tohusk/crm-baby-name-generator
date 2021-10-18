@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import AuthService from "../services/auth.service";
 import CategoryService from "../services/category.service";
 
-
 export default class CategoryOverview extends Component {
     constructor(props) {
         super(props);
-
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
@@ -20,7 +18,11 @@ export default class CategoryOverview extends Component {
         }
         return this.state.categories.map((currentCategory) => {
             return (
-                <div key={currentCategory.id} className="category-containerTag" style={{ background: currentCategory.colour }}>
+                <div
+                    key={currentCategory.id}
+                    className="category-containerTag"
+                    style={{ background: currentCategory.colour }}
+                >
                     {currentCategory.name}
                 </div>
             );
@@ -41,10 +43,6 @@ export default class CategoryOverview extends Component {
     }
 
     render() {
-        return (
-            <div className="category-containerProductOverview">
-                {this.displayCategories()}
-            </div>
-        );
+        return <div className="category-containerProductOverview">{this.displayCategories()}</div>;
     }
 }
