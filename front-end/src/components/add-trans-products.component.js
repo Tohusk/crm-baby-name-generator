@@ -18,8 +18,6 @@ class SelectedProduct extends React.Component {
         }
         this.addQty = this.addQty.bind(this);
         this.reduceQty = this.reduceQty.bind(this);
-        this._onChange = this._onChange.bind(this);
-        this._onClick = this._onClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
 
     }
@@ -27,33 +25,22 @@ class SelectedProduct extends React.Component {
     //increase quantity by one
     addQty() {
         this.props.addQty(this.props.product);
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // });
         this.props.handleTotal(this.props.product.price);
     }
 
     //decrease quantity by one
     reduceQty() {
         this.props.reduceQty(this.props.product);
-        // this.setState({
-        //   qty: this.state.qty - 1
-        // });
         this.props.handleTotal(-this.props.product.price);
     }
 
-    _onChange(e) {
-        this.props.updateQty(e.target.value, this.props.product);
-        //this.props.handleTotal(this.props.product);
-        
-    }
-
-    _onClick(e) {
-        this.props.handleTotal(this.props.product);
-    }
-
+    //delete product from selected list of products
     handleDelete(e) {
-        this.props.deleteProduct(this.props.product, this.props.total);
+        const newTotal = (this.props.product.price * this.props.product.quantity) - this.props.product.price;
+        console.log(newTotal);
+        console.log(this.props.total);
+        this.props.handleTotal(-newTotal);
+        this.props.deleteProduct(this.props.product);
     }
 
     render() {
@@ -71,12 +58,7 @@ class SelectedProduct extends React.Component {
                             <span>{this.props.product.quantity} </span>
                             <span className="addTransaction-qty-btn"><button className="btn btn-outline-dark" onClick={this.addQty}>+</button></span>
                             <button className="addTransaction-no-style-button" onClick={this.handleDelete}>x</button>
-                        
-                        
-                    
                 </div>
-                
-                    
                     {/* <div className="addTransaction-products-container">
                     <h4>{this.props.product.name}: ${this.props.product.price}</h4>
                     <div className="addTransaction-buttons-wrapper">
@@ -108,7 +90,6 @@ class AddTransProductForm extends React.Component {
         }
 
         this.calculateTotal = this.calculateTotal.bind(this);
-        //this.updateQty = this.updateQty.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
         this.addQty = this.addQty.bind(this);
         this.reduceQty = this.reduceQty.bind(this);
@@ -151,16 +132,9 @@ class AddTransProductForm extends React.Component {
 
     }
 
-
-
-    deleteProduct(deletedProduct, total) {
+    deleteProduct(deletedProduct) {
         const filteredProducts = this.state.productList.filter((product) => product.productId !== deletedProduct.productId);
         this.setState({ productList: filteredProducts });
-        const updateTotal = deletedProduct.price * deletedProduct.quantity;
-        console.log(total);
-        console.log(updateTotal);
-        this.setState({total: total - updateTotal});
-        console.log(this.state.total);
     }
 
     addQty(product) {
@@ -169,14 +143,12 @@ class AddTransProductForm extends React.Component {
         const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { quantity }) : el));
         this.setState({ productList: updateQtyProducts });
         console.log(this.state.productList);
-        //this.calculateTotal(this.props.price);
     }
 
     reduceQty(product) {
         const quantity = product.quantity - 1;
         const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { quantity }) : el));
         this.setState({ productList: updateQtyProducts });
-        //this.calculateTotal(-this.props.price);
     }
 
     handleRating(e) {
@@ -216,7 +188,6 @@ class AddTransProductForm extends React.Component {
 
     render() {
         const calcTotal = this.calculateTotal;
-        const getQty = this.updateQty;
         const deleteProduct = this.deleteProduct;
         const addQty = this.addQty;
         const reduceQty = this.reduceQty;
@@ -337,10 +308,6 @@ class AddTransProductForm extends React.Component {
                 </button>
               </div>
 
-              
-            
-              
-            {/* </form> */}
             <br />
             </div>
             </div>

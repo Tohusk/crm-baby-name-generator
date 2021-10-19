@@ -95,6 +95,9 @@ export default class AddTransaction extends Component {
     handleProductCallback = (childData) => {
       let { allProducts } = this.state;
       console.log(this.state.products);
+      if(this.state.products.some(item => childData === item.name)){
+        alert("item already selected");
+      } else {
       for(let k in allProducts){
         console.log(allProducts[k]);
         if(allProducts[k]['name'] === childData){
@@ -117,7 +120,7 @@ export default class AddTransaction extends Component {
         }
       }
       console.log(this.state.products);
-      
+    }
       // this.setState({ products: [...this.state.products.productId, childData] })
     }
 
