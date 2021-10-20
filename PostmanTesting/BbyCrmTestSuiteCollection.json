@@ -181,7 +181,7 @@
               "response": []
             },
             {
-              "name": "Register without name Copy",
+              "name": "Register without name",
               "event": [
                 {
                   "listen": "test",
