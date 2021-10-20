@@ -289,7 +289,7 @@
               "response": []
             },
             {
-              "name": "New Request",
+              "name": "Sign in with non existant account",
               "id": "ed69c886-8c48-4d17-8b29-fc56a84138bb",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
