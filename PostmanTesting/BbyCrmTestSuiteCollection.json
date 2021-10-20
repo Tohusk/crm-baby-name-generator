@@ -1826,6 +1826,20 @@
             },
             {
               "name": "New transaction without contact",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "77f6a86a-6ff9-4aef-adbf-83fc33d28491",
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "dacade13-f3ed-4ed3-97a4-884a0ac5c2a3",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
