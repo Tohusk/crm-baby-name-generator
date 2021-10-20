@@ -1825,7 +1825,7 @@
               "response": []
             },
             {
-              "name": "New transaction without products Copy",
+              "name": "New transaction without contact",
               "id": "dacade13-f3ed-4ed3-97a4-884a0ac5c2a3",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
