@@ -1823,6 +1823,28 @@
                 "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
+            },
+            {
+              "name": "New transaction without products Copy",
+              "id": "dacade13-f3ed-4ed3-97a4-884a0ac5c2a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"contactId\": \"{{contactId2}}\",\r\n    \"transactionRating\": {{transactionRating1}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/transaction/new"
+              },
+              "response": []
             }
           ],
           "id": "a952783c-eb3f-4e30-b862-7aababd9e611",
