@@ -287,6 +287,19 @@
                 "url": "{{rootUrl}}/api/auth/signin"
               },
               "response": []
+            },
+            {
+              "name": "New Request",
+              "id": "ed69c886-8c48-4d17-8b29-fc56a84138bb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": null
+              },
+              "response": []
             }
           ],
           "id": "54f4ae5a-4479-4e12-bef6-9aac89f4d3f4",
