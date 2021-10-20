@@ -181,7 +181,7 @@
               "response": []
             },
             {
-              "name": "Register without name Copy",
+              "name": "Register without name",
               "event": [
                 {
                   "listen": "test",
@@ -217,7 +217,7 @@
               "response": []
             },
             {
-              "name": "Register without password Copy",
+              "name": "Register without password",
               "event": [
                 {
                   "listen": "test",
@@ -278,6 +278,42 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"email\": \"{{userEmail}}\",\r\n    \"password\": \"WrongPW12#\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/auth/signin"
+              },
+              "response": []
+            },
+            {
+              "name": "Sign in with non existant account",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "34357951-0fa7-442e-8afc-be98ed0f1c58",
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "ed69c886-8c48-4d17-8b29-fc56a84138bb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"non@existant.com\",\r\n    \"password\": \"WrongPW12#\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1787,6 +1823,64 @@
                 "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
+            },
+            {
+              "name": "New transaction without contact",
+              "id": "dacade13-f3ed-4ed3-97a4-884a0ac5c2a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"productsPurchased\": [\r\n        {\r\n            \"productId\": \"{{productId2}}\",\r\n            \"quantity\": {{transactionQuantity2}},\r\n            \"price\": {{productPrice2}}\r\n        }\r\n    ], \r\n    \"transactionRating\": {{transactionRating2}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/transaction/new"
+              },
+              "response": []
+            },
+            {
+              "name": "New transaction without price for product",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "bc67281d-87c9-49a6-8fa1-31d2c37ac963",
+                    "exec": [
+                      "pm.test(\"Status code is 500\", function () {\r",
+                      "    pm.response.to.have.status(500);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "4cbdf832-1dea-425b-80ec-856fa921e815",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"productsPurchased\": [\r\n        {\r\n            \"productId\": \"{{productId2}}\",\r\n            \"quantity\": {{transactionQuantity2}}\r\n        }\r\n    ], \r\n    \"contactId\": \"{{contactId2}}\",\r\n    \"transactionRating\": {{transactionRating2}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/transaction/new"
+              },
+              "response": []
             }
           ],
           "id": "a952783c-eb3f-4e30-b862-7aababd9e611",
@@ -1794,7 +1888,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "b8d20aa0-1fd3-454a-97f8-12bb81d5728a",
+                "id": "b52fddcb-2374-408b-a823-85775cdd9ca4",
                 "type": "text/javascript",
                 "exec": [
                   ""
@@ -1804,12 +1898,10 @@
             {
               "listen": "test",
               "script": {
-                "id": "3d2f23f9-2d26-4855-9a4c-4558985e3c81",
+                "id": "ea41e93e-ad27-4123-bd70-675ab1872b07",
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 400\", function () {",
-                  "    pm.response.to.have.status(400);",
-                  "});"
+                  ""
                 ]
               }
             }
