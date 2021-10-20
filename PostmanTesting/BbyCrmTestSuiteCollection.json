@@ -1804,6 +1804,20 @@
           "item": [
             {
               "name": "New transaction without products",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "d5d635ff-1a4e-4e48-a318-372657a60ed1",
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "6e51bc1b-cd2d-470b-a465-96cf2b17af15",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
