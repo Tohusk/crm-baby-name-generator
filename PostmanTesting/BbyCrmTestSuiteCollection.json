@@ -1874,7 +1874,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "b8d20aa0-1fd3-454a-97f8-12bb81d5728a",
+                "id": "b52fddcb-2374-408b-a823-85775cdd9ca4",
                 "type": "text/javascript",
                 "exec": [
                   ""
@@ -1884,12 +1884,10 @@
             {
               "listen": "test",
               "script": {
-                "id": "3d2f23f9-2d26-4855-9a4c-4558985e3c81",
+                "id": "ea41e93e-ad27-4123-bd70-675ab1872b07",
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 400\", function () {",
-                  "    pm.response.to.have.status(400);",
-                  "});"
+                  ""
                 ]
               }
             }
