@@ -217,7 +217,7 @@
               "response": []
             },
             {
-              "name": "Register without password Copy",
+              "name": "Register without password",
               "event": [
                 {
                   "listen": "test",
