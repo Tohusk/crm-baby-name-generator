@@ -290,6 +290,20 @@
             },
             {
               "name": "Sign in with non existant account",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "34357951-0fa7-442e-8afc-be98ed0f1c58",
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "ed69c886-8c48-4d17-8b29-fc56a84138bb",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -297,7 +311,16 @@
               "request": {
                 "method": "POST",
                 "header": [],
-                "url": null
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"non@existant.com\",\r\n    \"password\": \"WrongPW12#\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/auth/signin"
               },
               "response": []
             }
