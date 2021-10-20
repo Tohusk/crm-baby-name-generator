@@ -10,6 +10,7 @@ export default class AutoCompleteText extends React.Component {
         this.state = {
             suggestions: [],
             text:'',
+            trackItem: [],
         };
     }
 
@@ -47,9 +48,15 @@ export default class AutoCompleteText extends React.Component {
         }));
     }
 
+    //sending selected data back to parent component and emptying input box
     onTrigger = (e) => {
         console.log(this.state.text);
+        // if(this.state.products.some(item => childData === item.name)){
+        //     this.setState({errorMessage: "Item already selected"});
+        //   } else {
         this.props.parentCallback(this.state.text);
+        this.setState({text: ''});
+        //}
         // e.preventDefault();
     }
 
@@ -58,10 +65,7 @@ export default class AutoCompleteText extends React.Component {
 
         return (
             <div>
-            {/* <div className="addTransaction-sub-container">
-            <div className="addTransaction-subtitle">Select Customer</div> */}
             <div className="AutoCompleteText">
-                {/* <form onSubmit={this.onTrigger}> */}
                     <input 
                         value={text}
                         onFocus={this.value=""} 
@@ -71,12 +75,9 @@ export default class AutoCompleteText extends React.Component {
                         autoComplete="off"
                         placeholder="Enter name..."/>
                     {this.renderSuggestions()}
-                    
-                {/* </form> */}
             </div>
             <br />
             <button className="addTransaction-add-button" onClick={this.onTrigger}>Select</button>
-            {/* </div> */}
             </div>
         )
     }

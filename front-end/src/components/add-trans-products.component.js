@@ -44,8 +44,8 @@ class SelectedProduct extends React.Component {
     }
 
     render() {
-        let productTotal = this.props.product.price * this.props.product.quantity;
-        productTotal = (Math.round(productTotal * 100) / 100).toFixed(2);
+        //let productTotal = this.props.product.price * this.props.product.quantity;
+        let productTotal = (Math.round((this.props.product.price * this.props.product.quantity) * 100) / 100).toFixed(2);
 
         return (
             <div>
@@ -132,11 +132,13 @@ class AddTransProductForm extends React.Component {
 
     }
 
+    //handling delete product from list
     deleteProduct(deletedProduct) {
         const filteredProducts = this.state.productList.filter((product) => product.productId !== deletedProduct.productId);
         this.setState({ productList: filteredProducts });
     }
 
+    //handling adding quantity by one
     addQty(product) {
         console.log(product.quantity);
         const quantity = product.quantity + 1;
@@ -145,12 +147,14 @@ class AddTransProductForm extends React.Component {
         console.log(this.state.productList);
     }
 
+    //handling reducing quantity by one
     reduceQty(product) {
         const quantity = product.quantity - 1;
         const updateQtyProducts = this.state.productList.map(el => (el.productId === product.productId ? Object.assign({}, el, { quantity }) : el));
         this.setState({ productList: updateQtyProducts });
     }
 
+    //handling rating on change
     handleRating(e) {
         let rating = parseInt(e.target.value);
         this.setState({
@@ -193,11 +197,12 @@ class AddTransProductForm extends React.Component {
         const reduceQty = this.reduceQty;
 
         let total = this.state.total;
+        let stringTotal = this.state.total;
 
         var products = this.state.productList.map( (product) => {
             console.log(product);
             total += product.price;
-            total = (Math.round(total * 100) / 100).toFixed(2);
+            stringTotal = (Math.round((total) * 100) / 100).toFixed(2);
             console.log(total);
             return (
                 <SelectedProduct
@@ -225,7 +230,7 @@ class AddTransProductForm extends React.Component {
                             <div>
                                 {products}
                                 <br />
-                                <h4 className="addTransaction-total">Total: ${total}</h4>
+                                <h4 className="addTransaction-total">Total: ${stringTotal}</h4>
                             </div>
                     </div>
                 

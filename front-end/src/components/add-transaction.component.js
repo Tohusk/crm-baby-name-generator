@@ -30,16 +30,9 @@ export default class AddTransaction extends Component {
               name: '',
               price: 0,
             }],
-            rating: 0,
             total: 0,
-            //custName: {},
-            // products: [{
-            //   productId: "",
-            //   quantity: 0,
-            //   name: "",
-            //   price: 0,
-            // }]
-
+            rating: 0,
+            errorMessage: '',
             
         };
     }
@@ -95,9 +88,7 @@ export default class AddTransaction extends Component {
     handleProductCallback = (childData) => {
       let { allProducts } = this.state;
       console.log(this.state.products);
-      if(this.state.products.some(item => childData === item.name)){
-        alert("item already selected");
-      } else {
+      
       for(let k in allProducts){
         console.log(allProducts[k]);
         if(allProducts[k]['name'] === childData){
@@ -120,8 +111,6 @@ export default class AddTransaction extends Component {
         }
       }
       console.log(this.state.products);
-    }
-      // this.setState({ products: [...this.state.products.productId, childData] })
     }
 
     //Set products purchased 
@@ -149,13 +138,6 @@ export default class AddTransaction extends Component {
           <div>
             <div className="addItem-title">New Transaction</div>
             <div className="addTransaction-container">
-              
-              
-                    {/*Page Name*/}
-              
-              {/* <div className="addTransaction-container">  */}
-        {/* <div className="addTransaction-form"> */}
-                
           <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Select Customer</div>
             <AutoCompleteText items={this.state.customernames} parentCallback={this.handleCustomerCallback}/>
@@ -170,21 +152,10 @@ export default class AddTransaction extends Component {
           <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Select Product/s</div>
             <AutoCompleteText items={this.state.productnames} parentCallback={this.handleProductCallback}/>
-            {/* <button className="addTransaction-add-button">Add</button> */}
+            {this.state.errorMessage && <p className="addTransaction-error">{this.state.errorMessage}</p>}
           </div>
-          {/* <Form> */}
-          {/* <div className="addTransaction-sub-container">
-            <div className="addTransaction-subtitle">Customer:</div>
-            <p>{this.state.customer['name']}</p>
-            
-          </div> */}
-          {/* <div className="addTransaction-sub-container">
-            <div className="addTransaction-subtitle">Product/s:</div> */}
-
-            {/* <AddTransProductForm selectedProducts={this.state.products}></AddTransProductForm> */}
             <AddTransProductForm selectedProducts={this.state.products} customer={this.state.customer} userId={this.state.currentUser.id}></AddTransProductForm>
 
-          {/* </div> */}
          
       </div>
       </div>
