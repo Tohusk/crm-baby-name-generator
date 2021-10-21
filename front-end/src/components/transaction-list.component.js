@@ -44,12 +44,12 @@ export default class TransactionList extends Component {
                 ) : (
                     <Table bordered hover>
                         <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Contact</th>
-                            <th>Total</th>
-                        </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Contact</th>
+                                <th>Total</th>
+                            </tr>
                         </thead>
                         <tbody>{this.displayTable()}</tbody>
                     </Table>

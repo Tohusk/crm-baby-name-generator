@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import TransactionService from "../services/transaction.service";
 import "../styles/AddItem.css";
 import { withRouter } from "react-router";
@@ -192,28 +192,26 @@ class AddTransProductForm extends React.Component {
     async hSumbit(e) {
         //alert("dsfdfs");
         e.preventDefault();
-            //console.log(this.state.total);
-            // console.log(this.state.transactionRating);
-            // console.log(this.state.productList);
-            // console.log(this.props.contact._id);
-            // console.log(this.props.userId);
-            try {
-                const res = await TransactionService.addNewTransaction(
-                    //this.state.total,
-                    this.state.transactionRating,
-                    this.state.productList,
-                    this.props.contact._id,
-                    this.props.userId,
-                );
-                console.log(res.data);
-                this.props.history.push('/sales');
-            } catch (err) {
-                const resMessage =
-                    (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
-                alert(resMessage);
-            }
-        
-
+        //console.log(this.state.total);
+        // console.log(this.state.transactionRating);
+        // console.log(this.state.productList);
+        // console.log(this.props.contact._id);
+        // console.log(this.props.userId);
+        try {
+            const res = await TransactionService.addNewTransaction(
+                //this.state.total,
+                this.state.transactionRating,
+                this.state.productList,
+                this.props.contact._id,
+                this.props.userId
+            );
+            console.log(res.data);
+            this.props.history.push("/sales");
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            alert(resMessage);
+        }
     }
 
     render() {
@@ -248,8 +246,8 @@ class AddTransProductForm extends React.Component {
                 <div className="addTransaction-second-container">
                     <div className="addTransaction-sub-container">
                         <div className="addTransaction-subtitle">Contact:</div>
-                            <h4>{this.props.contact['name']}</h4>
-                        </div>
+                        <h4>{this.props.contact["name"]}</h4>
+                    </div>
                     <div className="addTransaction-sub-container">
                         <div className="addTransaction-subtitle">Product/s:</div>
                         <div>

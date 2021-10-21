@@ -27,7 +27,7 @@ export default class Contacts extends Component {
         // number of contacts on those dates is data
         const contactDatesHashMap = {};
         let total = 0;
-        contactDatesHashMap[' '] = total;
+        contactDatesHashMap[" "] = total;
         for (const contact of allContacts) {
             if (contact.dateAdded !== undefined) {
                 if (!contactDatesHashMap[contact.dateAdded.substring(0, 7)]) {
@@ -130,10 +130,7 @@ export default class Contacts extends Component {
             <div>
                 <div className="overview-pagename">Contacts</div>
                 <div className="overview-button-box">
-                    <Link
-                        to="/addcontact"
-                        className="overview-add-btn"
-                    >
+                    <Link to="/addcontact" className="overview-add-btn">
                         + Add Contact
                     </Link>
                 </div>

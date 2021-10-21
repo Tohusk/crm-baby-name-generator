@@ -61,11 +61,11 @@ export default class AutoCompleteText extends React.Component {
 
         return (
             <div>
-            {/* <div className="addTransaction-sub-container">
+                {/* <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Select Contact</div> */}
-            <div className="AutoCompleteText">
-                {/* <form onSubmit={this.onTrigger}> */}
-                    <input 
+                <div className="AutoCompleteText">
+                    {/* <form onSubmit={this.onTrigger}> */}
+                    <input
                         value={text}
                         // onFocus={this.value=""}  THIS ON FOCUS LINE IS PROBLEMATIC FOR SOME REASON
                         onChange={this.onTextChanged}

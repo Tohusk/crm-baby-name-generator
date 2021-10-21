@@ -95,10 +95,7 @@ export default class Products extends Component {
             <div>
                 <div className="overview-pagename">Products</div>
                 <div className="overview-button-box">
-                    <Link
-                        to="/addproduct"
-                        className="overview-add-btn"
-                    >
+                    <Link to="/addproduct" className="overview-add-btn">
                         + Add Product
                     </Link>
                 </div>
@@ -123,10 +120,7 @@ export default class Products extends Component {
                 <div className="category-flex-container">
                     <CategoryOverview></CategoryOverview>
                     <div className="overview-button-box">
-                        <Link
-                            to="/editCategory"
-                            className="overview-add-btn"
-                        >
+                        <Link to="/editCategory" className="overview-add-btn">
                             Edit Categories
                         </Link>
                     </div>
