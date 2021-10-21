@@ -117,7 +117,7 @@ export default class Products extends Component {
                         </div>
                     </div>
                     <div className="overview-pie-chart-card">
-                        <div className="overview-chart-heading">Popularity by Categories</div>
+                        <div className="overview-chart-heading">Category Popularity</div>
                         <div>{this.showCategoryChart()}</div>
                     </div>
                 </div>

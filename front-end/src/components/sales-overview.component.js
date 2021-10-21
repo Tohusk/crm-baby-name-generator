@@ -120,7 +120,7 @@ export default class Sales extends Component {
                         </div>
                     </div>
                     <div className="overview-graph-card">
-                        <div className="overview-card-heading">Transaction Ratings</div>
+                        <div className="overview-card-heading">Transaction Satisfaction</div>
                         <div>{this.displayRatingsGraph()}</div>
                     </div>
                 </div>
