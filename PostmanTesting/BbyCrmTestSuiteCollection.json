@@ -1933,7 +1933,7 @@
               "response": []
             },
             {
-              "name": "New Request",
+              "name": "Delete product still in use by a transaction",
               "id": "9373f7ec-9fca-4c66-a4a7-61fb92a021ca",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
