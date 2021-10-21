@@ -1904,9 +1904,7 @@
                   "script": {
                     "id": "bc67281d-87c9-49a6-8fa1-31d2c37ac963",
                     "exec": [
-                      "pm.test(\"Status code is 500\", function () {\r",
-                      "    pm.response.to.have.status(500);\r",
-                      "});"
+                      ""
                     ],
                     "type": "text/javascript"
                   }
@@ -1929,6 +1927,19 @@
                   }
                 },
                 "url": "{{rootUrl}}/api/transaction/new"
+              },
+              "response": []
+            },
+            {
+              "name": "Delete product still in use by a transaction",
+              "id": "9373f7ec-9fca-4c66-a4a7-61fb92a021ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": null
               },
               "response": []
             }
