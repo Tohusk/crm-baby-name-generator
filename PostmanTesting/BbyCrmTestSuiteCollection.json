@@ -1450,15 +1450,24 @@
               "response": []
             },
             {
-              "name": "New Request",
+              "name": "Delete category currently in use by a product",
               "id": "b0295fb7-63a7-4a82-a004-3f5fb8e23221",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
               "request": {
-                "method": "GET",
+                "method": "DELETE",
                 "header": [],
-                "url": null
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"categoryId\": \"{{categoryId2}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/category/deleteOne"
               },
               "response": []
             }
@@ -1920,6 +1929,19 @@
                   }
                 },
                 "url": "{{rootUrl}}/api/transaction/new"
+              },
+              "response": []
+            },
+            {
+              "name": "New Request",
+              "id": "9373f7ec-9fca-4c66-a4a7-61fb92a021ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": null
               },
               "response": []
             }
