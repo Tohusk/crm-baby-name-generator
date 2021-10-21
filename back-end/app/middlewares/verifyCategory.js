@@ -91,12 +91,11 @@ const checkCategoryNotInUse = async (req, res, next) => {
         const allProducts = await Product.findOne({ user: req.body.userId });
 
         for (const p of allProducts.products) {
-            if (p.categoryId.toString() == req.body.categoryId.toString()) {
+            if (p.categoryId && p.categoryId.toString() === req.body.categoryId.toString()) {
                 res.status(400).send({ message: "Failed! This category is in use by one or more products" });
                 return;
             }
         }
-
         next();
     } catch (err) {
         res.status(500).send({ message: err });
