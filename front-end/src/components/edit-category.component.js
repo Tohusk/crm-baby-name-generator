@@ -21,7 +21,7 @@ const required = (value) => {
     }
 };
 
-export default class AddCategory extends Component {
+export default class EditCategory extends Component {
     constructor(props) {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
@@ -112,8 +112,8 @@ export default class AddCategory extends Component {
         }
         return (
             <div className="addItem-container">
-                <div className="addCategory-smallText">
-                    <a className="addCategory-backButton" href="/addproduct">
+                <div className="editCategory-smallText">
+                    <a className="editCategory-backButton" href="/addproduct">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -131,7 +131,7 @@ export default class AddCategory extends Component {
                     </a>
                 </div>
                 <div className="addItem-title">Edit Categories</div>
-                <div className="addCategory-list-container">
+                <div className="editCategory-list-container">
                     <p>CATEGORIES</p>
                     <div className="overview-flex-container">
                         <CategoryList />
@@ -139,13 +139,13 @@ export default class AddCategory extends Component {
 
                     {this.state.showAddForm ? (
                         <Form
-                            className="addCategory-form"
+                            className="editCategory-form"
                             onSubmit={this.handleSubmit}
                             ref={(c) => {
                                 this.form = c;
                             }}
                         >
-                            <div className="addCategory-form-group">
+                            <div className="editCategory-form-group">
                                 <label htmlFor="name">NAME</label>
                                 <Input
                                     type="text"
@@ -165,8 +165,8 @@ export default class AddCategory extends Component {
                                     validations={[required]}
                                 />
                             </div>
-                            <div className="addCategory-submit-group">
-                                <button onClick={this.hideForm} className="addCategory-cancelButton" href="/home">
+                            <div className="editCategory-submit-group">
+                                <button onClick={this.hideForm} className="editCategory-cancelButton" href="/home">
                                     Cancel
                                 </button>
                                 <button className="submitButton" disabled={this.state.loading}>
@@ -192,7 +192,7 @@ export default class AddCategory extends Component {
                         </Form>
                     ) : null}
 
-                    <button onClick={this.showAddForm} className="addCategory-addCategory">
+                    <button onClick={this.showAddForm} className="editCategory-editCategory">
                         + Add Category
                     </button>
                 </div>

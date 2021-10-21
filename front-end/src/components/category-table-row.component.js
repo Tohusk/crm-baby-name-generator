@@ -34,7 +34,7 @@ export default class CategoryTableRow extends Component {
                 <td style={styles}></td>
                 <td>{this.props.category.name}</td>
                 <td>
-                    <button className="addCategory-delete" onClick={this.deleteOneCategory}>
+                    <button className="editCategory-delete" onClick={this.deleteOneCategory}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1.3em"

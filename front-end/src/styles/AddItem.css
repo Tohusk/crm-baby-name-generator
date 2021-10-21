@@ -78,12 +78,12 @@
     float: left;
 }
 
-.addProduct-addCategory {
+.addProduct-editCategory {
     text-decoration-line: underline;
     color: #747474;
 }
 
-.addProduct-addCategory-container {
+.addProduct-editCategory-container {
     margin-top: 6vh;
 }
 
@@ -198,39 +198,39 @@
 
 /* Add category */
 
-.addCategory-smallText{
+.editCategory-smallText{
     font-size: 1em;
     color: grey;
     justify-content: space-around;
     margin-top: 2em;
 }
 
-.addCategory-backButton {
+.editCategory-backButton {
     text-decoration: none;
     color: #747474;
 }
 
 
-.addCategory-list-container {
+.editCategory-list-container {
     margin-top: 3%;
 }
 
-.addCategory-list-container p {
+.editCategory-list-container p {
     color: #747474;
     font-family: 'Inter';
     font-size: 0.8em;
 }
 
-.addCategory-form-group {
+.editCategory-form-group {
     width: 20%;
 }
 
-.addCategory-list {
+.editCategory-list {
     list-style-type: none;
     width: 15%;
 }
 
-.addCategory-delete {
+.editCategory-delete {
     background: none;
 	color: inherit;
 	border: none;
@@ -240,11 +240,11 @@
 	outline: inherit;
 }
 
-.addCategory-list li {
+.editCategory-list li {
     border-bottom: 1px solid #747474;
 }
 
-.addCategory-addCategory {
+.editCategory-editCategory {
     background: none;
     border: none;
     padding: 0;
@@ -253,7 +253,7 @@
     cursor: pointer;
 }
 
-.addCategory-deleteCategory {
+.editCategory-deleteCategory {
     background: none;
     border: none;
     padding: 0;
@@ -261,7 +261,7 @@
     float: right;
 }
 
-.addCategory-submit-group {
+.editCategory-submit-group {
     flex-basis: 100%;
     display: flex;
     justify-content: flex-start;
@@ -270,7 +270,7 @@
     margin-left: 2%;
 }
 
-.addCategory-cancelButton {
+.editCategory-cancelButton {
     text-decoration-line: underline;
     color: #747474;
     margin-right: 2vw;

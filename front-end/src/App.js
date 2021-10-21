@@ -16,7 +16,7 @@ import EditContact from "./components/edit-contact.component";
 
 import AddContact from "./components/add-contact.component";
 import AddProduct from "./components/add-product.component";
-import AddCategory from "./components/add-category.component";
+import EditCategory from "./components/edit-category.component";
 import AddTransaction from "./components/add-transaction.component";
 
 import Sidebar from "./components/sidebar.component";
@@ -75,9 +75,9 @@ class App extends Component {
                             <Sidebar />
                             <AddTransaction />
                         </Route>
-                        <Route exact path="/addCategory">
+                        <Route exact path="/editCategory">
                             <Sidebar />
-                            <AddCategory />
+                            <EditCategory />
                         </Route>
                         <Route exact path="/editContact">
                             <Sidebar />

@@ -17,6 +17,7 @@ export default class CategoryList extends Component {
     }
 
     async componentDidMount() {
+        // Load all categories into the state
         try {
             const res = await CategoryService.getAllCategories(this.state.currentUser.id);
             this.setState({
@@ -33,6 +34,7 @@ export default class CategoryList extends Component {
         if (this.state.categories.length === 0) {
             return <div>No categories found</div>;
         }
+        // Using categories in state, render a row for every category
         return this.state.categories.map((currentCategory, i) => {
             return <CategoryTableRow currentUser={this.state.currentUser} category={currentCategory} key={i} />;
         });
