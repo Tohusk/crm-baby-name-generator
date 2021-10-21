@@ -1932,14 +1932,35 @@
             },
             {
               "name": "Delete product still in use by a transaction",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "c82eb102-1ee8-475b-8a69-91afa6c1da67",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "9373f7ec-9fca-4c66-a4a7-61fb92a021ca",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
               "request": {
-                "method": "GET",
+                "method": "DELETE",
                 "header": [],
-                "url": null
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"productId\": \"{{productId2}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/product/deleteOne"
               },
               "response": []
             }
