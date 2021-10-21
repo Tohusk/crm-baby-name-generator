@@ -5,6 +5,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import AutoCompleteText from "./search-autocomplete.component";
 import AddTransProductForm from "./add-trans-products.component";
+import ContactService from "../services/contact.service";
+import ProductService from "../services/product.service";
 
 import "../styles/AddItem.css";
 import { Redirect } from "react-router";
@@ -45,25 +47,26 @@ export default class AddTransaction extends Component {
     }
 
     //get request for all customers and products
-    componentDidMount() {
-      Promise.all([
-        axios.get("http://localhost:8080/api/contact/getAll?userId=" + this.state.currentUser.id),
-        axios.get("http://localhost:8080/api/product/getAll?userId=" + this.state.currentUser.id)
-      ])
-      .then(axios.spread((customerResponse, productResponse) => {
-        console.log(productResponse.data);
-        console.log(customerResponse.data);
-        const custData = customerResponse.data;
+    async componentDidMount() {
+      try {
+        let customers = ContactService.getAllCustomers(this.state.currentUser.id);
+        let products = ProductService.getAllProducts(this.state.currentUser.id);
+        let response = await Promise.all([customers, products]);
+        
+        let customerResponse = response[0];
+        let productResponse = response[1];
 
+        const custData = customerResponse.data;
         //putting customer and product names into an array of strings for autocomplete searchbox
-        var custNames = [];
-        for(var i in custData){
-          custNames.push(custData[i].name);
+        let custNames = [];
+        for(const customer of custData){
+          custNames.push(customer.name);
         }
+
         const prodData = productResponse.data;
-        var prodNames = [];
-        for(var item in prodData){
-          prodNames.push(prodData[item].name);
+        let prodNames = [];
+        for(const product of prodData){
+          prodNames.push(product.name);
         }
 
         this.setState({
@@ -73,8 +76,11 @@ export default class AddTransaction extends Component {
           allProducts: productResponse.data,
           allCustomers: customerResponse.data,
         });
-        console.log(this.state.allCustomers);
-      }));
+
+      }
+      catch (err) {
+        console.log(err);
+      }
     }
 
     //set the customer selected from autocomplete searchbox component as state customer
