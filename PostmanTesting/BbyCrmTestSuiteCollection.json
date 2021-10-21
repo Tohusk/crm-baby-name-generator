@@ -1450,7 +1450,7 @@
               "response": []
             },
             {
-              "name": "Delete category currently in use by a product",
+              "name": "Delete category currently in use",
               "id": "b0295fb7-63a7-4a82-a004-3f5fb8e23221",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
