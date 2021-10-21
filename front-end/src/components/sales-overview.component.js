@@ -7,7 +7,7 @@ import "../styles/Home.css";
 import "../styles/Overview.css";
 import TransactionList from "./transaction-list.component";
 import TransactionService from "../services/transaction.service";
-import { Bar } from 'react-chartjs-2';
+import { Bar } from "react-chartjs-2";
 
 export default class Sales extends Component {
     constructor(props) {
@@ -15,8 +15,8 @@ export default class Sales extends Component {
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
-            numTrans: 'N/A',
-            totalRevenue: 'N/A',
+            numTrans: "N/A",
+            totalRevenue: "N/A",
             ratingsFreq: [],
         };
     }
@@ -36,11 +36,10 @@ export default class Sales extends Component {
                 totalRevenue: totalRevenue,
                 ratingsFreq: ratingsFreq,
             });
-
         } catch (err) {
             this.setState({
-                numTrans: 'N/A',
-                totalRevenue: 'N/A',
+                numTrans: "N/A",
+                totalRevenue: "N/A",
                 ratingsFreq: [],
             });
         }
@@ -54,25 +53,27 @@ export default class Sales extends Component {
                 <div>
                     <Bar
                         data={{
-                            labels: ['Very Unsatisfied', 'Unsatisfied', 'Neutral', 'Satisfied', 'Very Satisfied'],
-                            datasets: [{
-                                data: this.state.ratingsFreq,
-                                backgroundColor: [
-                                    'rgba(255, 68, 68, 0.2)',
-                                    'rgba(255, 170, 30, 0.2)',
-                                    'rgba(255, 215, 68, 0.2)',
-                                    'rgba(177, 229, 64, 0.2)',
-                                    'rgba(64, 221, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 68, 68, 1)',
-                                    'rgba(255, 170, 30, 1)',
-                                    'rgba(255, 215, 68, 1)',
-                                    'rgba(177, 229, 64, 1)',
-                                    'rgba(64, 221, 64, 1)'
-                                ],
-                                borderWidth: 1,
-                            }],
+                            labels: ["Very Unsatisfied", "Unsatisfied", "Neutral", "Satisfied", "Very Satisfied"],
+                            datasets: [
+                                {
+                                    data: this.state.ratingsFreq,
+                                    backgroundColor: [
+                                        "rgba(255, 68, 68, 0.2)",
+                                        "rgba(255, 170, 30, 0.2)",
+                                        "rgba(255, 215, 68, 0.2)",
+                                        "rgba(177, 229, 64, 0.2)",
+                                        "rgba(64, 221, 64, 0.2)",
+                                    ],
+                                    borderColor: [
+                                        "rgba(255, 68, 68, 1)",
+                                        "rgba(255, 170, 30, 1)",
+                                        "rgba(255, 215, 68, 1)",
+                                        "rgba(177, 229, 64, 1)",
+                                        "rgba(64, 221, 64, 1)",
+                                    ],
+                                    borderWidth: 1,
+                                },
+                            ],
                         }}
                         options={{
                             plugins: {

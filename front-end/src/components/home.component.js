@@ -9,7 +9,7 @@ import VerticalBar from "./verticalBar.component";
 import PieChart from "./pie.component";
 
 import "../styles/Home.css";
-import {Pie} from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 
 export default class Home extends Component {
     constructor(props) {
@@ -17,11 +17,11 @@ export default class Home extends Component {
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
-            avgSatisfactionScore: 'N/A',
-            totalProducts: 'N/A',
-            mostPopularProduct: 'N/A',
+            avgSatisfactionScore: "N/A",
+            totalProducts: "N/A",
+            mostPopularProduct: "N/A",
             categoryChartStat: [],
-            totalRevenue: 'N/A',
+            totalRevenue: "N/A",
             ratingsFreq: [],
         };
     }
@@ -34,9 +34,13 @@ export default class Home extends Component {
             const salesStats = await TransactionService.getSalesStats(this.state.currentUser.id);
 
             this.setState({
-                avgSatisfactionScore: avgSatisfactionScore?.data.avgUserRating ? avgSatisfactionScore.data.avgUserRating : 'N/A',
-                totalProducts: totalProducts?.data ? totalProducts.data : 'N/A',
-                mostPopularProduct: productStats?.data.mostPopularProduct?.name ? productStats.data.mostPopularProduct.name : 'N/A',
+                avgSatisfactionScore: avgSatisfactionScore?.data.avgUserRating
+                    ? avgSatisfactionScore.data.avgUserRating
+                    : "N/A",
+                totalProducts: totalProducts?.data ? totalProducts.data : "N/A",
+                mostPopularProduct: productStats?.data.mostPopularProduct?.name
+                    ? productStats.data.mostPopularProduct.name
+                    : "N/A",
                 categoryChartStat: productStats?.data.categoryStats ? productStats.data.categoryStats : [],
                 totalRevenue: salesStats?.data.totalRevenue,
                 ratingsFreq: salesStats?.data.ratingsFreq,
@@ -60,15 +64,14 @@ export default class Home extends Component {
                 backgroundColor: categoryChartColourList,
                 data: categoryChartDataList,
             }];*/
-
         } catch (err) {
             console.log(err);
             this.setState({
-                avgSatisfactionScore: 'N/A',
-                totalProducts: 'N/A',
-                mostPopularProduct: 'N/A',
+                avgSatisfactionScore: "N/A",
+                totalProducts: "N/A",
+                mostPopularProduct: "N/A",
                 categoryChartStat: [],
-                totalRevenue: 'N/A',
+                totalRevenue: "N/A",
                 ratingsFreq: [],
             });
         }
@@ -76,17 +79,17 @@ export default class Home extends Component {
 
     displayRatingsChart() {
         if (this.state.categoryChartStat.length === 0) {
-            return (<div className="overview-card-stat">No Data</div>);
+            return <div className="overview-card-stat">No Data</div>;
         } else {
-            return (<VerticalBar ratingsFreq={this.state.ratingsFreq}/>);
+            return <VerticalBar ratingsFreq={this.state.ratingsFreq} />;
         }
     }
 
     displayCategoryChart() {
         if (this.state.categoryChartStat.length === 0) {
-            return (<div className="overview-card-stat">No Data</div>);
+            return <div className="overview-card-stat">No Data</div>;
         } else {
-            return (<PieChart categoryChartStat={this.state.categoryChartStat}/>);
+            return <PieChart categoryChartStat={this.state.categoryChartStat} />;
         }
     }
 
@@ -101,11 +104,11 @@ export default class Home extends Component {
                 <div className="overview-pagename">Home</div>
                 <div className="home-charts">
                     <div className="home-bar-overview">
-                        <div className='home-chart-heading'>Transaction Ratings</div>
+                        <div className="home-chart-heading">Transaction Ratings</div>
                         <div>{this.displayRatingsChart()}</div>
                     </div>
                     <div className="home-pie-overview">
-                        <div className='home-chart-heading'>Category Popularity</div>
+                        <div className="home-chart-heading">Category Popularity</div>
                         <div>{this.displayCategoryChart()}</div>
                     </div>
                 </div>
@@ -126,11 +129,8 @@ export default class Home extends Component {
                         <div className="overview-card-heading">Total Revenue</div>
                         <div className="overview-card-stat">${this.state.totalRevenue}</div>
                     </div>
-                    
                 </div>
-
             </div>
-            
         );
     }
 }
