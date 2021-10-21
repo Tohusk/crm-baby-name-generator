@@ -1448,6 +1448,19 @@
                 "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
+            },
+            {
+              "name": "Delete category currently in use by a product",
+              "id": "b0295fb7-63a7-4a82-a004-3f5fb8e23221",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": null
+              },
+              "response": []
             }
           ],
           "id": "af5e3f54-33ec-4465-acce-9dcb95d09578",
