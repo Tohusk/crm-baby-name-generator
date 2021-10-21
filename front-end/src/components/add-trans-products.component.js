@@ -13,45 +13,33 @@ class SelectedProduct extends Component {
         };
         this.addQty = this.addQty.bind(this);
         this.reduceQty = this.reduceQty.bind(this);
-        this._onChange = this._onChange.bind(this);
-        this._onClick = this._onClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
 
     //increase quantity by one
     addQty() {
         this.props.addQty(this.props.product);
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // });
         this.props.handleTotal(this.props.product.price);
     }
 
     //decrease quantity by one
     reduceQty() {
         this.props.reduceQty(this.props.product);
-        // this.setState({
-        //   qty: this.state.qty - 1
-        // });
         this.props.handleTotal(-this.props.product.price);
     }
 
-    _onChange(e) {
-        this.props.updateQty(e.target.value, this.props.product);
-        //this.props.handleTotal(this.props.product);
-    }
-
-    _onClick(e) {
-        this.props.handleTotal(this.props.product);
-    }
-
+    //delete product from selected list of products
     handleDelete(e) {
-        this.props.deleteProduct(this.props.product, this.props.total);
+        const newTotal = this.props.product.price * this.props.product.quantity - this.props.product.price;
+        console.log(newTotal);
+        console.log(this.props.total);
+        this.props.handleTotal(-newTotal);
+        this.props.deleteProduct(this.props.product);
     }
 
     render() {
-        let productTotal = this.props.product.price * this.props.product.quantity;
-        productTotal = (Math.round(productTotal * 100) / 100).toFixed(2);
+        //let productTotal = this.props.product.price * this.props.product.quantity;
+        let productTotal = (Math.round(this.props.product.price * this.props.product.quantity * 100) / 100).toFixed(2);
 
         return (
             <div>
@@ -77,7 +65,6 @@ class SelectedProduct extends Component {
                         x
                     </button>
                 </div>
-
                 {/* <div className="addTransaction-products-container">
                     <h4>{this.props.product.name}: ${this.props.product.price}</h4>
                     <div className="addTransaction-buttons-wrapper">
@@ -107,7 +94,6 @@ class AddTransProductForm extends React.Component {
         };
 
         this.calculateTotal = this.calculateTotal.bind(this);
-        //this.updateQty = this.updateQty.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
         this.addQty = this.addQty.bind(this);
         this.reduceQty = this.reduceQty.bind(this);
@@ -148,19 +134,15 @@ class AddTransProductForm extends React.Component {
         });
         console.log(this.state.total);
     }
-
-    deleteProduct(deletedProduct, total) {
+    //handling delete product from list
+    deleteProduct(deletedProduct) {
         const filteredProducts = this.state.productList.filter(
             (product) => product.productId !== deletedProduct.productId
         );
         this.setState({ productList: filteredProducts });
-        const updateTotal = deletedProduct.price * deletedProduct.quantity;
-        console.log(total);
-        console.log(updateTotal);
-        this.setState({ total: total - updateTotal });
-        console.log(this.state.total);
     }
 
+    //handling adding quantity by one
     addQty(product) {
         console.log(product.quantity);
         const quantity = product.quantity + 1;
@@ -169,18 +151,18 @@ class AddTransProductForm extends React.Component {
         );
         this.setState({ productList: updateQtyProducts });
         console.log(this.state.productList);
-        //this.calculateTotal(this.props.price);
     }
 
+    //handling reducing quantity by one
     reduceQty(product) {
         const quantity = product.quantity - 1;
         const updateQtyProducts = this.state.productList.map((el) =>
             el.productId === product.productId ? Object.assign({}, el, { quantity }) : el
         );
         this.setState({ productList: updateQtyProducts });
-        //this.calculateTotal(-this.props.price);
     }
 
+    //handling rating on change
     handleRating(e) {
         let rating = parseInt(e.target.value);
         this.setState({
@@ -216,17 +198,17 @@ class AddTransProductForm extends React.Component {
 
     render() {
         const calcTotal = this.calculateTotal;
-        const getQty = this.updateQty;
         const deleteProduct = this.deleteProduct;
         const addQty = this.addQty;
         const reduceQty = this.reduceQty;
 
         let total = this.state.total;
+        let stringTotal = this.state.total;
 
         var products = this.state.productList.map((product) => {
             console.log(product);
             total += product.price;
-            total = (Math.round(total * 100) / 100).toFixed(2);
+            stringTotal = (Math.round(total * 100) / 100).toFixed(2);
             console.log(total);
             return (
                 <SelectedProduct
@@ -253,7 +235,7 @@ class AddTransProductForm extends React.Component {
                         <div>
                             {products}
                             <br />
-                            <h4 className="addTransaction-total">Total: ${total}</h4>
+                            <h4 className="addTransaction-total">Total: ${stringTotal}</h4>
                         </div>
                     </div>
 

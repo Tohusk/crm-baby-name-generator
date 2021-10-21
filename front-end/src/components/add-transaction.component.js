@@ -31,15 +31,9 @@ export default class AddTransaction extends Component {
                     price: 0,
                 },
             ],
-            rating: 0,
             total: 0,
-            //custName: {},
-            // products: [{
-            //   productId: "",
-            //   quantity: 0,
-            //   name: "",
-            //   price: 0,
-            // }]
+            rating: 0,
+            errorMessage: "",
         };
     }
 
@@ -96,6 +90,7 @@ export default class AddTransaction extends Component {
     handleProductCallback = (childData) => {
         let { allProducts } = this.state;
         console.log(this.state.products);
+
         for (let k in allProducts) {
             console.log(allProducts[k]);
             if (allProducts[k]["name"] === childData) {
@@ -117,8 +112,6 @@ export default class AddTransaction extends Component {
             }
         }
         console.log(this.state.products);
-
-        // this.setState({ products: [...this.state.products.productId, childData] })
     };
 
     //Set products purchased
@@ -150,9 +143,9 @@ export default class AddTransaction extends Component {
                     </div>
                     <div className="addTransaction-sub-container">
                         <div className="addTransaction-subtitle">Select Product/s</div>
-                        <AutoCompleteText items={this.state.productNames} parentCallback={this.handleProductCallback} />
+                        <AutoCompleteText items={this.state.productnames} parentCallback={this.handleProductCallback} />
+                        {this.state.errorMessage && <p className="addTransaction-error">{this.state.errorMessage}</p>}
                     </div>
-
                     <AddTransProductForm
                         selectedProducts={this.state.products}
                         contact={this.state.contact}
