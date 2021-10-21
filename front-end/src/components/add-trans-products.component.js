@@ -33,7 +33,7 @@ class SelectedProduct extends React.Component {
 
     //delete product from selected list of products
     handleDelete(e) {
-        const newTotal = (this.props.product.price * this.props.product.quantity) - this.props.product.price;
+        const newTotal = this.props.product.price * this.props.product.quantity - this.props.product.price;
         console.log(newTotal);
         console.log(this.props.total);
         this.props.handleTotal(-newTotal);
@@ -42,21 +42,33 @@ class SelectedProduct extends React.Component {
 
     render() {
         //let productTotal = this.props.product.price * this.props.product.quantity;
-        let productTotal = (Math.round((this.props.product.price * this.props.product.quantity) * 100) / 100).toFixed(2);
+        let productTotal = (Math.round(this.props.product.price * this.props.product.quantity * 100) / 100).toFixed(2);
 
         return (
             <div>
                 <div className="addTransaction-buttons-wrapper">
-                
-                    
-                        <div className="addTransaction-question">{this.props.product.name}: ${productTotal}</div>
-                        
-                            <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.quantity <= 1}>-</button>
-                            <span>{this.props.product.quantity} </span>
-                            <span className="addTransaction-qty-btn"><button className="btn btn-outline-dark" onClick={this.addQty}>+</button></span>
-                            <button className="addTransaction-no-style-button" onClick={this.handleDelete}>x</button>
+                    <div className="addTransaction-question">
+                        {this.props.product.name}: ${productTotal}
+                    </div>
+
+                    <button
+                        className="btn btn-outline-dark"
+                        onClick={this.reduceQty}
+                        disabled={this.props.product.quantity <= 1}
+                    >
+                        -
+                    </button>
+                    <span>{this.props.product.quantity} </span>
+                    <span className="addTransaction-qty-btn">
+                        <button className="btn btn-outline-dark" onClick={this.addQty}>
+                            +
+                        </button>
+                    </span>
+                    <button className="addTransaction-no-style-button" onClick={this.handleDelete}>
+                        x
+                    </button>
                 </div>
-                    {/* <div className="addTransaction-products-container">
+                {/* <div className="addTransaction-products-container">
                     <h4>{this.props.product.name}: ${this.props.product.price}</h4>
                     <div className="addTransaction-buttons-wrapper">
                     <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.quantity <= 1}>-</button>
@@ -127,7 +139,9 @@ class AddTransProductForm extends React.Component {
     }
     //handling delete product from list
     deleteProduct(deletedProduct) {
-        const filteredProducts = this.state.productList.filter((product) => product.productId !== deletedProduct.productId);
+        const filteredProducts = this.state.productList.filter(
+            (product) => product.productId !== deletedProduct.productId
+        );
         this.setState({ productList: filteredProducts });
     }
 
@@ -197,7 +211,7 @@ class AddTransProductForm extends React.Component {
         var products = this.state.productList.map((product) => {
             console.log(product);
             total += product.price;
-            stringTotal = (Math.round((total) * 100) / 100).toFixed(2);
+            stringTotal = (Math.round(total * 100) / 100).toFixed(2);
             console.log(total);
             return (
                 <SelectedProduct
@@ -221,11 +235,11 @@ class AddTransProductForm extends React.Component {
                     </div>
                     <div className="addTransaction-sub-container">
                         <div className="addTransaction-subtitle">Product/s:</div>
-                            <div>
-                                {products}
-                                <br />
-                                <h4 className="addTransaction-total">Total: ${stringTotal}</h4>
-                            </div>
+                        <div>
+                            {products}
+                            <br />
+                            <h4 className="addTransaction-total">Total: ${stringTotal}</h4>
+                        </div>
                     </div>
 
                     <br />

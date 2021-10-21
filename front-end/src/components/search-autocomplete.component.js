@@ -9,7 +9,7 @@ export default class AutoCompleteText extends React.Component {
 
         this.state = {
             suggestions: [],
-            text:'',
+            text: "",
             trackItem: [],
         };
     }
@@ -58,7 +58,7 @@ export default class AutoCompleteText extends React.Component {
         //     this.setState({errorMessage: "Item already selected"});
         //   } else {
         this.props.parentCallback(this.state.text);
-        this.setState({text: ''});
+        this.setState({ text: "" });
         //}
         // e.preventDefault();
     };
@@ -68,8 +68,8 @@ export default class AutoCompleteText extends React.Component {
 
         return (
             <div>
-            <div className="AutoCompleteText">
-                    <input 
+                <div className="AutoCompleteText">
+                    <input
                         value={text}
                         // onFocus={this.value=""}  THIS ON FOCUS LINE IS PROBLEMATIC FOR SOME REASON
                         onChange={this.onTextChanged}
@@ -79,9 +79,11 @@ export default class AutoCompleteText extends React.Component {
                         placeholder="Enter name..."
                     />
                     {this.renderSuggestions()}
-            </div>
-            <br />
-            <button className="addTransaction-add-button" onClick={this.onTrigger}>Select</button>
+                </div>
+                <br />
+                <button className="addTransaction-add-button" onClick={this.onTrigger}>
+                    Select
+                </button>
             </div>
         );
     }
