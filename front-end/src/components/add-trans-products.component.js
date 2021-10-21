@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 import TransactionService from "../services/transaction.service";
 import "../styles/AddItem.css";
 import { withRouter } from "react-router";
@@ -9,7 +6,7 @@ import { withRouter } from "react-router";
 
 
 //displaying row of product that is selected
-class SelectedProduct extends React.Component {
+class SelectedProduct extends Component {
     constructor(props) {
         super(props);
 
@@ -193,14 +190,14 @@ class AddTransProductForm extends React.Component {
             //console.log(this.state.total);
             // console.log(this.state.transactionRating);
             // console.log(this.state.productList);
-            // console.log(this.props.customer._id);
+            // console.log(this.props.contact._id);
             // console.log(this.props.userId);
             try {
                 const res = await TransactionService.addNewTransaction(
                     //this.state.total,
                     this.state.transactionRating,
                     this.state.productList,
-                    this.props.customer._id,
+                    this.props.contact._id,
                     this.props.userId,
                 );
                 console.log(res.data);
@@ -245,8 +242,8 @@ class AddTransProductForm extends React.Component {
             <div>
                 <div className="addTransaction-second-container">
                     <div className="addTransaction-sub-container">
-                        <div className="addTransaction-subtitle">Customer:</div>
-                            <h4>{this.props.customer['name']}</h4>
+                        <div className="addTransaction-subtitle">Contact:</div>
+                            <h4>{this.props.contact['name']}</h4>
             
                         </div>
                     <div className="addTransaction-sub-container">
@@ -261,7 +258,7 @@ class AddTransProductForm extends React.Component {
                     <br />
                 </div>
             <div>
-          <div className="addTransaction-question">How satisfied was the customer? (Optional)</div>
+          <div className="addTransaction-question">How satisfied was the contact? (Optional)</div>
           <br />
             
             

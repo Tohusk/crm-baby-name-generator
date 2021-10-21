@@ -11,12 +11,12 @@
     margin: 8vh 0vw 0vh;
 }
 
-/* Add Customer */
-.addCustomer-form {
+/* Add Contact */
+.addContact-form {
     width: 40%;
 }
 
-.addCustomer-form-group {
+.addContact-form-group {
     margin-top: 4vh;
     margin-left: 1vw;
     font-size: 1.2em;
@@ -24,14 +24,14 @@
     color: #747474;
 }
 
-.addCustomer-submit-group {
+.addContact-submit-group {
     margin-top: 8vh;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.addCustomer-cancelButton {
+.addContact-cancelButton {
     margin-right: 2vw;
     text-decoration-line: underline;
     color: #747474;

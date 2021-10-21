@@ -8,7 +8,7 @@ import CheckButton from "react-validation/build/button";
 import ContactService from "../services/contact.service";
 import { Redirect } from "react-router";
 
-import "../styles/EditCustomer.css";
+import "../styles/EditContact.css";
 
 const required = (value) => {
     if (!value) {
@@ -20,7 +20,7 @@ const required = (value) => {
     }
 };
 
-class EditCustomer extends Component {
+class EditContact extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -89,7 +89,7 @@ class EditCustomer extends Component {
 
         try {
             if (window.confirm("Are you sure you wish to delete this?")) {
-                const res = await ContactService.deleteCustomer(
+                const res = await ContactService.deleteContact(
                     this.state.currentUser.id,
                     this.state.currentContact._id
                 );
@@ -97,7 +97,7 @@ class EditCustomer extends Component {
                     message: res.data.message,
                     loading: false,
                 });
-                this.props.history.push("/customers");
+                this.props.history.push("/contacts");
             }
         } catch (err) {
             const resMessage =
@@ -122,7 +122,7 @@ class EditCustomer extends Component {
 
         if (this.checkBtn.context._errors.length === 0) {
             try {
-                const res = await ContactService.updateCustomer(
+                const res = await ContactService.updateContact(
                     this.state.newName,
                     this.state.newEmail,
                     this.state.newPhoneNumber,
@@ -160,28 +160,28 @@ class EditCustomer extends Component {
         return (
             <div className="addItem-container">
                 {/*Page Name*/}
-                <div className="addItem-title">Edit Customer Profile</div>
-                <button className="editCustomer-deleteContainer" onClick={this.handleDelete}>
-                    <u>Delete Customer</u>
+                <div className="addItem-title">Edit Contact Profile</div>
+                <button className="editContact-deleteContainer" onClick={this.handleDelete}>
+                    <u>Delete Contact</u>
                 </button>
-                {/* Input values need to be filled automatically from customer details */}
+                {/* Input values need to be filled automatically from contact details */}
 
                 {this.state.redirect ? (
                     <Redirect
                         to={{
-                            pathname: "/customer-profile",
+                            pathname: "/contact-profile",
                             state: { contactId: this.state.currentContact._id },
                         }}
                     />
                 ) : null}
                 <Form
-                    className="addCustomer-form"
+                    className="addContact-form"
                     onSubmit={this.handleSubmit}
                     ref={(c) => {
                         this.form = c;
                     }}
                 >
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="name">NAME (Required)</label>
                         <Input
                             type="text"
@@ -192,7 +192,7 @@ class EditCustomer extends Component {
                             validations={[required]}
                         />
                     </div>
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="phoneNumber">PHONE NUMBER</label>
                         <Input
                             type="text"
@@ -202,7 +202,7 @@ class EditCustomer extends Component {
                             onChange={this.onChangePhoneNumber}
                         />
                     </div>
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="email">EMAIL</label>
                         <Input
                             type="text"
@@ -212,7 +212,7 @@ class EditCustomer extends Component {
                             onChange={this.onChangeEmail}
                         />
                     </div>
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="description">DESCRIPTION</label>
                         <Input
                             type="text"
@@ -222,7 +222,7 @@ class EditCustomer extends Component {
                             onChange={this.onChangeDescription}
                         />
                     </div>
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="companyName">BUSINESS NAME</label>
                         <Input
                             type="text"
@@ -232,11 +232,11 @@ class EditCustomer extends Component {
                             onChange={this.onChangeCompanyName}
                         />
                     </div>
-                    <div className="addCustomer-submit-group">
+                    <div className="addContact-submit-group">
                         <Link
-                            className="addCustomer-cancelButton"
+                            className="addContact-cancelButton"
                             to={{
-                                pathname: "/customer-profile",
+                                pathname: "/contact-profile",
                                 state: { contactId: this.state.currentContact._id },
                             }}
                         >
@@ -268,4 +268,4 @@ class EditCustomer extends Component {
     }
 }
 
-export default withRouter(EditCustomer);
+export default withRouter(EditContact);

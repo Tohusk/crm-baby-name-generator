@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-import axios from "axios";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import AutoCompleteText from "./search-autocomplete.component";
 import AddTransProductForm from "./add-trans-products.component";
 import ContactService from "../services/contact.service";
@@ -18,13 +15,13 @@ export default class AddTransaction extends Component {
         
         this.state = {
             currentUser: AuthService.getCurrentUser(),
-            allCustomers: [],
-            customernames: [],
+            allContacts: [],
+            contactNames: [],
             allProducts: [],
-            productnames: [],
-            showCustomer: false,
+            productNames: [],
+            showContact: false,
             showProduct: false,
-            customer: {},
+            contact: {},
             products: [],
             productsPurchased: [{
               productId: '',
@@ -46,35 +43,35 @@ export default class AddTransaction extends Component {
         };
     }
 
-    //get request for all customers and products
+    //get request for all contacts and products
     async componentDidMount() {
       try {
-        let customers = ContactService.getAllCustomers(this.state.currentUser.id);
+        let contacts = ContactService.getAllContacts(this.state.currentUser.id);
         let products = ProductService.getAllProducts(this.state.currentUser.id);
-        let response = await Promise.all([customers, products]);
+        let response = await Promise.all([contacts, products]);
         
-        let customerResponse = response[0];
+        let contactResponse = response[0];
         let productResponse = response[1];
 
-        const custData = customerResponse.data;
-        //putting customer and product names into an array of strings for autocomplete searchbox
-        let custNames = [];
-        for(const customer of custData){
-          custNames.push(customer.name);
+        const contactData = contactResponse.data;
+        //putting contact and product names into an array of strings for autocomplete searchbox
+        let contactNames = [];
+        for(const contact of contactData){
+          contactNames.push(contact.name);
         }
 
-        const prodData = productResponse.data;
-        let prodNames = [];
-        for(const product of prodData){
-          prodNames.push(product.name);
+        const productData = productResponse.data;
+        let productNames = [];
+        for(const product of productData){
+          productNames.push(product.name);
         }
 
         this.setState({
-          customernames: custNames,
-          productnames: prodNames,
-          customerId: '',
+          contactNames: contactNames,
+          productNames: productNames,
+          contactId: '',
           allProducts: productResponse.data,
-          allCustomers: customerResponse.data,
+          allContacts: contactResponse.data,
         });
 
       }
@@ -83,18 +80,18 @@ export default class AddTransaction extends Component {
       }
     }
 
-    //set the customer selected from autocomplete searchbox component as state customer
-    handleCustomerCallback = (childData) => {
-      let { allCustomers } = this.state;
-      //console.log(allCustomers);
-      for(let k in allCustomers){
-        //console.log(allCustomers[k]);
-        if(allCustomers[k]['name'] === childData){
-          this.setState({customer: allCustomers[k]});
+    //set the contact selected from autocomplete searchbox component as state contact
+    handleContactCallback = (childData) => {
+      let { allContacts } = this.state;
+      //console.log(allContacts);
+      for(let k in allContacts){
+        //console.log(allContacts[k]);
+        if(allContacts[k]['name'] === childData){
+          this.setState({contact: allContacts[k]});
         }
       }
       
-      //this.setState({customer: childData})
+      //this.setState({contact: childData})
     }
 
     //set the product selected from autocomplete searchbox component as state product
@@ -130,15 +127,15 @@ export default class AddTransaction extends Component {
     //Set products purchased 
     handleSubmit = (childData) => {
       let databody = {
-        "contactId": this.state.customer,
+        "contactId": this.state.contact,
         "satisfactionRating": this.state.rating,
         "total": this.state.total,
       }
       
     }
     
-    onCustomerButtonClickHandler = () => {
-      this.setState({ showCustomer: !this.state.showCustomer});
+    onContactButtonClickHandler = () => {
+      this.setState({ showContact: !this.state.showContact});
     }
 
     render() {
@@ -160,9 +157,9 @@ export default class AddTransaction extends Component {
         {/* <div className="addTransaction-form"> */}
                 
           <div className="addTransaction-sub-container">
-            <div className="addTransaction-subtitle">Select Customer</div>
-            <AutoCompleteText items={this.state.customernames} parentCallback={this.handleCustomerCallback}/>
-            {/* <button className="addTransaction-add-button" onClick={this.onCustomerButtonClickHandler}>
+            <div className="addTransaction-subtitle">Select Contact</div>
+            <AutoCompleteText items={this.state.contactNames} parentCallback={this.handleContactCallback}/>
+            {/* <button className="addTransaction-add-button" onClick={this.onContactButtonClickHandler}>
               <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
                 <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                 <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
@@ -172,20 +169,20 @@ export default class AddTransaction extends Component {
           </div>
           <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Select Product/s</div>
-            <AutoCompleteText items={this.state.productnames} parentCallback={this.handleProductCallback}/>
+            <AutoCompleteText items={this.state.productNames} parentCallback={this.handleProductCallback}/>
             {/* <button className="addTransaction-add-button">Add</button> */}
           </div>
           {/* <Form> */}
           {/* <div className="addTransaction-sub-container">
-            <div className="addTransaction-subtitle">Customer:</div>
-            <p>{this.state.customer['name']}</p>
+            <div className="addTransaction-subtitle">Contact:</div>
+            <p>{this.state.contact['name']}</p>
             
           </div> */}
           {/* <div className="addTransaction-sub-container">
             <div className="addTransaction-subtitle">Product/s:</div> */}
 
             {/* <AddTransProductForm selectedProducts={this.state.products}></AddTransProductForm> */}
-            <AddTransProductForm selectedProducts={this.state.products} customer={this.state.customer} userId={this.state.currentUser.id}></AddTransProductForm>
+            <AddTransProductForm selectedProducts={this.state.products} contact={this.state.contact} userId={this.state.currentUser.id}></AddTransProductForm>
 
           {/* </div> */}
          

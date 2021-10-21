@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TransactionService from "../services/transaction.service";
 import AuthService from "../services/auth.service";
 
-export default class CustomerTableRow extends Component {
+export default class TransactionTableRow extends Component {
     constructor(props) {
         super(props);
         this.deleteOneTrans = this.deleteOneTrans.bind(this);

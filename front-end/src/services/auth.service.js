@@ -20,7 +20,6 @@ class AuthService {
         localStorage.removeItem("user");
     }
 
-    //TODO Add try catch stuff
     register(name, email, companyName, password) {
         return axios.post(API_URL + "signup", {
             name,

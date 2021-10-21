@@ -67,8 +67,7 @@ class AddProduct extends Component {
                 categories: res.data,
             });
         } catch (err) {
-            //do not alert for user experience
-            //alert(err);
+            console.log(err);
         }
     }
 
