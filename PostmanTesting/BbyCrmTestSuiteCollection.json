@@ -1866,9 +1866,7 @@
                   "script": {
                     "id": "77f6a86a-6ff9-4aef-adbf-83fc33d28491",
                     "exec": [
-                      "pm.test(\"Status code is 400\", function () {\r",
-                      "    pm.response.to.have.status(400);\r",
-                      "});"
+                      ""
                     ],
                     "type": "text/javascript"
                   }
