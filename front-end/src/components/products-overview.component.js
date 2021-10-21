@@ -89,13 +89,11 @@ export default class Products extends Component {
         }
         return (
             <div>
-                {/*Page Name*/}
                 <div className="overview-pagename">Products</div>
                 <div className="overview-button-box">
                     <Link
                         to="/addproduct"
                         className="overview-add-btn"
-                        // style={{ textDecoration: "none" }}
                     >
                         + Add Product
                     </Link>
@@ -124,7 +122,6 @@ export default class Products extends Component {
                         <Link
                             to="/editCategory"
                             className="overview-add-btn"
-                            // style={{ textDecoration: "none" }}
                         >
                             Edit Categories
                         </Link>

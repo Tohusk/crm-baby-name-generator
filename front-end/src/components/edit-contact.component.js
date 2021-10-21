@@ -110,7 +110,6 @@ class EditContact extends Component {
     }
 
     async handleSubmit(e) {
-        // Use update
         e.preventDefault();
 
         this.setState({
@@ -159,7 +158,6 @@ class EditContact extends Component {
         }
         return (
             <div className="addItem-container">
-                {/*Page Name*/}
                 <div className="addItem-title">Edit Contact Profile</div>
                 <button className="editContact-deleteContainer" onClick={this.handleDelete}>
                     <u>Delete Contact</u>

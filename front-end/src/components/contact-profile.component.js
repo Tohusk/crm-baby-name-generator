@@ -56,12 +56,13 @@ class ContactProfile extends Component {
     //contactId is specified in contacttablerow
     async componentDidMount() {
         try {
-            // contactId is specified in contact-table-row
+            // Grab contact details
             const contact = await ContactService.getOneContact(
                 this.state.currentUser.id,
                 this.props.location.state.contactId
             );
 
+            // Grab contact stats
             const stats = await ContactService.getContactStatistics(
                 this.state.currentUser.id,
                 this.props.location.state.contactId

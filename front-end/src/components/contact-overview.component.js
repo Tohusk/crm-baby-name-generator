@@ -71,7 +71,6 @@ export default class Contacts extends Component {
             const numContacts = allContacts.data.length;
             console.log(numContacts);
 
-
             this.getGraphData(allContacts.data);
 
             this.setState({
@@ -129,13 +128,11 @@ export default class Contacts extends Component {
         }
         return (
             <div>
-                {/*Page Name*/}
                 <div className="overview-pagename">Contacts</div>
                 <div className="overview-button-box">
                     <Link
                         to="/addcontact"
                         className="overview-add-btn"
-                        // style={{ textDecoration: "none" }}
                     >
                         + Add Contact
                     </Link>

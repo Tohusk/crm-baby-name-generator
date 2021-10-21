@@ -21,6 +21,7 @@ export default class ContactList extends Component {
 
     async componentDidMount() {
         try {
+            // Save all contacts into state
             const res = await ContactService.getAllContacts(this.state.currentUser.id);
             this.setState({
                 contacts: res.data,
@@ -30,16 +31,11 @@ export default class ContactList extends Component {
         }
     }
 
-    // dataTable(){
-    //     return this.state.contacts.map((res, i) => {
-    //         return <ContactTableRow obj={res} key={i} />;
-    //     });
-    // }
-
     displayTable() {
         if (this.state.contacts.length === 0) {
             return;
         }
+        // For every contact render a table row
         return this.state.contacts.map((currentContact, i) => {
             return <ContactTableRow contact={currentContact} key={i} id={i + 1} />;
         });

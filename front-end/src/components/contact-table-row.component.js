@@ -23,6 +23,7 @@ export default class ContactTableRow extends Component {
     }
 
     async componentDidMount() {
+        // Populate contact stats
         try {
             const res = await ContactService.getContactStatistics(this.state.currentUser.id, this.props.contact._id);
             this.setState({
@@ -32,7 +33,7 @@ export default class ContactTableRow extends Component {
                 topCategories: res.data.topCategories,
             });
         } catch (err) {
-            alert(err);
+            console.log(err);
         }
     }
 
@@ -71,8 +72,6 @@ export default class ContactTableRow extends Component {
                 <td>
                     <div className="category-containerTable">{this.displayCategories()}</div>
                 </td>
-                {/* <td>{this.props.obj.score}</td> */}
-                {/* <td>{this.props.obj.categories}</td> */}
             </tr>
         );
     }
