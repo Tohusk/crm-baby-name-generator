@@ -147,7 +147,7 @@ const getMostPopularProduct = async (req, res) => {
     } catch (err) {
         res.status(500).send({ message: err });
     }
-}
+};
 
 const getProductStats = async (req, res) => {
     try {
@@ -166,7 +166,10 @@ const getProductStats = async (req, res) => {
             if (!categoryPopularityMap.get(categoryId)) {
                 categoryPopularityMap.set(categoryId, productPopularityMap.get(p));
             } else {
-                categoryPopularityMap.set(categoryId, categoryPopularityMap.get(categoryId) + productPopularityMap.get(p));
+                categoryPopularityMap.set(
+                    categoryId,
+                    categoryPopularityMap.get(categoryId) + productPopularityMap.get(p)
+                );
             }
         }
 
@@ -180,11 +183,11 @@ const getProductStats = async (req, res) => {
             const category = queryResponse.categories[0];
 
             const categoryInfo = {
-                _id : category._id,
-                name : category.name,
-                colour : category.colour,
-                count : categoryPopularityMap.get(c),
-            }
+                _id: category._id,
+                name: category.name,
+                colour: category.colour,
+                count: categoryPopularityMap.get(c),
+            };
             categoryList.push(categoryInfo);
         }
 
@@ -192,12 +195,12 @@ const getProductStats = async (req, res) => {
         const productStats = {
             mostPopularProduct: mostPopularProduct,
             categoryStats: categoryList,
-        }
+        };
         res.json(productStats);
     } catch (err) {
         res.status(500).send({ message: err });
     }
-}
+};
 
 /**
  * function that finds stats related to product popularity

@@ -75,7 +75,7 @@ export default class Contacts extends Component {
 
             this.setState({
                 totalContacts: numContacts,
-            })
+            });
 
             if (res.data.avgUserRating !== null) {
                 this.setState({

@@ -57,9 +57,7 @@ export default class ContactList extends Component {
                                 <th>Preferred Categories</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {this.displayTable()}
-                        </tbody>
+                        <tbody>{this.displayTable()}</tbody>
                     </Table>
                 )}
             </div>

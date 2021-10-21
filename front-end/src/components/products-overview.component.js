@@ -8,7 +8,7 @@ import { Redirect } from "react-router";
 import "../styles/Home.css";
 import "../styles/Overview.css";
 import CategoryOverview from "./category-overview.component";
-import {Pie} from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 
 export default class Products extends Component {
     constructor(props) {
@@ -17,14 +17,14 @@ export default class Products extends Component {
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             totalProducts: 0,
-            mostPopularProduct: 'N/A',
+            mostPopularProduct: "N/A",
             // for chart
             labels: [],
             datasets: [
                 {
                     backgroundColor: [],
-                    data: []
-                }
+                    data: [],
+                },
             ],
         };
     }
@@ -43,14 +43,16 @@ export default class Products extends Component {
                 dataList.push(c.count);
             }
 
-            const datasetList = [{
-                backgroundColor: colourList,
-                data: dataList,
-            }]
+            const datasetList = [
+                {
+                    backgroundColor: colourList,
+                    data: dataList,
+                },
+            ];
 
             this.setState({
                 totalProducts: total.data,
-                mostPopularProduct: stats.data.mostPopularProduct ? stats.data.mostPopularProduct.name : 'N/A',
+                mostPopularProduct: stats.data.mostPopularProduct ? stats.data.mostPopularProduct.name : "N/A",
                 labels: labelList,
                 datasets: datasetList,
             });
@@ -63,21 +65,23 @@ export default class Products extends Component {
 
     showCategoryChart() {
         if (this.state.labels.length === 0) {
-            return (<div className="overview-card-stat">No Data</div>);
+            return <div className="overview-card-stat">No Data</div>;
         } else {
-            return (<Pie
-                data={{
-                    labels: this.state.labels,
-                    datasets: this.state.datasets,
-                }}
-                options={{
-                    plugins: {
-                        legend: {
-                            display: false,
-                        }
-                    },
-                }}
-            />);
+            return (
+                <Pie
+                    data={{
+                        labels: this.state.labels,
+                        datasets: this.state.datasets,
+                    }}
+                    options={{
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                        },
+                    }}
+                />
+            );
         }
     }
 
