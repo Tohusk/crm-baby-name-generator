@@ -35,7 +35,7 @@ export default class ProductTableRow extends Component {
                 category: res.data,
             });
         } catch (err) {
-            alert(err);
+            console.log(err);
         }
     }
 
@@ -48,7 +48,10 @@ export default class ProductTableRow extends Component {
                 <td>
                     <div className="category-containerTable">
                         <div className="category-containerTag" style={{ background: this.state.category.colour }}>
-                            {this.state.category.name}
+                            {this.state.category ? (
+                                this.state.category.name
+                            ) : <div>No Category</div>  
+                            }
                         </div>
                     </div>
                 </td>
