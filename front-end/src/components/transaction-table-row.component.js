@@ -33,7 +33,7 @@ export default class TransactionTableRow extends Component {
                 <td>{this.props.transaction.contactName}</td>
                 <td>${(Math.round(this.props.transaction.transactionTotal * 100) / 100).toFixed(2)}</td>
                 <td>
-                    <button className="addCategory-delete" onClick={this.deleteOneTrans}>
+                    <button className="editCategory-delete" onClick={this.deleteOneTrans}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1.3em"

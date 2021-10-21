@@ -53,7 +53,7 @@ export default class ProductTableRow extends Component {
                     </div>
                 </td>
                 <td>
-                    <button className="addCategory-delete" onClick={this.deleteOneProduct}>
+                    <button className="editCategory-delete" onClick={this.deleteOneProduct}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1.3em"

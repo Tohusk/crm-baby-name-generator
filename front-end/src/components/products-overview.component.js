@@ -122,7 +122,7 @@ export default class Products extends Component {
                     <CategoryOverview></CategoryOverview>
                     <div className="overview-button-box">
                         <Link
-                            to="/addCategory"
+                            to="/editCategory"
                             className="overview-add-btn"
                             // style={{ textDecoration: "none" }}
                         >
