@@ -95,6 +95,9 @@ const getContact = async (req, res) => {
     }
 };
 
+/**
+ * function that accesses db and returns one contact
+ */
 const getOneContact = async (userId, contactId) => {
     const contact = await Contacts.findOne({ user: mongoose.Types.ObjectId(userId) }).select({
         customers: { $elemMatch: { _id: mongoose.Types.ObjectId(contactId) } },
@@ -146,7 +149,7 @@ const deleteOneContact = async (req, res) => {
 };
 
 /**
- * Controller for deleting contacts entry for a given user
+ * function for deleting contacts entry for a given user
  */
 const deleteAllContacts = async (userId) => {
     await Contacts.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
@@ -157,6 +160,7 @@ const deleteAllContacts = async (userId) => {
  */
 const getContactStatistics = async (req, res) => {
     try {
+        // gets all the transactions for a user
         const queryResponse = await Transaction.findOne({
             user: mongoose.Types.ObjectId(req.query.userId) /*,
         transactions: { $elemMatch: { contactId: mongoose.Types.ObjectId(req.query.contactId) } }*/,
@@ -166,6 +170,8 @@ const getContactStatistics = async (req, res) => {
             res.json({ averageRating: null, topCategories: [] });
             return;
         }
+
+        // find all the transactions made by this customer
         const transactions = queryResponse.transactions;
         const transactionsByThisCustomer = [];
         for (const t of transactions) {
@@ -254,6 +260,9 @@ const getContactAvgRating = async (transactions) => {
     return avg;
 };
 
+/**
+ * function that finds the average customer rating
+ */
 const getUserAvgRating = async (req, res) => {
     try {
         const queryResponse = await Transaction.findOne({
@@ -274,6 +283,7 @@ const getUserAvgRating = async (req, res) => {
         let validScoreContacts = 0;
 
         for (const contact of contacts.customers) {
+            // filter transactions made only by this customer
             const transactionsByThisCustomer = [];
             for (const t of transactions) {
                 if (t.contactId.toString() === contact._id.toString()) {
@@ -281,6 +291,7 @@ const getUserAvgRating = async (req, res) => {
                 }
             }
 
+            // find the average rating for this customer
             const avgRating = await getContactAvgRating(transactionsByThisCustomer);
             if (avgRating !== 0) {
                 validScoreContacts += 1;
@@ -288,6 +299,7 @@ const getUserAvgRating = async (req, res) => {
             }
         }
 
+        // calculate average
         let avgUserRating = total / validScoreContacts;
         avgUserRating = Math.round(avgUserRating * 100) / 100;
 

@@ -1,8 +1,6 @@
-/**
- * middleware that helps check if a product is valid
- */
 const db = require("../models");
 const Product = db.product;
+const Transaction = db.transaction;
 
 const verifyCategory = require("./verifyCategory");
 /**
@@ -27,10 +25,6 @@ const checkDuplicateUserProduct = async (req, res, next) => {
 
 /**
  * checks if product is being inserted in a category that does not exist
- * @param req
- * @param res
- * @param next
- * @returns {Promise<void>}
  */
 const checkProductCategoryExists = async (req, res, next) => {
     try {
@@ -62,6 +56,9 @@ const checkRequiredFields = (req, res, next) => {
     next();
 };
 
+/**
+ * check if required fields are filled when updating the contacts
+ */
 const checkRequiredFieldsUpdate = (req, res, next) => {
     if (!req.body.name) {
         res.status(400).send({ message: "Failed! Need product name!" });
@@ -81,11 +78,34 @@ const checkRequiredFieldsUpdate = (req, res, next) => {
     next();
 };
 
+/**
+ * checks if the product is being referenced in a transaction
+ */
+const checkProductNotInUse = async (req, res, next) => {
+    try {
+        const allTransactions = await Transaction.findOne({ user: req.body.userId });
+
+        for (const t of allTransactions.transactions) {
+            for (const p of t.productsPurchased) {
+                if (p.productId.toString() == req.body.productId.toString()) {
+                    res.status(400).send({ message: "Failed! This product is in use by one or more transactions" });
+                    return;
+                }
+            }
+        }
+        next();
+    } catch (err) {
+        res.status(500).send({ message: err });
+    }
+}
+
+
 const verifyProduct = {
     checkDuplicateUserProduct,
     checkRequiredFields,
     checkRequiredFieldsUpdate,
     checkProductCategoryExists,
+    checkProductNotInUse,
 };
 
 module.exports = verifyProduct;

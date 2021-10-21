@@ -1,9 +1,8 @@
-/**
- * middleware that helps check if a category is valid
- */
 const db = require("../models");
 const mongoose = require("mongoose");
 const Category = db.category;
+const Product = db.product;
+
 /**
  * check if a duplicate category for a user is trying to be created;
  */
@@ -21,9 +20,6 @@ const checkDuplicateUserCategory = async (req, res, next) => {
 
 /**
  * searches for a categoryId or category name in a user's category list. Returns true if it does exist
- * @param req
- * @param res
- * @returns {Promise<boolean>}
  */
 const checkCategoryExists = async (req, res) => {
     try {
@@ -65,6 +61,9 @@ const checkRequiredFields = (req, res, next) => {
     next();
 };
 
+/**
+ * checks if the required fields have been filled when updating a category
+ */
 const checkRequiredFieldsUpdate = (req, res, next) => {
     if (!req.body.name) {
         res.status(400).send({ message: "Failed! Need category name!" });
@@ -84,11 +83,32 @@ const checkRequiredFieldsUpdate = (req, res, next) => {
     next();
 };
 
+/**
+ * checks if the category is not being used by a product
+ */
+const checkCategoryNotInUse = async (req, res, next) => {
+    try {
+        const allProducts = await Product.findOne({ user: req.body.userId });
+
+        for (const p of allProducts.products) {
+            if (p.categoryId.toString() == req.body.categoryId.toString()) {
+                res.status(400).send({ message: "Failed! This category is in use by one or more products" });
+                return;
+            }
+        }
+
+        next();
+    } catch (err) {
+        res.status(500).send({ message: err });
+    }
+};
+
 const verifyCategory = {
     checkDuplicateUserCategory,
     checkRequiredFields,
     checkRequiredFieldsUpdate,
     checkCategoryExists,
+    checkCategoryNotInUse,
 };
 
 module.exports = verifyCategory;

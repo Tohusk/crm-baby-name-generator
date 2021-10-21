@@ -1,8 +1,4 @@
 /**
- * middleware that helps check if a product is valid
- */
-
-/**
  * check if all the required fields are filled
  */
 const checkRequiredFields = (req, res, next) => {

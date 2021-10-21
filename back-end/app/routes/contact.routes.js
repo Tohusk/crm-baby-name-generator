@@ -10,8 +10,10 @@ const controller = require("../controllers/contact.controller");
  * POST /api/contact/update
  * GET /api/contact/get
  * GET /api/contact/getAll
+ * GET /api/contact/getContactStatistics
+ * GET /api/contact/getUserAvgRating
+ * GET /api/contact/getByName
  * DELETE /api/contact/delete
- * @param app
  */
 module.exports = function (app) {
     app.use(function (req, res, next) {
