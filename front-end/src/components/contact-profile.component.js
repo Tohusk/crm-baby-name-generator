@@ -190,23 +190,6 @@ class ContactProfile extends Component {
                         <div className="category-containerProfile">{this.displayCategories()}</div>
                     </div>
                 </div>
-
-                {/* Need to implement logic */}
-                <div className="contactProfile-pageTitleMedium">
-                    Transaction History
-                    <a className="contactProfile-transaction-button" href="/addtransaction">
-                        {" "}
-                        +Add Transaction{" "}
-                    </a>
-                </div>
-                <div className="contactProfile-tranhis-container">
-                    <div className="contactProfile-tran-log">
-                        <span className="contactProfile-tran-log-text">#</span>
-                        <span className="contactProfile-tran-log-text">First</span>
-                        <span className="contactProfile-tran-log-text">Last</span>
-                        <span className="contactProfile-tran-log-text">Handle</span>
-                    </div>
-                </div>
             </div>
         );
     }
