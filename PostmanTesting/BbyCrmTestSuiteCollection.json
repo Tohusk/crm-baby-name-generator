@@ -1931,19 +1931,6 @@
                 "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
-            },
-            {
-              "name": "New Request",
-              "id": "9373f7ec-9fca-4c66-a4a7-61fb92a021ca",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": null
-              },
-              "response": []
             }
           ],
           "id": "a952783c-eb3f-4e30-b862-7aababd9e611",
