@@ -100,12 +100,12 @@ const getOneContact = async (userId, contactId) => {
         customers: { $elemMatch: { _id: mongoose.Types.ObjectId(contactId) } },
     });
     return contact.customers[0];
-}
+};
 
 /**
  * Controller to get one contact by name
  */
- const getContactByName = async (req, res) => {
+const getContactByName = async (req, res) => {
     try {
         const contact = await Contacts.findOne({ user: mongoose.Types.ObjectId(req.query.userId) }).select({
             customers: { $elemMatch: { name: req.query.name } },
@@ -116,7 +116,6 @@ const getOneContact = async (userId, contactId) => {
         return;
     }
 };
-
 
 /**
  * Controller to get a user's contact list

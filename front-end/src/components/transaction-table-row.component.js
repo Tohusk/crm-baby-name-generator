@@ -15,7 +15,10 @@ export default class CustomerTableRow extends Component {
     async deleteOneTrans() {
         try {
             if (window.confirm("Are you sure you wish to delete this?")) {
-                const res = await TransactionService.deleteTransaction(this.state.currentUser.id, this.props.transaction._id);
+                const res = await TransactionService.deleteTransaction(
+                    this.state.currentUser.id,
+                    this.props.transaction._id
+                );
                 // Refresh to refresh category table
                 //TODO: trigger a rerender of the table only instead of the entire page
                 window.location.reload();

@@ -79,7 +79,7 @@ const calcTotal = (purchases) => {
         total += p.quantity * p.price;
     }
     return total;
-}
+};
 
 /**
  * Controller for updating a transaction
@@ -137,7 +137,7 @@ const getAllTransactions = async (req, res) => {
                 contactName: contact?.name,
                 dateAdded: t?.dateAdded,
                 transactionTotal: t?.transactionTotal,
-            }
+            };
 
             processedTransactions.push(transactionInfo);
         }
@@ -187,8 +187,13 @@ const getSalesStats = async (req, res) => {
         const allTransactions = await getAllTransactionsForUser(req.query.userId);
 
         let totalRevenue = 0;
-        let ratingsMap = new Map([["1", 0], ["2", 0], ["3", 0], ["4", 0], ["5", 0]]);
-
+        let ratingsMap = new Map([
+            ["1", 0],
+            ["2", 0],
+            ["3", 0],
+            ["4", 0],
+            ["5", 0],
+        ]);
 
         for (const t of allTransactions) {
             if (t.transactionTotal) {
@@ -196,7 +201,7 @@ const getSalesStats = async (req, res) => {
             }
 
             if (ratingsMap.get(t.transactionRating.toString())) {
-                ratingsMap.set(t.transactionRating.toString(), ratingsMap.get(t.transactionRating.toString())+1);
+                ratingsMap.set(t.transactionRating.toString(), ratingsMap.get(t.transactionRating.toString()) + 1);
             } else {
                 ratingsMap.set(t.transactionRating.toString(), 1);
             }
@@ -211,15 +216,14 @@ const getSalesStats = async (req, res) => {
         const stats = {
             totalRevenue: totalRevenue,
             ratingsFreq: ratingsArray,
-        }
+        };
 
         res.json(stats);
-
     } catch (err) {
         console.log(err);
         res.status(500).send({ message: err });
     }
-}
+};
 
 /**
  * Gets all transactions from the past 7 days for a user

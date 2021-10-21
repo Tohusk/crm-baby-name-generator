@@ -29,31 +29,31 @@ export default class TransactionList extends Component {
 
     displayTable() {
         if (this.state.transactions.length === 0) {
-            return ;
+            return;
         }
         return this.state.transactions.map((currentTransaction, i) => {
-            return <TransactionTableRow transaction={currentTransaction} key={i} id={i + 1}/>;
+            return <TransactionTableRow transaction={currentTransaction} key={i} id={i + 1} />;
         });
     }
 
     render() {
         return (
             <div className="overview-table-wrapper">
-                {this.state.transactions.length === 0 ?
+                {this.state.transactions.length === 0 ? (
                     <div className="overview-no-data-title">No Transactions Found</div>
-                    :
+                ) : (
                     <Table bordered hover>
                         <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Customer</th>
-                            <th>Total</th>
-                        </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Total</th>
+                            </tr>
                         </thead>
                         <tbody>{this.displayTable()}</tbody>
                     </Table>
-                }
+                )}
             </div>
         );
     }

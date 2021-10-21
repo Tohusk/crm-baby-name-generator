@@ -27,7 +27,7 @@ export default class Customers extends Component {
         // number of customers on those dates is data
         const customerDatesHashMap = {};
         let total = 0;
-        customerDatesHashMap[' '] = total;
+        customerDatesHashMap[" "] = total;
         for (const contact of allContacts) {
             if (contact.dateAdded !== undefined) {
                 if (!customerDatesHashMap[contact.dateAdded.substring(0, 7)]) {
@@ -71,12 +71,11 @@ export default class Customers extends Component {
             const numContacts = allContacts.data.length;
             console.log(numContacts);
 
-
             this.getGraphData(allContacts.data);
 
             this.setState({
                 totalContacts: numContacts,
-            })
+            });
 
             if (res.data.avgUserRating !== null) {
                 this.setState({
