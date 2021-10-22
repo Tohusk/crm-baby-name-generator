@@ -137,7 +137,7 @@ export default class AddTransaction extends Component {
                     </div>
                     <div className="addTransaction-sub-container">
                         <div className="addTransaction-subtitle">Select Product/s</div>
-                        <AutoCompleteText items={this.state.productnames} parentCallback={this.handleProductCallback} />
+                        <AutoCompleteText items={this.state.productNames} parentCallback={this.handleProductCallback} />
                         {this.state.errorMessage && <p className="addTransaction-error">{this.state.errorMessage}</p>}
                     </div>
                     <AddTransProductForm
