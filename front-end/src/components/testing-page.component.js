@@ -361,6 +361,25 @@ export default class TestingPage extends Component {
                 this.state.loggedInUser.id,
                 this.state.transactionId);
             console.log(res.data.message);
+
+            console.log("Deleting product");
+            const getRes = await ProductService.getAllProducts(
+                this.state.loggedInUser.id
+            );
+
+            const productId = getRes.data[0]._id;
+
+            const deleteProductRes = await ProductService.deleteProduct(
+                this.state.loggedInUser.id,
+                productId
+            );
+            console.log(deleteProductRes.data.message);
+
+            console.log("Deleting contact");
+            const deleteContactRes = await ContactService.deleteCustomer(
+                this.state.loggedInUser.id, 
+                this.state.contactId);
+            console.log(deleteContactRes.data.message);
         } catch (err) {
             const resMessage =
                 (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
