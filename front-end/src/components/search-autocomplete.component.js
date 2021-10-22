@@ -18,7 +18,7 @@ export default class AutoCompleteText extends React.Component {
 
     //filtering for matching items when typed into input
     onTextChanged = (e) => {
-        this.setState({errorMessage: ""});
+        //this.setState({errorMessage: ""});
         const { items } = this.props;
         const value = e.target.value;
         let suggestions = [];
@@ -57,18 +57,11 @@ export default class AutoCompleteText extends React.Component {
     //sending selected data back to parent component and emptying input box
     onTrigger = (e) => {
         console.log(this.state.text);
-        if(this.state.trackItem.indexOf(this.state.text) !== -1){
-            this.setState({showError: true});
-            this.setState({errorMessage: "Item already selected"});
-            console.log("matched");
-        } else {
-            //this.setState({errorMessage: ""});
             this.props.parentCallback(this.state.text);
             this.setState({ text: "" });
             this.setState((prevState) => ({
                 trackItem: [...prevState.trackItem, this.state.text],
             }));
-        }
         console.log(this.state.trackItem);
         e.preventDefault();
     };
@@ -91,7 +84,6 @@ export default class AutoCompleteText extends React.Component {
                     {this.renderSuggestions()}
                     
                 </div>
-                {this.state.errorMessage && <p className="addTransaction-error">{this.state.errorMessage}</p>}
                 <br />
                 <button className="addTransaction-add-button" onClick={this.onTrigger}>
                     Select
