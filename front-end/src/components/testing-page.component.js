@@ -3,6 +3,8 @@ import AuthService from "../services/auth.service";
 import CategoryService from "../services/category.service";
 import ContactService from "../services/contact.service";
 import ProductService from "../services/product.service";
+import TransactionService from "../services/transaction.service";
+
 
 export default class TestingPage extends Component {
     constructor(props) {
@@ -11,6 +13,8 @@ export default class TestingPage extends Component {
         this.testCategory = this.testCategory.bind(this);
         this.testContact = this.testContact.bind(this);
         this.testProduct = this.testProduct.bind(this);
+        this.testTransaction = this.testTransaction.bind(this);
+
 
         this.state = {
             // Define testing data
@@ -32,9 +36,19 @@ export default class TestingPage extends Component {
             contactDescription: "Not Michael Jackson's lover",
             contactId: "",
 
+            contactUpdateName: "Kevin Joe",
+            contactUpdateEmail: "Kevin@Joe.com",
+            contactUpdatePhoneNumber: "0444444444",
+            contactUpdateCompanyName: "Butane and Butane Accessories",
+            contactUpdateDescription: "Michael Jackson's lover",
+
             productName: "Chicken Burger",
             productPrice: "5",
             productCategoryId: null,
+
+            transactionRating: 5,
+            transactionProductQuantity: 1,
+            transactionId: "",
         };
     }
 
@@ -69,9 +83,6 @@ export default class TestingPage extends Component {
 
             console.log(resMessage);
         }
-
-        console.log("update not yet implemented");
-        console.log("delete not yet implemented");
     }
 
     // Need tests for new, update, get, getAll, delete
@@ -112,6 +123,16 @@ export default class TestingPage extends Component {
         }
 
         try {
+            console.log("Getting single category");
+            const res = await CategoryService.getOneCategory(this.state.loggedInUser.id, this.state.categoryId);
+            console.log(res.data);
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
+        }
+
+        try {
             console.log("Deleting category");
             const res = await CategoryService.deleteCategory(this.state.loggedInUser.id, this.state.categoryId);
             console.log(res.data.message);
@@ -121,8 +142,6 @@ export default class TestingPage extends Component {
             console.log(resMessage);
         }
 
-        console.log("get not implemented");
-        console.log("update not implemented");
     }
 
     // Need tests for new, update, get, getAll, delete
@@ -174,8 +193,34 @@ export default class TestingPage extends Component {
             console.log(resMessage);
         }
 
-        console.log("update not implemented yet");
-        console.log("delete not implemented yet");
+        try {
+            console.log("Updating contact");
+            const res = await ContactService.updateCustomer(
+                this.state.contactUpdateName,
+                this.state.contactUpdateEmail,
+                this.state.contactUpdatePhoneNumber,
+                this.state.contactUpdateCompanyName,
+                this.state.contactUpdateDescription,
+                this.state.loggedInUser.id, 
+                this.state.contactId);
+            console.log(res.data.message);
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
+        }
+
+        try {
+            console.log("Deleting contact");
+            const res = await ContactService.deleteCustomer(
+                this.state.loggedInUser.id, 
+                this.state.contactId);
+            console.log(res.data.message);
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
+        }
     }
 
     // Need tests for new, update, get, getAll, delete
@@ -202,10 +247,125 @@ export default class TestingPage extends Component {
             console.log(resMessage);
         }
 
-        console.log("update not implemented yet");
-        console.log("get not implemented yet");
-        console.log("getAll not implemented yet");
-        console.log("delete not implemented yet");
+        try {
+            console.log("Getting all products");
+            const res = await ProductService.getAllProducts(
+                this.state.loggedInUser.id
+            );
+            console.log(res.data);
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
+        }
+
+        try {
+            console.log("Deleting product");
+            const getRes = await ProductService.getAllProducts(
+                this.state.loggedInUser.id
+            );
+
+            const productId = getRes.data[0]._id;
+
+            const res = await ProductService.deleteProduct(
+                this.state.loggedInUser.id,
+                productId
+            );
+            console.log(res.data.message);
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
+        }
+    }
+
+    // Need tests for new, update, get, getAll, delete
+    async testTransaction() {
+        console.log("Testing Transaction: ");
+        try {
+            console.log("Adding transaction");
+            await AuthService.login(this.state.userEmail, this.state.userPassword);
+            console.log("Logged In");
+            this.setState({
+                loggedInUser: AuthService.getCurrentUser(),
+            });
+
+            console.log("Adding product");
+            const addProdRes = await ProductService.addNewProduct(
+                this.state.productName,
+                this.state.productPrice,
+                this.state.productCategoryId,
+                this.state.loggedInUser.id
+            );
+            console.log(addProdRes.data.message);
+
+            console.log("Adding contact");
+            const addContactRes = await ContactService.addNewCustomer(
+                this.state.contactName,
+                this.state.contactEmail,
+                this.state.contactPhoneNumber,
+                this.state.contactCompanyName,
+                this.state.contactDescription,
+                this.state.loggedInUser.id
+            );
+            console.log(addContactRes.data.message);
+
+            console.log("Getting product for transaction");
+            const getProductRes = await ProductService.getAllProducts(
+                this.state.loggedInUser.id
+            );
+            const productId = getProductRes.data[0]._id;
+            let productsPurchased = [];
+            productsPurchased.push({
+                productId: productId,
+                quantity: this.state.transactionProductQuantity,
+                price: this.state.productPrice,
+            });
+
+            console.log("Getting contact for transaction")
+            const getContactRes = await ContactService.getAllCustomers(this.state.loggedInUser.id);
+            this.setState({
+                contactId: getContactRes.data[0]._id,
+            });
+
+            const res = await TransactionService.addNewTransaction(
+                this.state.transactionRating, 
+                productsPurchased,
+                this.state.contactId, 
+                this.state.loggedInUser.id);
+            console.log(res.data.message);
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
+        }
+
+        try {
+            console.log("Getting all transactions");
+
+            const res = await TransactionService.getAllTransactions(this.state.loggedInUser.id);
+            console.log(res.data);
+            this.setState({
+                transactionId: res.data[0]._id,
+            });
+
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
+        }
+
+        try {
+            console.log("Deleting transaction");
+            const res = await TransactionService.deleteTransaction(
+                this.state.loggedInUser.id,
+                this.state.transactionId);
+            console.log(res.data.message);
+        } catch (err) {
+            const resMessage =
+                (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+            console.log(resMessage);
+        }
     }
 
     render() {
@@ -220,7 +380,7 @@ export default class TestingPage extends Component {
                 <h1>Product Service</h1>
                 <button onClick={this.testProduct}>Test</button>
                 <h1>Transaction Service</h1>
-                <div>Not implemented yet</div>
+                <button onClick={this.testTransaction}>Test</button>
             </div>
         );
     }
