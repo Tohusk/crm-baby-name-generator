@@ -155,7 +155,7 @@ export default class TestingPage extends Component {
                 loggedInUser: AuthService.getCurrentUser(),
             });
 
-            const res = await ContactService.addNewCustomer(
+            const res = await ContactService.addNewContact(
                 this.state.contactName,
                 this.state.contactEmail,
                 this.state.contactPhoneNumber,
@@ -172,7 +172,7 @@ export default class TestingPage extends Component {
 
         try {
             console.log("Getting all contacts");
-            const res = await ContactService.getAllCustomers(this.state.loggedInUser.id);
+            const res = await ContactService.getAllContacts(this.state.loggedInUser.id);
             this.setState({
                 contactId: res.data[0]._id,
             });
@@ -185,7 +185,7 @@ export default class TestingPage extends Component {
 
         try {
             console.log("Getting single contact");
-            const res = await ContactService.getOneCustomer(this.state.loggedInUser.id, this.state.contactId);
+            const res = await ContactService.getOneContact(this.state.loggedInUser.id, this.state.contactId);
             console.log(res.data);
         } catch (err) {
             const resMessage =

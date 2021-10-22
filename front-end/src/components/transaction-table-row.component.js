@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TransactionService from "../services/transaction.service";
 import AuthService from "../services/auth.service";
 
-export default class CustomerTableRow extends Component {
+export default class TransactionTableRow extends Component {
     constructor(props) {
         super(props);
         this.deleteOneTrans = this.deleteOneTrans.bind(this);
@@ -20,7 +20,6 @@ export default class CustomerTableRow extends Component {
                     this.props.transaction._id
                 );
                 // Refresh to refresh category table
-                //TODO: trigger a rerender of the table only instead of the entire page
                 window.location.reload();
             }
         } catch (err) {
@@ -36,7 +35,7 @@ export default class CustomerTableRow extends Component {
                 <td>{this.props.transaction.contactName}</td>
                 <td>${(Math.round(this.props.transaction.transactionTotal * 100) / 100).toFixed(2)}</td>
                 <td>
-                    <button className="addCategory-delete" onClick={this.deleteOneTrans}>
+                    <button className="editCategory-delete" onClick={this.deleteOneTrans}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1.3em"

@@ -120,7 +120,6 @@ export default class Register extends Component {
                 });
 
                 // Redirect to login page for user to login
-                //TODO: implement auto login after registering and redirect to home
                 this.props.history.push("/login");
                 window.location.reload();
             } catch (err) {
@@ -188,7 +187,6 @@ export default class Register extends Component {
                                             name="companyName"
                                             value={this.state.companyName}
                                             onChange={this.onChangeCompanyName}
-                                            // validations={[required, companyName]}
                                         />
                                     </div>
                                     <div className="authentication-form-group">

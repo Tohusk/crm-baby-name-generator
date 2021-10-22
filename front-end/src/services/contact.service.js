@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL + "/api/contact/";
 
 class ContactService {
-    async addNewCustomer(name, email, phoneNumber, companyName, description, userId) {
+    async addNewContact(name, email, phoneNumber, companyName, description, userId) {
         return axios.post(API_URL + "new", {
             name,
             email,
@@ -14,7 +14,7 @@ class ContactService {
         });
     }
 
-    async updateCustomer(name, email, phoneNumber, companyName, description, userId, contactId) {
+    async updateContact(name, email, phoneNumber, companyName, description, userId, contactId) {
         return axios.post(API_URL + "update", {
             name,
             email,
@@ -26,7 +26,7 @@ class ContactService {
         });
     }
 
-    async deleteCustomer(userId, contactId) {
+    async deleteContact(userId, contactId) {
         return axios.delete(API_URL + "deleteOne", {
             data: {
                 userId: userId,
@@ -36,11 +36,11 @@ class ContactService {
     }
 
     // contact routes to specify get, contact controller for get?userId
-    async getOneCustomer(userId, contactId) {
+    async getOneContact(userId, contactId) {
         return axios.get(API_URL + "get?userId=" + userId + "&contactId=" + contactId);
     }
 
-    async getAllCustomers(userId) {
+    async getAllContacts(userId) {
         return axios.get(API_URL + "getAll?userId=" + userId);
     }
 

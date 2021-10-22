@@ -21,7 +21,7 @@ const required = (value) => {
     }
 };
 
-class AddCustomer extends Component {
+class AddContact extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,7 +55,7 @@ class AddCustomer extends Component {
 
         if (this.checkBtn.context._errors.length === 0) {
             try {
-                const res = await ContactService.addNewCustomer(
+                const res = await ContactService.addNewContact(
                     this.state.name,
                     this.state.email,
                     this.state.phoneNumber,
@@ -68,7 +68,7 @@ class AddCustomer extends Component {
                     message: res.data.message,
                     loading: false,
                 });
-                this.props.history.push("/customers");
+                this.props.history.push("/Contacts");
             } catch (err) {
                 const resMessage =
                     (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
@@ -122,17 +122,15 @@ class AddCustomer extends Component {
         }
         return (
             <div className="addItem-container">
-                {/*Page Name*/}
-                <div className="addItem-title">Add Customer</div>
-
+                <div className="addItem-title">Add Contact</div>
                 <Form
-                    className="addCustomer-form"
+                    className="addContact-form"
                     onSubmit={this.handleSubmit}
                     ref={(c) => {
                         this.form = c;
                     }}
                 >
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="name">NAME (Required)</label>
                         <Input
                             type="text"
@@ -144,7 +142,7 @@ class AddCustomer extends Component {
                         />
                     </div>
 
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="phoneNumber">PHONE NUMBER</label>
                         <Input
                             type="text"
@@ -155,7 +153,7 @@ class AddCustomer extends Component {
                         />
                     </div>
 
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="email">EMAIL</label>
                         <Input
                             type="text"
@@ -166,7 +164,7 @@ class AddCustomer extends Component {
                         />
                     </div>
 
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="description">DESCRIPTION</label>
                         <Input
                             type="text"
@@ -177,7 +175,7 @@ class AddCustomer extends Component {
                         />
                     </div>
 
-                    <div className="addCustomer-form-group">
+                    <div className="addContact-form-group">
                         <label htmlFor="companyName">BUSINESS NAME</label>
                         <Input
                             type="text"
@@ -188,8 +186,8 @@ class AddCustomer extends Component {
                         />
                     </div>
 
-                    <div className="addCustomer-submit-group">
-                        <a className="addCustomer-cancelButton" href="/customers">
+                    <div className="addContact-submit-group">
+                        <a className="addContact-cancelButton" href="/contacts">
                             Cancel
                         </a>
                         <button className="submitButton" disabled={this.state.loading}>
@@ -218,4 +216,4 @@ class AddCustomer extends Component {
     }
 }
 
-export default withRouter(AddCustomer);
+export default withRouter(AddContact);

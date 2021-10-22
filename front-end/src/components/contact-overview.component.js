@@ -1,7 +1,7 @@
 import React, { Component, isValidElement } from "react";
 import AuthService from "../services/auth.service";
 import { Link } from "react-router-dom";
-import CustomerList from "./customer-list.component";
+import ContactList from "./contact-list.component";
 import ContactService from "../services/contact.service";
 import { Redirect } from "react-router";
 import { Line } from "react-chartjs-2";
@@ -9,7 +9,7 @@ import { Line } from "react-chartjs-2";
 import "../styles/Home.css";
 import "../styles/Overview.css";
 
-export default class Customers extends Component {
+export default class Contacts extends Component {
     constructor(props) {
         super(props);
 
@@ -24,18 +24,18 @@ export default class Customers extends Component {
 
     getGraphData(allContacts) {
         // Loop through all contacts and find dates to make labels,
-        // number of customers on those dates is data
-        const customerDatesHashMap = {};
+        // number of contacts on those dates is data
+        const contactDatesHashMap = {};
         let total = 0;
-        customerDatesHashMap[" "] = total;
+        contactDatesHashMap[" "] = total;
         for (const contact of allContacts) {
             if (contact.dateAdded !== undefined) {
-                if (!customerDatesHashMap[contact.dateAdded.substring(0, 7)]) {
-                    customerDatesHashMap[contact.dateAdded.substring(0, 7)] =
-                        (customerDatesHashMap[contact.dateAdded.substring(0, 7)] || 0) + total + 1;
+                if (!contactDatesHashMap[contact.dateAdded.substring(0, 7)]) {
+                    contactDatesHashMap[contact.dateAdded.substring(0, 7)] =
+                        (contactDatesHashMap[contact.dateAdded.substring(0, 7)] || 0) + total + 1;
                 } else {
-                    customerDatesHashMap[contact.dateAdded.substring(0, 7)] =
-                        (customerDatesHashMap[contact.dateAdded.substring(0, 7)] || 0) + 1;
+                    contactDatesHashMap[contact.dateAdded.substring(0, 7)] =
+                        (contactDatesHashMap[contact.dateAdded.substring(0, 7)] || 0) + 1;
                 }
                 total++;
             }
@@ -43,9 +43,9 @@ export default class Customers extends Component {
 
         let labels = [];
         let data = [];
-        for (const entry in customerDatesHashMap) {
+        for (const entry in contactDatesHashMap) {
             labels.push(entry);
-            data.push(customerDatesHashMap[entry]);
+            data.push(contactDatesHashMap[entry]);
         }
 
         const datasets = [
@@ -66,7 +66,7 @@ export default class Customers extends Component {
     async componentDidMount() {
         try {
             const res = await ContactService.getUserAvgRating(this.state.currentUser.id);
-            const allContacts = await ContactService.getAllCustomers(this.state.currentUser.id);
+            const allContacts = await ContactService.getAllContacts(this.state.currentUser.id);
             console.log(allContacts.data);
             const numContacts = allContacts.data.length;
             console.log(numContacts);
@@ -90,7 +90,7 @@ export default class Customers extends Component {
         }
     }
 
-    showCustomerChart() {
+    showContactChart() {
         if (this.state.labels.length === 0) {
             return <div className="overview-card-stat">No Data</div>;
         } else {
@@ -128,22 +128,17 @@ export default class Customers extends Component {
         }
         return (
             <div>
-                {/*Page Name*/}
-                <div className="overview-pagename">Customers</div>
+                <div className="overview-pagename">Contacts</div>
                 <div className="overview-button-box">
-                    <Link
-                        to="/addcustomer"
-                        className="overview-add-btn"
-                        // style={{ textDecoration: "none" }}
-                    >
-                        + Add Customer
+                    <Link to="/addcontact" className="overview-add-btn">
+                        + Add Contact
                     </Link>
                 </div>
                 <div className="overview-subheading">Overview</div>
                 <div className="overview-flex-container">
                     <div className="overview-stats">
                         <div className="overview-stats-card">
-                            <div className="overview-card-heading">Total Customers</div>
+                            <div className="overview-card-heading">Total Contacts</div>
                             <div className="overview-card-stat">{this.state.totalContacts}</div>
                         </div>
                         <div className="overview-stats-card">
@@ -152,14 +147,14 @@ export default class Customers extends Component {
                         </div>
                     </div>
                     <div className="overview-graph-card">
-                        <div className="overview-card-heading">Number of Customers</div>
-                        {this.showCustomerChart()}
+                        <div className="overview-card-heading">Number of Contacts</div>
+                        {this.showContactChart()}
                     </div>
                 </div>
-                <div className="overview-subheading">Customer List</div>
+                <div className="overview-subheading">Contact List</div>
 
                 <div className="overview-flex-container">
-                    <CustomerList></CustomerList>
+                    <ContactList></ContactList>
                 </div>
             </div>
         );

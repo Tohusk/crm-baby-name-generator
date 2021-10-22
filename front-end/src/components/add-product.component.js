@@ -67,8 +67,7 @@ class AddProduct extends Component {
                 categories: res.data,
             });
         } catch (err) {
-            //do not alert for user experience
-            //alert(err);
+            console.log(err);
         }
     }
 
@@ -168,8 +167,8 @@ class AddProduct extends Component {
                             );
                         })}
 
-                        <div className="addProduct-addCategory-container">
-                            <a className="addProduct-addCategory" href="/addCategory">
+                        <div className="addProduct-editCategory-container">
+                            <a className="addProduct-editCategory" href="/editCategory">
                                 + Add Category
                             </a>
                         </div>

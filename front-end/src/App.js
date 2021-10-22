@@ -1,33 +1,33 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/App.css";
+import { Redirect, withRouter } from "react-router";
 
-import AuthVerify from "./common/auth-verify";
 import AuthService from "./services/auth.service";
-
 import Login from "./components/login.component";
 import Register from "./components/register.component";
-import Profile from "./components/profile.component";
-import Home from "./components/home.component";
-import Customers from "./components/customer-overview.component";
-import Products from "./components/products-overview.component";
-import CustomerProfile from "./components/customer-profile.component";
-import AddCustomer from "./components/add-customer.component";
-import AddProduct from "./components/add-product.component";
-import AddCategory from "./components/add-category.component";
-import AddTransaction from "./components/add-transaction.component";
-import EditCustomer from "./components/edit-customer.component";
-import Sidebar from "./components/sidebar.component";
 
+import Home from "./components/home.component";
+import Contacts from "./components/contact-overview.component";
+import Products from "./components/products-overview.component";
 import Sales from "./components/sales-overview.component";
+
+import ContactProfile from "./components/contact-profile.component";
+import EditContact from "./components/edit-contact.component";
+
+import AddContact from "./components/add-contact.component";
+import AddProduct from "./components/add-product.component";
+import EditCategory from "./components/edit-category.component";
+import AddTransaction from "./components/add-transaction.component";
+
+import Sidebar from "./components/sidebar.component";
 import TestingPage from "./components/testing-page.component";
-import { Redirect, withRouter } from "react-router";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/App.css";
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.logOut = this.logOut.bind(this);
 
         this.state = {
             currentUser: undefined,
@@ -44,14 +44,6 @@ class App extends Component {
         }
     }
 
-    logOut() {
-        AuthService.logout();
-        this.setState({
-            currentUser: undefined,
-        });
-    }
-
-    //TODO: Implement restrictions for access to all pages when not logged in
     render() {
         return (
             <div>
@@ -63,21 +55,17 @@ class App extends Component {
                         <Route exact path="/">
                             <Redirect to="/login" />
                         </Route>
-                        <Route exact path="/profile">
-                            <Sidebar />
-                            <Profile />
-                        </Route>
                         <Route exact path="/home">
                             <Sidebar />
                             <Home />
                         </Route>
-                        <Route exact path="/customer-profile">
+                        <Route exact path="/contact-profile">
                             <Sidebar />
-                            <CustomerProfile />
+                            <ContactProfile />
                         </Route>
-                        <Route exact path="/addCustomer">
+                        <Route exact path="/addContact">
                             <Sidebar />
-                            <AddCustomer />
+                            <AddContact />
                         </Route>
                         <Route exact path="/addProduct">
                             <Sidebar />
@@ -87,17 +75,17 @@ class App extends Component {
                             <Sidebar />
                             <AddTransaction />
                         </Route>
-                        <Route exact path="/addCategory">
+                        <Route exact path="/editCategory">
                             <Sidebar />
-                            <AddCategory />
+                            <EditCategory />
                         </Route>
-                        <Route exact path="/editCustomer">
+                        <Route exact path="/editContact">
                             <Sidebar />
-                            <EditCustomer />
+                            <EditContact />
                         </Route>
-                        <Route exact path="/customers">
+                        <Route exact path="/contacts">
                             <Sidebar />
-                            <Customers />
+                            <Contacts />
                         </Route>
                         <Route exact path="/products">
                             <Sidebar />
@@ -107,14 +95,12 @@ class App extends Component {
                             <Sidebar />
                             <Sales />
                         </Route>
-                        <Route exact path="/customer-profile">
+                        <Route exact path="/contact-profile">
                             <Sidebar />
-                            <CustomerProfile />
+                            <ContactProfile />
                         </Route>
                     </Switch>
                 </div>
-
-                <AuthVerify logOut={this.logOut} />
             </div>
         );
     }

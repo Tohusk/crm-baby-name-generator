@@ -3,7 +3,7 @@ import { Redirect } from "react-router";
 import ContactService from "../services/contact.service";
 import AuthService from "../services/auth.service";
 
-export default class CustomerTableRow extends Component {
+export default class ContactTableRow extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -23,8 +23,9 @@ export default class CustomerTableRow extends Component {
     }
 
     async componentDidMount() {
+        // Populate contact stats
         try {
-            const res = await ContactService.getContactStatistics(this.state.currentUser.id, this.props.customer._id);
+            const res = await ContactService.getContactStatistics(this.state.currentUser.id, this.props.contact._id);
             this.setState({
                 averageRating: res.data.averageRating
                     ? (Math.round(res.data.averageRating * 100) / 100).toFixed(2)
@@ -32,7 +33,7 @@ export default class CustomerTableRow extends Component {
                 topCategories: res.data.topCategories,
             });
         } catch (err) {
-            alert(err);
+            console.log(err);
         }
     }
 
@@ -59,20 +60,18 @@ export default class CustomerTableRow extends Component {
                 {this.state.redirect ? (
                     <Redirect
                         to={{
-                            pathname: "/customer-profile",
-                            state: { contactId: this.props.customer._id },
+                            pathname: "/contact-profile",
+                            state: { contactId: this.props.contact._id },
                         }}
                     />
                 ) : null}
                 <td>{this.props.id}</td>
-                <td>{this.props.customer.name}</td>
-                <td>{this.props.customer.email}</td>
+                <td>{this.props.contact.name}</td>
+                <td>{this.props.contact.email}</td>
                 <td>{this.state.averageRating}</td>
                 <td>
                     <div className="category-containerTable">{this.displayCategories()}</div>
                 </td>
-                {/* <td>{this.props.obj.score}</td> */}
-                {/* <td>{this.props.obj.categories}</td> */}
             </tr>
         );
     }

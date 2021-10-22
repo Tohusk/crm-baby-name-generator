@@ -20,7 +20,6 @@ export default class ProductTableRow extends Component {
             if (window.confirm("Are you sure you wish to delete this?")) {
                 const res = await ProductService.deleteProduct(this.state.currentUser.id, this.props.product._id);
                 // Refresh to refresh category table
-                //TODO: trigger a rerender of the table only instead of the entire page
                 window.location.reload();
             }
         } catch (err) {
@@ -56,7 +55,7 @@ export default class ProductTableRow extends Component {
                     </div>
                 </td>
                 <td>
-                    <button className="addCategory-delete" onClick={this.deleteOneProduct}>
+                    <button className="editCategory-delete" onClick={this.deleteOneProduct}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1.3em"

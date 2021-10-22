@@ -99,11 +99,7 @@ export default class Sales extends Component {
                 {/*Page Name*/}
                 <div className="overview-pagename">Sales</div>
                 <div className="overview-button-box">
-                    <Link
-                        to="/addtransaction"
-                        className="overview-add-btn"
-                        // style={{ textDecoration: "none" }}
-                    >
+                    <Link to="/addtransaction" className="overview-add-btn">
                         + Add Sales
                     </Link>
                 </div>

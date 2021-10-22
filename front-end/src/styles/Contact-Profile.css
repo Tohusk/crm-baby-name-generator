@@ -1,4 +1,4 @@
-.customerProfile-smallText{
+.contactProfile-smallText{
     font-size: 1em;
     color: grey;
     justify-content: space-around;
@@ -6,19 +6,19 @@
     margin-left: 10em;
 }
 
-.customerProfile-backButton {
+.contactProfile-backButton {
     text-decoration: none;
     color: #747474;
 }
 
-.customerProfile-topContainer {
+.contactProfile-topContainer {
     margin-left: 7%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
 }
 
-.customerProfile-profile-container{
+.contactProfile-profile-container{
     flex-grow: 1;
     margin-left: 8%;
     border: 0.1em solid rgb(0, 0, 0);
@@ -28,7 +28,7 @@
     padding-right: 1%;
 }
 
-.customerProfile-score-container{
+.contactProfile-score-container{
     flex-grow: 0.5;
     border: 0.1em solid rgb(0, 0, 0);
     border-radius: 2em;
@@ -37,27 +37,27 @@
     padding-left: 2%; 
 }
 
-.customerProfile-dropdown {
+.contactProfile-dropdown {
     float: right;
     display: flex;
     flex-direction: column;
 }
 
-.customerProfile-link-container :hover {
+.contactProfile-link-container :hover {
     color: blue;
 }
 
-.customerProfile-dropdown-link {
+.contactProfile-dropdown-link {
     text-decoration: none;
     color: #747474;
     margin-left: 20%;
 }
 
-.customerProfile-deleteButton-container :hover {
+.contactProfile-deleteButton-container :hover {
     color: blue;
 }
 
-.customerProfile-deleteButton {
+.contactProfile-deleteButton {
     padding: 0;
     border: none;
     background: none;
@@ -65,7 +65,7 @@
     margin-left: 20%;
 }
 
-.customerProfile-pageTitleMedium{
+.contactProfile-pageTitleMedium{
     font-size: 2.3em;
     font-weight: bold;
     color: black;
@@ -75,13 +75,13 @@
 }
 
 
-.customerProfile-smallerText{
+.contactProfile-smallerText{
     font-size: 1em;
     color: grey;
     font-weight: bolder;
 }
 
-.customerProfile-userText{
+.contactProfile-userText{
     font-size: 1.3em;
     color: darkcyan;
     font-weight: bold;
@@ -91,14 +91,14 @@
 
 
 
-.customerProfile-transaction-button{
+.contactProfile-transaction-button{
     margin-left: 1em;
     font-size: 0.5em;
     color: grey;
     font-weight: bolder;
 }
 
-.customerProfile-transactionHistory{
+.contactProfile-transactionHistory{
     font-size: 2.3em;
     font-weight: bold;
     color: black;
@@ -108,7 +108,7 @@
 }
 
 
-.customerProfile-tranhis-container{
+.contactProfile-tranhis-container{
     height: 15em;
     margin-left: 10em;
     padding-top: 1em;
@@ -117,12 +117,12 @@
     padding-right: 2em;
 }
 
-.customerProfile-tran-log{
+.contactProfile-tran-log{
     border-top: 0.1em solid rgba(180, 176, 176, 0.452);
     border-bottom: 0.1em solid rgba(180, 176, 176, 0.452);
     font-size: 1em;
 }
-.customerProfile-tran-log-text{
+.contactProfile-tran-log-text{
     margin-left: 1em;
     margin-right: 10em;
     font-weight: bold;

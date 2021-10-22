@@ -4,12 +4,9 @@ import ProductService from "../services/product.service";
 import ContactService from "../services/contact.service";
 import TransactionService from "../services/transaction.service";
 import { Redirect } from "react-router";
-
 import VerticalBar from "./verticalBar.component";
 import PieChart from "./pie.component";
-
 import "../styles/Home.css";
-import { Pie } from "react-chartjs-2";
 
 export default class Home extends Component {
     constructor(props) {
@@ -45,25 +42,6 @@ export default class Home extends Component {
                 totalRevenue: salesStats?.data.totalRevenue,
                 ratingsFreq: salesStats?.data.ratingsFreq,
             });
-
-            /*const avgSatisfactionScore = await ContactService.getUserAvgRating(this.state.currentUser.id);
-            const totalProducts = await ProductService.getTotalProducts(this.state.currentUser.id);
-            const productStats = await ProductService.getProductStats(this.state.currentUser.id);
-
-            const categoryChartStat = productStats?.data.categoryStats ? productStats.data.categoryStats : [];
-            const categoryChartLabelsList = [];
-            const categoryChartColourList = [];
-            const categoryChartDataList = [];
-            for (const c of categoryChartStat) {
-                categoryChartLabelsList.push(c.name);
-                categoryChartColourList.push(c.colour);
-                categoryChartDataList.push(c.count);
-            }
-
-            const categoryDatasetList = [{
-                backgroundColor: categoryChartColourList,
-                data: categoryChartDataList,
-            }];*/
         } catch (err) {
             console.log(err);
             this.setState({

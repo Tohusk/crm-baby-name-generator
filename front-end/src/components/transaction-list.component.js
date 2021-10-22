@@ -47,7 +47,7 @@ export default class TransactionList extends Component {
                             <tr>
                                 <th>ID</th>
                                 <th>Date</th>
-                                <th>Customer</th>
+                                <th>Contact</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
