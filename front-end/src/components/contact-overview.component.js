@@ -142,7 +142,7 @@ export default class Contacts extends Component {
                             <div className="overview-card-stat">{this.state.totalContacts}</div>
                         </div>
                         <div className="overview-stats-card">
-                            <div className="overview-card-heading">Average Satisfaction Score</div>
+                            <div className="overview-card-heading">Average Relationship Score</div>
                             <div className="overview-card-stat">{this.state.avgScore}</div>
                         </div>
                     </div>
