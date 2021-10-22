@@ -104,7 +104,7 @@ export default class Home extends Component {
                 <div className="overview-pagename">Home</div>
                 <div className="home-charts">
                     <div className="home-bar-overview">
-                        <div className="home-chart-heading">Transaction Ratings</div>
+                        <div className="home-chart-heading">Transaction Satisfaction</div>
                         <div>{this.displayRatingsChart()}</div>
                     </div>
                     <div className="home-pie-overview">
@@ -114,7 +114,7 @@ export default class Home extends Component {
                 </div>
                 <div className="home-stats">
                     <div className="home-stats-card">
-                        <div className="overview-card-heading">Average Satisfaction Score</div>
+                        <div className="overview-card-heading">Average Relationship Score</div>
                         <div className="overview-card-stat">{this.state.avgSatisfactionScore}</div>
                     </div>
                     <div className="home-stats-card">
