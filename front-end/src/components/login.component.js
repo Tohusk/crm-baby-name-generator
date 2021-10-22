@@ -62,7 +62,6 @@ export default class Login extends Component {
             try {
                 await AuthService.login(this.state.email, this.state.password);
                 // After successful login, redirect to homepage
-                //TODO: Better way to both display successful login and redirect
                 this.props.history.push("/home");
                 window.location.reload();
             } catch (err) {

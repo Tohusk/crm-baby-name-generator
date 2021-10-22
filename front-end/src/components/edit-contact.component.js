@@ -163,7 +163,6 @@ class EditContact extends Component {
                     <u>Delete Contact</u>
                 </button>
                 {/* Input values need to be filled automatically from contact details */}
-
                 {this.state.redirect ? (
                     <Redirect
                         to={{

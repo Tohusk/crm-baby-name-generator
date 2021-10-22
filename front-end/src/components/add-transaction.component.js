@@ -11,7 +11,6 @@ import { Redirect } from "react-router";
 export default class AddTransaction extends Component {
     constructor(props) {
         super(props);
-        // this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
@@ -43,12 +42,11 @@ export default class AddTransaction extends Component {
             let contacts = ContactService.getAllContacts(this.state.currentUser.id);
             let products = ProductService.getAllProducts(this.state.currentUser.id);
             let response = await Promise.all([contacts, products]);
-
             let contactResponse = response[0];
             let productResponse = response[1];
 
-            const contactData = contactResponse.data;
             //putting contact and product names into an array of strings for autocomplete searchbox
+            const contactData = contactResponse.data;
             let contactNames = [];
             for (const contact of contactData) {
                 contactNames.push(contact.name);
@@ -75,15 +73,11 @@ export default class AddTransaction extends Component {
     //set the contact selected from autocomplete searchbox component as state contact
     handleContactCallback = (childData) => {
         let { allContacts } = this.state;
-        //console.log(allContacts);
         for (let k in allContacts) {
-            //console.log(allContacts[k]);
             if (allContacts[k]["name"] === childData) {
                 this.setState({ contact: allContacts[k] });
             }
         }
-
-        //this.setState({contact: childData})
     };
 
     //set the product selected from autocomplete searchbox component as state product

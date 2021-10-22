@@ -54,13 +54,8 @@ export default class AutoCompleteText extends React.Component {
     //sending selected data back to parent component and emptying input box
     onTrigger = (e) => {
         console.log(this.state.text);
-        // if(this.state.products.some(item => childData === item.name)){
-        //     this.setState({errorMessage: "Item already selected"});
-        //   } else {
         this.props.parentCallback(this.state.text);
         this.setState({ text: "" });
-        //}
-        // e.preventDefault();
     };
 
     render() {
@@ -71,7 +66,6 @@ export default class AutoCompleteText extends React.Component {
                 <div className="AutoCompleteText">
                     <input
                         value={text}
-                        // onFocus={this.value=""}  THIS ON FOCUS LINE IS PROBLEMATIC FOR SOME REASON
                         onChange={this.onTextChanged}
                         type="text"
                         name="myname"

@@ -38,7 +38,6 @@ class SelectedProduct extends Component {
     }
 
     render() {
-        //let productTotal = this.props.product.price * this.props.product.quantity;
         let productTotal = (Math.round(this.props.product.price * this.props.product.quantity * 100) / 100).toFixed(2);
 
         return (
@@ -52,9 +51,7 @@ class SelectedProduct extends Component {
                         className="btn btn-outline-dark"
                         onClick={this.reduceQty}
                         disabled={this.props.product.quantity <= 1}
-                    >
-                        -
-                    </button>
+                    ></button>
                     <span>{this.props.product.quantity} </span>
                     <span className="addTransaction-qty-btn">
                         <button className="btn btn-outline-dark" onClick={this.addQty}>
@@ -65,15 +62,6 @@ class SelectedProduct extends Component {
                         x
                     </button>
                 </div>
-                {/* <div className="addTransaction-products-container">
-                    <h4>{this.props.product.name}: ${this.props.product.price}</h4>
-                    <div className="addTransaction-buttons-wrapper">
-                    <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.quantity <= 1}>-</button>
-                    <span>{this.props.product.quantity} </span>
-                    <button className="btn btn-outline-dark" onClick={this.addQty}>+</button>
-                    <button className="addTransaction-no-style-button" onClick={this.handleDelete}>x</button>
-                    </div> 
-            </div> */}
             </div>
         );
     }
@@ -85,8 +73,6 @@ class AddTransProductForm extends React.Component {
         super(props);
 
         this.state = {
-            //qty: 1,
-
             contactId: "",
             transactionRating: 0,
             total: 0,
@@ -134,6 +120,7 @@ class AddTransProductForm extends React.Component {
         });
         console.log(this.state.total);
     }
+
     //handling delete product from list
     deleteProduct(deletedProduct) {
         const filteredProducts = this.state.productList.filter(
@@ -172,16 +159,9 @@ class AddTransProductForm extends React.Component {
 
     //sending post request with the correct request body
     async hSumbit(e) {
-        //alert("dsfdfs");
         e.preventDefault();
-        //console.log(this.state.total);
-        // console.log(this.state.transactionRating);
-        // console.log(this.state.productList);
-        // console.log(this.props.contact._id);
-        // console.log(this.props.userId);
         try {
             const res = await TransactionService.addNewTransaction(
-                //this.state.total,
                 this.state.transactionRating,
                 this.state.productList,
                 this.props.contact._id,
@@ -222,7 +202,9 @@ class AddTransProductForm extends React.Component {
                 />
             );
         });
+
         console.log(this.state.total);
+
         return (
             <div>
                 <div className="addTransaction-second-container">
@@ -251,7 +233,7 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="1" //{this.state.name}
+                                value="1"
                                 onChange={this.handleRating}
                             />
                             Very Unsatisfied (1)
@@ -263,7 +245,7 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="2" //{this.state.name}
+                                value="2"
                                 onChange={this.handleRating}
                             />
                             Unsatisfied (2)
@@ -275,7 +257,7 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="3" //{this.state.name}
+                                value="3"
                                 onChange={this.handleRating}
                             />
                             Neutral (3)
@@ -287,7 +269,7 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="4" //{this.state.name}
+                                value="4"
                                 onChange={this.handleRating}
                             />
                             Satisfied (4)
@@ -299,7 +281,7 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="5" //{this.state.name}
+                                value="5"
                                 onChange={this.handleRating}
                             />
                             Very Satisfied (5)

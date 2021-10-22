@@ -81,6 +81,7 @@ export default class EditCategory extends Component {
                     this.state.colour,
                     this.state.currentUser.id
                 );
+                
                 // Give success message
                 this.setState({
                     message: res.data.message,

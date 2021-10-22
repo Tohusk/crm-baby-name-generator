@@ -12,8 +12,6 @@ export default class CategoryTableRow extends Component {
         try {
             if (window.confirm("Are you sure you wish to delete this?")) {
                 const res = await CategoryService.deleteCategory(this.props.currentUser.id, this.props.category._id);
-                // Refresh to refresh category table
-                //TODO: trigger a rerender of the table only instead of the entire page
                 window.location.reload();
             }
         } catch (err) {

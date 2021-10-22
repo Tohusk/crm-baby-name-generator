@@ -20,7 +20,6 @@ export default class TransactionTableRow extends Component {
                     this.props.transaction._id
                 );
                 // Refresh to refresh category table
-                //TODO: trigger a rerender of the table only instead of the entire page
                 window.location.reload();
             }
         } catch (err) {
