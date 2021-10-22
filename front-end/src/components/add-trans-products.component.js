@@ -111,8 +111,8 @@ class AddTransProductForm extends React.Component {
             console.log(this.props.selectedProducts);
 
             for (let i in this.props.selectedProducts) {
-                console.log(this.props.selectedProducts[i]);
-                console.log(this.props.selectedProducts[i]["_id"]);
+                //console.log(this.props.selectedProducts[i]);
+                //console.log(this.props.selectedProducts[i]["_id"]);
                 this.setState({
                     productList: [
                         ...this.state.productList,
@@ -225,7 +225,7 @@ class AddTransProductForm extends React.Component {
                 />
             );
         });
-        console.log(this.state.total);
+        //console.log(this.state.total);
         return (
             <div>
                 <div className="addTransaction-second-container">

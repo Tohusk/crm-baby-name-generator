@@ -192,8 +192,12 @@
     flex-direction: row;
 }
 
-.addTransaction-total {
+/* .addTransaction-total {
     align-self: flex-end;
+} */
+
+.addTransaction-error{
+    color: #D80707;
 }
 
 /* Add category */
