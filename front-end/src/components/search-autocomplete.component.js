@@ -9,9 +9,9 @@ export default class AutoCompleteText extends React.Component {
 
         this.state = {
             suggestions: [],
-            text: '',
+            text: "",
             trackItem: [],
-            errorMessage: '',
+            errorMessage: "",
             showError: false,
         };
     }
@@ -57,11 +57,11 @@ export default class AutoCompleteText extends React.Component {
     //sending selected data back to parent component and emptying input box
     onTrigger = (e) => {
         console.log(this.state.text);
-            this.props.parentCallback(this.state.text);
-            this.setState({ text: "" });
-            this.setState((prevState) => ({
-                trackItem: [...prevState.trackItem, this.state.text],
-            }));
+        this.props.parentCallback(this.state.text);
+        this.setState({ text: "" });
+        this.setState((prevState) => ({
+            trackItem: [...prevState.trackItem, this.state.text],
+        }));
         console.log(this.state.trackItem);
         e.preventDefault();
     };
@@ -82,7 +82,6 @@ export default class AutoCompleteText extends React.Component {
                         placeholder="Enter name..."
                     />
                     {this.renderSuggestions()}
-                    
                 </div>
                 <br />
                 <button className="addTransaction-add-button" onClick={this.onTrigger}>
