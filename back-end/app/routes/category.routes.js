@@ -11,7 +11,6 @@ const controller = require("../controllers/category.controller");
  * GET /api/category/get
  * GET /api/category/getAll
  * DELETE /api/category/delete
- * @param app
  */
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -31,5 +30,5 @@ module.exports = function (app) {
 
     app.get("/api/category/getAll", controller.getAllCategories);
 
-    app.delete("/api/category/deleteOne", controller.deleteOneCategory);
+    app.delete("/api/category/deleteOne", [verifyCategory.checkCategoryNotInUse], controller.deleteOneCategory);
 };

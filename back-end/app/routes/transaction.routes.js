@@ -13,6 +13,7 @@ const { verifyContact } = require("../middlewares");
  * GET /api/transaction/get
  * GET /api/transaction/getAll
  * DELETE /api/transaction/delete
+ * GET /api/transaction/getStats
  * @param app
  */
 module.exports = function (app) {

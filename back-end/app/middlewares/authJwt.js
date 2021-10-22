@@ -1,7 +1,4 @@
 // written with reference to this tutorial: https://www.bezkoder.com/node-js-mongodb-auth-jwt/
-/**
- * Middlewares that helps with authorisation
- */
 
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
@@ -49,30 +46,8 @@ const isAdmin = async (req, res, next) => {
     }
 };
 
-/**
- * find out if a a user is moderator
- */
-// isModerator = async (req, res, next) => {
-//     try {
-//         const user = await User.findById(req.userId);
-//         const roles = await Role.find({_id: { $in: user.roles }});
-//         for (let i = 0; i < roles.length; i++) {
-//             if (roles[i].name === "moderator") {
-//                 next();
-//                 return;
-//             }
-//         }
-//         res.status(403).send({ message: "Require Moderator Role!" });
-//         return;
-//     } catch (err) {
-//         res.status(500).send({ message: err });
-//         return;
-//     }
-// };
-
 const authJwt = {
     verifyToken,
-    //isModerator,
     isAdmin,
 };
 module.exports = authJwt;

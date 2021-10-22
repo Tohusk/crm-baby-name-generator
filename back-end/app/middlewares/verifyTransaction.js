@@ -1,8 +1,4 @@
 /**
- * middleware that helps check if a product is valid
- */
-
-/**
  * check if all the required fields are filled
  */
 const checkRequiredFields = (req, res, next) => {
@@ -20,17 +16,24 @@ const checkRequiredFields = (req, res, next) => {
         return;
     }
 
+    for (const p of req.body.productsPurchased) {
+        if (!p.price) {
+            res.status(400).send({ message: "Failed! Need to provide price!" });
+            return;
+        }
+    }
+
     next();
 };
 
 const checkRequiredFieldsUpdate = (req, res, next) => {
-    if (!req.body.productsPurchased || req.body.productsPurchased.length == 0) {
+    if (!req.body.productsPurchased || req.body.productsPurchased.length === 0) {
         res.status(400).send({ message: "Failed! Need list of products purchased!" });
         return;
     }
 
     if (!req.body.userId) {
-        res.status(400).send({ message: "Failed! Needs to provide userId!" });
+        res.status(400).send({ message: "Failed! Needs to provide user!" });
         return;
     }
 
@@ -42,6 +45,13 @@ const checkRequiredFieldsUpdate = (req, res, next) => {
     if (!req.body.transactionId) {
         res.status(400).send({ message: "Failed! Need to provide transactionId!" });
         return;
+    }
+
+    for (const p of req.body.productsPurchased) {
+        if (!p.price) {
+            res.status(400).send({ message: "Failed! Need to provide price!" });
+            return;
+        }
     }
 
     next();

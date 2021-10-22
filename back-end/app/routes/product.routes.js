@@ -11,7 +11,9 @@ const controller = require("../controllers/product.controller");
  * GET /api/product/get
  * GET /api/product/getAll
  * DELETE /api/product/delete
- * @param app
+ * GET /api/product/getTotal
+ * GET /api/product/getMostPopular
+ * GET /api/product/getStats
  */
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -35,7 +37,7 @@ module.exports = function (app) {
 
     app.get("/api/product/getAll", controller.getAllProducts);
 
-    app.delete("/api/product/deleteOne", controller.deleteOneProduct);
+    app.delete("/api/product/deleteOne", [verifyProduct.checkProductNotInUse], controller.deleteOneProduct);
 
     app.get("/api/product/getTotal", controller.getTotalProducts);
 
