@@ -93,14 +93,9 @@ export default class Products extends Component {
         }
         return (
             <div>
-                {/*Page Name*/}
                 <div className="overview-pagename">Products</div>
                 <div className="overview-button-box">
-                    <Link
-                        to="/addproduct"
-                        className="overview-add-btn"
-                        // style={{ textDecoration: "none" }}
-                    >
+                    <Link to="/addproduct" className="overview-add-btn">
                         + Add Product
                     </Link>
                 </div>
@@ -117,7 +112,7 @@ export default class Products extends Component {
                         </div>
                     </div>
                     <div className="overview-pie-chart-card">
-                        <div className="overview-chart-heading">Popularity by Categories</div>
+                        <div className="overview-chart-heading">Category Popularity</div>
                         <div>{this.showCategoryChart()}</div>
                     </div>
                 </div>
@@ -125,11 +120,7 @@ export default class Products extends Component {
                 <div className="category-flex-container">
                     <CategoryOverview></CategoryOverview>
                     <div className="overview-button-box">
-                        <Link
-                            to="/addCategory"
-                            className="overview-add-btn"
-                            // style={{ textDecoration: "none" }}
-                        >
+                        <Link to="/editCategory" className="overview-add-btn">
                             Edit Categories
                         </Link>
                     </div>

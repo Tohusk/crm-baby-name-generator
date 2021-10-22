@@ -12,8 +12,6 @@ export default class CategoryTableRow extends Component {
         try {
             if (window.confirm("Are you sure you wish to delete this?")) {
                 const res = await CategoryService.deleteCategory(this.props.currentUser.id, this.props.category._id);
-                // Refresh to refresh category table
-                //TODO: trigger a rerender of the table only instead of the entire page
                 window.location.reload();
             }
         } catch (err) {
@@ -34,7 +32,7 @@ export default class CategoryTableRow extends Component {
                 <td style={styles}></td>
                 <td>{this.props.category.name}</td>
                 <td>
-                    <button className="addCategory-delete" onClick={this.deleteOneCategory}>
+                    <button className="editCategory-delete" onClick={this.deleteOneCategory}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1.3em"

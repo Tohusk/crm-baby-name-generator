@@ -1,7 +1,4 @@
 // written with reference to this tutorial: https://www.bezkoder.com/node-js-mongodb-auth-jwt/
-/**
- * middleware that helps verify signups
- */
 
 const db = require("../models");
 const ROLES = db.ROLES;

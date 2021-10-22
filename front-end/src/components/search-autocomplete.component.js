@@ -10,15 +10,12 @@ export default class AutoCompleteText extends React.Component {
         this.state = {
             suggestions: [],
             text: "",
-            trackItem: [],
-            errorMessage: "",
-            showError: false,
         };
     }
 
     //filtering for matching items when typed into input
     onTextChanged = (e) => {
-        //this.setState({errorMessage: ""});
+
         const { items } = this.props;
         const value = e.target.value;
         let suggestions = [];
@@ -59,11 +56,6 @@ export default class AutoCompleteText extends React.Component {
         console.log(this.state.text);
         this.props.parentCallback(this.state.text);
         this.setState({ text: "" });
-        this.setState((prevState) => ({
-            trackItem: [...prevState.trackItem, this.state.text],
-        }));
-        console.log(this.state.trackItem);
-        e.preventDefault();
     };
 
     render() {
@@ -74,7 +66,6 @@ export default class AutoCompleteText extends React.Component {
                 <div className="AutoCompleteText">
                     <input
                         value={text}
-                        // onFocus={this.value=""}  THIS ON FOCUS LINE IS PROBLEMATIC FOR SOME REASON
                         onChange={this.onTextChanged}
                         type="text"
                         name="myname"

@@ -11,7 +11,6 @@ const controller = require("../controllers/auth.controller");
  * POST /api/auth/update
  * POST /api/auth/signin
  * DELETE /api/auth/deleteAccount
- * @param app
  */
 module.exports = function (app) {
     app.use(function (req, res, next) {

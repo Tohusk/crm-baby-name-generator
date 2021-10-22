@@ -4,7 +4,7 @@ import "../styles/AddItem.css";
 import { withRouter } from "react-router";
 
 //displaying row of product that is selected
-class SelectedProduct extends React.Component {
+class SelectedProduct extends Component {
     constructor(props) {
         super(props);
 
@@ -38,7 +38,6 @@ class SelectedProduct extends React.Component {
     }
 
     render() {
-        //let productTotal = this.props.product.price * this.props.product.quantity;
         let productTotal = (Math.round(this.props.product.price * this.props.product.quantity * 100) / 100).toFixed(2);
 
         return (
@@ -52,9 +51,7 @@ class SelectedProduct extends React.Component {
                         className="btn btn-outline-dark"
                         onClick={this.reduceQty}
                         disabled={this.props.product.quantity <= 1}
-                    >
-                        -
-                    </button>
+                    ></button>
                     <span>{this.props.product.quantity} </span>
                     <span className="addTransaction-qty-btn">
                         <button className="btn btn-outline-dark" onClick={this.addQty}>
@@ -65,15 +62,6 @@ class SelectedProduct extends React.Component {
                         x
                     </button>
                 </div>
-                {/* <div className="addTransaction-products-container">
-                    <h4>{this.props.product.name}: ${this.props.product.price}</h4>
-                    <div className="addTransaction-buttons-wrapper">
-                    <button className="btn btn-outline-dark" onClick={this.reduceQty} disabled={this.props.product.quantity <= 1}>-</button>
-                    <span>{this.props.product.quantity} </span>
-                    <button className="btn btn-outline-dark" onClick={this.addQty}>+</button>
-                    <button className="addTransaction-no-style-button" onClick={this.handleDelete}>x</button>
-                    </div> 
-            </div> */}
             </div>
         );
     }
@@ -85,8 +73,6 @@ class AddTransProductForm extends React.Component {
         super(props);
 
         this.state = {
-            //qty: 1,
-
             contactId: "",
             transactionRating: 0,
             total: 0,
@@ -143,6 +129,7 @@ class AddTransProductForm extends React.Component {
         });
         console.log(this.state.total);
     }
+
     //handling delete product from list
     deleteProduct(deletedProduct) {
         const filteredProducts = this.state.productList.filter(
@@ -184,19 +171,12 @@ class AddTransProductForm extends React.Component {
 
     //sending post request with the correct request body
     async hSumbit(e) {
-        //alert("dsfdfs");
         e.preventDefault();
-        //console.log(this.state.total);
-        // console.log(this.state.transactionRating);
-        // console.log(this.state.productList);
-        // console.log(this.props.customer._id);
-        // console.log(this.props.userId);
         try {
             const res = await TransactionService.addNewTransaction(
-                //this.state.total,
                 this.state.transactionRating,
                 this.state.productList,
-                this.props.customer._id,
+                this.props.contact._id,
                 this.props.userId
             );
             console.log(res.data);
@@ -234,13 +214,15 @@ class AddTransProductForm extends React.Component {
                 />
             );
         });
+
         //console.log(this.state.total);
+
         return (
             <div>
                 <div className="addTransaction-second-container">
                     <div className="addTransaction-sub-container">
-                        <div className="addTransaction-subtitle">Customer:</div>
-                        <h4>{this.props.customer["name"]}</h4>
+                        <div className="addTransaction-subtitle">Contact:</div>
+                        <h4>{this.props.contact["name"]}</h4>
                     </div>
                     <div className="addTransaction-sub-container">
                         <div className="addTransaction-subtitle">Product/s:</div>
@@ -266,9 +248,8 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="1" //{this.state.name}
+                                value="1"
                                 onChange={this.handleRating}
-                                // validations={[required]}
                             />
                             Very Unsatisfied (1)
                         </label>
@@ -279,9 +260,8 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="2" //{this.state.name}
+                                value="2"
                                 onChange={this.handleRating}
-                                // validations={[required]}
                             />
                             Unsatisfied (2)
                         </label>
@@ -292,9 +272,8 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="3" //{this.state.name}
+                                value="3"
                                 onChange={this.handleRating}
-                                // validations={[required]}
                             />
                             Neutral (3)
                         </label>
@@ -305,9 +284,8 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="4" //{this.state.name}
+                                value="4"
                                 onChange={this.handleRating}
-                                // validations={[required]}
                             />
                             Satisfied (4)
                         </label>
@@ -318,9 +296,8 @@ class AddTransProductForm extends React.Component {
                                 type="radio"
                                 className="form-check-input"
                                 name="name"
-                                value="5" //{this.state.name}
+                                value="5"
                                 onChange={this.handleRating}
-                                // validations={[required]}
                             />
                             Very Satisfied (5)
                         </label>
@@ -334,7 +311,6 @@ class AddTransProductForm extends React.Component {
                         </button>
                     </div>
 
-                    {/* </form> */}
                     <br />
                 </div>
             </div>

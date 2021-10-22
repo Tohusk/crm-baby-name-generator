@@ -4,9 +4,7 @@ import { Bar } from "react-chartjs-2";
 export default class VerticalBar extends Component {
     constructor(props) {
         super(props);
-
         const dataList = this.props.ratingsFreq;
-
         this.state = {
             data: dataList,
         };
