@@ -173,19 +173,20 @@ const deleteOneTransaction = async (req, res) => {
 };
 
 /**
- * Controller for deleting all transaction entries for a given user
+ * function for deleting all transaction entries for a given user
  */
 const deleteAllTransactions = async (userId) => {
     await Transaction.findOneAndDelete({ user: mongoose.Types.ObjectId(userId) });
 };
 
 /**
- * controller for getting stats related to sales
+ * controller for getting total revenue and transaction satisfaction stats
  */
 const getSalesStats = async (req, res) => {
     try {
         const allTransactions = await getAllTransactionsForUser(req.query.userId);
 
+        // initialise stats
         let totalRevenue = 0;
         let ratingsMap = new Map([
             ["1", 0],
@@ -196,10 +197,12 @@ const getSalesStats = async (req, res) => {
         ]);
 
         for (const t of allTransactions) {
+            // update total
             if (t.transactionTotal) {
                 totalRevenue += t.transactionTotal;
             }
 
+            // update ratings map
             if (ratingsMap.get(t.transactionRating.toString())) {
                 ratingsMap.set(t.transactionRating.toString(), ratingsMap.get(t.transactionRating.toString()) + 1);
             } else {
@@ -207,8 +210,8 @@ const getSalesStats = async (req, res) => {
             }
         }
 
+        // convert ratings map into an array
         const ratingsArray = [];
-
         for (const t of ratingsMap.keys()) {
             ratingsArray.push(ratingsMap.get(t));
         }
@@ -225,23 +228,6 @@ const getSalesStats = async (req, res) => {
     }
 };
 
-/**
- * Gets all transactions from the past 7 days for a user
- */
-/*const getPastWeekTransactions = async (userId) => {
-    const WEEK_LENGTH = 7;
-    const today = new Date();
-    let sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(today.getDate() - WEEK_LENGTH);
-
-    const transactionsPastWeek = await Transaction.findOne({
-        user: mongoose.Types.ObjectId(userId),
-        transactions: { $elemMatch: { dateAdded: { $gte: sevenDaysAgo } } }
-    });
-
-    return transactionsPastWeek.transactions;
-}*/
-
 module.exports = {
     initialiseTransaction,
     newTransaction,
@@ -250,7 +236,6 @@ module.exports = {
     getAllTransactions,
     deleteOneTransaction,
     deleteAllTransactions,
-    //getPastWeekTransactions,
     getAllTransactionsForUser,
     getSalesStats,
 };

@@ -1,7 +1,3 @@
-/**
- * middleware that helps check if a contact is valid
- */
-
 const db = require("../models");
 const Contact = db.contacts;
 const mongoose = require("mongoose");
@@ -22,6 +18,9 @@ const checkRequiredFields = (req, res, next) => {
     next();
 };
 
+/**
+ * checks if all the required fields have been filled when updating a contact
+ */
 const checkRequiredFieldsUpdate = (req, res, next) => {
     if (!req.body.name) {
         res.status(400).send({ message: "Failed! Need contact name!" });
@@ -37,9 +36,6 @@ const checkRequiredFieldsUpdate = (req, res, next) => {
 
 /**
  * checks if a contact exists for a given user
- * @param req
- * @param res
- * @param next
  */
 const checkContactExists = async (req, res, next) => {
     try {

@@ -1448,6 +1448,28 @@
                 "url": "{{rootUrl}}/api/product/new"
               },
               "response": []
+            },
+            {
+              "name": "Delete category currently in use by a product",
+              "id": "b0295fb7-63a7-4a82-a004-3f5fb8e23221",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"categoryId\": \"{{categoryId2}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/category/deleteOne"
+              },
+              "response": []
             }
           ],
           "id": "af5e3f54-33ec-4465-acce-9dcb95d09578",
@@ -1810,9 +1832,7 @@
                   "script": {
                     "id": "d5d635ff-1a4e-4e48-a318-372657a60ed1",
                     "exec": [
-                      "pm.test(\"Status code is 400\", function () {\r",
-                      "    pm.response.to.have.status(400);\r",
-                      "});"
+                      ""
                     ],
                     "type": "text/javascript"
                   }
@@ -1846,9 +1866,7 @@
                   "script": {
                     "id": "77f6a86a-6ff9-4aef-adbf-83fc33d28491",
                     "exec": [
-                      "pm.test(\"Status code is 400\", function () {\r",
-                      "    pm.response.to.have.status(400);\r",
-                      "});"
+                      ""
                     ],
                     "type": "text/javascript"
                   }
@@ -1882,9 +1900,7 @@
                   "script": {
                     "id": "bc67281d-87c9-49a6-8fa1-31d2c37ac963",
                     "exec": [
-                      "pm.test(\"Status code is 500\", function () {\r",
-                      "    pm.response.to.have.status(500);\r",
-                      "});"
+                      ""
                     ],
                     "type": "text/javascript"
                   }
@@ -1909,6 +1925,40 @@
                 "url": "{{rootUrl}}/api/transaction/new"
               },
               "response": []
+            },
+            {
+              "name": "Delete product still in use by a transaction",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "c82eb102-1ee8-475b-8a69-91afa6c1da67",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "9373f7ec-9fca-4c66-a4a7-61fb92a021ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"productId\": \"{{productId2}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{rootUrl}}/api/product/deleteOne"
+              },
+              "response": []
             }
           ],
           "id": "a952783c-eb3f-4e30-b862-7aababd9e611",
@@ -1916,7 +1966,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "b52fddcb-2374-408b-a823-85775cdd9ca4",
+                "id": "4ae26dcd-51b6-43e5-8f9d-9291c6d687ab",
                 "type": "text/javascript",
                 "exec": [
                   ""
@@ -1926,10 +1976,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "ea41e93e-ad27-4123-bd70-675ab1872b07",
+                "id": "bc5ced4f-946e-43f1-bd84-4301665c96ea",
                 "type": "text/javascript",
                 "exec": [
-                  ""
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
                 ]
               }
             }

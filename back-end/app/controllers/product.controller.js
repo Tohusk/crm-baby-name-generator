@@ -149,6 +149,9 @@ const getMostPopularProduct = async (req, res) => {
     }
 };
 
+/**
+ * controller for getting the most popular product and the popularity of categories
+ */
 const getProductStats = async (req, res) => {
     try {
         // find most popular product
