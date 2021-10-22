@@ -211,11 +211,11 @@ const getProductStats = async (req, res) => {
 const findProductPopularityStats = async (userId) => {
     const transactions = await transactionController.getAllTransactionsForUser(userId);
 
-    // find most popular product and
     let mostPopularCount = 0;
     let mostPopularProduct;
     let productPopularityMap = new Map();
 
+    // find most popular product
     for (const t of transactions) {
         for (const p of t.productsPurchased) {
             if (!productPopularityMap.get(p.productId.toString())) {

@@ -54,7 +54,7 @@ const newTransaction = async (req, res) => {
 };
 
 /**
- * go through the list of products in JSON request and create structure
+ * function to go through the list of products in JSON request and create structure
  */
 function parsePurchaseList(req, res) {
     try {

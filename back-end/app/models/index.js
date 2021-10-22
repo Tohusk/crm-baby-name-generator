@@ -12,6 +12,6 @@ db.product = require("./product.model");
 db.category = require("./category.model");
 db.transaction = require("./transaction.model");
 
-db.ROLES = ["user", "admin"]; //, "moderator"];
+db.ROLES = ["user", "admin"];
 
 module.exports = db;
