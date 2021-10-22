@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-import axios from "axios";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import AutoCompleteText from "./search-autocomplete.component";
 import AddTransProductForm from "./add-trans-products.component";
 import ContactService from "../services/contact.service";
@@ -14,7 +11,6 @@ import { Redirect } from "react-router";
 export default class AddTransaction extends Component {
     constructor(props) {
         super(props);
-        // this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
@@ -22,8 +18,6 @@ export default class AddTransaction extends Component {
             customernames: [],
             allProducts: [],
             productnames: [],
-            showCustomer: false,
-            showProduct: false,
             customer: {},
             products: [],
             productsPurchased: [
@@ -34,9 +28,6 @@ export default class AddTransaction extends Component {
                     price: 0,
                 },
             ],
-            total: 0,
-            rating: 0,
-            errorMessage: "",
         };
     }
 
@@ -85,8 +76,6 @@ export default class AddTransaction extends Component {
                 this.setState({ customer: allCustomers[k] });
             }
         }
-
-        //this.setState({customer: childData})
     };
 
     //set the product selected from autocomplete searchbox component as state product
@@ -117,19 +106,6 @@ export default class AddTransaction extends Component {
         console.log(this.state.products);
     };
 
-    //Set products purchased
-    handleSubmit = (childData) => {
-        let databody = {
-            contactId: this.state.customer,
-            satisfactionRating: this.state.rating,
-            total: this.state.total,
-        };
-    };
-
-    onCustomerButtonClickHandler = () => {
-        this.setState({ showCustomer: !this.state.showCustomer });
-    };
-
     render() {
         if (AuthService.getCurrentUser() == null) {
             alert("Please login first.");
@@ -146,18 +122,10 @@ export default class AddTransaction extends Component {
                             items={this.state.customernames}
                             parentCallback={this.handleCustomerCallback}
                         />
-                        {/* <button className="addTransaction-add-button" onClick={this.onCustomerButtonClickHandler}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-              </svg>
-              Add
-            </button> */}
                     </div>
                     <div className="addTransaction-sub-container">
                         <div className="addTransaction-subtitle">Select Product/s</div>
                         <AutoCompleteText items={this.state.productnames} parentCallback={this.handleProductCallback} />
-                        {/* {this.state.errorMessage && <p className="addTransaction-error">{this.state.errorMessage}</p>} */}
                     </div>
                     <AddTransProductForm
                         selectedProducts={this.state.products}

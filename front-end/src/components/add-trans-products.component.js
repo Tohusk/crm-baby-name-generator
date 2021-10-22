@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 import TransactionService from "../services/transaction.service";
 import "../styles/AddItem.css";
 import { withRouter } from "react-router";
@@ -47,7 +44,7 @@ class SelectedProduct extends React.Component {
         return (
             <div>
                 <div className="addTransaction-buttons-wrapper">
-                    <div className="addTransaction-question">
+                    <div className="addTransaction-product">
                         {this.props.product.name}: ${productTotal}
                     </div>
 
@@ -254,7 +251,7 @@ class AddTransProductForm extends React.Component {
                             {products}
                             {this.state.errorMessage && <p className="addTransaction-error">{this.state.errorMessage}</p>}
                             <br />
-                            <h4 className="addTransaction-total">Total: ${stringTotal}</h4>
+                            <h4>Total: ${stringTotal}</h4>
                         </div>
                     </div>
 

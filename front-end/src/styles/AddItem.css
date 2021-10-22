@@ -140,6 +140,10 @@
     margin-left: 70%;   
 }
 
+.addTransaction-add-button:hover{
+    background-color: #ffe4a1;
+}
+
 .addTransaction-submit-group {
     flex-basis: 100%;
     display: flex;
@@ -192,12 +196,12 @@
     flex-direction: row;
 }
 
-/* .addTransaction-total {
-    align-self: flex-end;
-} */
-
 .addTransaction-error{
     color: #D80707;
+}
+
+.addTransaction-product{
+    font-size: 1.2em;
 }
 
 /* Add category */
