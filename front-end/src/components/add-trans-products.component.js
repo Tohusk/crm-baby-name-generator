@@ -43,7 +43,7 @@ class SelectedProduct extends Component {
         return (
             <div>
                 <div className="addTransaction-buttons-wrapper">
-                    <div className="addTransaction-question">
+                    <div className="addTransaction-product">
                         {this.props.product.name}: ${productTotal}
                     </div>
 
@@ -51,7 +51,9 @@ class SelectedProduct extends Component {
                         className="btn btn-outline-dark"
                         onClick={this.reduceQty}
                         disabled={this.props.product.quantity <= 1}
-                    ></button>
+                    >
+                        -
+                    </button>
                     <span>{this.props.product.quantity} </span>
                     <span className="addTransaction-qty-btn">
                         <button className="btn btn-outline-dark" onClick={this.addQty}>
@@ -77,6 +79,7 @@ class AddTransProductForm extends React.Component {
             transactionRating: 0,
             total: 0,
             productList: [],
+            errorMessage: "",
         };
 
         this.calculateTotal = this.calculateTotal.bind(this);
@@ -94,19 +97,27 @@ class AddTransProductForm extends React.Component {
             console.log(this.props.selectedProducts);
 
             for (let i in this.props.selectedProducts) {
-                console.log(this.props.selectedProducts[i]);
-                console.log(this.props.selectedProducts[i]["_id"]);
-                this.setState({
-                    productList: [
-                        ...this.state.productList,
-                        {
-                            productId: this.props.selectedProducts[i]["_id"],
-                            quantity: 1,
-                            name: this.props.selectedProducts[i]["name"],
-                            price: this.props.selectedProducts[i]["price"],
-                        },
-                    ],
-                });
+                if (this.state.productList.some((item) => item.name === this.props.selectedProducts[i]["name"])) {
+                    // this.setState({showError: true});
+                    this.setState({ errorMessage: "Item already selected" });
+                    //this.addQty(this.props.selectedProducts[i]);
+                    console.log("matched");
+                } else {
+                    //console.log(this.props.selectedProducts[i]);
+                    //console.log(this.props.selectedProducts[i]["_id"]);
+                    this.setState({
+                        productList: [
+                            ...this.state.productList,
+                            {
+                                productId: this.props.selectedProducts[i]["_id"],
+                                quantity: 1,
+                                name: this.props.selectedProducts[i]["name"],
+                                price: this.props.selectedProducts[i]["price"],
+                            },
+                        ],
+                    });
+                    this.setState({ errorMessage: "" });
+                }
             }
 
             console.log(this.state.productList);
@@ -127,6 +138,7 @@ class AddTransProductForm extends React.Component {
             (product) => product.productId !== deletedProduct.productId
         );
         this.setState({ productList: filteredProducts });
+        this.setState({ errorMessage: "" });
     }
 
     //handling adding quantity by one
@@ -138,6 +150,7 @@ class AddTransProductForm extends React.Component {
         );
         this.setState({ productList: updateQtyProducts });
         console.log(this.state.productList);
+        this.setState({ errorMessage: "" });
     }
 
     //handling reducing quantity by one
@@ -147,6 +160,7 @@ class AddTransProductForm extends React.Component {
             el.productId === product.productId ? Object.assign({}, el, { quantity }) : el
         );
         this.setState({ productList: updateQtyProducts });
+        this.setState({ errorMessage: "" });
     }
 
     //handling rating on change
@@ -203,7 +217,7 @@ class AddTransProductForm extends React.Component {
             );
         });
 
-        console.log(this.state.total);
+        //console.log(this.state.total);
 
         return (
             <div>
@@ -216,8 +230,11 @@ class AddTransProductForm extends React.Component {
                         <div className="addTransaction-subtitle">Product/s:</div>
                         <div>
                             {products}
+                            {this.state.errorMessage && (
+                                <p className="addTransaction-error">{this.state.errorMessage}</p>
+                            )}
                             <br />
-                            <h4 className="addTransaction-total">Total: ${stringTotal}</h4>
+                            <h4>Total: ${stringTotal}</h4>
                         </div>
                     </div>
 

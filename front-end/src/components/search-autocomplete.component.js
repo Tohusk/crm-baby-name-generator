@@ -10,12 +10,12 @@ export default class AutoCompleteText extends React.Component {
         this.state = {
             suggestions: [],
             text: "",
-            trackItem: [],
         };
     }
 
     //filtering for matching items when typed into input
     onTextChanged = (e) => {
+
         const { items } = this.props;
         const value = e.target.value;
         let suggestions = [];

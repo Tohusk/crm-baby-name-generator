@@ -18,8 +18,6 @@ export default class AddTransaction extends Component {
             contactNames: [],
             allProducts: [],
             productNames: [],
-            showContact: false,
-            showProduct: false,
             contact: {},
             products: [],
             productsPurchased: [
@@ -30,9 +28,6 @@ export default class AddTransaction extends Component {
                     price: 0,
                 },
             ],
-            total: 0,
-            rating: 0,
-            errorMessage: "",
         };
     }
 
@@ -86,9 +81,9 @@ export default class AddTransaction extends Component {
         console.log(this.state.products);
 
         for (let k in allProducts) {
-            console.log(allProducts[k]);
+            //console.log(allProducts[k]);
             if (allProducts[k]["name"] === childData) {
-                console.log("matched");
+                //console.log("matched");
                 console.log(allProducts[k]);
                 this.setState((prevState) => ({
                     products: [...prevState.products, allProducts[k]],
@@ -108,18 +103,6 @@ export default class AddTransaction extends Component {
         console.log(this.state.products);
     };
 
-    //Set products purchased
-    handleSubmit = (childData) => {
-        let databody = {
-            contactId: this.state.contact,
-            satisfactionRating: this.state.rating,
-            total: this.state.total,
-        };
-    };
-
-    onContactButtonClickHandler = () => {
-        this.setState({ showContact: !this.state.showContact });
-    };
 
     render() {
         if (AuthService.getCurrentUser() == null) {
@@ -132,13 +115,14 @@ export default class AddTransaction extends Component {
                 <div className="addItem-title">New Transaction</div>
                 <div className="addTransaction-container">
                     <div className="addTransaction-sub-container">
+
                         <div className="addTransaction-subtitle">Select Contact</div>
                         <AutoCompleteText items={this.state.contactNames} parentCallback={this.handleContactCallback} />
+
                     </div>
                     <div className="addTransaction-sub-container">
                         <div className="addTransaction-subtitle">Select Product/s</div>
                         <AutoCompleteText items={this.state.productNames} parentCallback={this.handleProductCallback} />
-                        {this.state.errorMessage && <p className="addTransaction-error">{this.state.errorMessage}</p>}
                     </div>
                     <AddTransProductForm
                         selectedProducts={this.state.products}
