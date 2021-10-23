@@ -51,7 +51,9 @@ class SelectedProduct extends Component {
                         className="btn btn-outline-dark"
                         onClick={this.reduceQty}
                         disabled={this.props.product.quantity <= 1}
-                    ></button>
+                    >
+                        -
+                    </button>
                     <span>{this.props.product.quantity} </span>
                     <span className="addTransaction-qty-btn">
                         <button className="btn btn-outline-dark" onClick={this.addQty}>
