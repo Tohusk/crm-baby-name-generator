@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import ProductService from "../services/product.service";
 import { Link } from "react-router-dom";
-import Table from "react-bootstrap/Table";
 import ProductList from "./product-list.component";
 import { Redirect } from "react-router";
 import "../styles/Home.css";
@@ -15,7 +14,7 @@ export default class Products extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             totalProducts: 0,
             mostPopularProduct: "N/A",
             // for chart
@@ -86,7 +85,7 @@ export default class Products extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null) {
+        if (UserService.getCurrentUser() == null) {
             alert("Please login first.");
 
             return <Redirect to={{ pathname: "/login" }} />;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -31,7 +31,7 @@ export default class EditCategory extends Component {
         this.hideForm = this.hideForm.bind(this);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             message: "",
             loading: false,
             showAddForm: false,
@@ -106,7 +106,7 @@ export default class EditCategory extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null) {
+        if (UserService.getCurrentUser() == null) {
             alert("Please login first.");
 
             return <Redirect to={{ pathname: "/login" }} />;

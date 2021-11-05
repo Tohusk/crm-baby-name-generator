@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import { withRouter } from "react-router";
 import logo from "../assets/logo.png";
 
@@ -11,12 +11,12 @@ class Sidebar extends Component {
         this.handleLogout = this.handleLogout.bind(this);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
         };
     }
 
     handleLogout() {
-        AuthService.logout();
+        UserService.logout();
         this.props.history.push("/login");
     }
 

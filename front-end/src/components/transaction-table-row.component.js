@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TransactionService from "../services/transaction.service";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 export default class TransactionTableRow extends Component {
     constructor(props) {
@@ -8,7 +8,7 @@ export default class TransactionTableRow extends Component {
         this.deleteOneTrans = this.deleteOneTrans.bind(this);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
         };
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { Redirect, withRouter } from "react-router";
 
-import AuthService from "./services/auth.service";
+import UserService from "./services/user.service";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 
@@ -35,7 +35,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        const user = AuthService.getCurrentUser();
+        const user = UserService.getCurrentUser();
 
         if (user) {
             this.setState({

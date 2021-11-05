@@ -1,5 +1,5 @@
 import React, { Component, isValidElement } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import { Link } from "react-router-dom";
 import ContactList from "./contact-list.component";
 import ContactService from "../services/contact.service";
@@ -14,7 +14,7 @@ export default class Contacts extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             avgScore: "N/A",
             totalContacts: 0,
             labels: [],
@@ -121,7 +121,7 @@ export default class Contacts extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null) {
+        if (UserService.getCurrentUser() == null) {
             alert("Please login first.");
 
             return <Redirect to={{ pathname: "/login" }} />;

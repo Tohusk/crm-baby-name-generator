@@ -6,7 +6,7 @@ import { isEmail } from "validator";
 
 import "../styles/Authentication.css";
 
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 import img from "../assets/img-signup.png";
 import logo from "../assets/logo.png";
@@ -107,7 +107,7 @@ export default class Register extends Component {
 
         if (this.checkBtn.context._errors.length === 0) {
             try {
-                const res = await AuthService.register(
+                const res = await UserService.register(
                     this.state.name,
                     this.state.email,
                     this.state.companyName,

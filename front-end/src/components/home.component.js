@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import ProductService from "../services/product.service";
 import ContactService from "../services/contact.service";
 import TransactionService from "../services/transaction.service";
@@ -13,7 +13,7 @@ export default class Home extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             avgSatisfactionScore: "N/A",
             totalProducts: "N/A",
             mostPopularProduct: "N/A",
@@ -72,7 +72,7 @@ export default class Home extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null) {
+        if (UserService.getCurrentUser() == null) {
             alert("Please login first.");
 
             return <Redirect to={{ pathname: "/login" }} />;

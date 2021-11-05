@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import AutoCompleteText from "./search-autocomplete.component";
 import AddTransProductForm from "./add-trans-products.component";
 import ContactService from "../services/contact.service";
@@ -13,7 +13,7 @@ export default class AddTransaction extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             allContacts: [],
             contactNames: [],
             allProducts: [],
@@ -105,7 +105,7 @@ export default class AddTransaction extends Component {
 
 
     render() {
-        if (AuthService.getCurrentUser() == null) {
+        if (UserService.getCurrentUser() == null) {
             alert("Please login first.");
 
             return <Redirect to={{ pathname: "/login" }} />;
@@ -128,7 +128,7 @@ export default class AddTransaction extends Component {
                         selectedProducts={this.state.products}
                         contact={this.state.contact}
                         userId={this.state.currentUser.id}
-                    ></AddTransProductForm>
+                    />
                 </div>
             </div>
         );

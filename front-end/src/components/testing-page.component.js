@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import CategoryService from "../services/category.service";
 import ContactService from "../services/contact.service";
 import ProductService from "../services/product.service";
@@ -9,7 +9,7 @@ import TransactionService from "../services/transaction.service";
 export default class TestingPage extends Component {
     constructor(props) {
         super(props);
-        this.testAuth = this.testAuth.bind(this);
+        this.testUser = this.testUser.bind(this);
         this.testCategory = this.testCategory.bind(this);
         this.testContact = this.testContact.bind(this);
         this.testProduct = this.testProduct.bind(this);
@@ -53,11 +53,11 @@ export default class TestingPage extends Component {
     }
 
     // Need tests for signup, signin, update, delete
-    async testAuth() {
-        console.log("Testing Auth: ");
+    async testUser() {
+        console.log("Testing User: ");
         try {
             console.log("Signing up");
-            const res = await AuthService.register(
+            const res = await UserService.register(
                 this.state.userName,
                 this.state.userEmail,
                 this.state.userCompanyName,
@@ -72,10 +72,10 @@ export default class TestingPage extends Component {
 
         try {
             console.log("Logging in");
-            await AuthService.login(this.state.userEmail, this.state.userPassword);
+            await UserService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
-                loggedInUser: AuthService.getCurrentUser(),
+                loggedInUser: UserService.getCurrentUser(),
             });
         } catch (err) {
             const resMessage =
@@ -90,10 +90,10 @@ export default class TestingPage extends Component {
         console.log("Testing Category: ");
         try {
             console.log("Adding category");
-            await AuthService.login(this.state.userEmail, this.state.userPassword);
+            await UserService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
-                loggedInUser: AuthService.getCurrentUser(),
+                loggedInUser: UserService.getCurrentUser(),
             });
 
             const res = await CategoryService.addNewCategory(
@@ -149,10 +149,10 @@ export default class TestingPage extends Component {
         console.log("Testing Contact: ");
         try {
             console.log("Adding contact");
-            await AuthService.login(this.state.userEmail, this.state.userPassword);
+            await UserService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
-                loggedInUser: AuthService.getCurrentUser(),
+                loggedInUser: UserService.getCurrentUser(),
             });
 
             const res = await ContactService.addNewContact(
@@ -228,10 +228,10 @@ export default class TestingPage extends Component {
         console.log("Testing Product: ");
         try {
             console.log("Adding product");
-            await AuthService.login(this.state.userEmail, this.state.userPassword);
+            await UserService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
-                loggedInUser: AuthService.getCurrentUser(),
+                loggedInUser: UserService.getCurrentUser(),
             });
 
             const res = await ProductService.addNewProduct(
@@ -284,10 +284,10 @@ export default class TestingPage extends Component {
         console.log("Testing Transaction: ");
         try {
             console.log("Adding transaction");
-            await AuthService.login(this.state.userEmail, this.state.userPassword);
+            await UserService.login(this.state.userEmail, this.state.userPassword);
             console.log("Logged In");
             this.setState({
-                loggedInUser: AuthService.getCurrentUser(),
+                loggedInUser: UserService.getCurrentUser(),
             });
 
             console.log("Adding product");
@@ -390,8 +390,8 @@ export default class TestingPage extends Component {
     render() {
         return (
             <div>
-                <h1>Auth Service</h1>
-                <button onClick={this.testAuth}>Test</button>
+                <h1>User Service</h1>
+                <button onClick={this.testUser}>Test</button>
                 <h1>Category Service</h1>
                 <button onClick={this.testCategory}>Test</button>
                 <h1>Contact Service</h1>
