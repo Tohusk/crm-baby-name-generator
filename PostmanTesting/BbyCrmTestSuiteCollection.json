@@ -48,6 +48,7 @@
                       "});\r",
                       "\r",
                       "pm.environment.set(\"userId\", response.id);\r",
+                      "pm.environment.set(\"accessToken\", response.accessToken);\r",
                       "\r",
                       "pm.test(\"Correct user info registered in database\", () => {\r",
                       "    pm.expect(response.name).to.eql(pm.environment.get(\"userName\"));\r",
