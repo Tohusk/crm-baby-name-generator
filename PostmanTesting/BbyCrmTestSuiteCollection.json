@@ -368,7 +368,13 @@
               },
               "request": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"name\": \"{{contactName1}}\",\r\n    \"email\": \"{{contactEmail1}}\",\r\n    \"phoneNumber\": \"{{contactPhone1}}\",\r\n    \"description\": \"{{contactDescription1}}\"\r\n}",
