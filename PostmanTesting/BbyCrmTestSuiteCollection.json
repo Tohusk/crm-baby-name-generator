@@ -724,7 +724,13 @@
               },
               "request": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"name\": \"Link\",\r\n    \"phoneNumber\": \"12312412\",\r\n    \"description\": \"zelda gamer\"\r\n}",
