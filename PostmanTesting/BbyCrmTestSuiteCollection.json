@@ -2074,7 +2074,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/signin"
+            "url": "{{rootUrl}}/api/user/signin"
           },
           "response": []
         },
@@ -2110,7 +2110,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/deleteAccount"
+            "url": "{{rootUrl}}/api/user/deleteAccount"
           },
           "response": []
         },
