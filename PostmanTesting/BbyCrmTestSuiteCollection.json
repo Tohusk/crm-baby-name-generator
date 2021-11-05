@@ -140,7 +140,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/auth/signup"
+                "url": "{{rootUrl}}/api/user/signup"
               },
               "response": []
             },
@@ -2074,7 +2074,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/signin"
+            "url": "{{rootUrl}}/api/user/signin"
           },
           "response": []
         },
@@ -2146,7 +2146,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/signin"
+            "url": "{{rootUrl}}/api/user/signin"
           },
           "response": []
         },
