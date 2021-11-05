@@ -212,7 +212,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/auth/signup"
+                "url": "{{rootUrl}}/api/user/signup"
               },
               "response": []
             },
