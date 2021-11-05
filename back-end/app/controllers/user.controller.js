@@ -3,7 +3,6 @@
  * Controllers related to users
  */
 
-const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
@@ -111,7 +110,7 @@ const signin = async (req, res) => {
         });
     }
 
-    const token = jwt.sign({ id: user.id }, config.secret, {
+    const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET, {
         expiresIn: 86400, // 24 hours
     });
 
