@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL + "/api/auth/";
+const API_URL = process.env.REACT_APP_API_URL + "/api/user/";
 
-class AuthService {
+class UserService {
     async login(email, password) {
         const response = await axios.post(API_URL + "signin", {
             email,
@@ -34,4 +34,4 @@ class AuthService {
     }
 }
 
-export default new AuthService();
+export default new UserService();

@@ -66,11 +66,11 @@ const checkRequiredFieldsUpdate = (req, res, next) => {
     next();
 };
 
-const verifySignUp = {
+const verifyUser = {
     checkRequiredFields,
     checkDuplicateEmail,
     checkRolesExisted,
     checkRequiredFieldsUpdate,
 };
 
-module.exports = verifySignUp;
+module.exports = verifyUser;

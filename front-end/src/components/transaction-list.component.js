@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import TransactionService from "../services/transaction.service";
 import Table from "react-bootstrap/Table";
 import TransactionTableRow from "./transaction-table-row.component";
@@ -11,7 +11,7 @@ export default class TransactionList extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             transactions: [],
         };
     }

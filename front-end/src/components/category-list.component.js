@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import Table from "react-bootstrap/Table";
 import CategoryService from "../services/category.service";
 
@@ -11,7 +11,7 @@ export default class CategoryList extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             categories: [],
         };
     }

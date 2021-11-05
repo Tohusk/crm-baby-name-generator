@@ -1,6 +1,6 @@
 // written with reference to this tutorial: https://www.bezkoder.com/node-js-mongodb-auth-jwt/
 /**
- * Controllers related to authorisation
+ * Controllers related to users
  */
 
 const config = require("../config/auth.config");

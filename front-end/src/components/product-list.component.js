@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import Table from "react-bootstrap/Table";
 import ProductTableRow from "./product-table-row.component";
-import { Link } from "react-router-dom";
 import ProductService from "../services/product.service";
 
 import "../styles/Overview.css";
@@ -12,7 +11,7 @@ export default class ProductList extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             products: [],
         };
     }

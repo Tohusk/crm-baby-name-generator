@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import ContactService from "../services/contact.service";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Redirect } from "react-router";
@@ -15,7 +15,7 @@ class ContactProfile extends Component {
         this.handleDelete = this.handleDelete.bind(this);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             currentContact: "",
             averageRating: "",
             topCategories: [],
@@ -99,7 +99,7 @@ class ContactProfile extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null) {
+        if (UserService.getCurrentUser() == null) {
             alert("Please login first.");
 
             return <Redirect to={{ pathname: "/login" }} />;

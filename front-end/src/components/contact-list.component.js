@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
-import axios from "axios";
+import UserService from "../services/user.service";
 import Table from "react-bootstrap/Table";
 import ContactTableRow from "./contact-table-row.component";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
 import ContactService from "../services/contact.service";
 
 import "../styles/Overview.css";
@@ -14,7 +11,7 @@ export default class ContactList extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             contacts: [],
         };
     }

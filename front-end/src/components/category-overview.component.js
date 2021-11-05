@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import CategoryService from "../services/category.service";
 
 export default class CategoryOverview extends Component {
@@ -7,7 +7,7 @@ export default class CategoryOverview extends Component {
         super(props);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             categories: [],
         };
     }

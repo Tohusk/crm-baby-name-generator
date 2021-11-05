@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import Form from "react-validation/build/form";
@@ -32,9 +32,9 @@ class EditContact extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
 
-        if (AuthService.getCurrentUser()) {
+        if (UserService.getCurrentUser()) {
             this.state = {
-                currentUser: AuthService.getCurrentUser(),
+                currentUser: UserService.getCurrentUser(),
                 currentContact: this.props.location.state.contact,
                 newName: this.props.location.state.contact.name,
                 newPhoneNumber: this.props.location.state.contact.phoneNumber,
@@ -151,7 +151,7 @@ class EditContact extends Component {
     }
 
     render() {
-        if (AuthService.getCurrentUser() == null) {
+        if (UserService.getCurrentUser() == null) {
             alert("Please login first.");
 
             return <Redirect to={{ pathname: "/login" }} />;

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/auth.service";
-import { Redirect } from "react-router";
+import UserService from "../services/user.service";
 import CategoryService from "../services/category.service";
 import ProductService from "../services/product.service";
 
@@ -10,7 +9,7 @@ export default class ProductTableRow extends Component {
         this.deleteOneProduct = this.deleteOneProduct.bind(this);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             category: "",
         };
     }

@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // TODO: add any new routes
-require("./app/routes/auth.routes")(app);
+require("./app/routes/user.routes")(app);
 require("./app/routes/contact.routes")(app);
 require("./app/routes/category.routes")(app);
 require("./app/routes/product.routes")(app);

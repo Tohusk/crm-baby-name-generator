@@ -5,7 +5,7 @@ import CheckButton from "react-validation/build/button";
 
 import "../styles/Authentication.css";
 
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 import img from "../assets/img-login.png";
 import logo from "../assets/logo.png";
@@ -60,7 +60,7 @@ export default class Login extends Component {
 
         if (this.checkBtn.context._errors.length === 0) {
             try {
-                await AuthService.login(this.state.email, this.state.password);
+                await UserService.login(this.state.email, this.state.password);
                 // After successful login, redirect to homepage
                 this.props.history.push("/home");
                 window.location.reload();

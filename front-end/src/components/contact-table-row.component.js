@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
 import ContactService from "../services/contact.service";
-import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 export default class ContactTableRow extends Component {
     constructor(props) {
@@ -9,7 +9,7 @@ export default class ContactTableRow extends Component {
         this.handleClick = this.handleClick.bind(this);
 
         this.state = {
-            currentUser: AuthService.getCurrentUser(),
+            currentUser: UserService.getCurrentUser(),
             redirect: false,
             averageRating: "N/A",
             topCategories: [],
