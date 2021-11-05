@@ -1,5 +1,5 @@
 const authJwt = require("./authJwt");
-const verifySignUp = require("./verifyUser");
+const verifyUser = require("./verifyUser");
 const verifyContact = require("./verifyContact");
 const verifyCategory = require("./verifyCategory");
 const verifyProduct = require("./verifyProduct");
@@ -7,7 +7,7 @@ const verifyTransaction = require("./verifyTransaction");
 
 module.exports = {
     authJwt,
-    verifyUser: verifySignUp,
+    verifyUser,
     verifyContact,
     verifyCategory,
     verifyProduct,

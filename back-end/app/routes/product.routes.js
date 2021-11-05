@@ -2,7 +2,7 @@
  * routes relating to products
  */
 
-const { verifyProduct } = require("../middlewares");
+const { verifyProduct, authJwt } = require("../middlewares");
 const controller = require("../controllers/product.controller");
 
 /**
@@ -24,6 +24,7 @@ module.exports = function (app) {
     app.post(
         "/api/product/new",
         [
+            authJwt.verifyToken,
             verifyProduct.checkRequiredFields,
             verifyProduct.checkDuplicateUserProduct,
             verifyProduct.checkProductCategoryExists,
@@ -31,17 +32,17 @@ module.exports = function (app) {
         controller.newProduct
     );
 
-    app.post("/api/product/update", [verifyProduct.checkRequiredFieldsUpdate], controller.updateProduct);
+    app.post("/api/product/update", [authJwt.verifyToken, verifyProduct.checkRequiredFieldsUpdate], controller.updateProduct);
 
-    app.get("/api/product/get", controller.getProduct);
+    app.get("/api/product/get", [authJwt.verifyToken], controller.getProduct);
 
-    app.get("/api/product/getAll", controller.getAllProducts);
+    app.get("/api/product/getAll", [authJwt.verifyToken], controller.getAllProducts);
 
-    app.delete("/api/product/deleteOne", [verifyProduct.checkProductNotInUse], controller.deleteOneProduct);
+    app.delete("/api/product/deleteOne", [authJwt.verifyToken, verifyProduct.checkProductNotInUse], controller.deleteOneProduct);
 
-    app.get("/api/product/getTotal", controller.getTotalProducts);
+    app.get("/api/product/getTotal", [authJwt.verifyToken], controller.getTotalProducts);
 
-    app.get("/api/product/getMostPopular", controller.getMostPopularProduct);
+    app.get("/api/product/getMostPopular", [authJwt.verifyToken], controller.getMostPopularProduct);
 
-    app.get("/api/product/getStats", controller.getProductStats);
+    app.get("/api/product/getStats", [authJwt.verifyToken], controller.getProductStats);
 };

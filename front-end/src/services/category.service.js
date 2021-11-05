@@ -4,11 +4,15 @@ const API_URL = process.env.REACT_APP_API_URL + "/api/category/";
 
 class CategoryService {
     async getAllCategories(userId) {
-        return axios.get(API_URL + "getAll?userId=" + userId);
+        return axios.get(API_URL + "getAll?userId=" + userId, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 
     async getOneCategory(userId, categoryId) {
-        return axios.get(API_URL + "get?userId=" + userId + "&categoryId=" + categoryId);
+        return axios.get(API_URL + "get?userId=" + userId + "&categoryId=" + categoryId, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 
     async addNewCategory(name, colour, userId) {
@@ -16,6 +20,8 @@ class CategoryService {
             userId,
             name,
             colour,
+        }, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
         });
     }
 
@@ -25,6 +31,7 @@ class CategoryService {
                 userId: userId,
                 categoryId: categoryId,
             },
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
         });
     }
 }
