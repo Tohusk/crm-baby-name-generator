@@ -911,7 +911,13 @@
               },
               "request": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{ \r\n    \"userId\": \"{{userId}}\",\r\n    \"categoryId\": \"{{categoryId1}}\",\r\n    \"name\": \"{{categoryName1}}\",\r\n    \"colour\": \"{{categoryColourUpdated}}\"\r\n}",
