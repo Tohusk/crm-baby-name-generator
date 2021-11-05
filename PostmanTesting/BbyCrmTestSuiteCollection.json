@@ -2025,7 +2025,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/auth/update"
+            "url": "{{rootUrl}}/api/user/update"
           },
           "response": []
         },
