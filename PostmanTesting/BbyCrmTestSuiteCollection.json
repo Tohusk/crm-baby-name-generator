@@ -788,7 +788,13 @@
               },
               "request": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{ \r\n    \"userId\": \"{{userId}}\",\r\n    \"name\": \"{{categoryName1}}\",\r\n    \"colour\": \"{{categoryColour1}}\"\r\n}",
