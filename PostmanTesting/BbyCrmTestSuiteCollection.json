@@ -2173,7 +2173,13 @@
           },
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "{{accessToken}}",
+                "type": "text"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\r\n    \"email\": \"{{userEmail}}\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
