@@ -74,7 +74,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/auth/signin"
+                "url": "{{rootUrl}}/api/user/signin"
               },
               "response": []
             }
