@@ -627,7 +627,13 @@
               },
               "request": {
                 "method": "GET",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "url": {
                   "raw": "{{rootUrl}}/api/contact/get?userId={{userId}}&contactId={{contactId1}}",
                   "host": [
