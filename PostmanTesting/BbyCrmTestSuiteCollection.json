@@ -876,7 +876,13 @@
               },
               "request": {
                 "method": "GET",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "url": {
                   "raw": "{{rootUrl}}/api/category/getAll?userId={{userId}}",
                   "host": [
