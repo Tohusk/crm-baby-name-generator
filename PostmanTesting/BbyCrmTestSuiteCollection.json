@@ -1626,7 +1626,13 @@
               },
               "request": {
                 "method": "DELETE",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"categoryId\": \"{{categoryId2}}\"\r\n}",
