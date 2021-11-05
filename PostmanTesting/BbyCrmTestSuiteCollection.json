@@ -1898,7 +1898,13 @@
               },
               "request": {
                 "method": "GET",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "url": {
                   "raw": "{{rootUrl}}/api/transaction/get?userId={{userId}}&transactionId={{transactionId1}}",
                   "host": [
