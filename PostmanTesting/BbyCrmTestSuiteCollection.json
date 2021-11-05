@@ -1845,7 +1845,13 @@
               },
               "request": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                  {
+                    "key": "x-access-token",
+                    "value": "{{accessToken}}",
+                    "type": "text"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"transactionId\": \"{{transactionId1}}\",\r\n    \"userId\": \"{{userId}}\",\r\n    \"productsPurchased\": [\r\n        {\r\n            \"productId\": \"{{productId3}}\",\r\n            \"quantity\": {{transactionQuantity1_1}},\r\n            \"price\": {{productPrice3}}\r\n        },\r\n        {\r\n            \"productId\": \"{{productId2}}\",\r\n            \"quantity\": {{transactionQuantityUpdated}},\r\n            \"price\": {{productPrice2}}\r\n        }\r\n    ], \r\n    \"contactId\": \"{{contactId2}}\",\r\n    \"transactionRating\": {{transactionRating1}}\r\n}",
