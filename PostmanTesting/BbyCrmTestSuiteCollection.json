@@ -140,7 +140,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/user/signup"
+                "url": "{{rootUrl}}/api/auth/signup"
               },
               "response": []
             },
@@ -176,7 +176,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/user/signup"
+                "url": "{{rootUrl}}/api/auth/signup"
               },
               "response": []
             },
@@ -212,7 +212,7 @@
                     }
                   }
                 },
-                "url": "{{rootUrl}}/api/user/signup"
+                "url": "{{rootUrl}}/api/auth/signup"
               },
               "response": []
             },
@@ -2074,7 +2074,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/user/signin"
+            "url": "{{rootUrl}}/api/auth/signin"
           },
           "response": []
         },
@@ -2146,7 +2146,7 @@
                 }
               }
             },
-            "url": "{{rootUrl}}/api/user/signin"
+            "url": "{{rootUrl}}/api/auth/signin"
           },
           "response": []
         },
