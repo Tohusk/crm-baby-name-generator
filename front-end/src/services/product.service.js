@@ -9,11 +9,15 @@ class ProductService {
             price,
             categoryId,
             userId,
+        }, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
         });
     }
 
     async getAllProducts(userId) {
-        return axios.get(API_URL + "getAll?userId=" + userId);
+        return axios.get(API_URL + "getAll?userId=" + userId, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 
     async deleteProduct(userId, productId) {
@@ -22,19 +26,26 @@ class ProductService {
                 userId: userId,
                 productId: productId,
             },
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
         });
     }
 
     async getTotalProducts(userId) {
-        return axios.get(API_URL + "getTotal?userId=" + userId);
+        return axios.get(API_URL + "getTotal?userId=" + userId, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 
     async getMostPopularProduct(userId) {
-        return axios.get(API_URL + "getMostPopular?userId=" + userId);
+        return axios.get(API_URL + "getMostPopular?userId=" + userId, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 
     async getProductStats(userId) {
-        return axios.get(API_URL + "getStats?userId=" + userId);
+        return axios.get(API_URL + "getStats?userId=" + userId, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 }
 

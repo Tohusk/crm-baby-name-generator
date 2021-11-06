@@ -11,6 +11,8 @@ class ContactService {
             companyName,
             description,
             userId,
+        }, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
         });
     }
 
@@ -23,6 +25,8 @@ class ContactService {
             description,
             userId,
             contactId,
+        }, {
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
         });
     }
 
@@ -32,24 +36,33 @@ class ContactService {
                 userId: userId,
                 contactId: contactId,
             },
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
         });
     }
 
     // contact routes to specify get, contact controller for get?userId
     async getOneContact(userId, contactId) {
-        return axios.get(API_URL + "get?userId=" + userId + "&contactId=" + contactId);
+        return axios.get(API_URL + "get?userId=" + userId + "&contactId=" + contactId,{
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 
     async getAllContacts(userId) {
-        return axios.get(API_URL + "getAll?userId=" + userId);
+        return axios.get(API_URL + "getAll?userId=" + userId,{
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 
     async getContactStatistics(userId, contactId) {
-        return axios.get(API_URL + "getContactStatistics?contactId=" + contactId + "&userId=" + userId);
+        return axios.get(API_URL + "getContactStatistics?contactId=" + contactId + "&userId=" + userId,{
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 
     async getUserAvgRating(userId) {
-        return axios.get(API_URL + "getUserAvgRating?userId=" + userId);
+        return axios.get(API_URL + "getUserAvgRating?userId=" + userId,{
+            headers: {'x-access-token': JSON.parse(localStorage.getItem("user")).accessToken},
+        });
     }
 }
 

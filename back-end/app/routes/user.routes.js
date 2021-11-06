@@ -4,7 +4,7 @@
  *  Login authentication routes
  */
 
-const { verifyUser } = require("../middlewares");
+const { verifyUser, authJwt } = require("../middlewares");
 const controller = require("../controllers/user.controller");
 /**
  * POST /api/user/signup
@@ -24,9 +24,9 @@ module.exports = function (app) {
         controller.signup
     );
 
-    app.post("/api/user/update", [verifyUser.checkRequiredFieldsUpdate], controller.updateUser);
+    app.post("/api/user/update", [authJwt.verifyToken, verifyUser.checkRequiredFieldsUpdate], controller.updateUser);
 
     app.post("/api/user/signin", controller.signin);
 
-    app.delete("/api/user/deleteAccount", controller.deleteAccount);
+    app.delete("/api/user/deleteAccount", [authJwt.verifyToken], controller.deleteAccount);
 };

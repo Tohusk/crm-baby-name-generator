@@ -2,7 +2,7 @@
  * routes relating to categories
  */
 
-const { verifyCategory } = require("../middlewares");
+const { verifyCategory, authJwt } = require("../middlewares");
 const controller = require("../controllers/category.controller");
 
 /**
@@ -20,15 +20,15 @@ module.exports = function (app) {
 
     app.post(
         "/api/category/new",
-        [verifyCategory.checkRequiredFields, verifyCategory.checkDuplicateUserCategory],
+        [authJwt.verifyToken, verifyCategory.checkRequiredFields, verifyCategory.checkDuplicateUserCategory],
         controller.newCategory
     );
 
-    app.post("/api/category/update", [verifyCategory.checkRequiredFieldsUpdate], controller.updateCategory);
+    app.post("/api/category/update", [authJwt.verifyToken, verifyCategory.checkRequiredFieldsUpdate], controller.updateCategory);
 
-    app.get("/api/category/get", controller.getCategory);
+    app.get("/api/category/get", [authJwt.verifyToken], controller.getCategory);
 
-    app.get("/api/category/getAll", controller.getAllCategories);
+    app.get("/api/category/getAll", [authJwt.verifyToken], controller.getAllCategories);
 
-    app.delete("/api/category/deleteOne", [verifyCategory.checkCategoryNotInUse], controller.deleteOneCategory);
+    app.delete("/api/category/deleteOne", [authJwt.verifyToken, verifyCategory.checkCategoryNotInUse], controller.deleteOneCategory);
 };

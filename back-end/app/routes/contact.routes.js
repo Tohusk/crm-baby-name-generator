@@ -2,7 +2,7 @@
  * routes relating to contacts
  */
 
-const { verifyContact } = require("../middlewares");
+const { verifyContact, authJwt } = require("../middlewares");
 const controller = require("../controllers/contact.controller");
 
 /**
@@ -21,19 +21,19 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("/api/contact/new", [verifyContact.checkRequiredFields], controller.newContact);
+    app.post("/api/contact/new", [authJwt.verifyToken, verifyContact.checkRequiredFields], controller.newContact);
 
-    app.post("/api/contact/update", [verifyContact.checkRequiredFieldsUpdate], controller.updateContact);
+    app.post("/api/contact/update", [authJwt.verifyToken, verifyContact.checkRequiredFieldsUpdate], controller.updateContact);
 
-    app.get("/api/contact/get", controller.getContact);
+    app.get("/api/contact/get", [authJwt.verifyToken], controller.getContact);
 
-    app.get("/api/contact/getAll", controller.getAllContacts);
+    app.get("/api/contact/getAll", [authJwt.verifyToken], controller.getAllContacts);
 
-    app.get("/api/contact/getContactStatistics", controller.getContactStatistics);
+    app.get("/api/contact/getContactStatistics", [authJwt.verifyToken], controller.getContactStatistics);
 
-    app.get("/api/contact/getUserAvgRating", controller.getUserAvgRating);
+    app.get("/api/contact/getUserAvgRating", [authJwt.verifyToken], controller.getUserAvgRating);
 
-    app.get("/api/contact/getByName", controller.getContactByName);
+    app.get("/api/contact/getByName", [authJwt.verifyToken], controller.getContactByName);
 
-    app.delete("/api/contact/deleteOne", controller.deleteOneContact);
+    app.delete("/api/contact/deleteOne", [authJwt.verifyToken], controller.deleteOneContact);
 };
