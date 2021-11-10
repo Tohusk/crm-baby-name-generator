@@ -9,6 +9,7 @@ import CategoryService from "../services/category.service";
 import "../styles/AddItem.css";
 import CategoryList from "./category-list.component";
 import { Redirect } from "react-router";
+import { useHistory } from "react-router";
 
 // If argument is empty, then return a div bar warning message
 const required = (value) => {
@@ -21,6 +22,29 @@ const required = (value) => {
     }
 };
 
+//Back button to go back to the previous page from history
+export const BackButton = () => {
+    let history = useHistory();
+    return (
+        <button className="editCategory-backButton" onClick={() => history.goBack()}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-arrow-left-short"
+                viewBox="0 0 16 16"
+            >
+            <path
+                fillRule="evenodd"
+                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+            />
+            </svg>
+            Back
+        </button>
+    );
+};
+
 export default class EditCategory extends Component {
     constructor(props) {
         super(props);
@@ -29,6 +53,7 @@ export default class EditCategory extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.showAddForm = this.showAddForm.bind(this);
         this.hideForm = this.hideForm.bind(this);
+        this.handleBack = this.handleBack.bind(this);
 
         this.state = {
             currentUser: UserService.getCurrentUser(),
@@ -38,6 +63,10 @@ export default class EditCategory extends Component {
             name: "",
             colour: "#000000",
         };
+    }
+
+    handleBack() {
+        this.props.history.goBack();
     }
 
     showAddForm() {
@@ -114,22 +143,7 @@ export default class EditCategory extends Component {
         return (
             <div className="addItem-container">
                 <div className="editCategory-smallText">
-                    <a className="editCategory-backButton" href="/addproduct">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            className="bi bi-arrow-left-short"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
-                            />
-                        </svg>
-                        Back
-                    </a>
+                    <BackButton></BackButton>
                 </div>
                 <div className="addItem-title">Edit Categories</div>
                 <div className="editCategory-list-container">
