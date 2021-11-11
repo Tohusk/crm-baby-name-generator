@@ -216,6 +216,8 @@
 .editCategory-backButton {
     text-decoration: none;
     color: #747474;
+    background-color: transparent;
+    border: none;
 }
 
 
